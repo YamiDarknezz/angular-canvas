@@ -55,9 +55,10 @@ jobs:
             git pull --ff-only origin main
             npm ci
             npm run build
-            # El dist y la config de nginx viven en carpetas separadas: así
-            # --delete no puede borrar nginx.conf (el bug del portfolio).
-            rsync -a --delete $HOME/data/repos/angular-canvas/dist/angular-canvas/browser/ $HOME/data/deploy/angular-canvas-dist/
+            # El build va a un SUBdirectorio (dist/) de la carpeta del proyecto:
+            # --delete queda encerrado ahí y no puede borrar conf.d/ ni el
+            # compose (ese fue el bug que tumbó el nginx.conf del portfolio).
+            rsync -a --delete $HOME/data/repos/angular-canvas/dist/angular-canvas/browser/ $HOME/data/deploy/angular-canvas/dist/
             cd $HOME/data/deploy/angular-canvas
             docker compose up -d
             docker exec angular-canvas nginx -s reload
