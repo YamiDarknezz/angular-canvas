@@ -206,6 +206,10 @@
   &.flipped {
     transform: rotateY(-180deg);
   }
+
+  &.no-transition {
+    transition: none !important;
+  }
 }
 
 .bk-face {
@@ -388,6 +392,6 @@
   .page-shadow,
   .book-right,
   .fold-corner {
-    transition: none;
+    transition: none !important;
   }
 }

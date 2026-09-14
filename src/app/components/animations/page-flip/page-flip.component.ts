@@ -11,6 +11,7 @@ export class PageFlipComponent {
   readonly foldActive = signal(false);
   readonly spread = signal(0);
   readonly turning = signal(false);
+  readonly noTransition = signal(false);
 
   readonly totalSpreads = 3;
   readonly leftPage = computed(() => this.spread() * 2 + 1);
@@ -26,23 +27,31 @@ export class PageFlipComponent {
     this.pageFlipped.update((v) => !v);
   }
 
+  /** Avanzar: la hoja gira hacia adelante y luego se reposa. */
   goNext(): void {
     if (this.turning() || !this.hasNext()) return;
     this.turning.set(true);
     this.bookFlipped.set(true);
     setTimeout(() => {
       this.spread.update((s) => s + 1);
+      this.noTransition.set(true);
       this.bookFlipped.set(false);
-      this.turning.set(false);
+      requestAnimationFrame(() => {
+        this.turning.set(false);
+        requestAnimationFrame(() => {
+          this.noTransition.set(false);
+        });
+      });
     }, 950);
   }
 
+  /** Retroceder: se actualiza el contenido y luego la hoja vuelve. */
   goPrev(): void {
     if (this.turning() || !this.hasPrev()) return;
     this.turning.set(true);
+    this.spread.update((s) => s - 1);
     this.bookFlipped.set(false);
     setTimeout(() => {
-      this.spread.update((s) => s - 1);
       this.turning.set(false);
     }, 950);
   }
