@@ -14,12 +14,20 @@ import { Component, signal } from '@angular/core';
 export class PageFlipComponent {
   readonly pageFlipped = signal(false);
   readonly bookPage = signal(0);
+  readonly turning = signal(false);
 
   togglePage(): void {
     this.pageFlipped.update((v) => !v);
   }
 
   nextBookPage(): void {
-    this.bookPage.update((p) => (p + 1) % 3);
+    if (this.turning()) {
+      return;
+    }
+    this.turning.set(true);
+    setTimeout(() => {
+      this.bookPage.update((p) => (p + 1) % 3);
+      this.turning.set(false);
+    }, 800);
   }
 }
