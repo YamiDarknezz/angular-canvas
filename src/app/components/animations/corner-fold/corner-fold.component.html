@@ -1,32 +1,40 @@
 <section class="design-section">
   <h2 class="section-title">Corner Fold</h2>
   <p class="section-desc">
-    Efecto de esquina doblada (dog-ear) y papel levantado con física de sombras realistas
+    Efecto realista de esquina levantada (page curl) que se despega al acercar el cursor
   </p>
 
   <!-- Variante 1: Nota Adhesiva -->
   <div class="fold-stage" data-variant="note">
-    <p class="fold-hint">Pasa el cursor o haz click para doblar la esquina superior</p>
+    <p class="fold-hint">
+      Acerca el cursor a la esquina superior derecha para levantar la hoja (o haz click para fijar)
+    </p>
     <div class="fold-scene">
       <article
         class="fold-card note-card"
-        [class.active]="noteActive()"
-        (click)="toggleNote()"
-        (mouseenter)="noteActive.set(true)"
-        (mouseleave)="noteActive.set(false)"
+        [class.pinned]="notePinned()"
+        [style.--curl-dyn.px]="noteSize()"
+        (mousemove)="onMouseMove($event, 'note')"
+        (mouseleave)="onMouseLeave('note')"
+        (click)="toggle('note')"
       >
-        <div class="fold-cutout"></div>
-        <div class="fold-flap" [class.active]="noteActive()"></div>
+        <div class="corner-curl" aria-hidden="true">
+          <div class="curl-cutout"></div>
+          <div class="curl-flap">
+            <div class="curl-sheen"></div>
+          </div>
+        </div>
+
         <div class="fold-content">
-          <span class="fold-tag">Recordatorio</span>
+          <span class="fold-tag">Nota</span>
           <h3>Revisión de Arquitectura</h3>
           <p>
-            La esquina superior se pliega sobre sí misma simulando un doblez físico en papel
-            auténtico.
+            Al acercar el cursor a la esquina, el papel se levanta y se dobla sobre su diagonal con
+            perspectiva física real.
           </p>
           <div class="fold-meta">
             <span>Prioridad Alta</span>
-            <span>#NOTE-104</span>
+            <span>Click para fijar pliegue</span>
           </div>
         </div>
       </article>
@@ -35,58 +43,72 @@
 
   <!-- Variante 2: Documento Técnico -->
   <div class="fold-stage" data-variant="document">
-    <p class="fold-hint">Pasa el cursor para revelar el código de verificación bajo el pliegue</p>
+    <p class="fold-hint">
+      Acerca el cursor a la esquina para descubrir el sello oculto debajo del pliegue
+    </p>
     <div class="fold-scene">
       <article
         class="fold-card doc-card"
-        [class.active]="docActive()"
-        (click)="toggleDoc()"
-        (mouseenter)="docActive.set(true)"
-        (mouseleave)="docActive.set(false)"
+        [class.pinned]="docPinned()"
+        [style.--curl-dyn.px]="docSize()"
+        (mousemove)="onMouseMove($event, 'doc')"
+        (mouseleave)="onMouseLeave('doc')"
+        (click)="toggle('doc')"
       >
-        <div class="fold-cutout doc-cutout">
-          <span class="hidden-seal">VERIFICADO</span>
+        <div class="corner-curl" aria-hidden="true">
+          <div class="curl-cutout doc-cutout">
+            <span class="hidden-seal">VALID</span>
+          </div>
+          <div class="curl-flap doc-flap">
+            <div class="curl-sheen"></div>
+          </div>
         </div>
-        <div class="fold-flap doc-flap" [class.active]="docActive()"></div>
+
         <div class="fold-content">
           <span class="fold-tag doc-tag">Certificado</span>
           <h3>Licencia de Componentes</h3>
           <p>
-            Diseñado para ser reutilizado en cualquier aplicación sin arrastrar estilos globales no
-            deseados.
+            El doblez diagonal respeta el área geométrica del papel sin rotaciones rígidas
+            arbitrarias.
           </p>
           <div class="fold-meta">
             <span>SHA-256: 8F2A...</span>
-            <span>Válido</span>
+            <span>Click para fijar</span>
           </div>
         </div>
       </article>
     </div>
   </div>
 
-  <!-- Variante 3: Sticker / Despegue -->
+  <!-- Variante 3: Sticker Satinado -->
   <div class="fold-stage" data-variant="peel">
-    <p class="fold-hint">Pasa el cursor para levantar la etiqueta adhesiva</p>
+    <p class="fold-hint">Acerca el cursor para despegar suavemente la esquina adhesiva</p>
     <div class="fold-scene">
       <article
         class="fold-card peel-card"
-        [class.active]="peelActive()"
-        (click)="togglePeel()"
-        (mouseenter)="peelActive.set(true)"
-        (mouseleave)="peelActive.set(false)"
+        [class.pinned]="peelPinned()"
+        [style.--curl-dyn.px]="peelSize()"
+        (mousemove)="onMouseMove($event, 'peel')"
+        (mouseleave)="onMouseLeave('peel')"
+        (click)="toggle('peel')"
       >
-        <div class="fold-cutout peel-cutout"></div>
-        <div class="fold-flap peel-flap" [class.active]="peelActive()"></div>
+        <div class="corner-curl" aria-hidden="true">
+          <div class="curl-cutout peel-cutout"></div>
+          <div class="curl-flap peel-flap">
+            <div class="curl-sheen"></div>
+          </div>
+        </div>
+
         <div class="fold-content">
           <span class="fold-tag peel-tag">Adhesivo</span>
-          <h3>Efecto Peel 3D</h3>
+          <h3>Efecto Peel Satinado</h3>
           <p>
-            Un despegue gradual con reflejo metálico que reacciona a la posición del cursor o toque
-            táctil.
+            El reverso metálico refleja luz conforme el ángulo de despegue aumenta
+            tridimensionalmente.
           </p>
           <div class="fold-meta">
             <span>Angular 22+</span>
-            <span>Zero Dependencies</span>
+            <span>Click para fijar</span>
           </div>
         </div>
       </article>
