@@ -6,6 +6,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Permite re-desplegar a mano desde la UI o con `gh workflow run CI`.
+  workflow_dispatch:
 
 # El workflow solo lee el repo.
 permissions:
