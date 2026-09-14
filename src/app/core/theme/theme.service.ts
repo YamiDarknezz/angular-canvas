@@ -5,15 +5,16 @@ export type ThemeName = 'dark' | 'light' | 'hacker' | 'cyberpunk' | 'corporate';
 export interface Theme {
   id: ThemeName;
   label: string;
-  icon: string;
+  /** Color representativo del tema para el selector. */
+  swatch: string;
 }
 
 export const THEMES: readonly Theme[] = [
-  { id: 'dark', label: 'Dark', icon: '🌙' },
-  { id: 'light', label: 'Light', icon: '☀️' },
-  { id: 'hacker', label: 'Hacker', icon: '💚' },
-  { id: 'cyberpunk', label: 'Cyberpunk', icon: '🌆' },
-  { id: 'corporate', label: 'Corporate', icon: '🏢' },
+  { id: 'dark', label: 'Dark', swatch: '#818cf8' },
+  { id: 'light', label: 'Light', swatch: '#f8fafc' },
+  { id: 'hacker', label: 'Hacker', swatch: '#00ff41' },
+  { id: 'cyberpunk', label: 'Cyberpunk', swatch: '#ff00ff' },
+  { id: 'corporate', label: 'Corporate', swatch: '#1e3a5f' },
 ] as const;
 
 const STORAGE_KEY = 'angular-canvas:theme';

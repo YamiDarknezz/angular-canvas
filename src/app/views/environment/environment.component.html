@@ -1,69 +1,80 @@
 @if (entryData(); as entry) {
-  <article class="env">
+  <article class="env" [style.--accent]="groupData()!.accent">
     <nav class="env-crumbs" aria-label="Ruta en el catálogo">
       <a routerLink="/">Catálogo</a>
-      <span aria-hidden="true">/</span>
+      <span class="crumb-sep" aria-hidden="true">/</span>
       <span class="crumb-dim">{{ groupData()!.label }}</span>
-      <span aria-hidden="true">/</span>
+      <span class="crumb-sep" aria-hidden="true">/</span>
       <span class="crumb-current" aria-current="page">{{ entry.label }}</span>
+
+      <button
+        type="button"
+        class="env-fav"
+        [class.on]="isFavorite()"
+        [attr.aria-pressed]="isFavorite()"
+        [attr.aria-label]="
+          (isFavorite() ? 'Quitar de favoritos: ' : 'Añadir a favoritos: ') + entry.label
+        "
+        (click)="toggleFavorite()"
+      >
+        <ac-icon [name]="isFavorite() ? 'star-filled' : 'star'" />
+        <span>{{ isFavorite() ? 'En favoritos' : 'Favorito' }}</span>
+      </button>
     </nav>
 
     <header class="env-header">
-      <h1>
-        <span class="env-icon" aria-hidden="true">{{ groupData()!.icon }}</span>
-        {{ entry.label }}
-      </h1>
-      <p class="env-tagline">{{ entry.tagline }}</p>
-      <ul class="env-meta">
-        <li>
-          {{ entry.variants.length }}
-          {{ entry.variants.length === 1 ? 'sub-estilo' : 'sub-estilos' }}
-        </li>
-        <li>
-          selector <code>{{ entry.selector }}</code>
-        </li>
-        <li>
-          clase <code>{{ entry.className }}</code>
-        </li>
-        <li class="shortcuts">
-          atajos <kbd>←</kbd><kbd>→</kbd> componente
+      <span class="env-glyph" [style.color]="groupData()!.accent" aria-hidden="true">
+        <ac-icon [name]="groupData()!.icon" />
+      </span>
+
+      <div class="env-heading">
+        <h1>{{ entry.label }}</h1>
+        <p class="env-tagline">{{ entry.tagline }}</p>
+      </div>
+
+      <p class="env-meta">
+        <span class="meta-route">/{{ groupData()!.id }}/{{ entry.id }}</span>
+        <span class="meta-keys"
+          ><kbd>←</kbd><kbd>→</kbd> componente
           @if (hasVariants()) {
             · <kbd>1</kbd>–<kbd>9</kbd> sub-estilo · <kbd>0</kbd> todos
           }
-        </li>
-      </ul>
+        </span>
+      </p>
     </header>
 
     @if (hasVariants()) {
-      <nav class="env-variants" aria-label="Sub-estilos del componente">
-        <a
-          class="chip"
-          [class.active]="!activeVariant()"
-          [routerLink]="['/', groupData()!.id, entry.id]"
-          [attr.aria-current]="!activeVariant() ? 'true' : null"
-        >
-          Todos
-        </a>
-        @for (variant of entry.variants; track variant.id) {
+      <div class="env-toolbar">
+        <nav class="env-variants" aria-label="Sub-estilos del componente">
           <a
             class="chip"
-            [class.active]="activeVariant()?.id === variant.id"
-            [routerLink]="['/', groupData()!.id, entry.id, variant.id]"
-            [attr.aria-current]="activeVariant()?.id === variant.id ? 'true' : null"
-            [title]="variant.hint"
+            [class.active]="!activeVariant()"
+            [routerLink]="['/', groupData()!.id, entry.id]"
+            [attr.aria-current]="!activeVariant() ? 'true' : null"
           >
-            {{ variant.label }}
+            Todos
           </a>
-        }
-      </nav>
+          @for (variant of entry.variants; track variant.id) {
+            <a
+              class="chip"
+              [class.active]="activeVariant()?.id === variant.id"
+              [routerLink]="['/', groupData()!.id, entry.id, variant.id]"
+              [attr.aria-current]="activeVariant()?.id === variant.id ? 'true' : null"
+              [title]="variant.hint"
+            >
+              {{ variant.label }}
+            </a>
+          }
+        </nav>
 
-      <p class="env-hint">
-        @if (activeVariant(); as variant) {
-          <strong>{{ variant.label }}:</strong> {{ variant.hint }}
-        } @else {
-          Viendo las {{ entry.variants.length }} variantes juntas. Elige una para aislarla.
-        }
-      </p>
+        <p class="env-hint">
+          @if (activeVariant(); as variant) {
+            <strong>{{ variant.label }}:</strong> {{ variant.hint }}
+          } @else {
+            Viendo las {{ entry.variants.length }} variantes juntas. Elige una para aislarla.
+          }
+        </p>
+      </div>
     }
 
     <ac-stage [group]="groupData()!" [entry]="entry" [activeVariant]="activeVariant()" />
@@ -71,14 +82,16 @@
     <nav class="env-pager" aria-label="Recorrer el catálogo">
       @if (previous(); as prev) {
         <a class="pager" [routerLink]="['/', prev.group.id, prev.entry.id]">
-          <span class="pager-dir">← Anterior</span>
+          <span class="pager-dir"><ac-icon name="arrow-left" /> Anterior</span>
           <span class="pager-name">{{ prev.entry.label }}</span>
+          <span class="pager-group">{{ prev.group.label }}</span>
         </a>
       }
       @if (next(); as next) {
         <a class="pager next" [routerLink]="['/', next.group.id, next.entry.id]">
-          <span class="pager-dir">Siguiente →</span>
+          <span class="pager-dir">Siguiente <ac-icon name="arrow-right" /></span>
           <span class="pager-name">{{ next.entry.label }}</span>
+          <span class="pager-group">{{ next.group.label }}</span>
         </a>
       }
     </nav>

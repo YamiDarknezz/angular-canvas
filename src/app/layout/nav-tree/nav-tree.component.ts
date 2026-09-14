@@ -3,39 +3,45 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
-import { CATALOG, CatalogEntry, CatalogGroup } from '../../core/catalog/catalog';
-
-/** Grupo con los componentes que pasan el filtro de búsqueda. */
-interface NavGroup {
-  readonly group: CatalogGroup;
-  readonly entries: readonly CatalogEntry[];
-}
+import { CATALOG } from '../../core/catalog/catalog';
+import { LibraryService } from '../../core/library/library.service';
+import { IconComponent } from '../../core/ui/icon.component';
+import { QuickSwitcherService } from '../quick-switcher/quick-switcher.service';
 
 /**
- * Navegación de dos niveles: **grupo → componente**.
+ * Navegación de dos niveles: **grupo → componente**, con estantes de favoritos
+ * y recientes arriba.
  *
  * Cada componente es un entorno con su propia URL, así que este árbol no hace
- * scroll a ninguna parte: cambia de vista. Los sub-estilos no viven aquí: se
- * eligen dentro del entorno (chips y atajos), para que el árbol no se convierta
- * en una lista de tres niveles difícil de recorrer.
+ * scroll a ninguna parte: cambia de vista. Los sub-estilos se eligen dentro del
+ * entorno (chips y atajos), y la búsqueda vive en el selector global (`⌘K`).
  *
  * El grupo del componente activo se despliega solo, de modo que un enlace
  * profundo (`/cards/neon/blue`) abre el árbol en su sitio.
  */
 @Component({
   selector: 'ac-nav-tree',
-  imports: [RouterLink],
+  imports: [RouterLink, IconComponent],
   templateUrl: './nav-tree.component.html',
   styleUrl: './nav-tree.component.scss',
 })
 export class NavTreeComponent {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly library = inject(LibraryService);
+  private readonly quickSwitcher = inject(QuickSwitcherService);
 
-  /** Filtro de búsqueda: por nombre, resumen o sub-estilo. */
-  readonly query = signal('');
+  readonly catalog = CATALOG;
   private readonly currentUrl = signal(this.router.url);
   private readonly openGroups = signal<ReadonlySet<string>>(new Set<string>());
+
+  /** Favoritos y recientes, en ese orden; los vacíos no se muestran. */
+  readonly shelves = computed(() =>
+    [
+      { id: 'favorites', title: 'Favoritos', icon: 'star-filled', items: this.library.favorites() },
+      { id: 'recents', title: 'Recientes', icon: 'clock', items: this.library.recents() },
+    ].filter((shelf) => shelf.items.length > 0),
+  );
 
   private readonly segments = computed(() =>
     this.currentUrl().split('?')[0].split('/').filter(Boolean),
@@ -43,11 +49,6 @@ export class NavTreeComponent {
 
   readonly activeGroupId = computed(() => this.segments()[0] ?? '');
   readonly activeEntryId = computed(() => this.segments()[1] ?? '');
-
-  /** Si hay búsqueda activa, el árbol se muestra entero desplegado. */
-  readonly searching = computed(() => this.query().trim().length > 0);
-
-  readonly groups = computed<readonly NavGroup[]>(() => this.filterTree(this.query()));
 
   constructor() {
     this.router.events
@@ -65,7 +66,7 @@ export class NavTreeComponent {
   }
 
   isGroupOpen(groupId: string): boolean {
-    return this.searching() || this.openGroups().has(groupId);
+    return this.openGroups().has(groupId);
   }
 
   /** Activo aunque la URL incluya sub-estilo: el componente es el mismo. */
@@ -73,12 +74,22 @@ export class NavTreeComponent {
     return this.activeGroupId() === groupId && this.activeEntryId() === entryId;
   }
 
+  isFavorite(groupId: string, entryId: string): boolean {
+    return this.library.isFavorite(groupId, entryId);
+  }
+
+  toggleFavorite(event: Event, groupId: string, entryId: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.library.toggleFavorite(groupId, entryId);
+  }
+
   toggleGroup(groupId: string): void {
     this.openGroups.update((open) => this.toggleIn(open, groupId));
   }
 
-  onQuery(event: Event): void {
-    this.query.set((event.target as HTMLInputElement).value);
+  openSearch(): void {
+    this.quickSwitcher.show();
   }
 
   /** Abre el grupo del componente activo, sin cerrar lo demás. */
@@ -98,29 +109,5 @@ export class NavTreeComponent {
       next.add(key);
     }
     return next;
-  }
-
-  private filterTree(rawQuery: string): readonly NavGroup[] {
-    const query = rawQuery.trim().toLowerCase();
-    if (!query) {
-      return CATALOG.map((group) => ({ group, entries: group.components }));
-    }
-    return CATALOG.map((group) => ({
-      group,
-      entries: group.label.toLowerCase().includes(query)
-        ? group.components
-        : group.components.filter((entry) => this.matches(entry, query)),
-    })).filter((item) => item.entries.length > 0);
-  }
-
-  private matches(entry: CatalogEntry, query: string): boolean {
-    return (
-      entry.label.toLowerCase().includes(query) ||
-      entry.id.includes(query) ||
-      entry.tagline.toLowerCase().includes(query) ||
-      entry.variants.some(
-        (variant) => variant.label.toLowerCase().includes(query) || variant.id.includes(query),
-      )
-    );
   }
 }

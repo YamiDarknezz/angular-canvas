@@ -6,7 +6,10 @@ import { filter } from 'rxjs';
 
 import { TOTAL_COMPONENTS, TOTAL_VARIANTS } from '../core/catalog/catalog';
 import { ThemeService } from '../core/theme/theme.service';
+import { IconComponent } from '../core/ui/icon.component';
 import { NavTreeComponent } from './nav-tree/nav-tree.component';
+import { QuickSwitcherComponent } from './quick-switcher/quick-switcher.component';
+import { QuickSwitcherService } from './quick-switcher/quick-switcher.service';
 
 /**
  * Marco de la aplicación: navegación a un lado, contenido (un entorno) al otro.
@@ -17,7 +20,7 @@ import { NavTreeComponent } from './nav-tree/nav-tree.component';
  */
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, NavTreeComponent],
+  imports: [RouterOutlet, NavTreeComponent, IconComponent, QuickSwitcherComponent],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
   host: {
@@ -29,6 +32,7 @@ export class ShellComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly themeService = inject(ThemeService);
+  private readonly quickSwitcher = inject(QuickSwitcherService);
 
   readonly themes = this.themeService.themes;
   readonly activeTheme = this.themeService.theme;
@@ -59,6 +63,10 @@ export class ShellComponent {
 
   setTheme(theme: (typeof this.themes)[number]['id']): void {
     this.themeService.setTheme(theme);
+  }
+
+  openSearch(): void {
+    this.quickSwitcher.show();
   }
 
   toggleDrawer(): void {

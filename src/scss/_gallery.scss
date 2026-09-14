@@ -1,26 +1,26 @@
 // ---------------------------------------------------------------------------
 // Estilos del *andamiaje* de la galería (no de la librería).
 //
-// Todo lo que hay aquí es interfaz del catálogo: los chips de navegación, los
-// avisos de la ventana de entorno, etc. Los componentes NO lo usan, así que no
-// viaja con ellos cuando copias una carpeta a otro proyecto.
+// Todo lo que hay aquí es interfaz del catálogo: chips de sub-estilos, pistas
+// de teclado, etc. Los componentes NO lo usan, así que no viaja con ellos
+// cuando copias una carpeta a otro proyecto.
 //
 // Criterio: si una clase la usan las plantillas de `components/`, va en el
 // bloque de librería de `styles.scss`. Si solo la usan `layout/` y `views/`,
 // va aquí.
 // ---------------------------------------------------------------------------
 
-/* Chip: enlace corto a una variante. Se usa en la portada y en la cabecera
-   del entorno. */
+/* Chip: enlace corto a un sub-estilo. Se usa en la portada y en la barra del
+   entorno; los activos toman el acento de la categoría (--accent). */
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.6rem;
+  padding: 0.18rem 0.55rem;
   border: 1px solid var(--ac-border);
   border-radius: 999px;
   background: transparent;
-  color: var(--ac-text-muted);
-  font-size: 0.72rem;
+  color: var(--ac-text-faint);
+  font-size: 0.7rem;
   line-height: 1.5;
   cursor: pointer;
   transition:
@@ -29,14 +29,14 @@
     background 0.2s;
 
   &:hover {
-    border-color: color-mix(in srgb, var(--ac-primary) 60%, transparent);
+    border-color: color-mix(in srgb, var(--accent, var(--ac-primary)) 55%, transparent);
     color: var(--ac-text);
   }
 
   &.active {
-    border-color: var(--ac-primary);
-    background: color-mix(in srgb, var(--ac-primary) 15%, transparent);
-    color: var(--ac-primary-soft);
+    border-color: color-mix(in srgb, var(--accent, var(--ac-primary)) 70%, transparent);
+    background: color-mix(in srgb, var(--accent, var(--ac-primary)) 15%, transparent);
+    color: color-mix(in srgb, var(--accent, var(--ac-primary)) 65%, var(--ac-text));
   }
 }
 
@@ -50,7 +50,7 @@ kbd {
   border-radius: 5px;
   background: var(--ac-surface);
   color: var(--ac-text-muted);
-  font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', monospace;
+  font-family: var(--ac-font-mono);
   font-size: 0.68rem;
   line-height: 1.5;
 }

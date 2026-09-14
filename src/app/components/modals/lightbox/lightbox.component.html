@@ -1,0 +1,82 @@
+<section class="design-section">
+  <h2 class="section-title">Lightbox</h2>
+  <p class="section-desc">Visor de fotos con prev/next y variantes oscura y de vidrio</p>
+
+  <div class="lb-stage" data-variant="photo">
+    <div class="lb-grid">
+      @for (photo of photos; track photo.id) {
+        <button type="button" class="lb-thumb" (click)="show(photo.id)">
+          <span class="lb-thumb-art" [style.background]="photo.gradient"></span>
+          <span class="lb-thumb-title">{{ photo.title }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="lb-stage" data-variant="glass">
+    <div class="lb-grid">
+      @for (photo of photos; track photo.id) {
+        <button type="button" class="lb-thumb glass" (click)="show(photo.id)">
+          <span class="lb-thumb-art" [style.background]="photo.gradient"></span>
+          <span class="lb-thumb-title">{{ photo.title }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (current(); as photo) {
+    <div class="lb-overlay" (click)="close()">
+      <div
+        class="lb-modal"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="photo.title"
+        (click)="$event.stopPropagation()"
+      >
+        <button type="button" class="lb-close" aria-label="Cerrar" (click)="close()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
+        </button>
+
+        <button type="button" class="lb-nav prev" aria-label="Foto anterior" (click)="prev()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m14.5 6-6 6 6 6" />
+          </svg>
+        </button>
+
+        <div class="lb-content">
+          <div class="lb-image" [style.background]="photo.gradient"></div>
+          <p class="lb-caption">{{ photo.title }}</p>
+        </div>
+
+        <button type="button" class="lb-nav next" aria-label="Foto siguiente" (click)="next()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9.5 6 6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  }
+</section>

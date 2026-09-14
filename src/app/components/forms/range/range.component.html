@@ -1,0 +1,48 @@
+<section class="design-section">
+  <h2 class="section-title">Range Slider</h2>
+  <p class="section-desc">Selector de rango con pista de degradado y pulgar de vidrio</p>
+
+  <div class="range-stage" data-variant="gradient">
+    <label class="range-label" for="range-gradient">Volumen</label>
+    <div class="range-row">
+      <span class="range-min">0</span>
+      <input
+        id="range-gradient"
+        type="range"
+        min="0"
+        max="100"
+        class="range-input"
+        [style.--p.%]="value()"
+        [attr.aria-valuenow]="value()"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [value]="value()"
+        (input)="onInput($event)"
+      />
+      <span class="range-max">100</span>
+    </div>
+    <output class="range-output">{{ value() }}%</output>
+  </div>
+
+  <div class="range-stage glass" data-variant="glass">
+    <label class="range-label" for="range-glass">Brillo</label>
+    <div class="range-row">
+      <span class="range-min">0</span>
+      <input
+        id="range-glass"
+        type="range"
+        min="0"
+        max="100"
+        class="range-input glass"
+        [style.--p.%]="value()"
+        [attr.aria-valuenow]="value()"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [value]="value()"
+        (input)="onInput($event)"
+      />
+      <span class="range-max">100</span>
+    </div>
+    <output class="range-output">{{ value() }}%</output>
+  </div>
+</section>

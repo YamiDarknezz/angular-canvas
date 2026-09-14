@@ -1,14 +1,14 @@
 # 🎨 AngularCanvas
 
 Biblioteca viva de **efectos y diseños para Angular**. Es un catálogo navegable
-de 40 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
+de 49 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
 en su propia carpeta, con su `.ts`, su `.html` y su `.scss`, listo para llevarlo
 a cualquier otro proyecto.
 
 Construido con **Angular 22** (standalone components, signals, router y control
 flow nativo `@if` / `@for`).
 
-**8 categorías · 40 componentes · 112 sub-estilos · 5 temas.**
+**8 categorías · 49 componentes · 133 sub-estilos · 5 temas.**
 
 ---
 
@@ -30,6 +30,10 @@ La galería **no es un landing**: es un navegador de entornos.
 - **El ancho de previsualización es real**: full, tablet (834 px) o móvil
   (390 px) con marco de dispositivo. Al ser un iframe, las `@media` responden a
   ese ancho de verdad, no al de tu pantalla.
+- **La galería se navega como un catálogo**: `⌘K` abre el buscador global, el
+  sidebar guarda **favoritos y recientes**, cada categoría tiene su acento y la
+  tipografía display y mono van self-hosted. El ancho elegido se recuerda entre
+  entornos.
 
 Ese aislamiento no es solo visual, es técnico (ver
 [Aislamiento](#-aislamiento-y-sub-estilos-más-abajo)): el componente no comparte
@@ -75,13 +79,15 @@ sub-estilo y `0` vuelve a verlos todos.
 ## 🗂️ Estructura del proyecto
 
 ```
+public/
+└── fonts/                      # Bricolage Grotesque y JetBrains Mono, self-hosted
 src/
-├── index.html                  # Script anti-flash de tema
+├── index.html                  # Script anti-flash de tema + preload de fuentes
 ├── main.ts                     # bootstrapApplication
 ├── styles.scss                 # Reset, tokens y estilos COMPARTIDOS de la librería
 ├── scss/
-│   ├── _tokens.scss            # Variables CSS de los 5 temas
-│   └── _gallery.scss           # UI del andamiaje (chips). NO viaja con los componentes
+│   ├── _tokens.scss            # Variables CSS de los 5 temas y tipografías
+│   └── _gallery.scss           # UI del andamiaje (chips, kbd). NO viaja con los componentes
 └── app/
     ├── app.ts                  # Raíz: monta el shell o la vista embed según la ruta
     ├── app.config.ts           # provideRouter + component input binding
@@ -89,7 +95,9 @@ src/
     ├── core/
     │   ├── catalog/catalog.ts        # FUENTE ÚNICA DE VERDAD (grupos/componentes/variantes)
     │   ├── registry/component-registry.ts  # grupo/componente → clase standalone
+    │   ├── library/library.service.ts  # Favoritos y recientes (localStorage)
     │   ├── theme/theme.service.ts    # Cambio de tema + persistencia
+    │   ├── ui/icon.component.ts      # Set de iconos del andamiaje (SVG)
     │   └── stage/
     │       ├── stage.component.*     # La ventana neutra: ancho, dispositivo y código
     │       ├── stage-messages.ts     # Canal postMessage con el iframe
@@ -97,10 +105,11 @@ src/
     │       └── variant-focus.ts      # Genera el CSS que filtra sub-estilos
     ├── layout/
     │   ├── shell.component.*         # Marco: sidebar, temas, topbar y drawer móvil
-    │   └── nav-tree/nav-tree.component.*  # Navegación de 2 niveles + buscador
+    │   ├── nav-tree/nav-tree.component.*  # Navegación de 2 niveles + favoritos/recientes
+    │   └── quick-switcher/quick-switcher.component.*  # Buscador global (⌘K)
     ├── views/
-    │   ├── home/home.component.*     # Portada
-    │   ├── environment/environment.component.*  # Cabecera, chips, atajos y pager
+    │   ├── home/home.component.*     # Portada: cover aurora y capítulos por categoría
+    │   ├── environment/environment.component.*  # Cabecera, chips sticky, atajos y pager
     │   └── embed/embed.component.*   # Documento desnudo que carga el iframe
     └── components/                   # 👈 LA LIBRERÍA (esto es lo que se copia)
         ├── cards/        glassmorphism/  neon/  hover-effects/  flip/
@@ -241,7 +250,7 @@ dentro se re-tematiza en vivo, sin recargar.
 
 ---
 
-## 🧩 Componentes (40)
+## 🧩 Componentes (49)
 
 Formato: **grupo (n)** → componente (`sub-estilos`).
 
@@ -262,14 +271,18 @@ gradient), Animated Mesh (1), Aurora (3: aurora, haces, vidrio)
 rainbow, subtle), Typewriter (1, sobre una terminal), 3D Text (3: extrude,
 isométrico, floating)
 
-**🧭 Navigation (4)** — Sidebar colapsable (1), Topbar responsiva (1), Dock
-inferior (3: flotante, cristal, barra), Glass Tabs (2: vidrio, subrayado)
+**🧭 Navigation (7)** — Sidebar colapsable (1), Topbar responsiva (1), Dock
+inferior (3: flotante, cristal, barra), Glass Tabs (2: vidrio, subrayado),
+Breadcrumbs (3: chevron, slash, vidrio), Pagination (3: números, compacta,
+vidrio), Stepper (3: horizontal, vertical, progreso)
 
-**📝 Forms (4)** — Glass Input (1), Toggle Switch (1), Checkbox (1), Segmented
-(2: vidrio, sólido)
+**📝 Forms (7)** — Glass Input (1), Toggle Switch (1), Checkbox (1), Segmented
+(2: vidrio, sólido), OTP Input (2: cajas, subrayado), Rating (2: estrellas,
+segmentos), Range Slider (2: degradado, vidrio)
 
-**🪟 Modals (3)** — Glass Modal (1), Slide-in Panel (1), Command Palette (1,
-búsqueda + teclado)
+**🪟 Modals (6)** — Glass Modal (1), Slide-in Panel (1), Command Palette (1,
+búsqueda + teclado), Confirm Dialog (2: peligro, vidrio), Bottom Sheet (2:
+sólido, vidrio), Lightbox (2: foto, vidrio)
 
 **🎨 Themes (5)** — Dark (3), Light (3), Hacker (2: terminal, paleta),
 Cyberpunk (3: glitch, subtítulo, paleta), Corporate (2)

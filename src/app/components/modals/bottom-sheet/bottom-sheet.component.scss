@@ -1,0 +1,144 @@
+.sheet-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background: #07070f;
+  border: 1px solid rgb(255 255 255 / 8%);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sheet-trigger {
+  padding: 0.8rem 1.9rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px -6px rgb(99 102 241 / 70%);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &.glass {
+    background: rgb(255 255 255 / 10%);
+    border: 1px solid rgb(255 255 255 / 25%);
+    color: #fff;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 30%),
+      0 6px 20px -8px rgb(0 0 0 / 60%);
+  }
+}
+
+.sheet-done {
+  font-size: 0.85rem;
+  color: #6ee7b7;
+  animation: confirm-pop 0.3s ease;
+}
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgb(0 0 0 / 50%);
+  animation: confirm-fade 0.2s ease;
+}
+
+.sheet {
+  width: min(420px, 100%);
+  border-radius: 20px 20px 0 0;
+  background: #0f0f1a;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  padding: 0 0 1.5rem;
+  color: #f4f6ff;
+  animation: sheet-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.glass {
+    background: rgb(15 15 26 / 82%);
+    border-top-color: rgb(255 255 255 / 20%);
+    backdrop-filter: blur(26px) saturate(170%);
+    -webkit-backdrop-filter: blur(26px) saturate(170%);
+  }
+}
+
+.sheet-handle {
+  width: 36px;
+  height: 4px;
+  margin: 0.6rem auto 1rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 18%);
+}
+
+.sheet-title {
+  padding: 0 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.sheet-list {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+}
+
+.sheet-option {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: rgb(244 246 255 / 85%);
+  font-family: inherit;
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgb(255 255 255 / 8%);
+  }
+}
+
+.sheet-cancel {
+  display: block;
+  width: calc(100% - 3rem);
+  margin: 0 auto;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 10%);
+  color: rgb(244 246 255 / 70%);
+  font-family: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgb(255 255 255 / 18%);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: none;
+  }
+}

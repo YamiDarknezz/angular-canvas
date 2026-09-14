@@ -1,0 +1,80 @@
+<section class="design-section">
+  <h2 class="section-title">Breadcrumbs</h2>
+  <p class="section-desc">Migas de pan con chevron, slash y acabado de vidrio</p>
+
+  <div class="crumbs-stage" data-variant="chevron">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      @for (crumb of crumbs; track crumb; let last = $last) {
+        <button
+          type="button"
+          class="crumb"
+          [class.current]="last"
+          [attr.aria-current]="last ? 'page' : null"
+        >
+          {{ crumb }}
+        </button>
+        @if (!last) {
+          <svg
+            class="crumb-sep"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9.5 6 6 6-6 6" />
+          </svg>
+        }
+      }
+    </nav>
+  </div>
+
+  <div class="crumbs-stage mono" data-variant="slash">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      @for (crumb of crumbs; track crumb; let last = $last) {
+        <button
+          type="button"
+          class="crumb"
+          [class.current]="last"
+          [attr.aria-current]="last ? 'page' : null"
+        >
+          {{ crumb }}
+        </button>
+        @if (!last) {
+          <span class="crumb-sep" aria-hidden="true">/</span>
+        }
+      }
+    </nav>
+  </div>
+
+  <div class="crumbs-stage glass" data-variant="glass">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      @for (crumb of crumbs; track crumb; let last = $last) {
+        <button
+          type="button"
+          class="crumb"
+          [class.current]="last"
+          [attr.aria-current]="last ? 'page' : null"
+        >
+          {{ crumb }}
+        </button>
+        @if (!last) {
+          <svg
+            class="crumb-sep"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9.5 6 6 6-6 6" />
+          </svg>
+        }
+      }
+    </nav>
+  </div>
+</section>

@@ -10,7 +10,9 @@ import {
   findVariant,
   hasMultipleVariants,
 } from '../../core/catalog/catalog';
+import { LibraryService } from '../../core/library/library.service';
 import { StageComponent } from '../../core/stage/stage.component';
+import { IconComponent } from '../../core/ui/icon.component';
 
 /**
  * Vista de un entorno: **un solo componente**, aislado en su ventana.
@@ -26,7 +28,7 @@ import { StageComponent } from '../../core/stage/stage.component';
  */
 @Component({
   selector: 'ac-environment',
-  imports: [RouterLink, StageComponent],
+  imports: [RouterLink, StageComponent, IconComponent],
   templateUrl: './environment.component.html',
   styleUrl: './environment.component.scss',
   host: {
@@ -36,6 +38,7 @@ import { StageComponent } from '../../core/stage/stage.component';
 export class EnvironmentComponent {
   private readonly title = inject(Title);
   private readonly router = inject(Router);
+  private readonly library = inject(LibraryService);
 
   /** Parámetro de ruta: categoría (`cards`). */
   readonly group = input<string>();
@@ -58,6 +61,12 @@ export class EnvironmentComponent {
     return entry ? (findVariant(entry, this.variant()) ?? null) : null;
   });
 
+  readonly isFavorite = computed(() => {
+    const group = this.groupData();
+    const entry = this.entryData();
+    return group && entry ? this.library.isFavorite(group.id, entry.id) : false;
+  });
+
   private readonly index = computed(() =>
     FLAT_ENTRIES.findIndex(
       (item) => item.group.id === this.group() && item.entry.id === this.entry(),
@@ -75,14 +84,26 @@ export class EnvironmentComponent {
   });
 
   constructor() {
-    // El título de la pestaña sigue al entorno abierto: sirve para compartir
-    // un enlace y para el historial del navegador.
+    // El título de la pestaña sigue al entorno abierto, y el entorno queda
+    // apuntado en recientes para volver rápido desde el sidebar.
     effect(() => {
       const entry = this.entryData();
+      const group = this.groupData();
       this.title.setTitle(
         entry ? `${entry.label} — AngularCanvas` : 'Entorno no encontrado — AngularCanvas',
       );
+      if (entry && group) {
+        this.library.markVisited(group.id, entry.id);
+      }
     });
+  }
+
+  toggleFavorite(): void {
+    const group = this.groupData();
+    const entry = this.entryData();
+    if (group && entry) {
+      this.library.toggleFavorite(group.id, entry.id);
+    }
   }
 
   /**

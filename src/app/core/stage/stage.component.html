@@ -20,10 +20,21 @@
             [title]="option.label"
             (click)="width.set(option.id)"
           >
-            <span aria-hidden="true">{{ option.icon }}</span>
+            <ac-icon [name]="option.icon" />
           </button>
         }
       </div>
+
+      <a
+        class="tool-btn text"
+        [href]="embedPath()"
+        target="_blank"
+        rel="noopener"
+        title="Abrir el componente en una pestaña"
+      >
+        <ac-icon name="external" />
+        <span class="tool-label">Abrir</span>
+      </a>
 
       <button
         type="button"
@@ -32,7 +43,8 @@
         [attr.aria-expanded]="codeOpen()"
         (click)="toggleCode()"
       >
-        Código
+        <ac-icon name="code" />
+        <span class="tool-label">Código</span>
       </button>
     </div>
   </header>

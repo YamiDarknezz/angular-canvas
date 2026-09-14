@@ -47,7 +47,10 @@ export interface CatalogEntry {
 export interface CatalogGroup {
   readonly id: string;
   readonly label: string;
+  /** Nombre del icono del set de la galería (`ac-icon`). */
   readonly icon: string;
+  /** Acento de la categoría para el andamiaje (los componentes no lo usan). */
+  readonly accent: string;
   readonly tagline: string;
   readonly components: readonly CatalogEntry[];
 }
@@ -56,7 +59,8 @@ export const CATALOG: readonly CatalogGroup[] = [
   {
     id: 'cards',
     label: 'Cards',
-    icon: '🃏',
+    icon: 'cards',
+    accent: '#6366f1',
     tagline: 'Tarjetas con vidrio, neón, volteo 3D y estilos sobrios',
     components: [
       {
@@ -170,7 +174,8 @@ export const CATALOG: readonly CatalogGroup[] = [
   {
     id: 'buttons',
     label: 'Buttons',
-    icon: '🔘',
+    icon: 'buttons',
+    accent: '#06b6d4',
     tagline: 'Botones con brillo, degradado, neumorfismo y animación',
     components: [
       {
@@ -284,7 +289,8 @@ export const CATALOG: readonly CatalogGroup[] = [
   {
     id: 'backgrounds',
     label: 'Backgrounds',
-    icon: '🌌',
+    icon: 'backgrounds',
+    accent: '#a855f7',
     tagline: 'Fondos degradados, partículas, grillas y mallas animadas',
     components: [
       {
@@ -354,7 +360,8 @@ export const CATALOG: readonly CatalogGroup[] = [
   {
     id: 'typography',
     label: 'Typography',
-    icon: '🔤',
+    icon: 'typography',
+    accent: '#ec4899',
     tagline: 'Texto con neón, degradados y efecto máquina de escribir',
     components: [
       {
@@ -414,7 +421,8 @@ export const CATALOG: readonly CatalogGroup[] = [
   {
     id: 'navigation',
     label: 'Navigation',
-    icon: '🧭',
+    icon: 'navigation',
+    accent: '#14b8a6',
     tagline: 'Sidebar colapsable y topbar responsiva',
     components: [
       {
@@ -468,12 +476,52 @@ export const CATALOG: readonly CatalogGroup[] = [
           { id: 'underline', label: 'Subrayado', hint: 'Línea luminosa que sigue a la pestaña' },
         ],
       },
+      {
+        id: 'breadcrumbs',
+        label: 'Breadcrumbs',
+        tagline: 'Migas de pan con chevron, slash y vidrio',
+        selector: 'app-nav-breadcrumbs',
+        className: 'BreadcrumbsComponent',
+        sourcePath: 'src/app/components/navigation/breadcrumbs',
+        variants: [
+          { id: 'chevron', label: 'Chevron', hint: 'Flechas entre niveles' },
+          { id: 'slash', label: 'Slash', hint: 'Barra monoespaciada' },
+          { id: 'glass', label: 'Vidrio', hint: 'Píldora translúcida sobre color' },
+        ],
+      },
+      {
+        id: 'pagination',
+        label: 'Pagination',
+        tagline: 'Paginación numérica, compacta y de vidrio',
+        selector: 'app-nav-pagination',
+        className: 'PaginationComponent',
+        sourcePath: 'src/app/components/navigation/pagination',
+        variants: [
+          { id: 'numbers', label: 'Números', hint: 'Página activa con elipsis dinámico' },
+          { id: 'compact', label: 'Compacta', hint: '"Página X de Y" con flechas' },
+          { id: 'glass', label: 'Vidrio', hint: 'Píldora translucida sobre color' },
+        ],
+      },
+      {
+        id: 'stepper',
+        label: 'Stepper',
+        tagline: 'Pasos en horizontal, vertical y barra de progreso',
+        selector: 'app-nav-stepper',
+        className: 'StepperComponent',
+        sourcePath: 'src/app/components/navigation/stepper',
+        variants: [
+          { id: 'horizontal', label: 'Horizontal', hint: 'Pasos en fila con conectores' },
+          { id: 'vertical', label: 'Vertical', hint: 'Pasos apilados con línea izquierda' },
+          { id: 'progress', label: 'Progreso', hint: 'Barra de progreso con puntos' },
+        ],
+      },
     ],
   },
   {
     id: 'forms',
     label: 'Forms',
-    icon: '📝',
+    icon: 'forms',
+    accent: '#f59e0b',
     tagline: 'Inputs de vidrio, toggles y checkboxes accesibles',
     components: [
       {
@@ -520,12 +568,50 @@ export const CATALOG: readonly CatalogGroup[] = [
           { id: 'solid', label: 'Sólido', hint: 'Pulgar sólido sobre panel oscuro' },
         ],
       },
+      {
+        id: 'otp',
+        label: 'OTP Input',
+        tagline: 'Código de verificación con avance automático',
+        selector: 'app-form-otp',
+        className: 'OtpComponent',
+        sourcePath: 'src/app/components/forms/otp',
+        requiresForms: false,
+        variants: [
+          { id: 'boxes', label: 'Cajas', hint: 'Dígitos en cajas de vidrio con blur' },
+          { id: 'underline', label: 'Subrayado', hint: 'Dígitos mono sobre línea de color' },
+        ],
+      },
+      {
+        id: 'rating',
+        label: 'Rating',
+        tagline: 'Valoración por estrellas y segmentos',
+        selector: 'app-form-rating',
+        className: 'RatingComponent',
+        sourcePath: 'src/app/components/forms/rating',
+        variants: [
+          { id: 'stars', label: 'Estrellas', hint: '5 estrellas con hover dorado' },
+          { id: 'segments', label: 'Segmentos', hint: 'Botones 1–5 con etiquetas' },
+        ],
+      },
+      {
+        id: 'range',
+        label: 'Range Slider',
+        tagline: 'Selector de rango con pista de degradado',
+        selector: 'app-form-range',
+        className: 'RangeComponent',
+        sourcePath: 'src/app/components/forms/range',
+        variants: [
+          { id: 'gradient', label: 'Degradado', hint: 'Pista indigo→rosa con pulgar blanco' },
+          { id: 'glass', label: 'Vidrio', hint: 'Pulgar translúcido con borde luminoso' },
+        ],
+      },
     ],
   },
   {
     id: 'modals',
     label: 'Modals',
-    icon: '🪟',
+    icon: 'modals',
+    accent: '#3b82f6',
     tagline: 'Modal de vidrio y panel lateral con foco gestionado',
     components: [
       {
@@ -573,12 +659,49 @@ export const CATALOG: readonly CatalogGroup[] = [
           },
         ],
       },
+      {
+        id: 'confirm',
+        label: 'Confirm Dialog',
+        tagline: 'Diálogo de confirmación con peligro y vidrio',
+        selector: 'app-modal-confirm',
+        className: 'ConfirmModalComponent',
+        sourcePath: 'src/app/components/modals/confirm',
+        variants: [
+          { id: 'danger', label: 'Peligro', hint: 'Acento rojo con icono de advertencia' },
+          { id: 'glass', label: 'Vidrio', hint: 'Panel translúcido con blur' },
+        ],
+      },
+      {
+        id: 'bottom-sheet',
+        label: 'Bottom Sheet',
+        tagline: 'Panel inferior con manija y acciones',
+        selector: 'app-modal-sheet',
+        className: 'BottomSheetComponent',
+        sourcePath: 'src/app/components/modals/bottom-sheet',
+        variants: [
+          { id: 'solid', label: 'Sólido', hint: 'Panel oscuro desde abajo' },
+          { id: 'glass', label: 'Vidrio', hint: 'Panel translúcido con blur' },
+        ],
+      },
+      {
+        id: 'lightbox',
+        label: 'Lightbox',
+        tagline: 'Visor de fotos con prev/next y vidrio',
+        selector: 'app-modal-lightbox',
+        className: 'LightboxComponent',
+        sourcePath: 'src/app/components/modals/lightbox',
+        variants: [
+          { id: 'photo', label: 'Foto', hint: 'Visor oscuro con flechas' },
+          { id: 'glass', label: 'Vidrio', hint: 'Miniaturas con efecto de vidrio' },
+        ],
+      },
     ],
   },
   {
     id: 'themes',
     label: 'Themes',
-    icon: '🎨',
+    icon: 'themes',
+    accent: '#f43f5e',
     tagline: 'Cinco temas completos basados en variables CSS',
     components: [
       {

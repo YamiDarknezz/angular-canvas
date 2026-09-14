@@ -17,7 +17,7 @@
 }
 
 .stage-path {
-  font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', monospace;
+  font-family: var(--ac-font-mono);
   font-size: 0.75rem;
   color: var(--ac-text-faint);
 
@@ -51,6 +51,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
   min-width: 1.9rem;
   height: 1.9rem;
   padding: 0 0.5rem;
@@ -64,6 +65,10 @@
   transition:
     background 0.2s,
     color 0.2s;
+
+  ac-icon {
+    font-size: 1rem;
+  }
 
   &:hover {
     background: var(--ac-surface);
@@ -128,7 +133,7 @@
   margin: 0;
   padding: 0.85rem 0.75rem;
   overflow-x: auto;
-  font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', monospace;
+  font-family: var(--ac-font-mono);
   font-size: 0.76rem;
   line-height: 1.65;
   color: var(--ac-text-muted);

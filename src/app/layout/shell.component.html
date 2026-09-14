@@ -6,7 +6,7 @@
     aria-label="Catálogo de componentes"
   >
     <div class="nav-brand">
-      <span class="brand-icon" aria-hidden="true">🎨</span>
+      <span class="brand-mark" aria-hidden="true"><ac-icon name="themes" /></span>
       <span class="brand-text">Angular<strong>Canvas</strong></span>
       <button
         type="button"
@@ -31,7 +31,7 @@
             [attr.aria-pressed]="activeTheme() === theme.id"
             (click)="setTheme(theme.id)"
           >
-            <span aria-hidden="true">{{ theme.icon }}</span>
+            <span class="theme-dot" [style.background]="theme.swatch" aria-hidden="true"></span>
             <span>{{ theme.label }}</span>
           </button>
         }
@@ -69,7 +69,12 @@
       >
         ☰
       </button>
-      <span class="topbar-brand">🎨 AngularCanvas</span>
+      <span class="topbar-brand"><ac-icon name="themes" /> AngularCanvas</span>
+      <button type="button" class="topbar-search" (click)="openSearch()">
+        <ac-icon name="search" />
+        <span>Buscar</span>
+        <kbd>⌘K</kbd>
+      </button>
       <span class="topbar-version">v1.0.0</span>
     </header>
 
@@ -77,4 +82,6 @@
       <router-outlet />
     </main>
   </div>
+
+  <ac-quick-switcher />
 </div>

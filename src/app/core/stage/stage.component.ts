@@ -15,10 +15,12 @@ import { CatalogEntry, CatalogGroup, CatalogVariant } from '../catalog/catalog';
 import { StageMessage } from './stage-messages';
 import { StageWidth, StageWidthService } from './stage-width.service';
 import { ThemeService } from '../theme/theme.service';
+import { IconComponent } from '../ui/icon.component';
 
 interface WidthOption {
   readonly id: StageWidth;
   readonly label: string;
+  /** Nombre del icono del set de la galería. */
   readonly icon: string;
 }
 
@@ -40,6 +42,7 @@ interface WidthOption {
  */
 @Component({
   selector: 'ac-stage',
+  imports: [IconComponent],
   templateUrl: './stage.component.html',
   styleUrl: './stage.component.scss',
 })
@@ -57,9 +60,9 @@ export class StageComponent {
   readonly activeVariant = input<CatalogVariant | null>(null);
 
   readonly widths: readonly WidthOption[] = [
-    { id: 'full', label: 'Ancho completo', icon: '🖥️' },
-    { id: 'tablet', label: 'Tablet — 834 px de ancho', icon: '📱' },
-    { id: 'mobile', label: 'Móvil — 390 px de ancho', icon: '📲' },
+    { id: 'full', label: 'Ancho completo', icon: 'monitor' },
+    { id: 'tablet', label: 'Tablet — 834 px de ancho', icon: 'tablet' },
+    { id: 'mobile', label: 'Móvil — 390 px de ancho', icon: 'phone' },
   ];
 
   /** Preset de ancho elegido; sobrevive a la navegación entre entornos. */
@@ -74,9 +77,12 @@ export class StageComponent {
   /** `true` cuando se previsualiza en un marco de dispositivo. */
   readonly isDevice = computed(() => this.width() !== 'full');
 
-  /** URL del iframe: la vista desnuda de este componente. */
+  /** Ruta de la vista desnuda, para el iframe y para abrir en pestaña. */
+  readonly embedPath = computed(() => `/embed/${this.group().id}/${this.entry().id}`);
+
+  /** URL del iframe (saneada por Angular). */
   readonly embedUrl = computed<SafeResourceUrl>(() =>
-    this.sanitizer.bypassSecurityTrustResourceUrl(`/embed/${this.group().id}/${this.entry().id}`),
+    this.sanitizer.bypassSecurityTrustResourceUrl(this.embedPath()),
   );
 
   /** Nombre de los archivos que el usuario tiene que copiar. */

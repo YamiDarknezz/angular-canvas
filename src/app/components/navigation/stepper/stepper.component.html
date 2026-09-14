@@ -1,0 +1,106 @@
+<section class="design-section">
+  <h2 class="section-title">Stepper</h2>
+  <p class="section-desc">Pasos en horizontal, vertical y barra de progreso</p>
+
+  <div class="step-stage" data-variant="horizontal">
+    <ol class="steps" aria-label="Pasos del proceso">
+      @for (step of steps; track step.label; let i = $index; let last = $last) {
+        <li class="step" [class.done]="i < current()" [class.active]="i === current()">
+          <button
+            type="button"
+            class="step-btn"
+            [attr.aria-current]="i === current() ? 'step' : null"
+            (click)="select(i)"
+          >
+            <span class="step-marker" aria-hidden="true">
+              @if (i < current()) {
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m5 12.5 4.5 4.5L19 7" />
+                </svg>
+              } @else {
+                {{ i + 1 }}
+              }
+            </span>
+            <span class="step-text">
+              <span class="step-label">{{ step.label }}</span>
+              <span class="step-hint">{{ step.hint }}</span>
+            </span>
+          </button>
+          @if (!last) {
+            <span class="step-line" aria-hidden="true"></span>
+          }
+        </li>
+      }
+    </ol>
+  </div>
+
+  <div class="step-stage" data-variant="vertical">
+    <ol class="steps vertical" aria-label="Pasos del proceso">
+      @for (step of steps; track step.label; let i = $index; let last = $last) {
+        <li class="step" [class.done]="i < current()" [class.active]="i === current()">
+          <button
+            type="button"
+            class="step-btn"
+            [attr.aria-current]="i === current() ? 'step' : null"
+            (click)="select(i)"
+          >
+            <span class="step-marker" aria-hidden="true">
+              @if (i < current()) {
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m5 12.5 4.5 4.5L19 7" />
+                </svg>
+              } @else {
+                {{ i + 1 }}
+              }
+            </span>
+            <span class="step-text">
+              <span class="step-label">{{ step.label }}</span>
+              <span class="step-hint">{{ step.hint }}</span>
+            </span>
+          </button>
+          @if (!last) {
+            <span class="step-line" aria-hidden="true"></span>
+          }
+        </li>
+      }
+    </ol>
+  </div>
+
+  <div class="step-stage" data-variant="progress">
+    <div class="progress">
+      <div class="progress-head">
+        <span class="progress-label">{{ steps[current()].label }}</span>
+        <span class="progress-count">{{ current() + 1 }} / {{ steps.length }}</span>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <span class="progress-fill" [style.--p]="(current() + 1) / steps.length"></span>
+      </div>
+      <div class="progress-dots">
+        @for (step of steps; track step.label; let i = $index) {
+          <button
+            type="button"
+            class="progress-dot"
+            [class.done]="i < current()"
+            [class.active]="i === current()"
+            [attr.aria-label]="step.label"
+            (click)="select(i)"
+          ></button>
+        }
+      </div>
+    </div>
+  </div>
+</section>

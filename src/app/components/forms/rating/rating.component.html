@@ -1,0 +1,60 @@
+<section class="design-section">
+  <h2 class="section-title">Rating</h2>
+  <p class="section-desc">Valoración por estrellas y por segmentos con previsualización</p>
+
+  <div class="rating-stage" data-variant="stars">
+    <p class="rating-title">¿Cómo te fue?</p>
+    <div class="rating-stars" role="radiogroup" aria-label="Valoración por estrellas">
+      @for (n of stars; track n) {
+        <button
+          type="button"
+          class="star-btn"
+          [class.active]="n <= display()"
+          role="radio"
+          [attr.aria-checked]="n === value()"
+          [attr.aria-label]="n + ' de 5'"
+          (mouseenter)="setHover(n)"
+          (mouseleave)="clearHover()"
+          (click)="setValue(n)"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            [attr.fill]="n <= display() ? 'currentColor' : 'none'"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="m12 3.6 2.6 5.4 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.9L12 3.6Z"
+            />
+          </svg>
+        </button>
+      }
+    </div>
+    <p class="rating-value">{{ value() }}/5</p>
+  </div>
+
+  <div class="rating-stage" data-variant="segments">
+    <p class="rating-title">Nivel de satisfacción</p>
+    <div class="rating-segments" role="radiogroup" aria-label="Nivel de satisfacción">
+      @for (seg of segments; track seg.value) {
+        <button
+          type="button"
+          class="seg-btn"
+          [class.active]="seg.value <= value()"
+          [class.highlight]="seg.value === value()"
+          role="radio"
+          [attr.aria-checked]="seg.value === value()"
+          [attr.aria-label]="seg.label + ' (' + seg.value + '/5)'"
+          (mouseenter)="setHover(seg.value)"
+          (mouseleave)="clearHover()"
+          (click)="setValue(seg.value)"
+        >
+          <span class="seg-num">{{ seg.value }}</span>
+          <span class="seg-label">{{ seg.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</section>

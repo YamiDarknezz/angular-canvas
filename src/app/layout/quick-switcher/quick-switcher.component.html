@@ -1,0 +1,58 @@
+@if (open()) {
+  <div class="qs-overlay" (click)="close()">
+    <div
+      class="qs"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Buscar en el catálogo"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="qs-search">
+        <ac-icon name="search" />
+        <input
+          #search
+          type="search"
+          placeholder="Buscar componente o sub-estilo…"
+          aria-label="Buscar componente o sub-estilo"
+          [value]="query()"
+          (input)="onQuery($event)"
+        />
+        <kbd>esc</kbd>
+      </div>
+
+      <ul class="qs-list" role="listbox" aria-label="Resultados">
+        @for (item of results(); track item.key; let i = $index) {
+          <li>
+            <button
+              type="button"
+              role="option"
+              class="qs-item"
+              [class.active]="cursor() === i"
+              [attr.aria-selected]="cursor() === i"
+              (mouseenter)="cursor.set(i)"
+              (click)="go(item)"
+            >
+              <span class="qs-icon" [style.color]="item.group.accent">
+                <ac-icon [name]="item.group.icon" />
+              </span>
+              <span class="qs-label">{{ item.label }}</span>
+              @if (item.kind === 'variant') {
+                <span class="qs-kind">sub-estilo</span>
+              }
+              <span class="qs-route">{{ item.route }}</span>
+            </button>
+          </li>
+        } @empty {
+          <li class="qs-empty">
+            {{ isSearching() ? 'Sin resultados para «' + query() + '»' : 'El catálogo está vacío' }}
+          </li>
+        }
+      </ul>
+
+      <p class="qs-foot">
+        <kbd>↑</kbd><kbd>↓</kbd> moverse <span aria-hidden="true">·</span> <kbd>↵</kbd> abrir
+        <span aria-hidden="true">·</span> <kbd>esc</kbd> cerrar
+      </p>
+    </div>
+  </div>
+}

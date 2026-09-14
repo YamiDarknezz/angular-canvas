@@ -1,53 +1,85 @@
 <div class="tree">
-  <div class="tree-search">
-    <span class="search-icon" aria-hidden="true">🔍</span>
-    <input
-      type="search"
-      class="search-input"
-      placeholder="Filtrar componentes…"
-      aria-label="Filtrar componentes del catálogo"
-      [value]="query()"
-      (input)="onQuery($event)"
-    />
-  </div>
+  <button type="button" class="tree-search" (click)="openSearch()">
+    <ac-icon name="search" />
+    <span class="search-label">Buscar componentes…</span>
+    <kbd>⌘K</kbd>
+  </button>
 
-  @if (groups().length === 0) {
-    <p class="tree-empty">Sin resultados para «{{ query() }}».</p>
+  @for (shelf of shelves(); track shelf.id) {
+    <section class="shelf" [attr.aria-label]="shelf.title">
+      <p class="shelf-title">
+        <ac-icon [name]="shelf.icon" />
+        {{ shelf.title }}
+      </p>
+      <ul class="shelf-list">
+        @for (item of shelf.items; track item.group.id + '/' + item.entry.id) {
+          <li>
+            <a class="shelf-link" [routerLink]="['/', item.group.id, item.entry.id]">
+              <span
+                class="shelf-dot"
+                [style.background]="item.group.accent"
+                aria-hidden="true"
+              ></span>
+              <span class="shelf-label">{{ item.entry.label }}</span>
+              <span class="shelf-group">{{ item.group.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </section>
   }
 
   <ul class="tree-groups">
-    @for (item of groups(); track item.group.id) {
+    @for (group of catalog; track group.id) {
       <li class="group">
         <button
           type="button"
           class="group-btn"
-          [attr.aria-expanded]="isGroupOpen(item.group.id)"
-          [attr.aria-controls]="'grp-' + item.group.id"
-          (click)="toggleGroup(item.group.id)"
+          [attr.aria-expanded]="isGroupOpen(group.id)"
+          [attr.aria-controls]="'grp-' + group.id"
+          (click)="toggleGroup(group.id)"
         >
-          <span class="ico" aria-hidden="true">{{ item.group.icon }}</span>
-          <span class="lbl">{{ item.group.label }}</span>
-          <span class="count">{{ item.entries.length }}</span>
-          <span class="chev" aria-hidden="true">▾</span>
+          <span class="ico" [style.color]="group.accent" aria-hidden="true">
+            <ac-icon [name]="group.icon" />
+          </span>
+          <span class="lbl">{{ group.label }}</span>
+          <span class="count">{{ group.components.length }}</span>
+          <span class="chev" aria-hidden="true"><ac-icon name="chevron" /></span>
         </button>
 
-        @if (isGroupOpen(item.group.id)) {
-          <ul class="entries" [id]="'grp-' + item.group.id">
-            @for (entry of item.entries; track entry.id) {
-              <li>
+        @if (isGroupOpen(group.id)) {
+          <ul class="entries" [id]="'grp-' + group.id">
+            @for (entry of group.components; track entry.id) {
+              <li class="entry-row">
                 <a
                   class="entry-link"
-                  [routerLink]="['/', item.group.id, entry.id]"
-                  [class.active]="isEntryActive(item.group.id, entry.id)"
-                  [attr.aria-current]="isEntryActive(item.group.id, entry.id) ? 'page' : null"
+                  [routerLink]="['/', group.id, entry.id]"
+                  [class.active]="isEntryActive(group.id, entry.id)"
+                  [attr.aria-current]="isEntryActive(group.id, entry.id) ? 'page' : null"
                 >
                   <span class="entry-label">{{ entry.label }}</span>
                   @if (entry.variants.length > 1) {
-                    <span class="variant-count" aria-hidden="true">{{
-                      entry.variants.length
-                    }}</span>
+                    <span class="variant-count">{{ entry.variants.length }}</span>
                   }
                 </a>
+
+                <button
+                  type="button"
+                  class="fav-btn"
+                  [class.on]="isFavorite(group.id, entry.id)"
+                  [attr.aria-pressed]="isFavorite(group.id, entry.id)"
+                  [attr.aria-label]="
+                    (isFavorite(group.id, entry.id)
+                      ? 'Quitar de favoritos: '
+                      : 'Añadir a favoritos: ') + entry.label
+                  "
+                  [title]="
+                    isFavorite(group.id, entry.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'
+                  "
+                  (click)="toggleFavorite($event, group.id, entry.id)"
+                >
+                  <ac-icon [name]="isFavorite(group.id, entry.id) ? 'star-filled' : 'star'" />
+                </button>
               </li>
             }
           </ul>

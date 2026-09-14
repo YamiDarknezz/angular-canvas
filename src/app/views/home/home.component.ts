@@ -8,11 +8,12 @@ import {
   TOTAL_VARIANTS,
 } from '../../core/catalog/catalog';
 import { ThemeService } from '../../core/theme/theme.service';
+import { IconComponent } from '../../core/ui/icon.component';
 
-/** Portada: los números del catálogo y las tarjetas de entrada por categoría. */
+/** Portada: la vitrina del catálogo, por capítulos de categoría. */
 @Component({
   selector: 'ac-home',
-  imports: [RouterLink],
+  imports: [RouterLink, IconComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

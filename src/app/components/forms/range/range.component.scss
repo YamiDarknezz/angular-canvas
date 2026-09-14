@@ -1,0 +1,134 @@
+.range-stage {
+  display: grid;
+  gap: 0.9rem;
+  padding: 2.25rem 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background: #07070f;
+  border: 1px solid rgb(255 255 255 / 8%);
+  color: #f4f6ff;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.glass {
+    background: #0a0a14;
+  }
+}
+
+.range-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.range-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.range-min,
+.range-max {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.78rem;
+  color: #475569;
+  user-select: none;
+}
+
+.range-output {
+  justify-self: end;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 8px;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.82rem;
+  color: #a5b4fc;
+}
+
+// ---- Estilo base del track ----
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #6366f1 0%,
+    #ec4899 var(--p, 50%),
+    rgb(255 255 255 / 12%) var(--p, 50%)
+  );
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow:
+      0 2px 8px rgb(0 0 0 / 45%),
+      0 0 0 3px rgb(129 140 248 / 30%);
+    cursor: pointer;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  &::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow:
+      0 2px 8px rgb(0 0 0 / 45%),
+      0 0 0 3px rgb(129 140 248 / 30%);
+    cursor: pointer;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+    box-shadow:
+      0 2px 12px rgb(0 0 0 / 55%),
+      0 0 0 4px rgb(129 140 248 / 40%);
+  }
+
+  &:focus-visible::-webkit-slider-thumb {
+    box-shadow:
+      0 2px 10px rgb(0 0 0 / 50%),
+      0 0 0 4px rgb(129 140 248 / 50%);
+  }
+}
+
+// ---- Variante vidrio: track translúcido y thumb con borde ----
+.range-input.glass {
+  background: linear-gradient(
+    90deg,
+    rgb(99 102 241 / 85%) 0%,
+    rgb(168 85 247 / 85%) var(--p, 50%),
+    rgb(255 255 255 / 10%) var(--p, 50%)
+  );
+
+  &::-webkit-slider-thumb {
+    background: rgb(255 255 255 / 22%);
+    border: 1.5px solid rgb(255 255 255 / 45%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow:
+      0 2px 10px rgb(0 0 0 / 50%),
+      inset 0 1px 0 rgb(255 255 255 / 35%);
+  }
+
+  &::-moz-range-thumb {
+    background: rgb(255 255 255 / 22%);
+    border: 1.5px solid rgb(255 255 255 / 45%);
+    box-shadow:
+      0 2px 10px rgb(0 0 0 / 50%),
+      inset 0 1px 0 rgb(255 255 255 / 35%);
+  }
+}

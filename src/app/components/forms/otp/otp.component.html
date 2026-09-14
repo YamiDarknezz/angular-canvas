@@ -1,0 +1,56 @@
+<section class="design-section">
+  <h2 class="section-title">OTP Input</h2>
+  <p class="section-desc">Código de 6 dígitos con avance automático y navegación por teclado</p>
+
+  <div class="otp-stage" data-variant="boxes">
+    <p class="otp-title">Verifica tu correo</p>
+    <p class="otp-copy">Escribe el código que enviamos a tu bandeja.</p>
+
+    <div class="otp-inputs" role="group" aria-label="Código de verificación">
+      @for (digit of digits(); track $index; let i = $index) {
+        <input
+          type="text"
+          class="otp-cell"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          maxlength="1"
+          [value]="digit"
+          [attr.aria-label]="'Dígito ' + (i + 1)"
+          (input)="onInput($any($event.target), i)"
+          (keydown)="onKeydown($any($event.target), i, $event)"
+        />
+      }
+    </div>
+
+    <p class="otp-status">
+      <span class="otp-code">{{ code() }}</span>
+      {{ filled() }}/{{ digits().length }} dígitos
+    </p>
+  </div>
+
+  <div class="otp-stage underline" data-variant="underline">
+    <p class="otp-title">Código de seguridad</p>
+    <p class="otp-copy">Revisa tu mensajería: expira en 5 minutos.</p>
+
+    <div class="otp-inputs" role="group" aria-label="Código de seguridad">
+      @for (digit of digits(); track $index; let i = $index) {
+        <input
+          type="text"
+          class="otp-cell"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          maxlength="1"
+          [value]="digit"
+          [attr.aria-label]="'Dígito ' + (i + 1)"
+          (input)="onInput($any($event.target), i)"
+          (keydown)="onKeydown($any($event.target), i, $event)"
+        />
+      }
+    </div>
+
+    <p class="otp-status">
+      <span class="otp-code">{{ code() }}</span>
+      {{ filled() }}/{{ digits().length }} dígitos
+    </p>
+  </div>
+</section>

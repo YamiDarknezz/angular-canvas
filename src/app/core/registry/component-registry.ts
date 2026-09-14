@@ -37,17 +37,26 @@ import { SidebarNavComponent } from '../../components/navigation/sidebar/sidebar
 import { TopbarNavComponent } from '../../components/navigation/topbar/topbar.component';
 import { DockNavComponent } from '../../components/navigation/dock/dock.component';
 import { GlassTabsComponent } from '../../components/navigation/glass-tabs/glass-tabs.component';
+import { BreadcrumbsComponent } from '../../components/navigation/breadcrumbs/breadcrumbs.component';
+import { PaginationComponent } from '../../components/navigation/pagination/pagination.component';
+import { StepperComponent } from '../../components/navigation/stepper/stepper.component';
 
 // Forms
 import { GlassInputComponent } from '../../components/forms/glass-input/glass-input.component';
 import { ToggleComponent } from '../../components/forms/toggle/toggle.component';
 import { CheckboxComponent } from '../../components/forms/checkbox/checkbox.component';
 import { SegmentedComponent } from '../../components/forms/segmented/segmented.component';
+import { OtpComponent } from '../../components/forms/otp/otp.component';
+import { RatingComponent } from '../../components/forms/rating/rating.component';
+import { RangeComponent } from '../../components/forms/range/range.component';
 
 // Modals
 import { GlassModalComponent } from '../../components/modals/glass-modal/glass-modal.component';
 import { SlideInModalComponent } from '../../components/modals/slide-in/slide-in.component';
 import { CommandPaletteComponent } from '../../components/modals/command-palette/command-palette.component';
+import { ConfirmModalComponent } from '../../components/modals/confirm/confirm.component';
+import { BottomSheetComponent } from '../../components/modals/bottom-sheet/bottom-sheet.component';
+import { LightboxComponent } from '../../components/modals/lightbox/lightbox.component';
 
 // Themes
 import { ThemeDarkComponent } from '../../components/themes/dark/dark.component';
@@ -61,7 +70,7 @@ import { ThemeCorporateComponent } from '../../components/themes/corporate/corpo
  *
  * Es el único punto donde el catálogo (datos) toca código: la vista de entorno
  * busca aquí el componente que debe montar. Con esto la galería no necesita un
- * `@switch` gigante ni instanciar los 40 componentes a la vez — solo se crea el
+ * `@switch` gigante ni instanciar los 49 componentes a la vez — solo se crea el
  * que se está viendo, que es justo lo que aísla los entornos entre sí.
  */
 const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Type<unknown>>([
@@ -98,15 +107,24 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['navigation/topbar', TopbarNavComponent],
   ['navigation/dock', DockNavComponent],
   ['navigation/glass-tabs', GlassTabsComponent],
+  ['navigation/breadcrumbs', BreadcrumbsComponent],
+  ['navigation/pagination', PaginationComponent],
+  ['navigation/stepper', StepperComponent],
   // Forms
   ['forms/glass-input', GlassInputComponent],
   ['forms/toggle', ToggleComponent],
   ['forms/checkbox', CheckboxComponent],
   ['forms/segmented', SegmentedComponent],
+  ['forms/otp', OtpComponent],
+  ['forms/rating', RatingComponent],
+  ['forms/range', RangeComponent],
   // Modals
   ['modals/glass-modal', GlassModalComponent],
   ['modals/slide-in', SlideInModalComponent],
   ['modals/command-palette', CommandPaletteComponent],
+  ['modals/confirm', ConfirmModalComponent],
+  ['modals/bottom-sheet', BottomSheetComponent],
+  ['modals/lightbox', LightboxComponent],
   // Themes
   ['themes/dark', ThemeDarkComponent],
   ['themes/light', ThemeLightComponent],

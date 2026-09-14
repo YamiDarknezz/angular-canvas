@@ -1,0 +1,122 @@
+<section class="design-section">
+  <h2 class="section-title">Confirm Dialog</h2>
+  <p class="section-desc">Diálogo de confirmación con variantes de peligro y vidrio</p>
+
+  <div class="confirm-stage" data-variant="danger">
+    <button type="button" class="confirm-trigger danger" (click)="show('danger')">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+        />
+      </svg>
+      Eliminar proyecto
+    </button>
+    @if (confirmed() === 'danger') {
+      <p class="confirm-done">Eliminado ✓</p>
+    }
+  </div>
+
+  @if (open() === 'danger') {
+    <div class="confirm-overlay" (click)="close()">
+      <div
+        class="confirm-dialog"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="danger-title"
+        aria-describedby="danger-desc"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="confirm-icon danger-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+            />
+          </svg>
+        </div>
+        <h3 id="danger-title" class="confirm-title">Eliminar este proyecto</h3>
+        <p id="danger-desc" class="confirm-text">
+          Esta acción no se puede deshacer. Se eliminarán todos los archivos, historial y
+          configuración del proyecto permanentemente.
+        </p>
+        <div class="confirm-actions">
+          <button type="button" class="confirm-btn secondary" (click)="close()">Cancelar</button>
+          <button type="button" class="confirm-btn danger" (click)="confirm('danger')">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="confirm-stage" data-variant="glass">
+    <button type="button" class="confirm-trigger glass" (click)="show('glass')">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+      Publicar cambios
+    </button>
+    @if (confirmed() === 'glass') {
+      <p class="confirm-done">Publicado ✓</p>
+    }
+  </div>
+
+  @if (open() === 'glass') {
+    <div class="confirm-overlay" (click)="close()">
+      <div
+        class="confirm-dialog glass"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="glass-title"
+        aria-describedby="glass-desc"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="confirm-icon glass-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+        <h3 id="glass-title" class="confirm-title">Publicar cambios</h3>
+        <p id="glass-desc" class="confirm-text">
+          Los cambios estarán visibles para todos los usuarios del proyecto. ¿Estás seguro de que
+          quieres continuar?
+        </p>
+        <div class="confirm-actions">
+          <button type="button" class="confirm-btn secondary" (click)="close()">Cancelar</button>
+          <button type="button" class="confirm-btn primary" (click)="confirm('glass')">
+            Publicar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</section>

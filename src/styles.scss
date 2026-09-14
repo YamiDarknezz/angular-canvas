@@ -1,6 +1,24 @@
 @use './scss/tokens';
 @use './scss/gallery';
 
+// Tipografías de la casa, servidas desde el propio proyecto (sin CDN).
+// Solo la display y la mono: el cuerpo usa la sans del sistema.
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fonts/bricolage-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+}
+
 *,
 *::before,
 *::after {
@@ -19,21 +37,21 @@ html {
 }
 
 body {
-  font-family:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
+  font-family: var(--ac-font-sans);
   background: var(--ac-bg);
   color: var(--ac-text);
   line-height: 1.6;
+  caret-color: var(--ac-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition:
     background 0.3s ease,
     color 0.3s ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ac-primary) 40%, transparent);
+  color: var(--ac-text);
 }
 
 /* Con el panel de navegación abierto en móvil, el fondo no hace scroll.
@@ -45,10 +63,16 @@ body.ac-drawer-open {
 a {
   color: inherit;
   text-decoration: none;
+  text-underline-offset: 3px;
 }
 
 button {
   font-family: inherit;
+}
+
+input,
+textarea {
+  accent-color: var(--ac-primary);
 }
 
 :focus-visible {
