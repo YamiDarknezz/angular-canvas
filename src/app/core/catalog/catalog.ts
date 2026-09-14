@@ -115,6 +115,19 @@ export const CATALOG: readonly CatalogGroup[] = [
         ],
       },
       {
+        id: 'tilt-3d',
+        label: '3D Tilt',
+        tagline: 'Perspectiva, profundidad y brillo que siguen al cursor',
+        selector: 'app-card-tilt3d',
+        className: 'Tilt3dCardComponent',
+        sourcePath: 'src/app/components/cards/tilt-3d',
+        variants: [
+          { id: 'tilt', label: 'Tilt + brillo', hint: 'Rota en 3D y el reflejo sigue al cursor' },
+          { id: 'depth', label: 'Profundidad', hint: 'Capas a distinta altura sobre el eje Z' },
+          { id: 'shine', label: 'Holo', hint: 'Tornasol con destello que se desplaza' },
+        ],
+      },
+      {
         id: 'minimal',
         label: 'Minimal',
         tagline: 'Limpio, elegante, sin distracciones',
@@ -355,6 +368,23 @@ export const CATALOG: readonly CatalogGroup[] = [
         sourcePath: 'src/app/components/navigation/topbar',
         variants: [
           { id: 'default', label: 'Con menú mobile', hint: 'Menú ☰ accesible por teclado' },
+        ],
+      },
+      {
+        id: 'dock',
+        label: 'Dock',
+        tagline: 'Dock inferior flotante, de cristal o barra completa',
+        selector: 'app-nav-dock',
+        className: 'DockNavComponent',
+        sourcePath: 'src/app/components/navigation/dock',
+        variants: [
+          {
+            id: 'floating',
+            label: 'Flotante',
+            hint: 'Píldora flotante con magnificación al pasar el cursor',
+          },
+          { id: 'glass', label: 'Cristal', hint: 'Vidrio transparente sobre color' },
+          { id: 'bar', label: 'Barra', hint: 'Barra inferior a ancho completo' },
         ],
       },
     ],

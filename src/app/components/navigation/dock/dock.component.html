@@ -1,0 +1,51 @@
+<section class="design-section">
+  <h2 class="section-title">Dock Navigation</h2>
+  <p class="section-desc">
+    Dock inferior con vidrio, magnificación al pasar el cursor y estado activo
+  </p>
+
+  @for (scene of scenes; track scene.id) {
+    <div
+      class="dock-scene"
+      [class.scene-glass]="scene.id === 'glass'"
+      [class.scene-bar]="scene.id === 'bar'"
+      [attr.data-variant]="scene.id"
+    >
+      <nav
+        class="dock"
+        [class.dock-glass]="scene.id === 'glass'"
+        [class.dock-bar]="scene.id === 'bar'"
+        [attr.aria-label]="'Navegación de ejemplo — ' + scene.label"
+      >
+        @for (item of items; track item.id) {
+          <button
+            type="button"
+            class="dock-item"
+            [class.active]="active() === item.id"
+            [attr.aria-current]="active() === item.id ? 'page' : null"
+            (click)="setActive(item.id)"
+          >
+            <span class="dock-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                @for (path of item.paths; track path) {
+                  <path [attr.d]="path" />
+                }
+              </svg>
+              @if (item.badge) {
+                <span class="dock-badge">{{ item.badge }}</span>
+              }
+            </span>
+            <span class="dock-label">{{ item.label }}</span>
+          </button>
+        }
+      </nav>
+    </div>
+  }
+</section>

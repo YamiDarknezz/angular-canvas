@@ -5,6 +5,7 @@ import { GlassmorphismComponent } from '../../components/cards/glassmorphism/gla
 import { NeonCardComponent } from '../../components/cards/neon/neon.component';
 import { HoverEffectsComponent } from '../../components/cards/hover-effects/hover-effects.component';
 import { FlipCardComponent } from '../../components/cards/flip/flip.component';
+import { Tilt3dCardComponent } from '../../components/cards/tilt-3d/tilt-3d.component';
 import { MinimalCardComponent } from '../../components/cards/minimal/minimal.component';
 import { DarkCorporateComponent } from '../../components/cards/dark-corporate/dark-corporate.component';
 
@@ -29,6 +30,7 @@ import { TypewriterComponent } from '../../components/typography/typewriter/type
 // Navigation
 import { SidebarNavComponent } from '../../components/navigation/sidebar/sidebar.component';
 import { TopbarNavComponent } from '../../components/navigation/topbar/topbar.component';
+import { DockNavComponent } from '../../components/navigation/dock/dock.component';
 
 // Forms
 import { GlassInputComponent } from '../../components/forms/glass-input/glass-input.component';
@@ -51,7 +53,7 @@ import { ThemeCorporateComponent } from '../../components/themes/corporate/corpo
  *
  * Es el único punto donde el catálogo (datos) toca código: la vista de entorno
  * busca aquí el componente que debe montar. Con esto la galería no necesita un
- * `@switch` gigante ni instanciar los 30 componentes a la vez — solo se crea el
+ * `@switch` gigante ni instanciar los 32 componentes a la vez — solo se crea el
  * que se está viendo, que es justo lo que aísla los entornos entre sí.
  */
 const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Type<unknown>>([
@@ -60,6 +62,7 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['cards/neon', NeonCardComponent],
   ['cards/hover-effects', HoverEffectsComponent],
   ['cards/flip', FlipCardComponent],
+  ['cards/tilt-3d', Tilt3dCardComponent],
   ['cards/minimal', MinimalCardComponent],
   ['cards/dark-corporate', DarkCorporateComponent],
   // Buttons
@@ -80,6 +83,7 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   // Navigation
   ['navigation/sidebar', SidebarNavComponent],
   ['navigation/topbar', TopbarNavComponent],
+  ['navigation/dock', DockNavComponent],
   // Forms
   ['forms/glass-input', GlassInputComponent],
   ['forms/toggle', ToggleComponent],

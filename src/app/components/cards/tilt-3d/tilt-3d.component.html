@@ -1,0 +1,58 @@
+<section class="design-section">
+  <h2 class="section-title">3D Tilt Cards</h2>
+  <p class="section-desc">Perspectiva, profundidad y brillo que siguen al cursor</p>
+
+  <div class="tilt-grid">
+    <div class="tilt-scene" data-variant="tilt">
+      <article
+        class="tilt-card"
+        (pointermove)="onPointerMove($event)"
+        (pointerleave)="onPointerLeave($event)"
+      >
+        <span class="tilt-glare" aria-hidden="true"></span>
+        <div class="tilt-body">
+          <span class="tilt-icon" aria-hidden="true">🧊</span>
+          <h3>Perspectiva 3D</h3>
+          <p>
+            La tarjeta rota en los dos ejes siguiendo al cursor y un brillo recorre el vidrio desde
+            donde apuntas.
+          </p>
+          <span class="tilt-cta">Mover el cursor →</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="tilt-scene" data-variant="depth">
+      <article
+        class="tilt-card depth-card"
+        (pointermove)="onPointerMove($event)"
+        (pointerleave)="onPointerLeave($event)"
+      >
+        <span class="tilt-glare" aria-hidden="true"></span>
+        <span class="depth-orb" aria-hidden="true"></span>
+        <span class="depth-chip" aria-hidden="true">3D</span>
+        <div class="tilt-body">
+          <h3>Profundidad</h3>
+          <p>Capas a distinta altura: el orbe, el chip y el texto flotan separados al inclinar.</p>
+          <span class="tilt-cta">Probar la inclinación</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="tilt-scene" data-variant="shine">
+      <article
+        class="tilt-card shine-card"
+        (pointermove)="onPointerMove($event)"
+        (pointerleave)="onPointerLeave($event)"
+      >
+        <span class="tilt-glare" aria-hidden="true"></span>
+        <div class="tilt-body">
+          <span class="tilt-icon" aria-hidden="true">✨</span>
+          <h3>Brillo holográfico</h3>
+          <p>Degradado tornasol y un destello que se desplaza con el puntero.</p>
+          <span class="tilt-cta">Deslizar el cursor</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
