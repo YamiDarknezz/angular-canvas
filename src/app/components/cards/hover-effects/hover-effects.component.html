@@ -2,35 +2,35 @@
   <h2 class="section-title">Hover Effects</h2>
   <p class="section-desc">Diferentes efectos al pasar el mouse</p>
   <div class="card-grid">
-    <div class="hover-card effect-lift">
+    <div class="hover-card effect-lift" data-variant="lift">
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">✨</span>
         <h3>Lift Effect</h3>
         <p>Elevación suave con sombra creciente</p>
       </div>
     </div>
-    <div class="hover-card effect-scale">
+    <div class="hover-card effect-scale" data-variant="scale">
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">🔍</span>
         <h3>Scale Effect</h3>
         <p>Escalado con cambio de color de fondo</p>
       </div>
     </div>
-    <div class="hover-card effect-rotate">
+    <div class="hover-card effect-rotate" data-variant="rotate">
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">🌀</span>
         <h3>Rotate Effect</h3>
         <p>Rotación 3D sutil al hacer hover</p>
       </div>
     </div>
-    <div class="hover-card effect-border-draw">
+    <div class="hover-card effect-border-draw" data-variant="border-draw">
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">✏️</span>
         <h3>Border Draw</h3>
         <p>Borde que se dibuja alrededor del card</p>
       </div>
     </div>
-    <div class="hover-card effect-glow">
+    <div class="hover-card effect-glow" data-variant="glow">
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">💡</span>
         <h3>Glow Effect</h3>
@@ -41,6 +41,7 @@
       class="hover-card effect-magnetic"
       (mousemove)="onMagneticMove($event)"
       (mouseleave)="resetMagnetic($event)"
+      data-variant="magnetic"
     >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">🧲</span>

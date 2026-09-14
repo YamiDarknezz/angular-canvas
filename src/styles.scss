@@ -1,4 +1,5 @@
 @use './scss/tokens';
+@use './scss/gallery';
 
 *,
 *::before,
@@ -30,6 +31,12 @@ body {
     color 0.3s ease;
 }
 
+/* Con el panel de navegación abierto en móvil, el fondo no hace scroll.
+   La clase la pone y la quita ShellComponent (y siempre la limpia al salir). */
+body.ac-drawer-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -44,10 +51,11 @@ button {
   outline-offset: 2px;
 }
 
-// ---- Estilos compartidos de la galería ----
-// Antes vivían en showcase.component.scss con `:host ::ng-deep` (deprecado).
-// Al ser estilos globales, los componentes hijos los heredan sin romper el
-// encapsulamiento de Angular.
+// ---- Estilos compartidos de la librería ----
+// Estos SÍ forman parte de los componentes: son las clases que las plantillas
+// de cada efecto usan (.design-section, .card-grid, .btn-showcase…) y viajan
+// con ellos cuando copias un componente. Viven en global para que ningún
+// componente necesite `::ng-deep` para aplicarlas.
 .design-section {
   margin-bottom: 3rem;
   padding-bottom: 3rem;
@@ -86,6 +94,10 @@ button {
   gap: 1rem;
   align-items: center;
 }
+
+// ---- Estilos de la galería (no de la librería) ----
+// Se importan arriba, junto a los tokens: Sass exige que todo `@use` esté antes
+// de la primera regla. El archivo explica qué se considera andamiaje.
 
 ::-webkit-scrollbar {
   width: 8px;

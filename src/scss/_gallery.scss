@@ -1,0 +1,41 @@
+// ---------------------------------------------------------------------------
+// Estilos del *andamiaje* de la galería (no de la librería).
+//
+// Todo lo que hay aquí es interfaz del catálogo: los chips de navegación, los
+// avisos de la ventana de entorno, etc. Los componentes NO lo usan, así que no
+// viaja con ellos cuando copias una carpeta a otro proyecto.
+//
+// Criterio: si una clase la usan las plantillas de `components/`, va en el
+// bloque de librería de `styles.scss`. Si solo la usan `layout/` y `views/`,
+// va aquí.
+// ---------------------------------------------------------------------------
+
+/* Chip: enlace corto a una variante. Se usa en la portada y en la cabecera
+   del entorno. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--ac-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ac-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--ac-primary) 60%, transparent);
+    color: var(--ac-text);
+  }
+
+  &.active {
+    border-color: var(--ac-primary);
+    background: color-mix(in srgb, var(--ac-primary) 15%, transparent);
+    color: var(--ac-primary-soft);
+  }
+}

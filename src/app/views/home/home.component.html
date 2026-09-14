@@ -1,0 +1,67 @@
+<article class="home">
+  <header class="hero">
+    <h1><span class="hero-gradient">AngularCanvas</span></h1>
+    <p class="hero-lead">
+      Biblioteca viva de efectos y diseños para Angular. Cada componente vive en su
+      <strong>entorno aislado</strong>: elige uno en la navegación, míralo solo —sin que nada del
+      resto lo toque— y copia su carpeta cuando te sirva.
+    </p>
+    <ul class="stats">
+      <li>
+        <strong>{{ totalComponents }}</strong>
+        <span>componentes</span>
+      </li>
+      <li>
+        <strong>{{ totalVariants }}</strong>
+        <span>sub-estilos</span>
+      </li>
+      <li>
+        <strong>{{ totalGroups }}</strong>
+        <span>categorías</span>
+      </li>
+      <li>
+        <strong>{{ totalThemes }}</strong>
+        <span>temas</span>
+      </li>
+    </ul>
+  </header>
+
+  @for (group of catalog; track group.id) {
+    <section class="group" [attr.aria-label]="group.label">
+      <header class="group-head">
+        <h2>
+          <span class="group-icon" aria-hidden="true">{{ group.icon }}</span>
+          {{ group.label }}
+        </h2>
+        <span class="group-count">{{ group.components.length }}</span>
+        <p class="group-tagline">{{ group.tagline }}</p>
+      </header>
+
+      <div class="entry-grid">
+        @for (entry of group.components; track entry.id) {
+          <article class="entry-card">
+            <a class="entry-main" [routerLink]="['/', group.id, entry.id]">
+              <h3>{{ entry.label }}</h3>
+              <p>{{ entry.tagline }}</p>
+              <span class="entry-cta">Abrir entorno →</span>
+            </a>
+
+            <ul class="chip-list">
+              @for (variant of entry.variants; track variant.id) {
+                <li>
+                  <a
+                    class="chip"
+                    [routerLink]="['/', group.id, entry.id, variant.id]"
+                    [title]="variant.hint"
+                  >
+                    {{ variant.label }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </section>
+  }
+</article>

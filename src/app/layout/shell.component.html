@@ -1,0 +1,80 @@
+<div class="shell">
+  <aside
+    class="shell-nav"
+    id="shell-nav"
+    [class.open]="drawerOpen()"
+    aria-label="Catálogo de componentes"
+  >
+    <div class="nav-brand">
+      <span class="brand-icon" aria-hidden="true">🎨</span>
+      <span class="brand-text">Angular<strong>Canvas</strong></span>
+      <button
+        type="button"
+        class="drawer-close"
+        aria-label="Cerrar la navegación"
+        (click)="closeDrawer()"
+      >
+        ✕
+      </button>
+    </div>
+
+    <ac-nav-tree />
+
+    <div class="nav-themes">
+      <span class="themes-label" id="theme-label">Tema</span>
+      <div class="theme-list" role="group" aria-labelledby="theme-label">
+        @for (theme of themes; track theme.id) {
+          <button
+            type="button"
+            class="theme-chip"
+            [class.active]="activeTheme() === theme.id"
+            [attr.aria-pressed]="activeTheme() === theme.id"
+            (click)="setTheme(theme.id)"
+          >
+            <span aria-hidden="true">{{ theme.icon }}</span>
+            <span>{{ theme.label }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="nav-footer">
+      <span class="version"
+        >{{ totalComponents }} componentes · {{ totalVariants }} sub-estilos</span
+      >
+      <a
+        class="repo-link"
+        href="https://github.com/YamiDarknezz/angular-canvas"
+        target="_blank"
+        rel="noopener"
+      >
+        GitHub ↗
+      </a>
+    </div>
+  </aside>
+
+  @if (drawerOpen()) {
+    <div class="shell-backdrop" (click)="closeDrawer()"></div>
+  }
+
+  <div class="shell-main" [attr.inert]="drawerOpen() ? '' : null">
+    <header class="shell-topbar">
+      <button
+        type="button"
+        class="drawer-toggle"
+        aria-controls="shell-nav"
+        [attr.aria-expanded]="drawerOpen()"
+        aria-label="Abrir la navegación del catálogo"
+        (click)="toggleDrawer()"
+      >
+        ☰
+      </button>
+      <span class="topbar-brand">🎨 AngularCanvas</span>
+      <span class="topbar-version">v1.0.0</span>
+    </header>
+
+    <main class="shell-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <section class="design-section">
   <h2 class="section-title">Toggle Switches</h2>
   <p class="section-desc">Interruptores animados accesibles (rol switch + teclado)</p>
-  <div class="toggle-showcase">
+  <div class="toggle-showcase" data-variant="default">
     @for (item of toggles; track item.id) {
       <div class="toggle-item">
         <span class="toggle-label" [id]="item.id + '-label'">{{ item.label }}</span>

@@ -1,0 +1,95 @@
+<div class="tree">
+  <div class="tree-search">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input
+      type="search"
+      class="search-input"
+      placeholder="Filtrar componentes…"
+      aria-label="Filtrar componentes del catálogo"
+      [value]="query()"
+      (input)="onQuery($event)"
+    />
+  </div>
+
+  @if (groups().length === 0) {
+    <p class="tree-empty">Sin resultados para «{{ query() }}».</p>
+  }
+
+  <ul class="tree-groups">
+    @for (item of groups(); track item.group.id) {
+      <li class="group">
+        <button
+          type="button"
+          class="group-btn"
+          [attr.aria-expanded]="isGroupOpen(item.group.id)"
+          [attr.aria-controls]="'grp-' + item.group.id"
+          (click)="toggleGroup(item.group.id)"
+        >
+          <span class="ico" aria-hidden="true">{{ item.group.icon }}</span>
+          <span class="lbl">{{ item.group.label }}</span>
+          <span class="count">{{ item.entries.length }}</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+
+        @if (isGroupOpen(item.group.id)) {
+          <ul class="entries" [id]="'grp-' + item.group.id">
+            @for (entry of item.entries; track entry.id) {
+              <li class="entry">
+                <div class="entry-row">
+                  <a
+                    class="entry-link"
+                    [routerLink]="['/', item.group.id, entry.id]"
+                    [class.active]="isEntryActive(item.group.id, entry.id)"
+                    [attr.aria-current]="isEntryActive(item.group.id, entry.id) ? 'page' : null"
+                  >
+                    <span class="entry-label">{{ entry.label }}</span>
+                    @if (entry.variants.length > 1) {
+                      <span class="variant-count" aria-hidden="true">{{
+                        entry.variants.length
+                      }}</span>
+                    }
+                  </a>
+
+                  @if (hasSubmenu(entry)) {
+                    <button
+                      type="button"
+                      class="sub-btn"
+                      [attr.aria-expanded]="isEntryOpen(item.group.id, entry)"
+                      [attr.aria-controls]="'sub-' + item.group.id + '-' + entry.id"
+                      [attr.aria-label]="'Ver los sub-estilos de ' + entry.label"
+                      [title]="'Sub-estilos de ' + entry.label"
+                      (click)="toggleEntry(item.group.id, entry.id)"
+                    >
+                      ▾
+                    </button>
+                  }
+                </div>
+
+                @if (isEntryOpen(item.group.id, entry)) {
+                  <ul class="variants" [id]="'sub-' + item.group.id + '-' + entry.id">
+                    @for (variant of entry.variants; track variant.id) {
+                      <li>
+                        <a
+                          class="variant-link"
+                          [routerLink]="['/', item.group.id, entry.id, variant.id]"
+                          [class.active]="isVariantActive(item.group.id, entry.id, variant.id)"
+                          [attr.aria-current]="
+                            isVariantActive(item.group.id, entry.id, variant.id) ? 'page' : null
+                          "
+                          [title]="variant.hint"
+                        >
+                          <span class="variant-dot" aria-hidden="true"></span>
+                          {{ variant.label }}
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                }
+              </li>
+            }
+          </ul>
+        }
+      </li>
+    }
+  </ul>
+</div>
