@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-glow-button',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-btn-glow',
   templateUrl: './glow.component.html',
-  styleUrl: './glow.component.scss'
+  styleUrl: './glow.component.scss',
 })
 export class GlowButtonComponent {}

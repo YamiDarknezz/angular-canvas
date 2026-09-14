@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+
+import { CATALOG, TOTAL_COMPONENTS } from '../../core/catalog/catalog';
+import { ThemeService } from '../../core/theme/theme.service';
 
 // Cards
 import { GlassmorphismComponent } from '../cards/glassmorphism/glassmorphism.component';
@@ -49,49 +51,67 @@ import { ThemeCorporateComponent } from '../themes/corporate/corporate.component
 
 @Component({
   selector: 'app-showcase',
-  standalone: true,
   imports: [
-    CommonModule,
     // Cards
-    GlassmorphismComponent, NeonCardComponent, HoverEffectsComponent,
-    FlipCardComponent, MinimalCardComponent, DarkCorporateComponent,
+    GlassmorphismComponent,
+    NeonCardComponent,
+    HoverEffectsComponent,
+    FlipCardComponent,
+    MinimalCardComponent,
+    DarkCorporateComponent,
     // Buttons
-    GlowButtonComponent, GradientButtonComponent, NeumorphismButtonComponent,
-    PillButtonComponent, AnimatedButtonComponent,
+    GlowButtonComponent,
+    GradientButtonComponent,
+    NeumorphismButtonComponent,
+    PillButtonComponent,
+    AnimatedButtonComponent,
     // Backgrounds
-    BgGradientComponent, BgParticleComponent, BgGridComponent, BgAnimatedMeshComponent,
+    BgGradientComponent,
+    BgParticleComponent,
+    BgGridComponent,
+    BgAnimatedMeshComponent,
     // Typography
-    GlowTextComponent, GradientTextComponent, TypewriterComponent,
+    GlowTextComponent,
+    GradientTextComponent,
+    TypewriterComponent,
     // Navigation
-    SidebarNavComponent, TopbarNavComponent,
+    SidebarNavComponent,
+    TopbarNavComponent,
     // Forms
-    GlassInputComponent, ToggleComponent, CheckboxComponent,
+    GlassInputComponent,
+    ToggleComponent,
+    CheckboxComponent,
     // Modals
-    GlassModalComponent, SlideInModalComponent,
+    GlassModalComponent,
+    SlideInModalComponent,
     // Themes
-    ThemeDarkComponent, ThemeLightComponent, ThemeHackerComponent,
-    ThemeCyberpunkComponent, ThemeCorporateComponent,
+    ThemeDarkComponent,
+    ThemeLightComponent,
+    ThemeHackerComponent,
+    ThemeCyberpunkComponent,
+    ThemeCorporateComponent,
   ],
   templateUrl: './showcase.component.html',
-  styleUrl: './showcase.component.scss'
+  styleUrl: './showcase.component.scss',
 })
 export class ShowcaseComponent {
-  categories = [
-    { id: 'cards', label: '🃏 Cards', icon: '🃏' },
-    { id: 'buttons', label: '🔘 Buttons', icon: '🔘' },
-    { id: 'backgrounds', label: '🌌 Backgrounds', icon: '🌌' },
-    { id: 'typography', label: '🔤 Typography', icon: '🔤' },
-    { id: 'navigation', label: '🧭 Navigation', icon: '🧭' },
-    { id: 'forms', label: '📝 Forms', icon: '📝' },
-    { id: 'modals', label: '🪟 Modals', icon: '🪟' },
-    { id: 'themes', label: '🎨 Themes', icon: '🎨' },
-  ];
+  private readonly themeService = inject(ThemeService);
 
-  activeCategory = 'cards';
+  readonly catalog = CATALOG;
+  readonly themes = this.themeService.themes;
+  readonly activeTheme = this.themeService.theme;
 
-  scrollTo(id: string) {
-    this.activeCategory = id;
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  readonly activeCategory = signal(this.catalog[0].id);
+
+  readonly totalComponents = TOTAL_COMPONENTS;
+  readonly totalGroups = computed(() => this.catalog.length);
+
+  setTheme(theme: (typeof this.themes)[number]['id']): void {
+    this.themeService.setTheme(theme);
+  }
+
+  scrollTo(id: string): void {
+    this.activeCategory.set(id);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

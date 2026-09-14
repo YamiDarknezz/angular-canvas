@@ -1,0 +1,78 @@
+// AngularCanvas — Design Tokens
+// Única fuente de verdad para colores. Los componentes usan var(--ac-*).
+
+:root,
+[data-theme='dark'] {
+  --ac-bg: #0f0f1a;
+  --ac-bg-deep: #0a0a1a;
+  --ac-surface: #1a1a2e;
+  --ac-surface-2: #1e1e32;
+  --ac-border: #1e1e32;
+  --ac-text: #e2e8f0;
+  --ac-text-muted: #8b949e;
+  --ac-text-faint: #64748b;
+  --ac-primary: #6366f1;
+  --ac-primary-soft: #818cf8;
+  --ac-accent: #ec4899;
+  --ac-shadow: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='light'] {
+  --ac-bg: #f8fafc;
+  --ac-bg-deep: #ffffff;
+  --ac-surface: #ffffff;
+  --ac-surface-2: #f1f5f9;
+  --ac-border: #e2e8f0;
+  --ac-text: #1e293b;
+  --ac-text-muted: #475569;
+  --ac-text-faint: #64748b;
+  --ac-primary: #2563eb;
+  --ac-primary-soft: #3b82f6;
+  --ac-accent: #db2777;
+  --ac-shadow: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme='hacker'] {
+  --ac-bg: #000000;
+  --ac-bg-deep: #0d1117;
+  --ac-surface: #0d1117;
+  --ac-surface-2: #161b22;
+  --ac-border: #1f3d2b;
+  --ac-text: #00ff41;
+  --ac-text-muted: #00cc33;
+  --ac-text-faint: #0a8f2b;
+  --ac-primary: #00ff41;
+  --ac-primary-soft: #39ff14;
+  --ac-accent: #39ff14;
+  --ac-shadow: rgba(0, 255, 65, 0.15);
+}
+
+[data-theme='cyberpunk'] {
+  --ac-bg: #0a0a1a;
+  --ac-bg-deep: #05050f;
+  --ac-surface: #12002b;
+  --ac-surface-2: #1a0033;
+  --ac-border: #2d0052;
+  --ac-text: #f0f0ff;
+  --ac-text-muted: #b98cff;
+  --ac-text-faint: #7a5cbb;
+  --ac-primary: #ff00ff;
+  --ac-primary-soft: #ff66ff;
+  --ac-accent: #00ffff;
+  --ac-shadow: rgba(255, 0, 255, 0.25);
+}
+
+[data-theme='corporate'] {
+  --ac-bg: #f8fafc;
+  --ac-bg-deep: #ffffff;
+  --ac-surface: #ffffff;
+  --ac-surface-2: #eef2f7;
+  --ac-border: #dbe3ec;
+  --ac-text: #0f172a;
+  --ac-text-muted: #475569;
+  --ac-text-faint: #64748b;
+  --ac-primary: #1e3a5f;
+  --ac-primary-soft: #2563eb;
+  --ac-accent: #0ea5e9;
+  --ac-shadow: rgba(15, 23, 42, 0.1);
+}

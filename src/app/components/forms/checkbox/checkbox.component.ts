@@ -1,22 +1,25 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal, WritableSignal } from '@angular/core';
+
+interface CheckboxItem {
+  readonly id: string;
+  readonly label: string;
+  readonly checked: WritableSignal<boolean>;
+}
 
 @Component({
-  selector: 'app-checkbox',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-form-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.scss'
+  styleUrl: './checkbox.component.scss',
 })
 export class CheckboxComponent {
-  items = [
-    { id: 'c1', label: 'TypeScript', checked: signal(true) },
-    { id: 'c2', label: 'Angular', checked: signal(true) },
-    { id: 'c3', label: 'React', checked: signal(false) },
-    { id: 'c4', label: 'Vue', checked: signal(false) },
+  readonly items: readonly CheckboxItem[] = [
+    { id: 'typescript', label: 'TypeScript', checked: signal(true) },
+    { id: 'angular', label: 'Angular', checked: signal(true) },
+    { id: 'react', label: 'React', checked: signal(false) },
+    { id: 'vue', label: 'Vue', checked: signal(false) },
   ];
 
-  toggle(item: { checked: { set: (v: boolean) => void; (): boolean } }) {
-    item.checked.set(!item.checked());
+  toggle(item: CheckboxItem): void {
+    item.checked.update((value) => !value);
   }
 }

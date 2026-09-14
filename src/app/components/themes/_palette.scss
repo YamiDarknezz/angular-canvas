@@ -1,0 +1,44 @@
+// Mixin compartido por los 5 componentes de tema.
+// Antes estas reglas estaban copiadas literalmente en cada componente.
+@mixin palette($swatch-height: 72px) {
+  .palette-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .swatch {
+    flex: 1 1 0;
+    // Sin min-width:0 un flex item no puede encogerse por debajo del ancho
+    // de su contenido (la etiqueta con el hex) y desborda su propia fila.
+    min-width: 0;
+    height: $swatch-height;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.4rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    span {
+      font-family: monospace;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

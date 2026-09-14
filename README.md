@@ -1,82 +1,158 @@
 # 🎨 AngularCanvas
 
-Biblioteca de efectos y diseños reutilizables para Angular.
+Biblioteca viva de **efectos y diseños para Angular**. Es un catálogo navegable
+de componentes visuales pensado para copiar y pegar: cada efecto vive aislado en
+su propia carpeta, con su `.ts`, `.html` y `.scss`, listo para llevarlo a
+cualquier otro proyecto.
 
-## Categorías
+Construido con **Angular 22** (standalone components, signals y control flow
+nativo `@if` / `@for`).
 
-### 🃏 Cards
-- **Glassmorphism** — Efecto vidrio esmerilado con blur y transparencia
-- **Neon** — Bordes luminosos con glow pulsante
-- **Hover Effects** — 6 efectos: lift, scale, rotate, border-draw, glow, magnetic
-- **Flip** — Tarjetas 3D que giran al hacer hover
-- **Minimal** — Limpio, elegante, sin distracciones
-- **Dark Corporate** — Elegancia corporativa en modo oscuro
+---
 
-### 🔘 Buttons
-- **Glow** — Brillo expansivo con sombra de color
-- **Gradient** — Degradados animados (sunset, ocean, aurora, fire, mesh)
-- **Neumorphism** — Efecto de relieve suave
-- **Pill** — Botones redondeados (outline, solid, ghost, gradient)
-- **Animated** — Ripple, pulse, shake, fill-up, slide-bg, magnetic
+## 📋 Requisitos
 
-### 🌌 Backgrounds
-- **Gradient** — 6 fondos degradados (sunset, aurora, deep ocean, mesh, radial, conic)
-- **Particle** — Canvas con partículas conectadas (animado)
-- **Grid** — Patrones de cuadrícula (dots, lines, fade)
-- **Animated Mesh** — Blobs de color que se mueven fluidamente
+- Node.js 20.19+ / 22.12+ / 24+
+- npm 10+
 
-### 🔤 Typography
-- **Glow Text** — Texto neón (cyan, pink, green, pulse)
-- **Gradient Text** — Degradados animados y estáticos
-- **Typewriter** — Efecto máquina de escribir en terminal
-
-### 🧭 Navigation
-- **Sidebar** — Navegación lateral colapsable
-- **Topbar** — Barra superior responsiva con menú mobile
-
-### 📝 Forms
-- **Glass Input** — Inputs con estilo glassmorphism y floating labels
-- **Toggle** — Interruptores animados
-- **Checkbox** — Checkboxes personalizados con animación pop
-
-### 🪟 Modals
-- **Glass Modal** — Modal con efecto glassmorphism
-- **Slide-in Panel** — Panel lateral que se desliza desde la derecha
-
-### 🎨 Themes
-- **Dark** — Paleta completa para modo oscuro
-- **Light** — Paleta limpia para modo claro
-- **Hacker** — Estilo Matrix / terminal verde
-- **Cyberpunk** — Futurista con neón y glitch
-- **Corporate** — Profesional y sobrio
-
-## Uso
-
-Cada componente es standalone y se puede copiar directamente a tu proyecto Angular.
+## 🚀 Uso local
 
 ```bash
-ng serve
+npm install
+npm start          # servidor de desarrollo en http://localhost:4200
+npm run build      # build de producción en dist/
+npm run format     # formatea con Prettier
 ```
 
-Abre `http://localhost:4200` para ver la galería de todos los efectos.
+---
 
-## Estructura
+## 🗂️ Estructura del proyecto
 
 ```
-src/app/
-├── components/
-│   ├── cards/           # 6 tipos de tarjetas
-│   ├── buttons/         # 5 estilos de botones
-│   ├── backgrounds/     # 4 fondos animados
-│   ├── typography/      # 3 efectos de texto
-│   ├── navigation/      # 2 tipos de nav
-│   ├── forms/           # 3 controles de formulario
-│   ├── modals/          # 2 tipos de modal
-│   ├── themes/          # 5 paletas de colores
-│   └── showcase/        # Componente orquestador
-└── services/            # Theme service
+src/
+├── index.html                  # Incluye un script anti-flash de tema
+├── main.ts                     # bootstrapApplication
+├── styles.scss                 # Reset, tokens globales y estilos de la galería
+├── scss/
+│   └── _tokens.scss            # Variables CSS de los 5 temas
+└── app/
+    ├── app.ts                  # Shell: sólo monta <app-showcase />
+    ├── app.config.ts
+    ├── core/
+    │   ├── catalog/catalog.ts       # Fuente única de verdad del catálogo
+    │   └── theme/theme.service.ts   # Cambio de tema + persistencia
+    └── components/
+        ├── cards/          hover-effects/  glassmorphism/  neon/
+        │                   flip/           minimal/        dark-corporate/
+        ├── buttons/        glow/  gradient/  neumorphism/  pill/  animated/
+        ├── backgrounds/    gradient/  particle/  grid/  animated-mesh/
+        ├── typography/     glow-text/  gradient-text/  typewriter/
+        ├── navigation/     sidebar/  topbar/
+        ├── forms/          glass-input/  toggle/  checkbox/
+        ├── modals/         glass-modal/  slide-in/
+        ├── themes/         dark/  light/  hacker/  cyberpunk/  corporate/
+        └── showcase/       # Orquestador: navegación + todas las secciones
 ```
 
-## License
+**Cómo funciona el catálogo:** `core/catalog/catalog.ts` es la única fuente de
+verdad. La navegación lateral, las anclas y el contador del hero se calculan a
+partir de esa lista. Para añadir un componente nuevo basta con registrarlo allí.
 
-MIT
+---
+
+## ♻️ Cómo reutilizar un componente en otro proyecto
+
+1. Copia la carpeta del efecto, por ejemplo
+   `src/app/components/cards/neon/` a tu proyecto.
+2. Si el componente importa `FormsModule` (los de `forms/`), asegúrate de tener
+   `@angular/forms` instalado.
+3. Úsalo en tu plantilla importándolo como standalone:
+
+```ts
+import { NeonCardComponent } from './components/cards/neon/neon.component';
+
+@Component({
+  selector: 'app-mi-pagina',
+  imports: [NeonCardComponent],
+  template: `<app-card-neon />`,
+})
+export class MiPaginaComponent {}
+```
+
+Los estilos de cada componente son **autocontenidos**: no dependen de
+`styles.scss`, salvo los que usan variables de tema (`var(--ac-*)`) para
+integrarse con el sistema de temas.
+
+---
+
+## 🎨 Sistema de temas
+
+Los 5 temas (dark, light, hacker, cyberpunk, corporate) se aplican cambiando el
+atributo `data-theme` en `<html>`. Las variables viven en `src/scss/_tokens.scss`:
+
+| Variable | Uso |
+| --- | --- |
+| `--ac-bg` / `--ac-bg-deep` | Fondo de página |
+| `--ac-surface` / `--ac-surface-2` | Superficies elevadas |
+| `--ac-border` | Bordes y separadores |
+| `--ac-text` / `--ac-text-muted` / `--ac-text-faint` | Jerarquía de texto |
+| `--ac-primary` / `--ac-primary-soft` | Color de acento y foco |
+
+`ThemeService` sincroniza el signal del tema con el atributo y lo persiste en
+`localStorage`, así que la elección sobrevive a la recarga.
+
+---
+
+## 🧩 Componentes (30)
+
+**🃏 Cards (6)** — Glassmorphism, Neon, Hover Effects (lift, scale, rotate,
+border-draw, glow, magnetic), Flip 3D, Minimal, Dark Corporate
+
+**🔘 Buttons (5)** — Glow, Gradient, Neumorphism, Pill, Animated
+(ripple, pulse, shake, fill-up, slide-bg)
+
+**🌌 Backgrounds (4)** — Gradient (6 variantes), Particle Canvas, Grid Patterns,
+Animated Mesh
+
+**🔤 Typography (3)** — Glow Text, Gradient Text, Typewriter
+
+**🧭 Navigation (2)** — Sidebar colapsable, Topbar responsiva
+
+**📝 Forms (3)** — Glass Input, Toggle Switch, Checkbox
+
+**🪟 Modals (2)** — Glass Modal, Slide-in Panel
+
+**🎨 Themes (5)** — Dark, Light, Hacker, Cyberpunk, Corporate
+
+---
+
+## ✅ Convenciones del código
+
+- **Standalone components** — sin `NgModule`. En Angular 19+ es el comportamiento
+  por defecto, así que no se escribe `standalone: true`.
+- **Signals** para estado local (`signal()`, `computed()`, `viewChild()`).
+- **Control flow nativo** `@if` / `@for` / `@switch` en lugar de `*ngIf` /
+  `*ngFor`, con `track` obligatorio. Por eso no se importa `CommonModule`.
+- **Sin `::ng-deep`** — los estilos compartidos de la galería viven en
+  `styles.scss` como estilos globales.
+- **Sin fugas de memoria** — todo `requestAnimationFrame`,
+  `ResizeObserver` o `setTimeout` se cancela en `ngOnDestroy`.
+- **Accesibilidad** — roles ARIA donde corresponde (`role="switch"`,
+  `role="checkbox"`, `role="dialog"`), `aria-label` en botones de sólo icono,
+  `aria-current` en navegación, cierre con `Escape`, `inert` en overlays
+  cerrados y `:focus-visible` visible.
+- **`type="button"`** explícito en todos los botones.
+- Los efectos visuales están **siempre activos**: no se desactivan por
+  `prefers-reduced-motion`.
+
+## 🧪 Tests
+
+El proyecto se creó con `--skip-tests`, así que **no hay tests configurados** ni
+target de test en `angular.json` (por eso `package.json` no expone `npm test`).
+La verificación actual es el build de producción y la revisión visual.
+
+---
+
+## 📄 Licencia
+
+MIT — ver [LICENSE](./LICENSE).

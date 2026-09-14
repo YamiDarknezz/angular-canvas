@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-neon-card',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-card-neon',
   templateUrl: './neon.component.html',
-  styleUrl: './neon.component.scss'
+  styleUrl: './neon.component.scss',
 })
 export class NeonCardComponent {}

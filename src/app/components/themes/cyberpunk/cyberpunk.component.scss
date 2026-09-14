@@ -1,19 +1,42 @@
+@use '../palette' as *;
+
 .cyber-card {
   background: #0a0a1a;
+  border: 1px solid rgba(255, 0, 255, 0.19);
   border-radius: 16px;
   padding: 2rem;
-  border: 1px solid #ff00ff30;
 }
 
+@include palette;
+
 .cyber-glitch {
-  font-size: 3rem;
+  position: relative;
+  // Escala con el viewport: "CYBERPUNK" es una palabra que no puede partirse
+  // y a tamaño fijo desborda en pantallas estrechas.
+  font-size: clamp(1.4rem, 8.5vw, 3rem);
   font-weight: 900;
   color: #ff00ff;
-  text-shadow: 2px 2px #00ffff, -2px -2px #ffff00;
-  position: relative;
-  animation: glitch 2s infinite;
   text-align: center;
   letter-spacing: 0.1em;
+
+  // Dos capas desplazadas usando el atributo data-text del markup.
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &::before {
+    color: #00ffff;
+    animation: glitch-shift 2s infinite steps(2, end);
+  }
+
+  &::after {
+    color: #ffff00;
+    animation: glitch-shift 2s infinite steps(2, end) reverse;
+  }
 }
 
 .cyber-subtitle {
@@ -24,38 +47,25 @@
   margin: 1rem 0 2rem;
 }
 
-@keyframes glitch {
-  0%, 100% { text-shadow: 2px 2px #00ffff, -2px -2px #ffff00; }
-  10% { text-shadow: -2px -2px #00ffff, 2px 2px #ff00ff; }
-  20% { text-shadow: 2px -2px #ffff00, -2px 2px #00ffff; }
-  30% { text-shadow: -2px 2px #ff00ff, 2px -2px #ffff00; }
-  40% { text-shadow: 2px 2px #00ffff, -2px -2px #ff00ff; }
-  50% { text-shadow: -2px -2px #ffff00, 2px 2px #00ffff; }
-}
+@keyframes glitch-shift {
+  0%,
+  100% {
+    transform: translate(2px, 0);
+    clip-path: inset(0 0 55% 0);
+  }
 
-.palette-row {
-  display: flex;
-  gap: 0.5rem;
-}
+  25% {
+    transform: translate(-3px, 0);
+    clip-path: inset(45% 0 20% 0);
+  }
 
-.swatch {
-  flex: 1;
-  height: 70px;
-  border-radius: 8px;
-  display: flex;
-  align-items: flex-end;
-  padding: 0.4rem;
-  cursor: pointer;
-  transition: transform 0.2s;
+  50% {
+    transform: translate(3px, 0);
+    clip-path: inset(20% 0 45% 0);
+  }
 
-  &:hover { transform: scale(1.08); }
-
-  span {
-    font-size: 0.6rem;
-    color: #fff;
-    background: rgba(0,0,0,0.5);
-    padding: 0.15rem 0.3rem;
-    border-radius: 3px;
-    font-family: monospace;
+  75% {
+    transform: translate(-2px, 0);
+    clip-path: inset(60% 0 0 0);
   }
 }

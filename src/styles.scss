@@ -1,4 +1,4 @@
-/* AngularCanvas — Global Styles */
+@use './scss/tokens';
 
 *,
 *::before,
@@ -13,12 +13,21 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #0f0f1a;
-  color: #e2e8f0;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  background: var(--ac-bg);
+  color: var(--ac-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 a {
@@ -30,19 +39,67 @@ button {
   font-family: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid var(--ac-primary);
+  outline-offset: 2px;
+}
+
+// ---- Estilos compartidos de la galería ----
+// Antes vivían en showcase.component.scss con `:host ::ng-deep` (deprecado).
+// Al ser estilos globales, los componentes hijos los heredan sin romper el
+// encapsulamiento de Angular.
+.design-section {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--ac-border);
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ac-text);
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  color: var(--ac-text-faint);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-grid {
+  display: grid;
+  // min(300px, 100%) evita que la columna fuerce scroll horizontal en
+  // viewports de 320px, donde el mínimo de 300px no cabe.
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+.btn-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a1a;
+  background: var(--ac-bg-deep);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a40;
+  background: var(--ac-surface-2);
   border-radius: 4px;
 
   &:hover {
-    background: #3a3a50;
+    background: var(--ac-text-faint);
   }
 }

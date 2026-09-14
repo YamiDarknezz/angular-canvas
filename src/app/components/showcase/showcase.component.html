@@ -1,98 +1,114 @@
 <div class="showcase-layout">
-  <!-- Sidebar Navigation -->
+  <!-- Navegación lateral -->
   <aside class="showcase-sidebar">
     <div class="sidebar-brand">
-      <span class="brand-icon">🎨</span>
+      <span class="brand-icon" aria-hidden="true">🎨</span>
       <span class="brand-text">AngularCanvas</span>
     </div>
-    <nav class="sidebar-nav">
-      <button *ngFor="let cat of categories"
-              class="nav-item"
-              [class.active]="activeCategory === cat.id"
-              (click)="scrollTo(cat.id)">
-        <span class="nav-icon">{{ cat.icon }}</span>
-        <span class="nav-label">{{ cat.label }}</span>
-      </button>
+
+    <nav class="sidebar-nav" aria-label="Categorías de componentes">
+      @for (cat of catalog; track cat.id) {
+        <button
+          type="button"
+          class="nav-item"
+          [class.active]="activeCategory() === cat.id"
+          [attr.aria-current]="activeCategory() === cat.id ? 'true' : null"
+          [attr.aria-label]="cat.label"
+          (click)="scrollTo(cat.id)"
+        >
+          <span class="nav-icon" aria-hidden="true">{{ cat.icon }}</span>
+          <span class="nav-label">{{ cat.label }}</span>
+        </button>
+      }
     </nav>
+
+    <div class="sidebar-themes">
+      <span class="themes-label" id="theme-label">Tema</span>
+      <div class="theme-list" role="group" aria-labelledby="theme-label">
+        @for (theme of themes; track theme.id) {
+          <button
+            type="button"
+            class="theme-chip"
+            [class.active]="activeTheme() === theme.id"
+            [attr.aria-pressed]="activeTheme() === theme.id"
+            (click)="setTheme(theme.id)"
+          >
+            <span aria-hidden="true">{{ theme.icon }}</span>
+            <span>{{ theme.label }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
     <div class="sidebar-footer">
       <span class="version">v1.0.0</span>
     </div>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Contenido -->
   <main class="showcase-main">
-    <!-- Hero -->
-    <section class="hero">
+    <header class="hero">
       <h1 class="hero-title">
         <span class="hero-gradient">AngularCanvas</span>
       </h1>
       <p class="hero-subtitle">Biblioteca de efectos y diseños para Angular</p>
       <p class="hero-desc">
-        {{ categories.length }} categorías · {{ 27 }}+ componentes de diseño listos para usar.
-        Copia, pega y personaliza en tus proyectos.
+        {{ totalGroups() }} categorías · {{ totalComponents }} componentes de diseño listos para
+        copiar y personalizar en tus proyectos.
       </p>
-    </section>
+    </header>
 
-    <!-- Cards -->
-    <div id="cards" class="showcase-section">
-      <app-glassmorphism></app-glassmorphism>
-      <app-neon-card></app-neon-card>
-      <app-hover-effects></app-hover-effects>
-      <app-flip-card></app-flip-card>
-      <app-minimal-card></app-minimal-card>
-      <app-dark-corporate></app-dark-corporate>
-    </div>
-
-    <!-- Buttons -->
-    <div id="buttons" class="showcase-section">
-      <app-glow-button></app-glow-button>
-      <app-gradient-button></app-gradient-button>
-      <app-neumorphism-button></app-neumorphism-button>
-      <app-pill-button></app-pill-button>
-      <app-animated-button></app-animated-button>
-    </div>
-
-    <!-- Backgrounds -->
-    <div id="backgrounds" class="showcase-section">
-      <app-bg-gradient></app-bg-gradient>
-      <app-bg-particle></app-bg-particle>
-      <app-bg-grid></app-bg-grid>
-      <app-bg-animated-mesh></app-bg-animated-mesh>
-    </div>
-
-    <!-- Typography -->
-    <div id="typography" class="showcase-section">
-      <app-glow-text></app-glow-text>
-      <app-gradient-text></app-gradient-text>
-      <app-typewriter></app-typewriter>
-    </div>
-
-    <!-- Navigation -->
-    <div id="navigation" class="showcase-section">
-      <app-sidebar-nav></app-sidebar-nav>
-      <app-topbar-nav></app-topbar-nav>
-    </div>
-
-    <!-- Forms -->
-    <div id="forms" class="showcase-section">
-      <app-glass-input></app-glass-input>
-      <app-toggle></app-toggle>
-      <app-checkbox></app-checkbox>
-    </div>
-
-    <!-- Modals -->
-    <div id="modals" class="showcase-section">
-      <app-glass-modal></app-glass-modal>
-      <app-slide-in-modal></app-slide-in-modal>
-    </div>
-
-    <!-- Themes -->
-    <div id="themes" class="showcase-section">
-      <app-theme-dark></app-theme-dark>
-      <app-theme-light></app-theme-light>
-      <app-theme-hacker></app-theme-hacker>
-      <app-theme-cyberpunk></app-theme-cyberpunk>
-      <app-theme-corporate></app-theme-corporate>
-    </div>
+    @for (group of catalog; track group.id) {
+      <section class="showcase-section" [id]="group.id" [attr.aria-label]="group.label">
+        @switch (group.id) {
+          @case ('cards') {
+            <app-card-glassmorphism />
+            <app-card-neon />
+            <app-card-hover />
+            <app-card-flip />
+            <app-card-minimal />
+            <app-card-corporate />
+          }
+          @case ('buttons') {
+            <app-btn-glow />
+            <app-btn-gradient />
+            <app-btn-neumorphism />
+            <app-btn-pill />
+            <app-btn-animated />
+          }
+          @case ('backgrounds') {
+            <app-bg-gradient />
+            <app-bg-particle />
+            <app-bg-grid />
+            <app-bg-mesh />
+          }
+          @case ('typography') {
+            <app-text-glow />
+            <app-text-gradient />
+            <app-text-typewriter />
+          }
+          @case ('navigation') {
+            <app-nav-sidebar />
+            <app-nav-topbar />
+          }
+          @case ('forms') {
+            <app-form-glass-input />
+            <app-form-toggle />
+            <app-form-checkbox />
+          }
+          @case ('modals') {
+            <app-modal-glass />
+            <app-modal-slide-in />
+          }
+          @case ('themes') {
+            <app-theme-dark />
+            <app-theme-light />
+            <app-theme-hacker />
+            <app-theme-cyberpunk />
+            <app-theme-corporate />
+          }
+        }
+      </section>
+    }
   </main>
 </div>

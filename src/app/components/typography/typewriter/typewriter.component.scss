@@ -20,9 +20,15 @@
   height: 12px;
   border-radius: 50%;
 
-  &.red { background: #ff5f56; }
-  &.yellow { background: #ffbd2e; }
-  &.green { background: #27c93f; }
+  &.red {
+    background: #ff5f56;
+  }
+  &.yellow {
+    background: #ffbd2e;
+  }
+  &.green {
+    background: #27c93f;
+  }
 }
 
 .terminal-title {
@@ -53,6 +59,11 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }

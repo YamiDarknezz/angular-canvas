@@ -1,18 +1,21 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+interface MenuItem {
+  readonly id: string;
+  readonly icon: string;
+  readonly label: string;
+}
 
 @Component({
-  selector: 'app-sidebar-nav',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-nav-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarNavComponent {
-  collapsed = signal(false);
-  activeItem = signal('dashboard');
+  readonly collapsed = signal(false);
+  readonly activeItem = signal('dashboard');
 
-  menuItems = [
+  readonly menuItems: readonly MenuItem[] = [
     { id: 'dashboard', icon: '📊', label: 'Dashboard' },
     { id: 'users', icon: '👥', label: 'Usuarios' },
     { id: 'settings', icon: '⚙️', label: 'Configuración' },
@@ -20,11 +23,11 @@ export class SidebarNavComponent {
     { id: 'messages', icon: '💬', label: 'Mensajes' },
   ];
 
-  toggle() {
-    this.collapsed.update(v => !v);
+  toggle(): void {
+    this.collapsed.update((value) => !value);
   }
 
-  setActive(id: string) {
+  setActive(id: string): void {
     this.activeItem.set(id);
   }
 }

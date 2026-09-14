@@ -1,22 +1,25 @@
 {
   "name": "angular-canvas",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Biblioteca de efectos y diseños reutilizables para Angular: cards, botones, fondos, tipografía, navegación, formularios, modales y temas.",
+  "author": "Gerardo Plasencia (YamiDarknezz)",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "npm@10.9.8",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss,json}\""
   },
-  "private": true,
-  "packageManager": "npm@10.9.8",
   "dependencies": {
     "@angular/common": "^22.1.0",
     "@angular/compiler": "^22.1.0",
     "@angular/core": "^22.1.0",
     "@angular/forms": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
-    "@angular/router": "^22.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

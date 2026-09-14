@@ -25,7 +25,9 @@
 .toggle-switch {
   width: 52px;
   height: 28px;
+  flex-shrink: 0;
   background: #334155;
+  border: none;
   border-radius: 50px;
   padding: 3px;
   cursor: pointer;

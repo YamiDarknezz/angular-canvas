@@ -1,17 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-topbar-nav',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-nav-topbar',
   templateUrl: './topbar.component.html',
-  styleUrl: './topbar.component.scss'
+  styleUrl: './topbar.component.scss',
 })
 export class TopbarNavComponent {
-  mobileMenuOpen = signal(false);
+  readonly mobileMenuOpen = signal(false);
+  readonly activeLink = signal('Inicio');
 
-  toggleMobile() {
-    this.mobileMenuOpen.update(v => !v);
+  readonly links = ['Inicio', 'Componentes', 'Templates', 'Documentación'] as const;
+
+  toggleMobile(): void {
+    this.mobileMenuOpen.update((value) => !value);
+  }
+
+  select(link: string): void {
+    this.activeLink.set(link);
+    this.mobileMenuOpen.set(false);
   }
 }

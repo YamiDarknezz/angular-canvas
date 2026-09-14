@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-pill-button',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-btn-pill',
   templateUrl: './pill.component.html',
-  styleUrl: './pill.component.scss'
+  styleUrl: './pill.component.scss',
 })
 export class PillButtonComponent {}

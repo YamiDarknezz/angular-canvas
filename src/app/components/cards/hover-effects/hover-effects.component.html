@@ -4,42 +4,46 @@
   <div class="card-grid">
     <div class="hover-card effect-lift">
       <div class="card-content">
-        <span class="card-emoji">✨</span>
+        <span class="card-emoji" aria-hidden="true">✨</span>
         <h3>Lift Effect</h3>
         <p>Elevación suave con sombra creciente</p>
       </div>
     </div>
     <div class="hover-card effect-scale">
       <div class="card-content">
-        <span class="card-emoji">🔍</span>
+        <span class="card-emoji" aria-hidden="true">🔍</span>
         <h3>Scale Effect</h3>
         <p>Escalado con cambio de color de fondo</p>
       </div>
     </div>
     <div class="hover-card effect-rotate">
       <div class="card-content">
-        <span class="card-emoji">🌀</span>
+        <span class="card-emoji" aria-hidden="true">🌀</span>
         <h3>Rotate Effect</h3>
         <p>Rotación 3D sutil al hacer hover</p>
       </div>
     </div>
     <div class="hover-card effect-border-draw">
       <div class="card-content">
-        <span class="card-emoji">✏️</span>
+        <span class="card-emoji" aria-hidden="true">✏️</span>
         <h3>Border Draw</h3>
         <p>Borde que se dibuja alrededor del card</p>
       </div>
     </div>
     <div class="hover-card effect-glow">
       <div class="card-content">
-        <span class="card-emoji">💡</span>
+        <span class="card-emoji" aria-hidden="true">💡</span>
         <h3>Glow Effect</h3>
         <p>Brillo expansivo con sombra de color</p>
       </div>
     </div>
-    <div class="hover-card effect-magnetic">
+    <div
+      class="hover-card effect-magnetic"
+      (mousemove)="onMagneticMove($event)"
+      (mouseleave)="resetMagnetic($event)"
+    >
       <div class="card-content">
-        <span class="card-emoji">🧲</span>
+        <span class="card-emoji" aria-hidden="true">🧲</span>
         <h3>Magnetic Effect</h3>
         <p>Sigue el cursor con efecto magnético</p>
       </div>

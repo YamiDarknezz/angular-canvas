@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-glow-text',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-text-glow',
   templateUrl: './glow-text.component.html',
-  styleUrl: './glow-text.component.scss'
+  styleUrl: './glow-text.component.scss',
 })
 export class GlowTextComponent {}

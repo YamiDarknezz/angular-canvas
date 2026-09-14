@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-dark-corporate',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-card-corporate',
   templateUrl: './dark-corporate.component.html',
-  styleUrl: './dark-corporate.component.scss'
+  styleUrl: './dark-corporate.component.scss',
 })
 export class DarkCorporateComponent {}

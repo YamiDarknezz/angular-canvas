@@ -1,30 +1,51 @@
 <section class="design-section">
   <h2 class="section-title">Slide-in Panel</h2>
-  <p class="section-desc">Panel lateral que se desliza desde la derecha</p>
-  <button class="slide-trigger" (click)="open()">Abrir Panel →</button>
+  <p class="section-desc">Panel lateral con animación de entrada, Escape y foco gestionado</p>
+  <button type="button" class="slide-trigger" (click)="open()">Abrir Panel →</button>
 </section>
 
-<div class="slide-overlay" [class.visible]="isOpen()" (click)="close()">
-  <div class="slide-panel" (click)="$event.stopPropagation()">
-    <div class="slide-header">
-      <h3>Panel Lateral</h3>
-      <button class="slide-close" (click)="close()">✕</button>
-    </div>
+<div
+  class="slide-overlay"
+  [class.visible]="isOpen()"
+  [attr.inert]="isOpen() ? null : ''"
+  (click)="close()"
+>
+  <aside
+    class="slide-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="slide-panel-title"
+    (click)="$event.stopPropagation()"
+  >
+    <header class="slide-header">
+      <h3 id="slide-panel-title">Panel Lateral</h3>
+      <button
+        #closeButton
+        type="button"
+        class="slide-close"
+        aria-label="Cerrar panel"
+        (click)="close()"
+      >
+        ✕
+      </button>
+    </header>
     <div class="slide-body">
       <p>Este panel se desliza desde el derecho con una transición suave.</p>
       <p>Ideal para configuraciones, detalles, o formularios secundarios.</p>
       <div class="slide-content-placeholder">
-        <div class="placeholder-item" *ngFor="let i of [1,2,3,4]">
-          <div class="placeholder-icon">📄</div>
-          <div class="placeholder-text">
-            <div class="placeholder-line"></div>
-            <div class="placeholder-line short"></div>
+        @for (i of placeholders; track i) {
+          <div class="placeholder-item">
+            <div class="placeholder-icon" aria-hidden="true">📄</div>
+            <div class="placeholder-text">
+              <div class="placeholder-line"></div>
+              <div class="placeholder-line short"></div>
+            </div>
           </div>
-        </div>
+        }
       </div>
     </div>
-    <div class="slide-footer">
-      <button class="slide-btn" (click)="close()">Cerrar</button>
-    </div>
-  </div>
+    <footer class="slide-footer">
+      <button type="button" class="slide-btn" (click)="close()">Cerrar</button>
+    </footer>
+  </aside>
 </div>

@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-bg-animated-mesh',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-bg-mesh',
   templateUrl: './animated-mesh.component.html',
-  styleUrl: './animated-mesh.component.scss'
+  styleUrl: './animated-mesh.component.scss',
 })
 export class BgAnimatedMeshComponent {}

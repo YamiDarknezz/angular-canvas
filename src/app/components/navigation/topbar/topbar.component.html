@@ -1,27 +1,51 @@
 <section class="design-section">
   <h2 class="section-title">Topbar Navigation</h2>
-  <p class="section-desc">Barra superior responsiva con menú mobile</p>
+  <p class="section-desc">Barra superior responsiva con menú mobile accesible</p>
   <div class="topbar-demo">
     <header class="topbar">
       <div class="topbar-brand">🎨 AngularCanvas</div>
-      <nav class="topbar-links">
-        <a href="#" class="active">Inicio</a>
-        <a href="#">Componentes</a>
-        <a href="#">Templates</a>
-        <a href="#">Documentación</a>
+
+      <nav class="topbar-links" aria-label="Navegación principal">
+        @for (link of links; track link) {
+          <a
+            href="#"
+            [class.active]="activeLink() === link"
+            [attr.aria-current]="activeLink() === link ? 'page' : null"
+            (click)="$event.preventDefault(); select(link)"
+          >
+            {{ link }}
+          </a>
+        }
       </nav>
+
       <div class="topbar-actions">
-        <button class="search-btn">🔍</button>
-        <button class="avatar-btn">👤</button>
+        <button type="button" class="icon-btn" aria-label="Buscar">🔍</button>
+        <button type="button" class="icon-btn" aria-label="Perfil de usuario">👤</button>
       </div>
-      <button class="mobile-toggle" (click)="toggleMobile()">☰</button>
+
+      <button
+        type="button"
+        class="mobile-toggle"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-controls="mobile-menu"
+        aria-label="Abrir menú de navegación"
+        (click)="toggleMobile()"
+      >
+        ☰
+      </button>
     </header>
-    <nav class="mobile-menu" [class.open]="mobileMenuOpen()">
-      <a href="#">Inicio</a>
-      <a href="#">Componentes</a>
-      <a href="#">Templates</a>
-      <a href="#">Documentación</a>
+
+    <nav
+      id="mobile-menu"
+      class="mobile-menu"
+      [class.open]="mobileMenuOpen()"
+      aria-label="Navegación móvil"
+    >
+      @for (link of links; track link) {
+        <a href="#" (click)="$event.preventDefault(); select(link)">{{ link }}</a>
+      }
     </nav>
+
     <div class="topbar-preview">
       <p>En mobile, click ☰ para ver el menú</p>
     </div>

@@ -14,21 +14,24 @@
 
 .glow-cyan {
   color: #00d4ff;
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5),
+  text-shadow:
+    0 0 10px rgba(0, 212, 255, 0.5),
     0 0 20px rgba(0, 212, 255, 0.3),
     0 0 40px rgba(0, 212, 255, 0.2);
 }
 
 .glow-pink {
   color: #ff006e;
-  text-shadow: 0 0 10px rgba(255, 0, 110, 0.5),
+  text-shadow:
+    0 0 10px rgba(255, 0, 110, 0.5),
     0 0 20px rgba(255, 0, 110, 0.3),
     0 0 40px rgba(255, 0, 110, 0.2);
 }
 
 .glow-green {
   color: #00ff88;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5),
+  text-shadow:
+    0 0 10px rgba(0, 255, 136, 0.5),
     0 0 20px rgba(0, 255, 136, 0.3),
     0 0 40px rgba(0, 255, 136, 0.2);
 }
@@ -40,11 +43,13 @@
 
 @keyframes text-glow-pulse {
   from {
-    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5),
+    text-shadow:
+      0 0 10px rgba(99, 102, 241, 0.5),
       0 0 20px rgba(99, 102, 241, 0.3);
   }
   to {
-    text-shadow: 0 0 20px rgba(99, 102, 241, 0.8),
+    text-shadow:
+      0 0 20px rgba(99, 102, 241, 0.8),
       0 0 40px rgba(99, 102, 241, 0.5),
       0 0 60px rgba(99, 102, 241, 0.3);
   }

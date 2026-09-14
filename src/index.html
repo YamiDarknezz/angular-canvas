@@ -1,13 +1,34 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>AngularCanvas</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularCanvas — Biblioteca de efectos y diseños para Angular</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Biblioteca de componentes de diseño para Angular: cards, botones, fondos animados, tipografía, formularios, modales y temas."
+    />
+    <meta name="theme-color" content="#0f0f1a" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // Aplica el tema guardado antes de que Angular arranque, para que no se vea
+      // un flash del tema por defecto. Debe mantenerse en sync con STORAGE_KEY
+      // y THEMES en src/app/core/theme/theme.service.ts.
+      (function () {
+        var THEMES = ['dark', 'light', 'hacker', 'cyberpunk', 'corporate'];
+        try {
+          var stored = localStorage.getItem('angular-canvas:theme');
+          if (THEMES.indexOf(stored) !== -1) {
+            document.documentElement.setAttribute('data-theme', stored);
+          }
+        } catch (e) {
+          /* localStorage no disponible: se queda el tema por defecto */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

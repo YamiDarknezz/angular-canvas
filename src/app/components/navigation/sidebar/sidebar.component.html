@@ -1,20 +1,42 @@
 <section class="design-section">
   <h2 class="section-title">Sidebar Navigation</h2>
-  <p class="section-desc">Navegación lateral colapsable</p>
+  <p class="section-desc">Navegación lateral colapsable, navegable por teclado</p>
   <div class="sidebar-demo">
-    <nav class="sidebar" [class.collapsed]="collapsed()">
+    <nav class="sidebar" [class.collapsed]="collapsed()" aria-label="Navegación de ejemplo">
       <div class="sidebar-header">
-        <span class="logo" *ngIf="!collapsed()">🎨 Canvas</span>
-        <span class="logo-mini" *ngIf="collapsed()">🎨</span>
-        <button class="toggle-btn" (click)="toggle()">☰</button>
+        @if (collapsed()) {
+          <span class="logo-mini" aria-hidden="true">🎨</span>
+        } @else {
+          <span class="logo">🎨 Canvas</span>
+        }
+        <button
+          type="button"
+          class="toggle-btn"
+          [attr.aria-expanded]="!collapsed()"
+          aria-label="Colapsar o expandir navegación"
+          (click)="toggle()"
+        >
+          ☰
+        </button>
       </div>
+
       <ul class="menu">
-        <li *ngFor="let item of menuItems"
-            [class.active]="activeItem() === item.id"
-            (click)="setActive(item.id)">
-          <span class="menu-icon">{{ item.icon }}</span>
-          <span class="menu-label" *ngIf="!collapsed()">{{ item.label }}</span>
-        </li>
+        @for (item of menuItems; track item.id) {
+          <li>
+            <button
+              type="button"
+              class="menu-item"
+              [class.active]="activeItem() === item.id"
+              [attr.aria-current]="activeItem() === item.id ? 'page' : null"
+              (click)="setActive(item.id)"
+            >
+              <span class="menu-icon" aria-hidden="true">{{ item.icon }}</span>
+              @if (!collapsed()) {
+                <span class="menu-label">{{ item.label }}</span>
+              }
+            </button>
+          </li>
+        }
       </ul>
     </nav>
     <div class="sidebar-preview">

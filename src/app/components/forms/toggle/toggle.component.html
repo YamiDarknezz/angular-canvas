@@ -1,12 +1,22 @@
 <section class="design-section">
   <h2 class="section-title">Toggle Switches</h2>
-  <p class="section-desc">Interruptores animados con diferentes estilos</p>
+  <p class="section-desc">Interruptores animados accesibles (rol switch + teclado)</p>
   <div class="toggle-showcase">
-    <div class="toggle-item" *ngFor="let t of toggles">
-      <span class="toggle-label">{{ t.label }}</span>
-      <div class="toggle-switch" [class.active]="t.checked()" (click)="toggle(t)">
-        <div class="toggle-thumb"></div>
+    @for (item of toggles; track item.id) {
+      <div class="toggle-item">
+        <span class="toggle-label" [id]="item.id + '-label'">{{ item.label }}</span>
+        <button
+          type="button"
+          class="toggle-switch"
+          role="switch"
+          [class.active]="item.checked()"
+          [attr.aria-checked]="item.checked()"
+          [attr.aria-labelledby]="item.id + '-label'"
+          (click)="toggle(item)"
+        >
+          <span class="toggle-thumb"></span>
+        </button>
       </div>
-    </div>
+    }
   </div>
 </section>

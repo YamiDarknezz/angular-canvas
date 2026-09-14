@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-minimal-card',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'app-card-minimal',
   templateUrl: './minimal.component.html',
-  styleUrl: './minimal.component.scss'
+  styleUrl: './minimal.component.scss',
 })
 export class MinimalCardComponent {}

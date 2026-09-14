@@ -37,7 +37,9 @@
   }
 
   &:hover {
-    box-shadow: 0 0 30px rgba(37, 99, 235, 0.6), 0 0 60px rgba(37, 99, 235, 0.2);
+    box-shadow:
+      0 0 30px rgba(37, 99, 235, 0.6),
+      0 0 60px rgba(37, 99, 235, 0.2);
   }
 }
 
@@ -46,7 +48,9 @@
   box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
 
   &:hover {
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.6), 0 0 60px rgba(124, 58, 237, 0.2);
+    box-shadow:
+      0 0 30px rgba(124, 58, 237, 0.6),
+      0 0 60px rgba(124, 58, 237, 0.2);
   }
 }
 
@@ -55,7 +59,9 @@
   box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
 
   &:hover {
-    box-shadow: 0 0 30px rgba(236, 72, 153, 0.6), 0 0 60px rgba(236, 72, 153, 0.2);
+    box-shadow:
+      0 0 30px rgba(236, 72, 153, 0.6),
+      0 0 60px rgba(236, 72, 153, 0.2);
   }
 }
 
@@ -64,7 +70,9 @@
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
 
   &:hover {
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.2);
+    box-shadow:
+      0 0 30px rgba(16, 185, 129, 0.6),
+      0 0 60px rgba(16, 185, 129, 0.2);
   }
 }
 
@@ -73,6 +81,8 @@
   box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
 
   &:hover {
-    box-shadow: 0 0 30px rgba(249, 115, 22, 0.6), 0 0 60px rgba(249, 115, 22, 0.2);
+    box-shadow:
+      0 0 30px rgba(249, 115, 22, 0.6),
+      0 0 60px rgba(249, 115, 22, 0.2);
   }
 }
