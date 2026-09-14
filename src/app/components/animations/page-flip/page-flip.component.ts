@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 
 /**
- * Efectos de transición tipo libro y papel: giro de página, libro abierto y
- * esquina que se dobla. Cada variante tiene un estado activo/quieto.
+ * Efectos de transición tipo libro y papel: giro de página con perspectiva,
+ * libro abierto con hoja que se curva y esquina que se levanta con sombra.
  *
  * Autocontenido: sin dependencias de la galería.
  */
