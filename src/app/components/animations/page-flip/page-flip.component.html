@@ -2,7 +2,6 @@
   <h2 class="section-title">Page Flip</h2>
   <p class="section-desc">Giros con perspectiva, hojas curvas y esquinas reales</p>
 
-  <!-- ===================== 1. PÁGINA ===================== -->
   <div class="flip-stage" data-variant="page">
     <p class="flip-hint">Haz click para girar la página</p>
     <div class="page-scene">
@@ -11,56 +10,52 @@
         <div class="page-face front">
           <span class="page-num">01</span>
           <h3>Front</h3>
-          <p>Lado frontal de la página. Click para ver el reverso.</p>
+          <p>Lado frontal. Click para girar.</p>
         </div>
         <div class="page-face back">
           <span class="page-num">02</span>
           <h3>Reverso</h3>
-          <p>Contenido del reverso. Click para volver al frente.</p>
+          <p>Contenido del reverso. Click para volver.</p>
         </div>
       </article>
     </div>
   </div>
 
-  <!-- ===================== 2. LIBRO ===================== -->
   <div class="flip-stage" data-variant="book">
-    <p class="flip-hint">Haz click en la hoja derecha para pasar</p>
+    <p class="flip-hint">Haz click para pasar la hoja</p>
     <div class="book-scene">
-      <div class="book">
-        <div class="book-page left">
-          <span class="page-num">{{ bookPage() * 2 + 1 }}</span>
-          <h3>Página izquierda</h3>
-          <p>Contenido estático del libro.</p>
+      <div class="book-wrapper">
+        <div class="book-left-page">
+          <span class="bk-num">1</span>
+          <h3>Capítulo Uno</h3>
+          <p>El principio de una historia que no termina aquí.</p>
         </div>
-        <div class="book-page right" (click)="nextBookPage()">
-          <div class="page-front-face">
-            <span class="page-num">{{ bookPage() * 2 + 2 }}</span>
-            <h3>Página derecha</h3>
-            <p>Click para pasar la hoja.</p>
-          </div>
-          <div class="page-back-face">
-            <span class="page-num">{{ bookPage() * 2 + 3 > 6 ? 1 : bookPage() * 2 + 3 }}</span>
-            <h3>Reverso</h3>
-            <p>El otro lado antes de la siguiente.</p>
-          </div>
-          <div class="page-curl" [class.turning]="turning()" aria-hidden="true"></div>
+        <div class="book-right-page" [class.turning]="bookFlipped()" (click)="toggleBook()">
+          <span class="bk-num">2</span>
+          <h3>Capítulo Dos</h3>
+          <p>La segunda parte del libro. Click para girar la hoja.</p>
         </div>
-        <div class="book-spine" aria-hidden="true"></div>
+        <div class="book-curl-overlay" [class.active]="bookFlipped()"></div>
+        <div class="book-spine-overlay"></div>
       </div>
     </div>
   </div>
 
-  <!-- ===================== 3. ESQUINA ===================== -->
   <div class="flip-stage" data-variant="fold">
     <p class="flip-hint">Pasa el cursor para doblar la esquina</p>
     <div class="fold-scene">
-      <article class="fold-card">
-        <div class="fold-peek"></div>
-        <div class="fold-shadow"></div>
+      <article
+        class="fold-card"
+        (mouseenter)="foldActive.set(true)"
+        (mouseleave)="foldActive.set(false)"
+      >
+        <div class="fold-paper-back"></div>
+        <div class="fold-paper" [class.active]="foldActive()"></div>
+        <div class="fold-shadow" [class.active]="foldActive()"></div>
         <div class="fold-body">
           <span class="fold-tag">Nota</span>
           <h3>Esquina doblada</h3>
-          <p>Pasa el cursor y la esquina se levanta con sombra.</p>
+          <p>El cursor levanta la esquina de la tarjeta.</p>
         </div>
       </article>
     </div>

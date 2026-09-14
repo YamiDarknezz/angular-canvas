@@ -1,11 +1,5 @@
 import { Component, signal } from '@angular/core';
 
-/**
- * Efectos de transición tipo libro y papel: giro de página con perspectiva,
- * libro abierto con hoja que se curva y esquina que se levanta con sombra.
- *
- * Autocontenido: sin dependencias de la galería.
- */
 @Component({
   selector: 'app-anim-page-flip',
   templateUrl: './page-flip.component.html',
@@ -13,22 +7,22 @@ import { Component, signal } from '@angular/core';
 })
 export class PageFlipComponent {
   readonly pageFlipped = signal(false);
-  readonly bookPage = signal(0);
-  readonly turning = signal(false);
+  readonly bookFlipped = signal(false);
+  readonly foldActive = signal(false);
 
   togglePage(): void {
     this.pageFlipped.update((v) => !v);
   }
 
-  nextBookPage(): void {
-    if (this.turning()) {
-      return;
+  toggleBook(): void {
+    if (this.bookFlipped()) {
+      this.bookFlipped.set(false);
+    } else {
+      this.bookFlipped.set(true);
     }
-    this.turning.set(true);
-    // Esperar a que la animación de giro termine (950ms) antes de avanzar.
-    setTimeout(() => {
-      this.bookPage.update((p) => (p + 1) % 3);
-      this.turning.set(false);
-    }, 950);
+  }
+
+  toggleFold(): void {
+    this.foldActive.update((v) => !v);
   }
 }
