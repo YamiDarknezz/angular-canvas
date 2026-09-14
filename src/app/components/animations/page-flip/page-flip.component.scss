@@ -87,7 +87,6 @@
     font-weight: 700;
     margin: 0;
   }
-
   p {
     font-size: 0.88rem;
     line-height: 1.5;
@@ -114,7 +113,7 @@
 }
 
 // ================================================================
-// 2. LIBRO — la hoja gira con rotateY, front/back y sombra visible
+// 2. LIBRO — front/back correcto en la hoja derecha
 // ================================================================
 .book-scene {
   perspective: 1400px;
@@ -125,58 +124,114 @@
   position: relative;
 }
 
-.book-left-page {
+// --- Página izquierda (estática) ---
+.book-left {
   width: 210px;
   height: 290px;
   padding: 1.75rem 1.5rem;
-  position: relative;
-  z-index: 1;
   background: linear-gradient(180deg, #0f172a, #1a1f35);
   color: #e2e8f0;
   border-radius: 14px 2px 2px 14px;
   border: 1px solid rgb(255 255 255 / 10%);
   border-right: 1px solid rgb(255 255 255 / 5%);
-}
-
-.book-right-page {
-  width: 210px;
-  height: 290px;
-  position: relative;
-  z-index: 2;
-  background: linear-gradient(180deg, #1a1f35, #0f172a);
-  color: #e2e8f0;
-  border-radius: 2px 14px 14px 2px;
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-left: 1px solid rgb(255 255 255 / 5%);
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  transition: transform 0.9s cubic-bezier(0.34, 1.15, 0.64, 1);
-  cursor: pointer;
-  padding: 1.75rem 1.5rem;
-  z-index: 3;
+  z-index: 1;
 
   h3 {
     font-size: 1.1rem;
     font-weight: 700;
     margin: 0 0 0.5rem;
   }
-
   p {
     font-size: 0.82rem;
     line-height: 1.5;
     opacity: 0.7;
     margin: 0;
   }
+}
+
+// --- Hoja derecha (la que gira) ---
+.book-right {
+  position: relative;
+  width: 210px;
+  height: 290px;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.34, 1.15, 0.64, 1);
+  cursor: pointer;
+  z-index: 2;
 
   &.turning {
     transform: rotateY(-180deg);
   }
 }
 
-// Sombra que aparece en la página izquierda cuando la derecha gira.
-.book-curl-overlay {
+// Cara frontal: lo que se ve antes de girar.
+.bk-face {
   position: absolute;
-  left: 210px;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.75rem 1.5rem;
+  backface-visibility: hidden;
+  border-radius: 2px 14px 14px 2px;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+  p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    opacity: 0.7;
+    margin: 0;
+  }
+}
+
+.bk-front {
+  background: linear-gradient(180deg, #1a1f35, #0f172a);
+  color: #e2e8f0;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-left: 1px solid rgb(255 255 255 / 5%);
+}
+
+// Cara trasera: muestra el SIGUIENTE capítulo (no el reverso del actual).
+.bk-back {
+  background: linear-gradient(180deg, #1e2340, #12152a);
+  color: #d6dbec;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-left: 1px solid rgb(255 255 255 / 5%);
+  transform: rotateY(180deg);
+}
+
+.bk-num {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.7rem;
+  color: rgb(255 255 255 / 35%);
+}
+
+.book-left h3,
+.book-right h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.book-left p,
+.book-right p {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  opacity: 0.7;
+  margin: 0;
+}
+
+// Sombra que aparece en la página izquierda cuando la derecha gira.
+.bk-shade {
+  position: absolute;
+  left: 206px;
   top: 0;
   bottom: 0;
   width: 0;
@@ -186,12 +241,13 @@
 
   &.active {
     opacity: 1;
-    width: 20px;
-    background: linear-gradient(90deg, rgb(0 0 0 / 40%), transparent);
+    width: 22px;
+    background: linear-gradient(90deg, rgb(0 0 0 / 45%), transparent);
   }
 }
 
-.book-spine-overlay {
+// Espina central.
+.book-spine {
   position: absolute;
   left: 210px;
   top: 4%;
@@ -201,8 +257,23 @@
   z-index: 1;
 }
 
+.book-left h3,
+.book-right h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.book-left p,
+.book-right p {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  opacity: 0.7;
+  margin: 0;
+}
+
 // ================================================================
-// 3. ESQUINA DOBLADA — la tarjeta se ve completa y levanta la esquina
+// 3. ESQUINA DOBLADA — esquina que se levanta con sombra realista
 // ================================================================
 .fold-scene {
   width: 340px;
@@ -227,60 +298,40 @@
   }
 }
 
-// La pieza de papel que se dobla (el triángulo superior derecho).
-.fold-paper {
+// Fondo que se ve debajo del papel al doblarse.
+.fold-backing {
   position: absolute;
   top: 0;
   right: 0;
-  width: 90px;
-  height: 90px;
-  background: linear-gradient(225deg, #8b5cf6, #6d28d9 50%, #4c1d95);
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-  transform-origin: top right;
-  opacity: 0.7;
-  z-index: 2;
-  transition:
-    transform 0.45s cubic-bezier(0.34, 1.5, 0.64, 1),
-    opacity 0.3s ease;
-
-  &.active {
-    transform: perspective(800px) rotateX(-22deg) rotateZ(-42deg) scale(1.08);
-    opacity: 1;
-  }
-}
-
-// El "papel de abajo" que se ve debajo del doblez.
-.fold-paper-back {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 90px;
-  height: 90px;
-  background: linear-gradient(225deg, #312e81, #1e1b4b);
+  width: 88px;
+  height: 88px;
+  background: linear-gradient(225deg, #272333, #1a1625);
   clip-path: polygon(0 0, 100% 0, 100% 100%);
   z-index: 1;
 }
 
-// Sombra proyectada por la esquina levantada.
-.fold-shadow {
+// La esquina del papel que se levanta: MISMO color que la tarjeta.
+.fold-corner {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(ellipse at top right, rgb(0 0 0 / 55%), transparent 60%);
+  top: 0;
+  right: 0;
+  width: 88px;
+  height: 88px;
+  background: linear-gradient(225deg, #231f2c, #1c1922 60%, #161320);
   clip-path: polygon(0 0, 100% 0, 100% 100%);
   transform-origin: top right;
-  opacity: 0;
-  z-index: 0;
+  z-index: 2;
+  opacity: 0.85;
   transition:
-    opacity 0.4s ease 0.05s,
-    transform 0.45s cubic-bezier(0.34, 1.5, 0.64, 1) 0.05s;
-  transform: scale(0.9);
+    transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+    opacity 0.4s ease,
+    box-shadow 0.4s ease;
 
+  &:hover,
   &.active {
+    transform: perspective(800px) rotateX(-25deg) rotateZ(-45deg) scale(1.06);
     opacity: 1;
-    transform: scale(1.15);
+    box-shadow: -3px 4px 12px rgb(0 0 0 / 60%);
   }
 }
 
@@ -316,10 +367,8 @@
 @media (prefers-reduced-motion: reduce) {
   .page-card,
   .page-shadow,
-  .book-right-page,
-  .book-curl-overlay,
-  .fold-paper,
-  .fold-shadow {
+  .book-right,
+  .fold-corner {
     transition: none;
   }
 }

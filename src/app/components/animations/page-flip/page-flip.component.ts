@@ -16,10 +16,9 @@ export class PageFlipComponent {
 
   toggleBook(): void {
     if (this.bookFlipped()) {
-      this.bookFlipped.set(false);
-    } else {
-      this.bookFlipped.set(true);
+      return;
     }
+    this.bookFlipped.set(true);
   }
 
   toggleFold(): void {
