@@ -1,0 +1,200 @@
+<section class="design-section">
+  <h2 class="section-title">Book Flip</h2>
+  <p class="section-desc">
+    Libro abierto 3D interactivo con paso de páginas bidireccional y hojas físicas
+  </p>
+
+  <!-- Variante 1: Clásico -->
+  <div class="book-stage" data-variant="classic">
+    <ng-container
+      *ngTemplateOutlet="
+        bookTpl;
+        context: {
+          hint: 'Haz click en las páginas (← izquierda / derecha →) o usa los botones para hojear',
+        }
+      "
+    />
+  </div>
+
+  <!-- Variante 2: Cuaderno de Notas -->
+  <div class="book-stage" data-variant="notebook">
+    <ng-container
+      *ngTemplateOutlet="
+        bookTpl;
+        context: { hint: 'Estilo cuaderno técnico con cuadrícula y tipografía monoespaciada' }
+      "
+    />
+  </div>
+
+  <!-- Variante 3: Pergamino Editorial -->
+  <div class="book-stage" data-variant="parchment">
+    <ng-container
+      *ngTemplateOutlet="
+        bookTpl;
+        context: { hint: 'Estilo editorial clásico con tonos cálidos y tipografía con serifa' }
+      "
+    />
+  </div>
+</section>
+
+<!-- Plantilla unificada de la estructura física del libro 3D -->
+<ng-template #bookTpl let-hint="hint">
+  <p class="book-hint">{{ hint }}</p>
+
+  <div class="book-nav">
+    <button
+      type="button"
+      class="book-arrow"
+      [disabled]="!hasPrev() || isTurning()"
+      (click)="turnPrev()"
+      aria-label="Página anterior"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m14.5 6-6 6 6 6" />
+      </svg>
+    </button>
+    <span class="book-progress">{{ spread() + 1 }} / {{ totalSpreads }}</span>
+    <button
+      type="button"
+      class="book-arrow"
+      [disabled]="!hasNext() || isTurning()"
+      (click)="turnNext()"
+      aria-label="Página siguiente"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m9.5 6 6 6-6 6" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="book-scene">
+    <div class="book-cover">
+      <!-- 1. Página Base Izquierda (Pág. 1 permanente al fondo) -->
+      <article
+        class="book-page base-left"
+        (click)="turnPrev()"
+        [class.interactive]="hasPrev() && !isTurning()"
+      >
+        <div class="page-inner">
+          <div class="page-top">
+            <span class="bk-tag">{{ page1.tag }}</span>
+            <span class="bk-num">{{ page1.num }}</span>
+          </div>
+          <h3 class="bk-title">{{ page1.title }}</h3>
+          <p class="bk-content">{{ page1.content }}</p>
+          <div class="page-bottom">
+            <span class="bk-footer">{{ page1.footer }}</span>
+            @if (hasPrev()) {
+              <span class="bk-turn-hint">← Retroceder</span>
+            }
+          </div>
+        </div>
+        <div class="gutter-shadow left"></div>
+      </article>
+
+      <!-- Lomo central -->
+      <div class="book-spine" aria-hidden="true"></div>
+
+      <!-- 2. Página Base Derecha (Pág. 6 permanente al fondo) -->
+      <article
+        class="book-page base-right"
+        (click)="turnNext()"
+        [class.interactive]="hasNext() && !isTurning()"
+      >
+        <div class="page-inner">
+          <div class="page-top">
+            <span class="bk-tag">{{ page6.tag }}</span>
+            <span class="bk-num">{{ page6.num }}</span>
+          </div>
+          <h3 class="bk-title">{{ page6.title }}</h3>
+          <p class="bk-content">{{ page6.content }}</p>
+          <div class="page-bottom">
+            <span class="bk-footer">{{ page6.footer }}</span>
+            @if (hasNext()) {
+              <span class="bk-turn-hint">Avanzar →</span>
+            }
+          </div>
+        </div>
+        <div class="gutter-shadow right"></div>
+      </article>
+
+      <!-- 3. Hoja 1 (Pág. 2 al frente / Pág. 3 al reverso) -->
+      <div
+        class="book-leaf leaf-1"
+        [class.flipped]="leaf1Flipped()"
+        [class.turning]="turningLeaf() === 1"
+        (click)="leaf1Flipped() ? turnPrev() : turnNext()"
+      >
+        <div class="leaf-face front">
+          <div class="page-inner">
+            <div class="page-top">
+              <span class="bk-tag">{{ page2.tag }}</span>
+              <span class="bk-num">{{ page2.num }}</span>
+            </div>
+            <h3 class="bk-title">{{ page2.title }}</h3>
+            <p class="bk-content">{{ page2.content }}</p>
+            <div class="page-bottom">
+              <span class="bk-footer">{{ page2.footer }}</span>
+              <span class="bk-turn-hint">Avanzar →</span>
+            </div>
+          </div>
+          <div class="gutter-shadow right"></div>
+        </div>
+        <div class="leaf-face back">
+          <div class="page-inner">
+            <div class="page-top">
+              <span class="bk-tag">{{ page3.tag }}</span>
+              <span class="bk-num">{{ page3.num }}</span>
+            </div>
+            <h3 class="bk-title">{{ page3.title }}</h3>
+            <p class="bk-content">{{ page3.content }}</p>
+            <div class="page-bottom">
+              <span class="bk-footer">{{ page3.footer }}</span>
+              <span class="bk-turn-hint">← Retroceder</span>
+            </div>
+          </div>
+          <div class="gutter-shadow left"></div>
+        </div>
+      </div>
+
+      <!-- 4. Hoja 2 (Pág. 4 al frente / Pág. 5 al reverso) -->
+      <div
+        class="book-leaf leaf-2"
+        [class.flipped]="leaf2Flipped()"
+        [class.turning]="turningLeaf() === 2"
+        (click)="leaf2Flipped() ? turnPrev() : turnNext()"
+      >
+        <div class="leaf-face front">
+          <div class="page-inner">
+            <div class="page-top">
+              <span class="bk-tag">{{ page4.tag }}</span>
+              <span class="bk-num">{{ page4.num }}</span>
+            </div>
+            <h3 class="bk-title">{{ page4.title }}</h3>
+            <p class="bk-content">{{ page4.content }}</p>
+            <div class="page-bottom">
+              <span class="bk-footer">{{ page4.footer }}</span>
+              <span class="bk-turn-hint">Avanzar →</span>
+            </div>
+          </div>
+          <div class="gutter-shadow right"></div>
+        </div>
+        <div class="leaf-face back">
+          <div class="page-inner">
+            <div class="page-top">
+              <span class="bk-tag">{{ page5.tag }}</span>
+              <span class="bk-num">{{ page5.num }}</span>
+            </div>
+            <h3 class="bk-title">{{ page5.title }}</h3>
+            <p class="bk-content">{{ page5.content }}</p>
+            <div class="page-bottom">
+              <span class="bk-footer">{{ page5.footer }}</span>
+              <span class="bk-turn-hint">← Retroceder</span>
+            </div>
+          </div>
+          <div class="gutter-shadow left"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
