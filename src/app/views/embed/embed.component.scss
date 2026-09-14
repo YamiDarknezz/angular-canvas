@@ -1,9 +1,21 @@
 :host {
   display: block;
+  // La ventana de la galería enmarca el componente en un lienzo o en un
+  // dispositivo: un poco de aire evita que sombras, glows y bordes choquen con
+  // el marco. Es andamiaje de la galería: el componente no lo necesita.
+  padding: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  :host {
+    // Aire arriba para que la isla dinámica del marco no tape el contenido,
+    // como el área segura de un móvil real.
+    padding: 3.5rem 1rem 1rem;
+  }
 }
 
 .embed-missing {
-  padding: 2rem;
+  padding: 1rem;
   font-size: 0.85rem;
   color: var(--ac-text-faint);
 }

@@ -1,10 +1,12 @@
 .form-container {
   max-width: 450px;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in srgb, var(--ac-surface, #1a1a2e) 55%, transparent);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid color-mix(in srgb, var(--ac-text, #e2e8f0) 12%, transparent);
+  box-shadow: 0 14px 34px -26px var(--ac-shadow, rgb(0 0 0 / 50%));
 }
 
 .glass-form {
@@ -20,24 +22,24 @@
   textarea {
     width: 100%;
     padding: 1rem 1rem 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: color-mix(in srgb, var(--ac-surface-2, #1e1e32) 55%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ac-text, #e2e8f0) 14%, transparent);
     border-radius: 12px;
-    color: #fff;
+    color: var(--ac-text, #e2e8f0);
     font-size: 1rem;
     outline: none;
     transition: all 0.3s;
     resize: none;
 
     &:focus {
-      border-color: rgba(99, 102, 241, 0.5);
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+      border-color: color-mix(in srgb, var(--ac-primary, #6366f1) 55%, transparent);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--ac-primary, #6366f1) 18%, transparent);
     }
 
     &:focus + label,
     &:not(:placeholder-shown) + label {
       transform: translateY(-1.2rem) scale(0.85);
-      color: #818cf8;
+      color: var(--ac-primary-soft, #818cf8);
     }
   }
 
@@ -45,7 +47,7 @@
     position: absolute;
     left: 1rem;
     top: 0.75rem;
-    color: #6b7280;
+    color: var(--ac-text-faint, #6b7280);
     font-size: 1rem;
     pointer-events: none;
     transition: all 0.3s;
@@ -59,7 +61,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #6366f1, #a855f7);
+  background: linear-gradient(90deg, var(--ac-primary, #6366f1), var(--ac-accent, #a855f7));
   transition: all 0.3s;
   transform: translateX(-50%);
   border-radius: 1px;
@@ -71,7 +73,7 @@
 
 .glass-submit {
   padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: linear-gradient(135deg, var(--ac-primary, #6366f1), var(--ac-accent, #a855f7));
   border: none;
   border-radius: 12px;
   color: #fff;
@@ -82,6 +84,6 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 8px 25px color-mix(in srgb, var(--ac-primary, #6366f1) 40%, transparent);
   }
 }

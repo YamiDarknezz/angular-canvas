@@ -161,7 +161,11 @@
     background 0.3s ease,
     border-color 0.3s ease;
 
+  // Con marco de dispositivo el lienzo envuelve al dispositivo: ni se escala
+  // ni se recorta, y el iframe conserva su proporción real (390×844 móvil,
+  // 834×1112 tablet). Si no cabe en pantalla, la página hace scroll.
   &.with-device {
+    height: auto;
     padding: 1.25rem;
   }
 }
@@ -181,10 +185,11 @@
       0 26px 50px -32px rgb(0 0 0 / 80%);
   }
 
-  // El ancho exterior es el viewport del dispositivo + 2 × bisel, para que el
-  // iframe mida exactamente 390 px / 834 px por dentro.
+  // El ancho y alto exteriores son el viewport del dispositivo + 2 × bisel,
+  // para que el iframe mida exactamente 390×844 / 834×1112 por dentro.
   &.phone {
     width: calc(390px + 2 * 10px);
+    height: calc(844px + 2 * 10px);
     max-width: 100%;
     padding: 10px;
     border-radius: 2.6rem;
@@ -192,6 +197,7 @@
 
   &.tablet {
     width: calc(834px + 2 * 14px);
+    height: calc(1112px + 2 * 14px);
     max-width: 100%;
     padding: 14px;
     border-radius: 1.4rem;
