@@ -24,7 +24,7 @@
   <div class="flip-stage" data-variant="book">
     <p class="flip-hint">← → para navegar entre capítulos</p>
     <div class="book-nav">
-      <button type="button" class="book-arrow prev" [disabled]="!hasPrev()" (click)="goPrev()">
+      <button type="button" class="book-arrow" [disabled]="!hasPrev()" (click)="goPrev()">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -37,7 +37,7 @@
         </svg>
       </button>
       <span class="book-progress">{{ spread() + 1 }} / {{ totalSpreads }}</span>
-      <button type="button" class="book-arrow next" [disabled]="!hasNext()" (click)="goNext()">
+      <button type="button" class="book-arrow" [disabled]="!hasNext()" (click)="goNext()">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -58,7 +58,7 @@
           <p>Contenido de la página izquierda.</p>
         </div>
         <div class="book-spine" aria-hidden="true"></div>
-        <div class="book-right" #rightPage [class.flipped]="bookFlipped()" (click)="goNext()">
+        <div class="book-right" #rightPage (click)="goNext()">
           <div class="bk-face bk-front">
             <span class="bk-num">{{ rightFrontPage() }}</span>
             <h3>Capítulo {{ rightFrontPage() }}</h3>
@@ -69,7 +69,7 @@
             <h3>Capítulo {{ rightBackPage() }}</h3>
             <p>Reverso antes de la siguiente.</p>
           </div>
-          <div class="bk-shade" [class.active]="bookFlipped()"></div>
+          <div class="bk-shade"></div>
         </div>
       </div>
     </div>

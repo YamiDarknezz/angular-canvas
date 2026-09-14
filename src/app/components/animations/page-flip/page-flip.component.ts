@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, signal, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-anim-page-flip',
@@ -6,10 +6,9 @@ import { Component, computed, ElementRef, inject, signal, viewChild } from '@ang
   styleUrl: './page-flip.component.scss',
 })
 export class PageFlipComponent {
-  private readonly rightPageRef = viewChild<ElementRef<HTMLElement>>('rightPage');
+  private readonly rightRef = viewChild<ElementRef<HTMLElement>>('rightPage');
 
   readonly pageFlipped = signal(false);
-  readonly bookFlipped = signal(false);
   readonly foldActive = signal(false);
   readonly spread = signal(0);
   readonly turning = signal(false);
@@ -28,36 +27,30 @@ export class PageFlipComponent {
     this.pageFlipped.update((v) => !v);
   }
 
-  /** Avanzar: la hoja gira hacia adelante y luego se reposa con reset instantáneo. */
   goNext(): void {
-    if (this.turning() || !this.hasNext()) return;
+    const el = this.rightRef()?.nativeElement;
+    if (!el || this.turning() || !this.hasNext()) return;
     this.turning.set(true);
-    this.bookFlipped.set(true);
-    const el = this.rightPageRef()?.nativeElement;
-    if (el) el.style.transform = 'rotateY(-180deg)';
+    // Giro hacia adelante
+    el.style.transform = 'rotateY(-180deg)';
     setTimeout(() => {
       this.spread.update((s) => s + 1);
-      if (el) {
-        el.style.transition = 'none';
-        el.style.transform = '';
+      // Reset instantáneo: desactivar transición, quitar transform, reactivar
+      el.style.transition = 'none';
+      el.style.transform = '';
+      requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            el.style.transition = '';
-            this.turning.set(false);
-          });
+          el.style.transition = '';
+          this.turning.set(false);
         });
-      } else {
-        this.turning.set(false);
-      }
+      });
     }, 900);
   }
 
-  /** Retroceder: se actualiza el contenido y luego la hoja vuelve. */
   goPrev(): void {
     if (this.turning() || !this.hasPrev()) return;
     this.turning.set(true);
     this.spread.update((s) => s - 1);
-    this.bookFlipped.set(false);
     setTimeout(() => {
       this.turning.set(false);
     }, 900);
