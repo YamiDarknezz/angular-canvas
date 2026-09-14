@@ -1,12 +1,35 @@
 # 🎨 AngularCanvas
 
 Biblioteca viva de **efectos y diseños para Angular**. Es un catálogo navegable
-de componentes visuales pensado para copiar y pegar: cada efecto vive aislado en
-su propia carpeta, con su `.ts`, `.html` y `.scss`, listo para llevarlo a
-cualquier otro proyecto.
+de 30 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
+en su propia carpeta, con su `.ts`, su `.html` y su `.scss`, listo para llevarlo
+a cualquier otro proyecto.
 
-Construido con **Angular 22** (standalone components, signals y control flow
-nativo `@if` / `@for`).
+Construido con **Angular 22** (standalone components, signals, router y control
+flow nativo `@if` / `@for`).
+
+**8 categorías · 30 componentes · 86 sub-estilos · 5 temas.**
+
+---
+
+## 🧠 Cómo está pensado
+
+La galería **no es un landing**: es un navegador de entornos.
+
+- **Un componente = un entorno = una vista.** La navegación lateral no hace
+  scroll: cambia de ruta y monta **un solo componente**. Los otros 29 no existen
+  en el DOM mientras miras uno.
+- **Cada entorno tiene su URL** (`/cards/neon`, `/cards/neon/blue`): se puede
+  compartir, marcar en favoritos y funciona con atrás/adelante del navegador.
+- **Cada componente se muestra dentro de una ventana** (`<ac-stage>`) con barra
+  de título, selector de ancho, y su ficha de código para copiar.
+- **Dentro de un entorno hay sub-estilos** (variantes): el tercer nivel del
+  sidebar los lista y cada uno se puede aislar para verlo solo.
+
+Ese aislamiento no es solo visual, es técnico (ver
+[Aislamiento](#-aislamiento-y-sub-estilos-más-abajo)): un componente con
+`position: fixed`, un `z-index` alto o un `requestAnimationFrame` no puede
+afectar al resto de la interfaz.
 
 ---
 
@@ -19,10 +42,24 @@ nativo `@if` / `@for`).
 
 ```bash
 npm install
-npm start          # servidor de desarrollo en http://localhost:4200
+npm start          # dev server en http://localhost:4200
 npm run build      # build de producción en dist/
 npm run format     # formatea con Prettier
 ```
+
+---
+
+## 🗺️ Rutas
+
+| URL | Qué muestra |
+| --- | --- |
+| `/` | Portada: contadores y tarjetas de los 8 grupos, con chips a cada sub-estilo |
+| `/cards/neon` | El entorno `Neon` con todas sus variantes |
+| `/cards/neon/blue` | El mismo entorno filtrado a la variante `blue` |
+| `/cards/no-existe` | Aviso de entorno inexistente con vuelta al catálogo |
+| `/cards` | Redirige a `/` (una categoría sin componente no tiene página) |
+
+El título de la pestaña sigue al entorno abierto (`Neon — AngularCanvas`).
 
 ---
 
@@ -30,49 +67,131 @@ npm run format     # formatea con Prettier
 
 ```
 src/
-├── index.html                  # Incluye un script anti-flash de tema
+├── index.html                  # Script anti-flash de tema
 ├── main.ts                     # bootstrapApplication
-├── styles.scss                 # Reset, tokens globales y estilos de la galería
+├── styles.scss                 # Reset, tokens y estilos COMPARTIDOS de la librería
 ├── scss/
-│   └── _tokens.scss            # Variables CSS de los 5 temas
+│   ├── _tokens.scss            # Variables CSS de los 5 temas
+│   └── _gallery.scss           # UI del andamiaje (chips). NO viaja con los componentes
 └── app/
-    ├── app.ts                  # Shell: sólo monta <app-showcase />
-    ├── app.config.ts
+    ├── app.ts                  # Raíz: instala el CSS de filtrado y monta el shell
+    ├── app.config.ts           # provideRouter + component input binding
+    ├── app.routes.ts           # /, /:group/:entry, /:group/:entry/:variant
     ├── core/
-    │   ├── catalog/catalog.ts       # Fuente única de verdad del catálogo
-    │   └── theme/theme.service.ts   # Cambio de tema + persistencia
-    └── components/
-        ├── cards/          hover-effects/  glassmorphism/  neon/
-        │                   flip/           minimal/        dark-corporate/
-        ├── buttons/        glow/  gradient/  neumorphism/  pill/  animated/
-        ├── backgrounds/    gradient/  particle/  grid/  animated-mesh/
-        ├── typography/     glow-text/  gradient-text/  typewriter/
-        ├── navigation/     sidebar/  topbar/
-        ├── forms/          glass-input/  toggle/  checkbox/
-        ├── modals/         glass-modal/  slide-in/
-        ├── themes/         dark/  light/  hacker/  cyberpunk/  corporate/
-        └── showcase/       # Orquestador: navegación + todas las secciones
+    │   ├── catalog/catalog.ts        # FUENTE ÚNICA DE VERDAD (grupos/componentes/variantes)
+    │   ├── registry/component-registry.ts  # grupo/componente → clase standalone
+    │   ├── theme/theme.service.ts    # Cambio de tema + persistencia
+    │   └── stage/
+    │       ├── stage.component.*     # La ventana del entorno + ficha de código
+    │       └── variant-focus.ts      # Genera el CSS que filtra sub-estilos
+    ├── layout/
+    │   ├── shell.component.*         # Marco: sidebar, temas, topbar y drawer móvil
+    │   └── nav-tree/nav-tree.component.*  # Navegación de 3 niveles + buscador
+    ├── views/
+    │   ├── home/home.component.*     # Portada
+    │   └── environment/environment.component.*  # Vista de un entorno
+    └── components/                   # 👈 LA LIBRERÍA (esto es lo que se copia)
+        ├── cards/        glassmorphism/  neon/  hover-effects/  flip/
+        │                 minimal/  dark-corporate/
+        ├── buttons/      glow/  gradient/  neumorphism/  pill/  animated/
+        ├── backgrounds/  gradient/  particle/  grid/  animated-mesh/
+        ├── typography/   glow-text/  gradient-text/  typewriter/
+        ├── navigation/   sidebar/  topbar/
+        ├── forms/        glass-input/  toggle/  checkbox/
+        ├── modals/       glass-modal/  slide-in/
+        └── themes/       dark/  light/  hacker/  cyberpunk/  corporate/
 ```
 
-**Cómo funciona el catálogo:** `core/catalog/catalog.ts` es la única fuente de
-verdad. La navegación lateral, las anclas y el contador del hero se calculan a
-partir de esa lista. Para añadir un componente nuevo basta con registrarlo allí.
+La separación importa: **`components/` es la librería** (autocontenida, sin
+dependencias del andamiaje) y **`core/` + `layout/` + `views/` son la galería**
+que la exhibe. Los estilos compartidos de la librería viven en `styles.scss` y
+los de la galería en `_gallery.scss`, para que nadie confunda qué se copia.
 
 ---
 
-## ♻️ Cómo reutilizar un componente en otro proyecto
+## 🧩 El catálogo (fuente única de verdad)
 
-1. Copia la carpeta del efecto, por ejemplo
-   `src/app/components/cards/neon/` a tu proyecto.
-2. Si el componente importa `FormsModule` (los de `forms/`), asegúrate de tener
+`src/app/core/catalog/catalog.ts` describe todo: grupos, componentes y sus
+sub-estilos. De ahí salen la navegación de 3 niveles, la portada, los contadores,
+la ficha de código y **el CSS que filtra las variantes**. No hay una segunda
+lista que mantener en sincronía.
+
+```ts
+{
+  id: 'hover-effects',
+  label: 'Hover Effects',
+  tagline: 'Diferentes respuestas al pasar el mouse',
+  selector: 'app-card-hover',
+  className: 'HoverEffectsComponent',
+  sourcePath: 'src/app/components/cards/hover-effects',
+  variants: [
+    { id: 'lift', label: 'Lift', hint: 'Elevación suave con sombra creciente' },
+    { id: 'magnetic', label: 'Magnetic', hint: 'Sigue el cursor con efecto magnético' },
+    // …
+  ],
+}
+```
+
+### ➕ Añadir un componente (3 pasos + 1)
+
+1. Crea la carpeta en `src/app/components/<categoría>/<nombre>/`
+   (`<nombre>.component.ts|html|scss`), standalone y con estilos propios.
+2. Registra la clase en `core/registry/component-registry.ts`
+   (`['<categoría>/<nombre>', MiComponente]`).
+3. Añade su entrada al catálogo con sus variantes.
+4. Marca cada sub-estilo en la plantilla con `data-variant="<id>"`.
+
+Con eso ya tiene URL, aparece en el sidebar (con submenú si tiene 2+ variantes),
+en la portada, y su ficha de código sale sola.
+
+---
+
+## 🔒 Aislamiento y sub-estilos
+
+Tres mecanismos, cada uno resolviendo un problema concreto:
+
+**1. Cambiar de entorno destruye el anterior.** El router monta un componente por
+vez (`component-registry` + `ngComponentOutlet`), así que nada sobrevive: ni
+timers, ni listeners, ni observadores.
+
+**2. La ventana encierra lo que se sale.** El viewport de `<ac-stage>` aplica
+`contain: layout paint style` e `isolation: isolate`. Consecuencias reales y
+verificadas: el `position: fixed` del modal y del panel lateral se resuelve
+**dentro de su ventana** (antes cubrían toda la aplicación), el desborde se
+recorta, y ningún `z-index` de un componente puede saltar por encima del resto
+de la interfaz.
+
+**3. Las variantes se filtran con CSS generado, no con DOM.**
+Cada sub-estilo de la plantilla lleva `data-variant="id"`. Al arrancar,
+`VariantFocusStyles` inyecta un único `<style>` con una regla por variante:
+
+```css
+.ac-viewport[data-focus='magnetic'] [data-variant]:not([data-variant='magnetic']) {
+  display: none !important;
+}
+```
+
+El CSS tiene que ser global (los nodos están dentro de componentes y Angular
+encapsula los estilos), pero se **genera desde el catálogo**, así que no puede
+desincronizarse ni duplicarse. Y `data-variant` es un atributo **inerte**: no
+arrastra ninguna dependencia si copias el componente a otro proyecto.
+
+---
+
+## ♻️ Reutilizar un componente en otro proyecto
+
+Cada componente se anuncia en su ficha de código (botón **Código** dentro de la
+ventana) y se copia con el botón **Copiar**. El resumen:
+
+1. Copia la carpeta, por ejemplo `src/app/components/cards/neon/`.
+2. Si el componente importa `FormsModule` (el de `forms/glass-input`), necesitas
    `@angular/forms` instalado.
-3. Úsalo en tu plantilla importándolo como standalone:
+3. Úsalo como standalone (sin NgModule):
 
 ```ts
 import { NeonCardComponent } from './components/cards/neon/neon.component';
 
 @Component({
-  selector: 'app-mi-pagina',
   imports: [NeonCardComponent],
   template: `<app-card-neon />`,
 })
@@ -80,8 +199,9 @@ export class MiPaginaComponent {}
 ```
 
 Los estilos de cada componente son **autocontenidos**: no dependen de
-`styles.scss`, salvo los que usan variables de tema (`var(--ac-*)`) para
-integrarse con el sistema de temas.
+`styles.scss`, salvo las clases compartidas (`.card-grid`, `.btn-showcase`) y las
+variables de tema (`var(--ac-*)`). Si quieres los 5 temas, copia también
+`src/scss/_tokens.scss`.
 
 ---
 
@@ -105,24 +225,29 @@ atributo `data-theme` en `<html>`. Las variables viven en `src/scss/_tokens.scss
 
 ## 🧩 Componentes (30)
 
-**🃏 Cards (6)** — Glassmorphism, Neon, Hover Effects (lift, scale, rotate,
-border-draw, glow, magnetic), Flip 3D, Minimal, Dark Corporate
+Formato: **grupo (n)** → componente (`sub-estilos`).
 
-**🔘 Buttons (5)** — Glow, Gradient, Neumorphism, Pill, Animated
-(ripple, pulse, shake, fill-up, slide-bg)
+**🃏 Cards (6)** — Glassmorphism (3), Neon (3), Hover Effects (6: lift, scale,
+rotate, border-draw, glow, magnetic), Flip 3D (3), Minimal (3), Dark Corporate (2)
 
-**🌌 Backgrounds (4)** — Gradient (6 variantes), Particle Canvas, Grid Patterns,
-Animated Mesh
+**🔘 Buttons (5)** — Glow (5 colores), Gradient (5), Neumorphism (4: soft,
+pressed, flat, convex), Pill (6: outline, solid, ghost, gradient, with-icon,
+small), Animated (6: ripple, pulse, shake, fill-up, slide-bg, magnetic)
 
-**🔤 Typography (3)** — Glow Text, Gradient Text, Typewriter
+**🌌 Backgrounds (4)** — Gradient (6), Particle (1), Grid (3: dots, lines,
+gradient), Animated Mesh (1)
 
-**🧭 Navigation (2)** — Sidebar colapsable, Topbar responsiva
+**🔤 Typography (3)** — Glow Text (4), Gradient Text (4: static, animated,
+rainbow, subtle), Typewriter (1, sobre una terminal)
 
-**📝 Forms (3)** — Glass Input, Toggle Switch, Checkbox
+**🧭 Navigation (2)** — Sidebar colapsable (1), Topbar responsiva (1)
 
-**🪟 Modals (2)** — Glass Modal, Slide-in Panel
+**📝 Forms (3)** — Glass Input (1), Toggle Switch (1), Checkbox (1)
 
-**🎨 Themes (5)** — Dark, Light, Hacker, Cyberpunk, Corporate
+**🪟 Modals (2)** — Glass Modal (1), Slide-in Panel (1)
+
+**🎨 Themes (5)** — Dark (3), Light (3), Hacker (2: terminal, paleta),
+Cyberpunk (3: glitch, subtítulo, paleta), Corporate (2)
 
 ---
 
@@ -130,20 +255,23 @@ Animated Mesh
 
 - **Standalone components** — sin `NgModule`. En Angular 19+ es el comportamiento
   por defecto, así que no se escribe `standalone: true`.
-- **Signals** para estado local (`signal()`, `computed()`, `viewChild()`).
+- **Signals** para estado local (`signal()`, `computed()`, `input()`, `effect()`).
 - **Control flow nativo** `@if` / `@for` / `@switch` en lugar de `*ngIf` /
   `*ngFor`, con `track` obligatorio. Por eso no se importa `CommonModule`.
-- **Sin `::ng-deep`** — los estilos compartidos de la galería viven en
-  `styles.scss` como estilos globales.
-- **Sin fugas de memoria** — todo `requestAnimationFrame`,
-  `ResizeObserver` o `setTimeout` se cancela en `ngOnDestroy`.
+- **Sin `::ng-deep`** — los estilos compartidos son globales (`styles.scss`), y el
+  filtrado de variantes usa CSS generado en runtime.
+- **Sin fugas de memoria** — todo `requestAnimationFrame`, `ResizeObserver`,
+  `setTimeout`, listener o clase añadida al `<body>` se libera en `ngOnDestroy` o
+  con `DestroyRef`.
 - **Accesibilidad** — roles ARIA donde corresponde (`role="switch"`,
   `role="checkbox"`, `role="dialog"`), `aria-label` en botones de sólo icono,
-  `aria-current` en navegación, cierre con `Escape`, `inert` en overlays
-  cerrados y `:focus-visible` visible.
+  `aria-current` en navegación, `aria-expanded`/`aria-controls` en el árbol,
+  cierre con `Escape`, `inert` en overlays cerrados y `:focus-visible` visible.
 - **`type="button"`** explícito en todos los botones.
 - Los efectos visuales están **siempre activos**: no se desactivan por
   `prefers-reduced-motion`.
+
+---
 
 ## 🚀 CI/CD y despliegue
 
@@ -158,7 +286,7 @@ commit que pasó el build, sincroniza el resultado y recarga nginx:
 
 ```
 git pull → npm ci → npm run build
-  → rsync dist/angular-canvas/browser/ → ~/data/deploy/angular-canvas-dist/
+  → rsync dist/angular-canvas/browser/ → ~/data/deploy/angular-canvas/dist/
   → docker compose up -d → nginx -s reload → smoke test dentro del contenedor
 ```
 
@@ -170,8 +298,14 @@ comprobar que nginx sirve el sitio.
 - `~/data/repos/angular-canvas/` — este repo (código fuente).
 - `~/data/deploy/angular-canvas/` — `docker-compose.yml`, `conf.d/default.conf`
   y `.env` con el dominio. **No es un repo git**: por eso el `.env` vive aquí.
-- `~/data/deploy/angular-canvas-dist/` — artefactos compilados. Es lo único que
-  el `rsync --delete` toca, así que no puede borrar la config del servidor.
+- `~/data/deploy/angular-canvas/dist/` — artefactos compilados, en un
+  **subdirectorio** del proyecto. El `rsync --delete` del CI apunta ahí y por eso
+  no puede borrar `conf.d/` ni el compose: cuando el destino era la raíz de la
+  carpeta, un `--delete` se llevó por delante la config de nginx del portfolio.
+
+nginx sirve el SPA con `try_files … /index.html`, así que las rutas profundas
+(`/cards/neon/blue`) se pueden abrir directamente, y el `index.html` nunca se
+cachea para que un deploy nuevo se vea al instante.
 
 ### Secretos
 
@@ -187,8 +321,8 @@ Para re-desplegar sin cambiar código: `gh workflow run CI`.
 
 El proyecto se creó con `--skip-tests`, así que **no hay tests configurados** ni
 target de test en `angular.json` (por eso `package.json` no expone `npm test`).
-La verificación actual es el build de producción y la revisión visual. El CI
-tampoco ejecuta tests: no hay nada que ejecutar todavía.
+La verificación actual es el build de producción y la revisión visual navegando
+el catálogo. El CI tampoco ejecuta tests: no hay nada que ejecutar todavía.
 
 ---
 
