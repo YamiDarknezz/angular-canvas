@@ -58,6 +58,11 @@ import { ConfirmModalComponent } from '../../components/modals/confirm/confirm.c
 import { BottomSheetComponent } from '../../components/modals/bottom-sheet/bottom-sheet.component';
 import { LightboxComponent } from '../../components/modals/lightbox/lightbox.component';
 
+// Animations
+import { SkeletonComponent } from '../../components/animations/skeleton/skeleton.component';
+import { SpinnerComponent } from '../../components/animations/spinner/spinner.component';
+import { PageFlipComponent } from '../../components/animations/page-flip/page-flip.component';
+
 // Themes
 import { ThemeDarkComponent } from '../../components/themes/dark/dark.component';
 import { ThemeLightComponent } from '../../components/themes/light/light.component';
@@ -70,7 +75,7 @@ import { ThemeCorporateComponent } from '../../components/themes/corporate/corpo
  *
  * Es el único punto donde el catálogo (datos) toca código: la vista de entorno
  * busca aquí el componente que debe montar. Con esto la galería no necesita un
- * `@switch` gigante ni instanciar los 49 componentes a la vez — solo se crea el
+ * `@switch` gigante ni instanciar los 52 componentes a la vez — solo se crea el
  * que se está viendo, que es justo lo que aísla los entornos entre sí.
  */
 const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Type<unknown>>([
@@ -125,6 +130,10 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['modals/confirm', ConfirmModalComponent],
   ['modals/bottom-sheet', BottomSheetComponent],
   ['modals/lightbox', LightboxComponent],
+  // Animations
+  ['animations/skeleton', SkeletonComponent],
+  ['animations/spinner', SpinnerComponent],
+  ['animations/page-flip', PageFlipComponent],
   // Themes
   ['themes/dark', ThemeDarkComponent],
   ['themes/light', ThemeLightComponent],

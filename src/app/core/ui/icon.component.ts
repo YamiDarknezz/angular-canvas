@@ -57,6 +57,7 @@ const ICONS: Readonly<Record<string, IconDefinition>> = {
       'M15 10.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Z',
     ],
   },
+  animations: { paths: ['M8 5.5v13l11-6.5z'] },
 
   // Acciones
   search: { paths: ['M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z', 'm20 20-3.8-3.8'] },

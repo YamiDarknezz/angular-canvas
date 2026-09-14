@@ -1,0 +1,235 @@
+.flip-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2.5rem 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background: #07070f;
+  border: 1px solid rgb(255 255 255 / 8%);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.flip-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #6b7385;
+}
+
+// ================================================================
+// Página simple: front/back con giro Y
+// ================================================================
+.page-scene {
+  perspective: 1000px;
+}
+
+.page-card {
+  position: relative;
+  width: 240px;
+  height: 320px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.flipped {
+    transform: rotateY(180deg);
+  }
+}
+
+.page-front,
+.page-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2rem;
+  border-radius: 14px;
+  backface-visibility: hidden;
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    opacity: 0.75;
+    margin: 0;
+  }
+}
+
+.page-front {
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  color: #e2e8f0;
+  border: 1px solid rgb(99 102 241 / 30%);
+}
+
+.page-back {
+  background: linear-gradient(135deg, #312e81, #4338ca);
+  color: #e2e8f0;
+  transform: rotateY(180deg);
+  border: 1px solid rgb(129 140 248 / 30%);
+}
+
+.page-num {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.72rem;
+  color: rgb(255 255 255 / 50%);
+}
+
+// ================================================================
+// Libro abierto: dos páginas con giro
+// ================================================================
+.book-scene {
+  perspective: 1200px;
+}
+
+.book {
+  display: flex;
+  position: relative;
+}
+
+.book-page {
+  width: 200px;
+  height: 280px;
+  padding: 1.75rem;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.left {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e2e8f0;
+    border-radius: 12px 2px 2px 12px;
+    border: 1px solid rgb(255 255 255 / 10%);
+    box-shadow: -4px 0 12px rgb(0 0 0 / 40%);
+  }
+
+  &.right {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: #e2e8f0;
+    border-radius: 2px 12px 12px 2px;
+    border: 1px solid rgb(255 255 255 / 10%);
+    transform-origin: left center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: rotateY(-15deg);
+    }
+  }
+}
+
+.book-content {
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+  }
+
+  p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    opacity: 0.7;
+    margin: 0;
+  }
+}
+
+.book-num {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.7rem;
+  color: rgb(255 255 255 / 40%);
+}
+
+.book-spine {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  bottom: 5%;
+  width: 2px;
+  background: rgb(0 0 0 / 60%);
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+// ================================================================
+// Esquina doblada: peel effect con clip-path + transform
+// ================================================================
+.fold-card {
+  position: relative;
+  width: 280px;
+  height: 200px;
+  padding: 1.75rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #18181b, #27272a);
+  color: #e2e8f0;
+  border: 1px solid rgb(255 255 255 / 10%);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  &:hover .fold-fold {
+    transform: rotate(-35deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.fold-fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(225deg, #6366f1, #312e81);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  transform: rotate(-35deg) scale(0);
+  transform-origin: top right;
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.3s ease;
+  border-radius: 0 14px 0 0;
+}
+
+.fold-body {
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0.6rem 0 0.4rem;
+  }
+
+  p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    opacity: 0.7;
+    margin: 0;
+  }
+}
+
+.fold-tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  background: rgb(99 102 241 / 20%);
+  color: #a5b4fc;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+// Respetar preferencias del usuario.
+@media (prefers-reduced-motion: reduce) {
+  .page-card,
+  .book-page.right,
+  .fold-fold {
+    transition: none;
+  }
+}

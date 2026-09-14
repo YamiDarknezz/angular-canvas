@@ -769,6 +769,58 @@ export const CATALOG: readonly CatalogGroup[] = [
       },
     ],
   },
+  {
+    id: 'animations',
+    label: 'Animations',
+    icon: 'animations',
+    accent: '#a78bfa',
+    tagline: 'Skeleton, spinner y transiciones tipo libro',
+    components: [
+      {
+        id: 'skeleton',
+        label: 'Skeleton',
+        tagline: 'Estados de carga con shimmer, pulso y onda',
+        selector: 'app-anim-skeleton',
+        className: 'SkeletonComponent',
+        sourcePath: 'src/app/components/animations/skeleton',
+        variants: [
+          {
+            id: 'shimmer',
+            label: 'Shimmer',
+            hint: 'Brillo que se desplaza de izquierda a derecha',
+          },
+          { id: 'pulse', label: 'Pulso', hint: 'Opacidad que sube y baja suavemente' },
+          { id: 'wave', label: 'Onda', hint: 'Ola azul que avanza por las líneas' },
+        ],
+      },
+      {
+        id: 'spinner',
+        label: 'Spinner',
+        tagline: 'Indicadores de carga: anillo, puntos y barra',
+        selector: 'app-anim-spinner',
+        className: 'SpinnerComponent',
+        sourcePath: 'src/app/components/animations/spinner',
+        variants: [
+          { id: 'ring', label: 'Anillo', hint: 'Círculo que gira con borde de color' },
+          { id: 'dots', label: 'Puntos', hint: 'Tres puntos que rebotan' },
+          { id: 'bar', label: 'Barra', hint: 'Barra con degradado que avanza' },
+        ],
+      },
+      {
+        id: 'page-flip',
+        label: 'Page Flip',
+        tagline: 'Efecto libro: giro, libro abierto y esquina doblada',
+        selector: 'app-anim-page-flip',
+        className: 'PageFlipComponent',
+        sourcePath: 'src/app/components/animations/page-flip',
+        variants: [
+          { id: 'page', label: 'Página', hint: 'Front/back con giro en el eje Y' },
+          { id: 'book', label: 'Libro', hint: 'Dos páginas abiertas con giro' },
+          { id: 'fold', label: 'Esquina', hint: 'Esquina que se levanta al pasar el cursor' },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Categorías del catálogo. */

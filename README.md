@@ -1,14 +1,14 @@
 # 🎨 AngularCanvas
 
 Biblioteca viva de **efectos y diseños para Angular**. Es un catálogo navegable
-de 49 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
+de 52 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
 en su propia carpeta, con su `.ts`, su `.html` y su `.scss`, listo para llevarlo
 a cualquier otro proyecto.
 
 Construido con **Angular 22** (standalone components, signals, router y control
 flow nativo `@if` / `@for`).
 
-**8 categorías · 49 componentes · 133 sub-estilos · 5 temas.**
+**9 categorías · 52 componentes · 142 sub-estilos · 5 temas.**
 
 ---
 
@@ -122,6 +122,7 @@ src/
         ├── forms/        glass-input/  toggle/  checkbox/  segmented/
         ├── modals/       glass-modal/  slide-in/  command-palette/
         └── themes/       dark/  light/  hacker/  cyberpunk/  corporate/
+        └── animations/ skeleton/  spinner/  page-flip/
 ```
 
 La separación importa: **`components/` es la librería** (autocontenida, sin
@@ -250,7 +251,7 @@ dentro se re-tematiza en vivo, sin recargar.
 
 ---
 
-## 🧩 Componentes (49)
+## 🧩 Componentes (52)
 
 Formato: **grupo (n)** → componente (`sub-estilos`).
 
@@ -286,6 +287,9 @@ sólido, vidrio), Lightbox (2: foto, vidrio)
 
 **🎨 Themes (5)** — Dark (3), Light (3), Hacker (2: terminal, paleta),
 Cyberpunk (3: glitch, subtítulo, paleta), Corporate (2)
+
+**✨ Animations (3)** — Skeleton (3: shimmer, pulso, onda), Spinner (3: anillo,
+puntos, barra), Page Flip (3: página, libro, esquina)
 
 ---
 

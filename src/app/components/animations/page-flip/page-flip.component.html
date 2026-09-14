@@ -1,0 +1,57 @@
+<section class="design-section">
+  <h2 class="section-title">Page Flip</h2>
+  <p class="section-desc">Giro de página, libro abierto y esquina que se dobla</p>
+
+  <div class="flip-stage" data-variant="page">
+    <p class="flip-hint">Pasa el cursor o haz click para girar</p>
+    <div class="page-scene">
+      <article class="page-card" [class.flipped]="pageFlipped()" (click)="togglePage()">
+        <div class="page-front">
+          <span class="page-num">1</span>
+          <h3>Front</h3>
+          <p>Lado frontal de la página. Pasa el cursor para ver el reverso.</p>
+        </div>
+        <div class="page-back">
+          <span class="page-num">2</span>
+          <h3>Reverso</h3>
+          <p>Contenido del reverso de la página. Click para volver.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="flip-stage" data-variant="book">
+    <p class="flip-hint">Haz click para pasar de página</p>
+    <div class="book-scene">
+      <div class="book">
+        <div class="book-page left">
+          <div class="book-content">
+            <span class="book-num">{{ bookPage() * 2 + 1 }}</span>
+            <p>Contenido de la página izquierda del libro.</p>
+          </div>
+        </div>
+        <div class="book-page right" (click)="nextBookPage()">
+          <div class="book-content">
+            <span class="book-num">{{ bookPage() * 2 + 2 }}</span>
+            <p>Contenido de la página derecha. Click para avanzar.</p>
+          </div>
+        </div>
+        <div class="book-spine" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-stage" data-variant="fold">
+    <p class="flip-hint">Pasa el cursor para doblar la esquina</p>
+    <div class="fold-scene">
+      <article class="fold-card">
+        <div class="fold-fold"></div>
+        <div class="fold-body">
+          <span class="fold-tag">Nota</span>
+          <h3>Esquina doblada</h3>
+          <p>Pasa el cursor sobre la tarjeta y la esquina superior derecha se levanta.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
