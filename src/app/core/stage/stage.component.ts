@@ -1,10 +1,20 @@
-import { NgComponentOutlet } from '@angular/common';
-import { Component, DestroyRef, Type, computed, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  viewChild,
+  ElementRef,
+} from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { CatalogEntry, CatalogGroup, CatalogVariant } from '../catalog/catalog';
-
-/** Anchos de previsualización que ofrece la barra de la ventana. */
-type StageWidth = 'full' | 'tablet' | 'mobile';
+import { StageMessage } from './stage-messages';
+import { StageWidth, StageWidthService } from './stage-width.service';
+import { ThemeService } from '../theme/theme.service';
 
 interface WidthOption {
   readonly id: StageWidth;
@@ -15,19 +25,29 @@ interface WidthOption {
 /**
  * Ventana de entorno: el marco donde vive **un solo** componente.
  *
- * Todo lo que hay aquí es andamiaje de la galería, no forma parte de los
- * componentes. Por eso puede permitirse cosas que la librería no debería tener
- * (como un `contain: paint` que encierra los `position: fixed` de cada
- * componente) sin contaminar el código que se copia a otros proyectos.
+ * La ventana es deliberadamente neutra: ni barra decorativa, ni colores de
+ * tema, ni insignias. Solo herramientas discretas (ancho y código) para que lo
+ * único con carácter sea el diseño de dentro.
+ *
+ * El componente no se monta aquí, sino en un **iframe** (`/embed/...`). Eso le
+ * da un viewport real —sus `@media`, su `100vh` y su `position: fixed` se
+ * comportan como en una pestaña— y convierte el aislamiento en una frontera de
+ * documento, no en una regla de CSS.
+ *
+ * Los presets tablet/móvil cambian el ancho REAL del iframe (390 px, 834 px) y
+ * lo visten con un marco de dispositivo. No se escala el iframe a propósito:
+ * escalarlo rompe el pintado del documento embebido en Chromium.
  */
 @Component({
   selector: 'ac-stage',
-  imports: [NgComponentOutlet],
   templateUrl: './stage.component.html',
   styleUrl: './stage.component.scss',
 })
 export class StageComponent {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly sanitizer = inject(DomSanitizer);
+  private readonly themeService = inject(ThemeService);
+  private readonly stageWidth = inject(StageWidthService);
 
   /** Categoría del componente mostrado. */
   readonly group = input.required<CatalogGroup>();
@@ -35,25 +55,29 @@ export class StageComponent {
   readonly entry = input.required<CatalogEntry>();
   /** Variante enfocada, o `null` para mostrar todas. */
   readonly activeVariant = input<CatalogVariant | null>(null);
-  /** Clase standalone que se monta dentro del viewport. */
-  readonly component = input<Type<unknown>>();
 
   readonly widths: readonly WidthOption[] = [
     { id: 'full', label: 'Ancho completo', icon: '🖥️' },
-    { id: 'tablet', label: 'Ancho tablet (834px)', icon: '📱' },
-    { id: 'mobile', label: 'Ancho móvil (420px)', icon: '📲' },
+    { id: 'tablet', label: 'Tablet — 834 px de ancho', icon: '📱' },
+    { id: 'mobile', label: 'Móvil — 390 px de ancho', icon: '📲' },
   ];
 
-  readonly width = signal<StageWidth>('full');
+  /** Preset de ancho elegido; sobrevive a la navegación entre entornos. */
+  readonly width = this.stageWidth.width;
   readonly codeOpen = signal(false);
   readonly copyState = signal<'idle' | 'ok' | 'error'>('idle');
 
+  private readonly frame = viewChild<ElementRef<HTMLIFrameElement>>('frame');
+
   private resetTimer?: ReturnType<typeof setTimeout>;
 
-  constructor() {
-    // Nada debe quedar vivo si se cambia de entorno con el aviso visible.
-    this.destroyRef.onDestroy(() => clearTimeout(this.resetTimer));
-  }
+  /** `true` cuando se previsualiza en un marco de dispositivo. */
+  readonly isDevice = computed(() => this.width() !== 'full');
+
+  /** URL del iframe: la vista desnuda de este componente. */
+  readonly embedUrl = computed<SafeResourceUrl>(() =>
+    this.sanitizer.bypassSecurityTrustResourceUrl(`/embed/${this.group().id}/${this.entry().id}`),
+  );
 
   /** Nombre de los archivos que el usuario tiene que copiar. */
   readonly fileNames = computed(() => {
@@ -97,6 +121,24 @@ export class StageComponent {
     return lines.join('\n');
   });
 
+  constructor() {
+    // Elegir sub-estilo o tema en la galería se reenvía al iframe sin recargarlo.
+    effect(() => {
+      const variant = this.activeVariant()?.id ?? null;
+      const theme = this.themeService.theme();
+      this.post({ type: 'ac:variant', variant });
+      this.post({ type: 'ac:theme', theme });
+    });
+
+    this.destroyRef.onDestroy(() => clearTimeout(this.resetTimer));
+  }
+
+  /** El iframe acaba de cargar: se pone al día con el estado de la galería. */
+  onFrameLoad(): void {
+    this.post({ type: 'ac:variant', variant: this.activeVariant()?.id ?? null });
+    this.post({ type: 'ac:theme', theme: this.themeService.theme() });
+  }
+
   toggleCode(): void {
     this.codeOpen.update((open) => !open);
   }
@@ -111,5 +153,11 @@ export class StageComponent {
     }
     clearTimeout(this.resetTimer);
     this.resetTimer = setTimeout(() => this.copyState.set('idle'), 2000);
+  }
+
+  /** Envía un mensaje a la vista desnuda. Sin iframe todavía, no hace nada. */
+  private post(message: StageMessage): void {
+    const view = this.frame()?.nativeElement.contentWindow;
+    view?.postMessage(message, window.location.origin);
   }
 }

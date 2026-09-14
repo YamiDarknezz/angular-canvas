@@ -11,6 +11,11 @@
 
 html {
   scroll-behavior: smooth;
+  // El fondo va en <html> (y no solo en <body>) porque cada componente vive en
+  // su propio iframe: el documento embebido pinta su viewport completo con este
+  // color, aunque el contenido sea más corto que la ventana.
+  background: var(--ac-bg);
+  transition: background 0.3s ease;
 }
 
 body {

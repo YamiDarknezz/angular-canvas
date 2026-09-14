@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
-import { CATALOG, CatalogEntry, CatalogGroup, hasSubmenu } from '../../core/catalog/catalog';
+import { CATALOG, CatalogEntry, CatalogGroup } from '../../core/catalog/catalog';
 
 /** Grupo con los componentes que pasan el filtro de búsqueda. */
 interface NavGroup {
@@ -12,14 +12,15 @@ interface NavGroup {
 }
 
 /**
- * Navegación de tres niveles: **grupo → componente → sub-estilo**.
+ * Navegación de dos niveles: **grupo → componente**.
  *
  * Cada componente es un entorno con su propia URL, así que este árbol no hace
- * scroll a ninguna parte: cambia de vista. Los componentes con un solo estilo no
- * abren submenú (no tendría sentido un submenú de un elemento).
+ * scroll a ninguna parte: cambia de vista. Los sub-estilos no viven aquí: se
+ * eligen dentro del entorno (chips y atajos), para que el árbol no se convierta
+ * en una lista de tres niveles difícil de recorrer.
  *
- * El grupo y el componente de la URL activa se despliegan solos, de modo que un
- * enlace profundo (`/cards/neon/blue`) abre el árbol en su sitio.
+ * El grupo del componente activo se despliega solo, de modo que un enlace
+ * profundo (`/cards/neon/blue`) abre el árbol en su sitio.
  */
 @Component({
   selector: 'ac-nav-tree',
@@ -35,9 +36,6 @@ export class NavTreeComponent {
   readonly query = signal('');
   private readonly currentUrl = signal(this.router.url);
   private readonly openGroups = signal<ReadonlySet<string>>(new Set<string>());
-  private readonly openEntries = signal<ReadonlySet<string>>(new Set<string>());
-
-  readonly hasSubmenu = hasSubmenu;
 
   private readonly segments = computed(() =>
     this.currentUrl().split('?')[0].split('/').filter(Boolean),
@@ -45,7 +43,6 @@ export class NavTreeComponent {
 
   readonly activeGroupId = computed(() => this.segments()[0] ?? '');
   readonly activeEntryId = computed(() => this.segments()[1] ?? '');
-  readonly activeVariantId = computed(() => this.segments()[2] ?? '');
 
   /** Si hay búsqueda activa, el árbol se muestra entero desplegado. */
   readonly searching = computed(() => this.query().trim().length > 0);
@@ -71,54 +68,26 @@ export class NavTreeComponent {
     return this.searching() || this.openGroups().has(groupId);
   }
 
-  isEntryOpen(groupId: string, entry: CatalogEntry): boolean {
-    if (!hasSubmenu(entry)) {
-      return false;
-    }
-    return this.searching() || this.openEntries().has(`${groupId}/${entry.id}`);
-  }
-
+  /** Activo aunque la URL incluya sub-estilo: el componente es el mismo. */
   isEntryActive(groupId: string, entryId: string): boolean {
-    return (
-      this.activeGroupId() === groupId &&
-      this.activeEntryId() === entryId &&
-      this.activeVariantId() === ''
-    );
-  }
-
-  isVariantActive(groupId: string, entryId: string, variantId: string): boolean {
-    return (
-      this.activeGroupId() === groupId &&
-      this.activeEntryId() === entryId &&
-      this.activeVariantId() === variantId
-    );
+    return this.activeGroupId() === groupId && this.activeEntryId() === entryId;
   }
 
   toggleGroup(groupId: string): void {
     this.openGroups.update((open) => this.toggleIn(open, groupId));
   }
 
-  toggleEntry(groupId: string, entryId: string): void {
-    this.openEntries.update((open) => this.toggleIn(open, `${groupId}/${entryId}`));
-  }
-
   onQuery(event: Event): void {
     this.query.set((event.target as HTMLInputElement).value);
   }
 
-  /** Abre el grupo y el componente de la URL activa, sin cerrar lo demás. */
+  /** Abre el grupo del componente activo, sin cerrar lo demás. */
   private revealActive(url: string): void {
-    const [groupId, entryId] = url.split('?')[0].split('/').filter(Boolean);
-    if (!groupId) {
+    const [groupId] = url.split('?')[0].split('/').filter(Boolean);
+    if (!groupId || this.openGroups().has(groupId)) {
       return;
     }
-    if (!this.openGroups().has(groupId)) {
-      this.openGroups.update((open) => new Set([...open, groupId]));
-    }
-    const key = `${groupId}/${entryId}`;
-    if (entryId && !this.openEntries().has(key)) {
-      this.openEntries.update((open) => new Set([...open, key]));
-    }
+    this.openGroups.update((open) => new Set([...open, groupId]));
   }
 
   private toggleIn(set: ReadonlySet<string>, key: string): ReadonlySet<string> {

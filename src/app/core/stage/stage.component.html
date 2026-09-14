@@ -1,11 +1,5 @@
-<section class="stage" [attr.aria-label]="entry().label + ' — entorno aislado'">
+<section class="stage" [attr.aria-label]="entry().label + ' — vista aislada'">
   <header class="stage-bar">
-    <span class="dots" aria-hidden="true">
-      <i class="dot"></i>
-      <i class="dot"></i>
-      <i class="dot"></i>
-    </span>
-
     <span class="stage-path">
       {{ group().id }}<span class="sep" aria-hidden="true">/</span>{{ entry().id }}
     </span>
@@ -15,7 +9,7 @@
     }
 
     <div class="stage-tools">
-      <div class="widths" role="group" aria-label="Ancho de previsualización">
+      <div class="widths" role="group" aria-label="Tamaño de la vista previa">
         @for (option of widths; track option.id) {
           <button
             type="button"
@@ -70,17 +64,19 @@
   }
 
   <!--
-    data-focus activa el filtro de sub-estilos generado por VariantFocusStyles.
-    Sin él (modo "todas") no coincide ninguna regla y se ve el componente entero.
+    El componente vive en un iframe: documento propio, viewport propio. Los
+    presets tablet/móvil cambian el ancho REAL del iframe (no un max-width),
+    así que sus media queries responden igual que en un dispositivo.
   -->
-  <div
-    class="ac-viewport"
-    [class.w-tablet]="width() === 'tablet'"
-    [class.w-mobile]="width() === 'mobile'"
-    [attr.data-focus]="activeVariant()?.id ?? null"
-  >
-    @if (component(); as cmp) {
-      <ng-container [ngComponentOutlet]="cmp" />
-    }
+  <div class="canvas" [class.with-device]="isDevice()">
+    <div class="device" [class.phone]="width() === 'mobile'" [class.tablet]="width() === 'tablet'">
+      <iframe
+        #frame
+        class="frame"
+        [src]="embedUrl()"
+        (load)="onFrameLoad()"
+        [title]="'Vista aislada de ' + entry().label"
+      ></iframe>
+    </div>
   </div>
 </section>

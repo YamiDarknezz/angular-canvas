@@ -39,3 +39,18 @@
     color: var(--ac-primary-soft);
   }
 }
+
+/* Tecla: pista de atajo de teclado (←/→, 1–9…). Solo andamiaje. */
+kbd {
+  display: inline-block;
+  margin: 0 0.1rem;
+  padding: 0.02rem 0.32rem;
+  border: 1px solid var(--ac-border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--ac-surface);
+  color: var(--ac-text-muted);
+  font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', monospace;
+  font-size: 0.68rem;
+  line-height: 1.5;
+}

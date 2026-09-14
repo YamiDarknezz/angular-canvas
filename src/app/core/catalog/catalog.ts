@@ -1,16 +1,17 @@
 /**
  * Catálogo de AngularCanvas — fuente única de verdad.
  *
- * Todo lo que se ve en la galería se deriva de esta lista: los tres niveles de
- * la navegación lateral (grupo → componente → variante), las tarjetas de la
- * portada, los contadores y la ficha de código de cada entorno.
+ * Todo lo que se ve en la galería se deriva de esta lista: la navegación
+ * lateral de dos niveles (grupo → componente), las tarjetas de la portada, los
+ * contadores, los chips de sub-estilos y la ficha de código de cada entorno.
  *
  * Reglas del modelo:
  * - Un **grupo** es una categoría (Cards, Buttons, …) y agrupa componentes.
  * - Un **componente** es un entorno aislado: vive en su carpeta, se muestra solo
  *   en su propia vista y se puede copiar sin arrastrar nada más.
  * - Una **variante** es un sub-estilo dentro del componente (el `data-variant`
- *   de su plantilla). Solo los componentes con 2+ variantes abren submenú.
+ *   de su plantilla). No ocupa un nivel en el sidebar: se elige dentro del
+ *   entorno con los chips (o con las teclas 1–9).
  *
  * Al añadir un componente: crea la carpeta, regístralo en `component-registry`
  * y añade su entrada aquí. Nada más.
@@ -524,8 +525,8 @@ export const TOTAL_VARIANTS = CATALOG.reduce(
   0,
 );
 
-/** Componentes con más de una variante (los que abren submenú). */
-export function hasSubmenu(entry: CatalogEntry): boolean {
+/** Componentes con más de una variante (los que muestran selector de sub-estilos). */
+export function hasMultipleVariants(entry: CatalogEntry): boolean {
   return entry.variants.length > 1;
 }
 

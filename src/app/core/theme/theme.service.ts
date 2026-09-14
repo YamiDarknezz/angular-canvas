@@ -19,7 +19,7 @@ export const THEMES: readonly Theme[] = [
 const STORAGE_KEY = 'angular-canvas:theme';
 const THEME_IDS = THEMES.map((t) => t.id);
 
-function isThemeName(value: unknown): value is ThemeName {
+export function isThemeName(value: unknown): value is ThemeName {
   return typeof value === 'string' && (THEME_IDS as string[]).includes(value);
 }
 

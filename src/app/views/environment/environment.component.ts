@@ -1,6 +1,6 @@
-import { Component, Type, computed, effect, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import {
   CatalogEntry,
@@ -8,9 +8,8 @@ import {
   FLAT_ENTRIES,
   findEntry,
   findVariant,
-  hasSubmenu,
+  hasMultipleVariants,
 } from '../../core/catalog/catalog';
-import { componentFor } from '../../core/registry/component-registry';
 import { StageComponent } from '../../core/stage/stage.component';
 
 /**
@@ -22,16 +21,21 @@ import { StageComponent } from '../../core/stage/stage.component';
  * tipo a la ventana y listo.
  *
  * El filtro por variante tampoco se hace por DOM: la ventana marca
- * `data-focus` y el CSS generado por `VariantFocusStyles` oculta el resto.
+ * `data-focus` en el iframe y el CSS generado por `VariantFocusStyles` oculta
+ * el resto.
  */
 @Component({
   selector: 'ac-environment',
   imports: [RouterLink, StageComponent],
   templateUrl: './environment.component.html',
   styleUrl: './environment.component.scss',
+  host: {
+    '(document:keydown)': 'onKeydown($event)',
+  },
 })
 export class EnvironmentComponent {
   private readonly title = inject(Title);
+  private readonly router = inject(Router);
 
   /** Parámetro de ruta: categoría (`cards`). */
   readonly group = input<string>();
@@ -43,12 +47,9 @@ export class EnvironmentComponent {
   readonly item = computed(() => findEntry(this.group(), this.entry()));
   readonly groupData = computed<CatalogGroup | undefined>(() => this.item()?.group);
   readonly entryData = computed<CatalogEntry | undefined>(() => this.item()?.entry);
-  readonly component = computed<Type<unknown> | undefined>(() =>
-    componentFor(this.group(), this.entry()),
-  );
   readonly hasVariants = computed(() => {
     const entry = this.entryData();
-    return entry ? hasSubmenu(entry) : false;
+    return entry ? hasMultipleVariants(entry) : false;
   });
 
   /** Variante enfocada. `null` = se ven todas. */
@@ -82,5 +83,45 @@ export class EnvironmentComponent {
         entry ? `${entry.label} — AngularCanvas` : 'Entorno no encontrado — AngularCanvas',
       );
     });
+  }
+
+  /**
+   * Atajos para elegir sin ratón: ←/→ recorren el catálogo entero y 1–9 aíslan
+   * un sub-estilo (0 vuelve a verlos todos). Se ignoran al escribir en un campo
+   * y dentro del iframe (sus teclas no llegan hasta aquí).
+   */
+  onKeydown(event: KeyboardEvent): void {
+    if (event.metaKey || event.ctrlKey || event.altKey) {
+      return;
+    }
+    const target = event.target as HTMLElement | null;
+    if (target?.closest('input, textarea, select, [contenteditable]')) {
+      return;
+    }
+
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      const item = event.key === 'ArrowLeft' ? this.previous() : this.next();
+      if (!item) {
+        return;
+      }
+      event.preventDefault();
+      this.router.navigate(['/', item.group.id, item.entry.id]);
+      return;
+    }
+
+    const entry = this.entryData();
+    if (!entry || !this.hasVariants() || !/^[0-9]$/.test(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+    if (event.key === '0') {
+      this.router.navigate(['/', this.group(), entry.id]);
+      return;
+    }
+    const variant = entry.variants[Number(event.key) - 1];
+    if (variant) {
+      this.router.navigate(['/', this.group(), entry.id, variant.id]);
+    }
   }
 }

@@ -25,6 +25,12 @@
         <li>
           clase <code>{{ entry.className }}</code>
         </li>
+        <li class="shortcuts">
+          atajos <kbd>←</kbd><kbd>→</kbd> componente
+          @if (hasVariants()) {
+            · <kbd>1</kbd>–<kbd>9</kbd> sub-estilo · <kbd>0</kbd> todos
+          }
+        </li>
       </ul>
     </header>
 
@@ -60,12 +66,7 @@
       </p>
     }
 
-    <ac-stage
-      [group]="groupData()!"
-      [entry]="entry"
-      [activeVariant]="activeVariant()"
-      [component]="component()"
-    />
+    <ac-stage [group]="groupData()!" [entry]="entry" [activeVariant]="activeVariant()" />
 
     <nav class="env-pager" aria-label="Recorrer el catálogo">
       @if (previous(); as prev) {
