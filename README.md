@@ -1,14 +1,14 @@
 # 🎨 AngularCanvas
 
 Biblioteca viva de **efectos y diseños para Angular**. Es un catálogo navegable
-de 32 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
+de 40 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
 en su propia carpeta, con su `.ts`, su `.html` y su `.scss`, listo para llevarlo
 a cualquier otro proyecto.
 
 Construido con **Angular 22** (standalone components, signals, router y control
 flow nativo `@if` / `@for`).
 
-**8 categorías · 32 componentes · 92 sub-estilos · 5 temas.**
+**8 categorías · 40 componentes · 112 sub-estilos · 5 temas.**
 
 ---
 
@@ -104,13 +104,14 @@ src/
     │   └── embed/embed.component.*   # Documento desnudo que carga el iframe
     └── components/                   # 👈 LA LIBRERÍA (esto es lo que se copia)
         ├── cards/        glassmorphism/  neon/  hover-effects/  flip/
-        │                 tilt-3d/  minimal/  dark-corporate/
+        │                 tilt-3d/  glass-panel/  minimal/  dark-corporate/
         ├── buttons/      glow/  gradient/  neumorphism/  pill/  animated/
-        ├── backgrounds/  gradient/  particle/  grid/  animated-mesh/
-        ├── typography/   glow-text/  gradient-text/  typewriter/
-        ├── navigation/   sidebar/  topbar/  dock/
-        ├── forms/        glass-input/  toggle/  checkbox/
-        ├── modals/       glass-modal/  slide-in/
+        │                 3d/  glass/
+        ├── backgrounds/  gradient/  particle/  grid/  animated-mesh/  aurora/
+        ├── typography/   glow-text/  gradient-text/  typewriter/  3d-text/
+        ├── navigation/   sidebar/  topbar/  dock/  glass-tabs/
+        ├── forms/        glass-input/  toggle/  checkbox/  segmented/
+        ├── modals/       glass-modal/  slide-in/  command-palette/
         └── themes/       dark/  light/  hacker/  cyberpunk/  corporate/
 ```
 
@@ -240,30 +241,35 @@ dentro se re-tematiza en vivo, sin recargar.
 
 ---
 
-## 🧩 Componentes (32)
+## 🧩 Componentes (40)
 
 Formato: **grupo (n)** → componente (`sub-estilos`).
 
-**🃏 Cards (7)** — Glassmorphism (3), Neon (3), Hover Effects (6: lift, scale,
+**🃏 Cards (8)** — Glassmorphism (3), Neon (3), Hover Effects (6: lift, scale,
 rotate, border-draw, glow, magnetic), Flip 3D (3), 3D Tilt (3: tilt + brillo,
-profundidad, holo), Minimal (3), Dark Corporate (2)
+profundidad, holo), Glass Panels (3: métricas, perfil, superposición), Minimal
+(3), Dark Corporate (2)
 
-**🔘 Buttons (5)** — Glow (5 colores), Gradient (5), Neumorphism (4: soft,
+**🔘 Buttons (7)** — Glow (5 colores), Gradient (5), Neumorphism (4: soft,
 pressed, flat, convex), Pill (6: outline, solid, ghost, gradient, with-icon,
-small), Animated (6: ripple, pulse, shake, fill-up, slide-bg, magnetic)
+small), Animated (6: ripple, pulse, shake, fill-up, slide-bg, magnetic), 3D (3:
+push, flip, levitación), Glass (3: glass, frost, borde degradado)
 
-**🌌 Backgrounds (4)** — Gradient (6), Particle (1), Grid (3: dots, lines,
-gradient), Animated Mesh (1)
+**🌌 Backgrounds (5)** — Gradient (6), Particle (1), Grid (3: dots, lines,
+gradient), Animated Mesh (1), Aurora (3: aurora, haces, vidrio)
 
-**🔤 Typography (3)** — Glow Text (4), Gradient Text (4: static, animated,
-rainbow, subtle), Typewriter (1, sobre una terminal)
+**🔤 Typography (4)** — Glow Text (4), Gradient Text (4: static, animated,
+rainbow, subtle), Typewriter (1, sobre una terminal), 3D Text (3: extrude,
+isométrico, floating)
 
-**🧭 Navigation (3)** — Sidebar colapsable (1), Topbar responsiva (1), Dock
-inferior (3: flotante, cristal, barra)
+**🧭 Navigation (4)** — Sidebar colapsable (1), Topbar responsiva (1), Dock
+inferior (3: flotante, cristal, barra), Glass Tabs (2: vidrio, subrayado)
 
-**📝 Forms (3)** — Glass Input (1), Toggle Switch (1), Checkbox (1)
+**📝 Forms (4)** — Glass Input (1), Toggle Switch (1), Checkbox (1), Segmented
+(2: vidrio, sólido)
 
-**🪟 Modals (2)** — Glass Modal (1), Slide-in Panel (1)
+**🪟 Modals (3)** — Glass Modal (1), Slide-in Panel (1), Command Palette (1,
+búsqueda + teclado)
 
 **🎨 Themes (5)** — Dark (3), Light (3), Hacker (2: terminal, paleta),
 Cyberpunk (3: glitch, subtítulo, paleta), Corporate (2)

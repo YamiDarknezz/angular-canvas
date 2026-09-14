@@ -1,0 +1,72 @@
+.text3d-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding: 2.5rem;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #101024, #07070f);
+  border: 1px solid rgb(255 255 255 / 7%);
+  overflow: hidden;
+}
+
+.t3d {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+// Extrusión: capas de sombra sólida que simulan el canto del texto.
+.extrude {
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  color: #c4b5fd;
+  text-shadow:
+    1px 1px 0 #4c1d95,
+    2px 2px 0 #4c1d95,
+    3px 3px 0 #4338ca,
+    4px 4px 0 #4338ca,
+    5px 5px 0 #3730a3,
+    6px 6px 0 #312e81,
+    7px 7px 0 #312e81,
+    8px 8px 0 #1e1b4b,
+    12px 14px 30px rgb(0 0 0 / 60%);
+}
+
+// Isométrico: el texto se recuesta con perspectiva y proyecta su sombra.
+.isometric {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  color: #67e8f9;
+  transform: perspective(750px) rotateX(26deg) rotateY(-16deg) skewX(-4deg);
+  transform-origin: left center;
+  text-shadow:
+    1px 1px 0 #0e7490,
+    2px 2px 0 #0e7490,
+    3px 3px 0 #155e75,
+    4px 4px 0 #155e75,
+    5px 5px 0 #164e63,
+    8px 10px 24px rgb(0 0 0 / 70%);
+}
+
+// Levitación: el texto flota y su sombra se separa con el ritmo.
+.floating {
+  font-size: clamp(2.2rem, 6.5vw, 3.6rem);
+  color: #f8fafc;
+  animation: text-levitate 3.2s ease-in-out infinite;
+}
+
+@keyframes text-levitate {
+  0%,
+  100% {
+    transform: translateY(0);
+    text-shadow:
+      0 6px 0 rgb(99 102 241 / 45%),
+      0 18px 30px rgb(0 0 0 / 65%);
+  }
+
+  50% {
+    transform: translateY(-12px);
+    text-shadow:
+      0 6px 0 rgb(99 102 241 / 30%),
+      0 34px 40px rgb(0 0 0 / 45%);
+  }
+}

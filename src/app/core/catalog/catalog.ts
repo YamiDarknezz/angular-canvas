@@ -128,6 +128,19 @@ export const CATALOG: readonly CatalogGroup[] = [
         ],
       },
       {
+        id: 'glass-panel',
+        label: 'Glass Panels',
+        tagline: 'Superficies de vidrio sobre color con blur y brillo interior',
+        selector: 'app-card-glass-panel',
+        className: 'GlassPanelComponent',
+        sourcePath: 'src/app/components/cards/glass-panel',
+        variants: [
+          { id: 'stats', label: 'Métricas', hint: 'Panel de resumen con barras translúcidas' },
+          { id: 'profile', label: 'Perfil', hint: 'Tarjeta de persona con acciones' },
+          { id: 'overlay', label: 'Superposición', hint: 'Texto legible sobre cualquier fondo' },
+        ],
+      },
+      {
         id: 'minimal',
         label: 'Minimal',
         tagline: 'Limpio, elegante, sin distracciones',
@@ -236,6 +249,36 @@ export const CATALOG: readonly CatalogGroup[] = [
           { id: 'magnetic', label: 'Magnetic', hint: 'Sigue el cursor' },
         ],
       },
+      {
+        id: '3d',
+        label: '3D',
+        tagline: 'Relieve que se hunde, volteo y levitación por capas',
+        selector: 'app-btn-3d',
+        className: 'Button3dComponent',
+        sourcePath: 'src/app/components/buttons/3d',
+        variants: [
+          { id: 'push', label: 'Push', hint: 'Se hunde hasta apoyarse en su base' },
+          { id: 'flip', label: 'Flip', hint: 'Voltea en 3D al pasar el cursor' },
+          { id: 'levitate', label: 'Levitación', hint: 'Pila de capas que se separa del suelo' },
+        ],
+      },
+      {
+        id: 'glass',
+        label: 'Glass',
+        tagline: 'Botones translúcidos con blur y bordes luminosos',
+        selector: 'app-btn-glass',
+        className: 'ButtonGlassComponent',
+        sourcePath: 'src/app/components/buttons/glass',
+        variants: [
+          { id: 'glass', label: 'Glass', hint: 'Vidrio suave con brillo interior' },
+          { id: 'frost', label: 'Frost', hint: 'Escarchado con blur intenso' },
+          {
+            id: 'gradient-border',
+            label: 'Borde degradado',
+            hint: 'Contorno tornasol sobre vidrio',
+          },
+        ],
+      },
     ],
   },
   {
@@ -293,6 +336,19 @@ export const CATALOG: readonly CatalogGroup[] = [
         sourcePath: 'src/app/components/backgrounds/animated-mesh',
         variants: [{ id: 'default', label: 'Mesh animado', hint: 'Blobs de color en movimiento' }],
       },
+      {
+        id: 'aurora',
+        label: 'Aurora',
+        tagline: 'Blobs de color, haces de luz y vidrio sobre aurora',
+        selector: 'app-bg-aurora',
+        className: 'BgAuroraComponent',
+        sourcePath: 'src/app/components/backgrounds/aurora',
+        variants: [
+          { id: 'aurora', label: 'Aurora', hint: 'Blobs difusos que derivan en diagonal' },
+          { id: 'beams', label: 'Haces', hint: 'Columnas de luz que barren el fondo' },
+          { id: 'glass', label: 'Con vidrio', hint: 'Panel translúcido sobre la aurora' },
+        ],
+      },
     ],
   },
   {
@@ -338,6 +394,19 @@ export const CATALOG: readonly CatalogGroup[] = [
         sourcePath: 'src/app/components/typography/typewriter',
         variants: [
           { id: 'default', label: 'Terminal', hint: 'Cursor, prompt y escribido secuencial' },
+        ],
+      },
+      {
+        id: '3d-text',
+        label: '3D Text',
+        tagline: 'Extrusión, perspectiva isométrica y levitación',
+        selector: 'app-text-3d',
+        className: 'Text3dComponent',
+        sourcePath: 'src/app/components/typography/3d-text',
+        variants: [
+          { id: 'extrude', label: 'Extrude', hint: 'Canto sólido por capas de sombra' },
+          { id: 'isometric', label: 'Isométrico', hint: 'Texto recostado con perspectiva' },
+          { id: 'floating', label: 'Floating', hint: 'Flota con su sombra en movimiento' },
         ],
       },
     ],
@@ -387,6 +456,18 @@ export const CATALOG: readonly CatalogGroup[] = [
           { id: 'bar', label: 'Barra', hint: 'Barra inferior a ancho completo' },
         ],
       },
+      {
+        id: 'glass-tabs',
+        label: 'Glass Tabs',
+        tagline: 'Pestañas translúcidas con indicador deslizante',
+        selector: 'app-nav-tabs',
+        className: 'GlassTabsComponent',
+        sourcePath: 'src/app/components/navigation/glass-tabs',
+        variants: [
+          { id: 'glass', label: 'Vidrio', hint: 'Barra de vidrio con pastilla que se desliza' },
+          { id: 'underline', label: 'Subrayado', hint: 'Línea luminosa que sigue a la pestaña' },
+        ],
+      },
     ],
   },
   {
@@ -427,6 +508,18 @@ export const CATALOG: readonly CatalogGroup[] = [
         sourcePath: 'src/app/components/forms/checkbox',
         variants: [{ id: 'default', label: 'Checkboxes', hint: 'Con icono de check animado' }],
       },
+      {
+        id: 'segmented',
+        label: 'Segmented',
+        tagline: 'Selector segmentado con indicador deslizante',
+        selector: 'app-form-segmented',
+        className: 'SegmentedComponent',
+        sourcePath: 'src/app/components/forms/segmented',
+        variants: [
+          { id: 'glass', label: 'Vidrio', hint: 'Translúcido con pulgar que se desliza' },
+          { id: 'solid', label: 'Sólido', hint: 'Pulgar sólido sobre panel oscuro' },
+        ],
+      },
     ],
   },
   {
@@ -462,6 +555,21 @@ export const CATALOG: readonly CatalogGroup[] = [
             id: 'default',
             label: 'Panel lateral',
             hint: 'Entra desde la derecha, cierra con Escape',
+          },
+        ],
+      },
+      {
+        id: 'command-palette',
+        label: 'Command Palette',
+        tagline: 'Paleta translúcida con búsqueda y teclado',
+        selector: 'app-modal-palette',
+        className: 'CommandPaletteComponent',
+        sourcePath: 'src/app/components/modals/command-palette',
+        variants: [
+          {
+            id: 'default',
+            label: 'Paleta de comandos',
+            hint: 'Flechas para moverse, Enter para ejecutar, Escape para cerrar',
           },
         ],
       },

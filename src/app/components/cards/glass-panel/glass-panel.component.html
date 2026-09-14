@@ -1,0 +1,48 @@
+<section class="design-section">
+  <h2 class="section-title">Glass Panels</h2>
+  <p class="section-desc">Superficies de vidrio sobre color: métricas, perfil y superposición</p>
+
+  <div class="panel-stage">
+    <span class="stage-orb orb-1" aria-hidden="true"></span>
+    <span class="stage-orb orb-2" aria-hidden="true"></span>
+    <span class="stage-orb orb-3" aria-hidden="true"></span>
+
+    <div class="panel-grid">
+      <article class="glass-panel panel-stats" data-variant="stats">
+        <header class="panel-head">
+          <h3>Resumen</h3>
+          <span class="panel-badge">+18%</span>
+        </header>
+
+        @for (metric of metrics; track metric.label) {
+          <div class="stat-row">
+            <span class="stat-label">{{ metric.label }}</span>
+            <span class="stat-value">{{ metric.value }}</span>
+            <span class="stat-bar" aria-hidden="true"
+              ><i [style.width.%]="metric.percent"></i
+            ></span>
+          </div>
+        }
+      </article>
+
+      <article class="glass-panel panel-profile" data-variant="profile">
+        <span class="avatar" aria-hidden="true">GP</span>
+        <h3>Gerardo P.</h3>
+        <p class="role">Frontend Engineer</p>
+        <p class="bio">Componentes accesibles, animaciones con propósito y vidrio bien puesto.</p>
+        <div class="profile-actions">
+          <button type="button" class="panel-btn primary">Mensaje</button>
+          <button type="button" class="panel-btn">Seguir</button>
+        </div>
+      </article>
+
+      <article class="glass-panel panel-overlay" data-variant="overlay">
+        <div class="overlay-media" aria-hidden="true"></div>
+        <div class="overlay-caption">
+          <h3>Ciudad nocturna</h3>
+          <p>La superposición de vidrio mantiene el texto legible sobre cualquier fondo.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

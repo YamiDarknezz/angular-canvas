@@ -1,0 +1,46 @@
+<section class="design-section">
+  <h2 class="section-title">Glass Tabs</h2>
+  <p class="section-desc">Pestañas translúcidas con indicador deslizante</p>
+
+  @for (variant of variants; track variant.id) {
+    <div
+      class="tabs-scene"
+      [class.scene-underline]="variant.id === 'underline'"
+      [attr.data-variant]="variant.id"
+    >
+      <div
+        class="tabs"
+        [class.tabs-glass]="variant.id === 'glass'"
+        [class.tabs-underline]="variant.id === 'underline'"
+        role="tablist"
+        aria-label="Secciones del panel"
+        [style.--tab-index]="active()"
+        [style.--tab-count]="tabs.length"
+      >
+        <span class="tab-indicator" aria-hidden="true"></span>
+
+        @for (tab of tabs; track tab.id; let i = $index) {
+          <button
+            type="button"
+            role="tab"
+            class="tab"
+            [id]="'tab-' + variant.id + '-' + tab.id"
+            [class.active]="active() === i"
+            [attr.aria-selected]="active() === i"
+            (click)="select(i)"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <p
+        class="tabs-body"
+        role="tabpanel"
+        [attr.aria-labelledby]="'tab-' + variant.id + '-' + activeTab().id"
+      >
+        {{ activeTab().body }}
+      </p>
+    </div>
+  }
+</section>

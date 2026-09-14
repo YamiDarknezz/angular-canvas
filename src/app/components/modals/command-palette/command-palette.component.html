@@ -1,0 +1,64 @@
+<section class="design-section">
+  <h2 class="section-title">Command Palette</h2>
+  <p class="section-desc">Paleta translúcida con búsqueda, flechas y Enter para ejecutar</p>
+
+  <div class="palette-stage">
+    <button type="button" class="palette-trigger" (click)="show()">
+      <span class="trigger-keys" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+      Abrir paleta de comandos
+    </button>
+
+    @if (lastRun(); as command) {
+      <p class="palette-last">
+        Ejecutado: <strong>{{ command }}</strong>
+      </p>
+    }
+  </div>
+
+  @if (open()) {
+    <div class="palette-overlay" (click)="close()">
+      <div
+        class="palette"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Paleta de comandos"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="palette-search">
+          <span aria-hidden="true">🔎</span>
+          <input
+            #search
+            type="search"
+            placeholder="Buscar un comando…"
+            aria-label="Buscar un comando"
+            [value]="query()"
+            (input)="onQuery($event)"
+          />
+          <kbd>esc</kbd>
+        </div>
+
+        @if (results().length === 0) {
+          <p class="palette-empty">Sin resultados para «{{ query() }}».</p>
+        } @else {
+          <ul class="palette-list">
+            @for (command of results(); track command.id; let i = $index) {
+              <li>
+                <button
+                  type="button"
+                  class="palette-item"
+                  [class.active]="cursor() === i"
+                  (mouseenter)="cursor.set(i)"
+                  (click)="run(command)"
+                >
+                  <span class="item-icon" aria-hidden="true">{{ command.icon }}</span>
+                  <span class="item-label">{{ command.label }}</span>
+                  <span class="item-hint">{{ command.hint }}</span>
+                </button>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  }
+</section>

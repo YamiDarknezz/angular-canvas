@@ -1,0 +1,37 @@
+<section class="design-section">
+  <h2 class="section-title">Segmented Control</h2>
+  <p class="section-desc">Selector segmentado con indicador deslizante en vidrio o sólido</p>
+
+  @for (variant of variants; track variant.id) {
+    <div
+      class="segment-scene"
+      [class.scene-solid]="variant.id === 'solid'"
+      [attr.data-variant]="variant.id"
+    >
+      <div
+        class="segments"
+        [class.segments-glass]="variant.id === 'glass'"
+        [class.segments-solid]="variant.id === 'solid'"
+        role="radiogroup"
+        aria-label="Rango de tiempo"
+        [style.--segment-index]="active()"
+        [style.--segment-count]="options.length"
+      >
+        <span class="segment-thumb" aria-hidden="true"></span>
+
+        @for (option of options; track option.id; let i = $index) {
+          <button
+            type="button"
+            role="radio"
+            class="segment"
+            [class.active]="active() === i"
+            [attr.aria-checked]="active() === i"
+            (click)="select(i)"
+          >
+            {{ option.label }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+</section>
