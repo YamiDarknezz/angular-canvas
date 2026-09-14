@@ -1,0 +1,78 @@
+.glow-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.glow-blue {
+  background: #2563eb;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+
+  &::before {
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.4) 0%, transparent 70%);
+  }
+
+  &:hover {
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.6), 0 0 60px rgba(37, 99, 235, 0.2);
+  }
+}
+
+.glow-purple {
+  background: #7c3aed;
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+
+  &:hover {
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.6), 0 0 60px rgba(124, 58, 237, 0.2);
+  }
+}
+
+.glow-pink {
+  background: #ec4899;
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+
+  &:hover {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.6), 0 0 60px rgba(236, 72, 153, 0.2);
+  }
+}
+
+.glow-green {
+  background: #10b981;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+
+  &:hover {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.glow-orange {
+  background: #f97316;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+
+  &:hover {
+    box-shadow: 0 0 30px rgba(249, 115, 22, 0.6), 0 0 60px rgba(249, 115, 22, 0.2);
+  }
+}

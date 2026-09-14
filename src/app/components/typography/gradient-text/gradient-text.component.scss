@@ -1,0 +1,58 @@
+.text-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: #0f0f1a;
+  border-radius: 16px;
+}
+
+.grad-text {
+  font-weight: 700;
+}
+
+.grad-static {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.grad-animated {
+  font-size: 2rem;
+  background: linear-gradient(90deg, #6366f1, #ec4899, #f97316, #6366f1);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-gradient-slide 4s linear infinite;
+}
+
+.grad-rainbow {
+  font-size: 2rem;
+  background: linear-gradient(90deg,
+    #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #ef4444);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-gradient-slide 3s linear infinite;
+}
+
+.grad-subtle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  background: linear-gradient(90deg, #94a3b8, #e2e8f0, #94a3b8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-gradient-slide 6s linear infinite;
+  line-height: 1.8;
+}
+
+@keyframes text-gradient-slide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

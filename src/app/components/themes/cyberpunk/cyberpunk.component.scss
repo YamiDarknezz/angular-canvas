@@ -1,0 +1,61 @@
+.cyber-card {
+  background: #0a0a1a;
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid #ff00ff30;
+}
+
+.cyber-glitch {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ff00ff;
+  text-shadow: 2px 2px #00ffff, -2px -2px #ffff00;
+  position: relative;
+  animation: glitch 2s infinite;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.cyber-subtitle {
+  color: #00ffff;
+  font-family: monospace;
+  text-align: center;
+  opacity: 0.6;
+  margin: 1rem 0 2rem;
+}
+
+@keyframes glitch {
+  0%, 100% { text-shadow: 2px 2px #00ffff, -2px -2px #ffff00; }
+  10% { text-shadow: -2px -2px #00ffff, 2px 2px #ff00ff; }
+  20% { text-shadow: 2px -2px #ffff00, -2px 2px #00ffff; }
+  30% { text-shadow: -2px 2px #ff00ff, 2px -2px #ffff00; }
+  40% { text-shadow: 2px 2px #00ffff, -2px -2px #ff00ff; }
+  50% { text-shadow: -2px -2px #ffff00, 2px 2px #00ffff; }
+}
+
+.palette-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.swatch {
+  flex: 1;
+  height: 70px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover { transform: scale(1.08); }
+
+  span {
+    font-size: 0.6rem;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    padding: 0.15rem 0.3rem;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+}

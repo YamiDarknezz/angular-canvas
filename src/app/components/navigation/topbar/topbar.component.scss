@@ -1,0 +1,132 @@
+.topbar-demo {
+  background: #0a0a1a;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  height: 64px;
+  background: rgba(15, 15, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #1e1e32;
+}
+
+.topbar-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-right: 2rem;
+}
+
+.topbar-links {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+
+  a {
+    color: #8b949e;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.2s;
+
+    &:hover,
+    &.active {
+      color: #fff;
+    }
+
+    &.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #6366f1;
+      border-radius: 1px;
+    }
+  }
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+
+  button {
+    background: #1e1e32;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #2a2a40;
+    }
+  }
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 0 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+
+  &.open {
+    max-height: 300px;
+    padding: 1rem 1.5rem;
+  }
+
+  a {
+    color: #8b949e;
+    text-decoration: none;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1e1e32;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.topbar-preview {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .topbar-links,
+  .topbar-actions {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+}

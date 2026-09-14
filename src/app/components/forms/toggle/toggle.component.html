@@ -1,0 +1,12 @@
+<section class="design-section">
+  <h2 class="section-title">Toggle Switches</h2>
+  <p class="section-desc">Interruptores animados con diferentes estilos</p>
+  <div class="toggle-showcase">
+    <div class="toggle-item" *ngFor="let t of toggles">
+      <span class="toggle-label">{{ t.label }}</span>
+      <div class="toggle-switch" [class.active]="t.checked()" (click)="toggle(t)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+  </div>
+</section>

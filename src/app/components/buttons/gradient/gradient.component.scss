@@ -1,0 +1,61 @@
+.grad-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s;
+  background-size: 200% 200%;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.grad-sunset {
+  background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6);
+  background-position: 0% 50%;
+
+  &:hover {
+    background-position: 100% 50%;
+  }
+}
+
+.grad-ocean {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1, #8b5cf6);
+
+  &:hover {
+    background-position: 100% 50%;
+  }
+}
+
+.grad-aurora {
+  background: linear-gradient(135deg, #10b981, #06b6d4, #3b82f6);
+
+  &:hover {
+    background-position: 100% 50%;
+  }
+}
+
+.grad-fire {
+  background: linear-gradient(135deg, #ef4444, #f97316, #eab308);
+
+  &:hover {
+    background-position: 100% 50%;
+  }
+}
+
+.grad-mesh {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

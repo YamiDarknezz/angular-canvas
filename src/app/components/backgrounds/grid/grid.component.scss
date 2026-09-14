@@ -1,0 +1,33 @@
+.grid-dots {
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-color: #0a0a1a;
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-color: #0a0a1a;
+}
+
+.grid-gradient {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-color: #0a0a1a;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 30%, #0a0a1a 80%);
+  }
+
+  span {
+    z-index: 1;
+  }
+}

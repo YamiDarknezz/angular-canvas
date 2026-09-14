@@ -1,0 +1,86 @@
+.form-container {
+  max-width: 450px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  position: relative;
+
+  input, textarea {
+    width: 100%;
+    padding: 1rem 1rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    resize: none;
+
+    &:focus {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+    }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      transform: translateY(-1.2rem) scale(0.85);
+      color: #818cf8;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    color: #6b7280;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s;
+    transform-origin: left;
+  }
+}
+
+.input-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  transition: all 0.3s;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.form-group:focus-within .input-highlight {
+  width: 100%;
+}
+
+.glass-submit {
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+  }
+}

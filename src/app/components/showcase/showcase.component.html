@@ -1,0 +1,98 @@
+<div class="showcase-layout">
+  <!-- Sidebar Navigation -->
+  <aside class="showcase-sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">🎨</span>
+      <span class="brand-text">AngularCanvas</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button *ngFor="let cat of categories"
+              class="nav-item"
+              [class.active]="activeCategory === cat.id"
+              (click)="scrollTo(cat.id)">
+        <span class="nav-icon">{{ cat.icon }}</span>
+        <span class="nav-label">{{ cat.label }}</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="version">v1.0.0</span>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="showcase-main">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero-title">
+        <span class="hero-gradient">AngularCanvas</span>
+      </h1>
+      <p class="hero-subtitle">Biblioteca de efectos y diseños para Angular</p>
+      <p class="hero-desc">
+        {{ categories.length }} categorías · {{ 27 }}+ componentes de diseño listos para usar.
+        Copia, pega y personaliza en tus proyectos.
+      </p>
+    </section>
+
+    <!-- Cards -->
+    <div id="cards" class="showcase-section">
+      <app-glassmorphism></app-glassmorphism>
+      <app-neon-card></app-neon-card>
+      <app-hover-effects></app-hover-effects>
+      <app-flip-card></app-flip-card>
+      <app-minimal-card></app-minimal-card>
+      <app-dark-corporate></app-dark-corporate>
+    </div>
+
+    <!-- Buttons -->
+    <div id="buttons" class="showcase-section">
+      <app-glow-button></app-glow-button>
+      <app-gradient-button></app-gradient-button>
+      <app-neumorphism-button></app-neumorphism-button>
+      <app-pill-button></app-pill-button>
+      <app-animated-button></app-animated-button>
+    </div>
+
+    <!-- Backgrounds -->
+    <div id="backgrounds" class="showcase-section">
+      <app-bg-gradient></app-bg-gradient>
+      <app-bg-particle></app-bg-particle>
+      <app-bg-grid></app-bg-grid>
+      <app-bg-animated-mesh></app-bg-animated-mesh>
+    </div>
+
+    <!-- Typography -->
+    <div id="typography" class="showcase-section">
+      <app-glow-text></app-glow-text>
+      <app-gradient-text></app-gradient-text>
+      <app-typewriter></app-typewriter>
+    </div>
+
+    <!-- Navigation -->
+    <div id="navigation" class="showcase-section">
+      <app-sidebar-nav></app-sidebar-nav>
+      <app-topbar-nav></app-topbar-nav>
+    </div>
+
+    <!-- Forms -->
+    <div id="forms" class="showcase-section">
+      <app-glass-input></app-glass-input>
+      <app-toggle></app-toggle>
+      <app-checkbox></app-checkbox>
+    </div>
+
+    <!-- Modals -->
+    <div id="modals" class="showcase-section">
+      <app-glass-modal></app-glass-modal>
+      <app-slide-in-modal></app-slide-in-modal>
+    </div>
+
+    <!-- Themes -->
+    <div id="themes" class="showcase-section">
+      <app-theme-dark></app-theme-dark>
+      <app-theme-light></app-theme-light>
+      <app-theme-hacker></app-theme-hacker>
+      <app-theme-cyberpunk></app-theme-cyberpunk>
+      <app-theme-corporate></app-theme-corporate>
+    </div>
+  </main>
+</div>

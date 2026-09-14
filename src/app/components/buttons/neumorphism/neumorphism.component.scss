@@ -1,0 +1,42 @@
+.neu-bg {
+  background: #e0e5ec;
+  padding: 2.5rem;
+  border-radius: 20px;
+}
+
+.neu-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #6366f1;
+  background: #e0e5ec;
+  box-shadow: 6px 6px 12px #b8bec7, -6px -6px 12px #ffffff;
+  transition: all 0.2s;
+
+  &:active,
+  &.pressed {
+    box-shadow: inset 4px 4px 8px #b8bec7, inset -4px -4px 8px #ffffff;
+  }
+}
+
+.neu-btn-flat {
+  @extend .neu-btn;
+  box-shadow: 3px 3px 6px #b8bec7, -3px -3px 6px #ffffff;
+
+  &:hover {
+    box-shadow: inset 3px 3px 6px #b8bec7, inset -3px -3px 6px #ffffff;
+  }
+}
+
+.neu-btn-convex {
+  @extend .neu-btn;
+  background: linear-gradient(145deg, #f0f5fc, #cacfd6);
+  box-shadow: 5px 5px 10px #b8bec7, -5px -5px 10px #ffffff;
+
+  &:hover {
+    box-shadow: 3px 3px 6px #b8bec7, -3px -3px 6px #ffffff;
+  }
+}

@@ -1,0 +1,14 @@
+<section class="design-section">
+  <h2 class="section-title">Custom Checkboxes</h2>
+  <p class="section-desc">Checkboxes personalizados con animaciones</p>
+  <div class="checkbox-showcase">
+    <div class="checkbox-item" *ngFor="let item of items" (click)="toggle(item)">
+      <div class="custom-checkbox" [class.checked]="item.checked()">
+        <svg viewBox="0 0 24 24" class="check-icon">
+          <polyline points="20 6 9 17 4 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="checkbox-label">{{ item.label }}</span>
+    </div>
+  </div>
+</section>

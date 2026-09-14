@@ -1,0 +1,29 @@
+<section class="design-section">
+  <h2 class="section-title">Topbar Navigation</h2>
+  <p class="section-desc">Barra superior responsiva con menú mobile</p>
+  <div class="topbar-demo">
+    <header class="topbar">
+      <div class="topbar-brand">🎨 AngularCanvas</div>
+      <nav class="topbar-links">
+        <a href="#" class="active">Inicio</a>
+        <a href="#">Componentes</a>
+        <a href="#">Templates</a>
+        <a href="#">Documentación</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="search-btn">🔍</button>
+        <button class="avatar-btn">👤</button>
+      </div>
+      <button class="mobile-toggle" (click)="toggleMobile()">☰</button>
+    </header>
+    <nav class="mobile-menu" [class.open]="mobileMenuOpen()">
+      <a href="#">Inicio</a>
+      <a href="#">Componentes</a>
+      <a href="#">Templates</a>
+      <a href="#">Documentación</a>
+    </nav>
+    <div class="topbar-preview">
+      <p>En mobile, click ☰ para ver el menú</p>
+    </div>
+  </div>
+</section>

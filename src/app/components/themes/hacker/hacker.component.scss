@@ -1,0 +1,91 @@
+.hacker-palette {
+  background: #000;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid #00ff4130;
+}
+
+.hacker-terminal {
+  background: #0d1117;
+  border: 1px solid #00ff4130;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.term-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.6rem 1rem;
+  background: #161b22;
+  border-bottom: 1px solid #00ff4120;
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00ff41;
+  opacity: 0.6;
+}
+
+.term-title {
+  color: #00ff41;
+  font-family: monospace;
+  font-size: 0.75rem;
+  margin-left: auto;
+}
+
+.term-body {
+  padding: 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.hacker-line {
+  color: #00ff41;
+  margin: 0;
+
+  &.dim { opacity: 0.5; }
+  &.accent { color: #39ff14; font-weight: bold; }
+  &.success { color: #00ff41; }
+
+  &.blink-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.palette-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.swatch {
+  flex: 1;
+  height: 60px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover { transform: scale(1.05); }
+
+  span {
+    font-size: 0.6rem;
+    color: #00ff41;
+    background: rgba(0,0,0,0.5);
+    padding: 0.15rem 0.3rem;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+}
