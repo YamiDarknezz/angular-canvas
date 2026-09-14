@@ -1,0 +1,64 @@
+name: CI
+
+# build → deploy. El deploy reconstruye SIEMPRE en el VPS a partir del commit
+# que pasó el build: no se suben binarios por SSH.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# El workflow solo lee el repo.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Gate de estilo: prettier está configurado, así que se exige que pase.
+      - name: Formato (Prettier)
+        run: npm run format:check
+
+      - name: Build de producción
+        run: npm run build
+
+      # El artefacto es solo para inspección: el deploy NO lo usa.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/angular-canvas/browser
+          retention-days: 7
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && !cancelled() && needs.build.result == 'success'
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            set -e
+            cd $HOME/data/repos/angular-canvas
+            git pull --ff-only origin main
+            npm ci
+            npm run build
+            # El dist y la config de nginx viven en carpetas separadas: así
+            # --delete no puede borrar nginx.conf (el bug del portfolio).
+            rsync -a --delete $HOME/data/repos/angular-canvas/dist/angular-canvas/browser/ $HOME/data/deploy/angular-canvas-dist/
+            cd $HOME/data/deploy/angular-canvas
+            docker compose up -d
+            docker exec angular-canvas nginx -s reload
+            # Smoke test dentro del contenedor: si no sirve, el job falla.
+            docker exec angular-canvas wget -qO- http://127.0.0.1/ > /dev/null
+            echo "✅ angular-canvas deploy OK"
