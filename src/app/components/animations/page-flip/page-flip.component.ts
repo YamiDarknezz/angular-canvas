@@ -25,9 +25,10 @@ export class PageFlipComponent {
       return;
     }
     this.turning.set(true);
+    // Esperar a que la animación de giro termine (950ms) antes de avanzar.
     setTimeout(() => {
       this.bookPage.update((p) => (p + 1) % 3);
       this.turning.set(false);
-    }, 800);
+    }, 950);
   }
 }
