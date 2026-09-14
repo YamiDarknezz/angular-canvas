@@ -145,11 +145,50 @@ Animated Mesh
 - Los efectos visuales están **siempre activos**: no se desactivan por
   `prefers-reduced-motion`.
 
+## 🚀 CI/CD y despliegue
+
+El sitio vive en **https://canvas.darknezz.dev** y se despliega solo en cada push
+a `main` mediante [`.github/workflows/ci.yml`](./.github/workflows/ci.yml).
+
+**Job `build`** (GitHub Actions): `npm ci` → `prettier --check` → `ng build`.
+El artefacto se sube solo para inspección; el deploy no lo usa.
+
+**Job `deploy`** (por SSH al VPS): hace `git pull`, **reconstruye en el VPS** el
+commit que pasó el build, sincroniza el resultado y recarga nginx:
+
+```
+git pull → npm ci → npm run build
+  → rsync dist/angular-canvas/browser/ → ~/data/deploy/angular-canvas-dist/
+  → docker compose up -d → nginx -s reload → smoke test dentro del contenedor
+```
+
+Si el smoke test falla, el job falla: no se declara un deploy en verde sin
+comprobar que nginx sirve el sitio.
+
+### Estructura en el VPS
+
+- `~/data/repos/angular-canvas/` — este repo (código fuente).
+- `~/data/deploy/angular-canvas/` — `docker-compose.yml`, `conf.d/default.conf`
+  y `.env` con el dominio. **No es un repo git**: por eso el `.env` vive aquí.
+- `~/data/deploy/angular-canvas-dist/` — artefactos compilados. Es lo único que
+  el `rsync --delete` toca, así que no puede borrar la config del servidor.
+
+### Secretos
+
+El workflow solo consume secretos de GitHub, nunca valores en el repo:
+
+`DEPLOY_KEY` (llave privada de despliegue), `VPS_HOST`, `VPS_USER`.
+
+Para re-desplegar sin cambiar código: `gh workflow run CI`.
+
+---
+
 ## 🧪 Tests
 
 El proyecto se creó con `--skip-tests`, así que **no hay tests configurados** ni
 target de test en `angular.json` (por eso `package.json` no expone `npm test`).
-La verificación actual es el build de producción y la revisión visual.
+La verificación actual es el build de producción y la revisión visual. El CI
+tampoco ejecuta tests: no hay nada que ejecutar todavía.
 
 ---
 
