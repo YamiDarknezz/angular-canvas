@@ -58,7 +58,7 @@
           <p>Contenido de la página izquierda.</p>
         </div>
         <div class="book-spine" aria-hidden="true"></div>
-        <div class="book-right" [class.flipped]="bookFlipped()" (click)="goNext()">
+        <div class="book-right" #rightPage [class.flipped]="bookFlipped()" (click)="goNext()">
           <div class="bk-face bk-front">
             <span class="bk-num">{{ rightFrontPage() }}</span>
             <h3>Capítulo {{ rightFrontPage() }}</h3>
