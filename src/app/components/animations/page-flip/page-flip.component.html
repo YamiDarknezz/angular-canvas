@@ -22,24 +22,51 @@
   </div>
 
   <div class="flip-stage" data-variant="book">
-    <p class="flip-hint">Haz click en la hoja derecha para pasar</p>
+    <p class="flip-hint">← → para navegar entre capítulos</p>
+    <div class="book-nav">
+      <button type="button" class="book-arrow prev" [disabled]="!hasPrev()" (click)="goPrev()">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m14.5 6-6 6 6 6" />
+        </svg>
+      </button>
+      <span class="book-progress">{{ spread() + 1 }} / {{ totalSpreads }}</span>
+      <button type="button" class="book-arrow next" [disabled]="!hasNext()" (click)="goNext()">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9.5 6 6 6-6 6" />
+        </svg>
+      </button>
+    </div>
     <div class="book-scene">
       <div class="book-wrapper">
-        <div class="book-left">
-          <span class="bk-num">1</span>
-          <h3>Capítulo Uno</h3>
-          <p>El principio de la historia.</p>
+        <div class="book-left" (click)="goPrev()">
+          <span class="bk-num">{{ leftPage() }}</span>
+          <h3>Capítulo {{ leftPage() }}</h3>
+          <p>Contenido de la página izquierda.</p>
         </div>
         <div class="book-spine" aria-hidden="true"></div>
-        <div class="book-right" [class.turning]="bookFlipped()" (click)="toggleBook()">
+        <div class="book-right" [class.flipped]="bookFlipped()" (click)="goNext()">
           <div class="bk-face bk-front">
-            <span class="bk-num">2</span>
-            <h3>Capítulo Dos</h3>
+            <span class="bk-num">{{ rightFrontPage() }}</span>
+            <h3>Capítulo {{ rightFrontPage() }}</h3>
             <p>Click para pasar la hoja.</p>
           </div>
           <div class="bk-face bk-back">
-            <span class="bk-num">3</span>
-            <h3>Capítulo Tres</h3>
+            <span class="bk-num">{{ rightBackPage() }}</span>
+            <h3>Capítulo {{ rightBackPage() }}</h3>
             <p>Reverso antes de la siguiente.</p>
           </div>
           <div class="bk-shade" [class.active]="bookFlipped()"></div>
