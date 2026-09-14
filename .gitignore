@@ -42,3 +42,12 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Secretos: nunca versionar .env ni llaves. El deploy del VPS los lee de
+# ~/data/deploy/angular-canvas/.env (esa carpeta no es un repo git).
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_ed25519*
