@@ -774,7 +774,7 @@ export const CATALOG: readonly CatalogGroup[] = [
     label: 'Animations',
     icon: 'animations',
     accent: '#a78bfa',
-    tagline: 'Skeleton, spinner, giro de página, libro 3D y esquina doblada',
+    tagline: 'Skeleton, spinner y transiciones tipo libro',
     components: [
       {
         id: 'skeleton',
@@ -809,64 +809,14 @@ export const CATALOG: readonly CatalogGroup[] = [
       {
         id: 'page-flip',
         label: 'Page Flip',
-        tagline: 'Giro de página individual con bisagra lateral y perspectiva 3D',
+        tagline: 'Efecto libro: giro, libro abierto y esquina doblada',
         selector: 'app-anim-page-flip',
         className: 'PageFlipComponent',
         sourcePath: 'src/app/components/animations/page-flip',
         variants: [
-          { id: 'card', label: 'Tarjeta', hint: 'Hoja interactiva frontal y reverso con click' },
-          {
-            id: 'editorial',
-            label: 'Editorial',
-            hint: 'Estilo página de revista con tipografía y número',
-          },
-          { id: 'glossy', label: 'Brillo', hint: 'Efecto satinado con reflejo de luz al voltear' },
-        ],
-      },
-      {
-        id: 'book-flip',
-        label: 'Book Flip',
-        tagline: 'Libro abierto interactivo con paso de páginas bidireccional y lomo 3D',
-        selector: 'app-anim-book-flip',
-        className: 'BookFlipComponent',
-        sourcePath: 'src/app/components/animations/book-flip',
-        variants: [
-          {
-            id: 'classic',
-            label: 'Clásico',
-            hint: 'Lomo realista, sombras de pliegue y navegación completa',
-          },
-          {
-            id: 'notebook',
-            label: 'Cuaderno',
-            hint: 'Estilo cuadrícula con tipografía monoespaciada',
-          },
-          { id: 'parchment', label: 'Pergamino', hint: 'Tono editorial cálido y bordes dorados' },
-        ],
-      },
-      {
-        id: 'corner-fold',
-        label: 'Corner Fold',
-        tagline: 'Efecto de esquina doblada (dog-ear) y papel levantado',
-        selector: 'app-anim-corner-fold',
-        className: 'CornerFoldComponent',
-        sourcePath: 'src/app/components/animations/corner-fold',
-        variants: [
-          {
-            id: 'note',
-            label: 'Nota',
-            hint: 'Esquina superior derecha doblada con elevación al hover',
-          },
-          {
-            id: 'document',
-            label: 'Documento',
-            hint: 'Hoja técnica con pliegue pronunciado y sello de verificación',
-          },
-          {
-            id: 'peel',
-            label: 'Despegue',
-            hint: 'Efecto pegatina o sticker que se levanta interactivamente',
-          },
+          { id: 'page', label: 'Página', hint: 'Front/back con giro en el eje Y' },
+          { id: 'book', label: 'Libro', hint: 'Dos páginas abiertas con giro' },
+          { id: 'fold', label: 'Esquina', hint: 'Esquina que se levanta al pasar el cursor' },
         ],
       },
     ],
