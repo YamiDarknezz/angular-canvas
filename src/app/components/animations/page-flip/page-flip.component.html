@@ -1,94 +1,98 @@
 <section class="design-section">
   <h2 class="section-title">Page Flip</h2>
-  <p class="section-desc">Giros con perspectiva, hojas curvas y esquinas reales</p>
+  <p class="section-desc">
+    Giro de página individual con perspectiva 3D, bisagra lateral y sombra proyectada
+  </p>
 
-  <div class="flip-stage" data-variant="page">
+  <!-- Variante 1: Tarjeta 3D Moderna -->
+  <div class="flip-stage" data-variant="card">
     <p class="flip-hint">Haz click para girar la página</p>
     <div class="page-scene">
-      <div class="page-shadow" [class.flipped]="pageFlipped()"></div>
-      <article class="page-card" [class.flipped]="pageFlipped()" (click)="togglePage()">
+      <div class="page-shadow" [class.flipped]="flipped()"></div>
+      <article class="page-card card-style" [class.flipped]="flipped()" (click)="toggleFlip()">
         <div class="page-face front">
+          <span class="page-badge">Frente</span>
           <span class="page-num">01</span>
-          <h3>Front</h3>
-          <p>Lado frontal. Click para girar.</p>
+          <h3>Interacción 3D</h3>
+          <p>Bisagra fija a la izquierda con perspectiva profunda. Haz click para voltear.</p>
+          <span class="page-action">Girar página →</span>
         </div>
         <div class="page-face back">
+          <span class="page-badge">Reverso</span>
           <span class="page-num">02</span>
-          <h3>Reverso</h3>
-          <p>Contenido del reverso. Click para volver.</p>
+          <h3>Contenido Posterior</h3>
+          <p>La cara trasera se revela manteniendo la continuidad espacial. Click para volver.</p>
+          <span class="page-action">← Volver al frente</span>
         </div>
       </article>
     </div>
   </div>
 
-  <div class="flip-stage" data-variant="book">
-    <p class="flip-hint">← → para navegar entre capítulos</p>
-    <div class="book-nav">
-      <button type="button" class="book-arrow" [disabled]="!hasPrev()" (click)="goPrev()">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m14.5 6-6 6 6 6" />
-        </svg>
-      </button>
-      <span class="book-progress">{{ spread() + 1 }} / {{ totalSpreads }}</span>
-      <button type="button" class="book-arrow" [disabled]="!hasNext()" (click)="goNext()">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m9.5 6 6 6-6 6" />
-        </svg>
-      </button>
-    </div>
-    <div class="book-scene">
-      <div class="book-wrapper">
-        <div class="book-left" (click)="goPrev()">
-          <span class="bk-num">{{ leftPage() }}</span>
-          <h3>Capítulo {{ leftPage() }}</h3>
-          <p>Contenido de la página izquierda.</p>
-        </div>
-        <div class="book-spine" aria-hidden="true"></div>
-        <div class="book-right" #rightPage (click)="goNext()">
-          <div class="bk-face bk-front">
-            <span class="bk-num">{{ rightFrontPage() }}</span>
-            <h3>Capítulo {{ rightFrontPage() }}</h3>
-            <p>Click para pasar la hoja.</p>
+  <!-- Variante 2: Editorial / Libro -->
+  <div class="flip-stage" data-variant="editorial">
+    <p class="flip-hint">Haz click para pasar de página</p>
+    <div class="page-scene">
+      <div class="page-shadow" [class.flipped]="flipped()"></div>
+      <article class="page-card editorial-style" [class.flipped]="flipped()" (click)="toggleFlip()">
+        <div class="page-face front">
+          <div class="editorial-header">
+            <span class="editorial-cat">Diseño & Tipografía</span>
+            <span class="page-num">Pág. 14</span>
           </div>
-          <div class="bk-face bk-back">
-            <span class="bk-num">{{ rightBackPage() }}</span>
-            <h3>Capítulo {{ rightBackPage() }}</h3>
-            <p>Reverso antes de la siguiente.</p>
+          <h3 class="editorial-title">Principios de Maquetación</h3>
+          <p class="editorial-body">
+            El giro con pivote lateral emula la experiencia táctil del papel impreso, guiando la
+            atención del lector con naturalidad.
+          </p>
+          <div class="editorial-footer">
+            <span>Volumen I</span>
+            <span class="page-action">Continuar →</span>
           </div>
-          <div class="bk-shade"></div>
         </div>
-      </div>
+        <div class="page-face back">
+          <div class="editorial-header">
+            <span class="editorial-cat">Diseño & Tipografía</span>
+            <span class="page-num">Pág. 15</span>
+          </div>
+          <h3 class="editorial-title">Espaciado y Ritmo</h3>
+          <p class="editorial-body">
+            Las sombras dinámicas en la base del pliegue comunican elevación física y
+            tridimensionalidad sin recurrir a librerías pesadas.
+          </p>
+          <div class="editorial-footer">
+            <span class="page-action">← Regresar</span>
+            <span>Fin de sección</span>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 
-  <div class="flip-stage" data-variant="fold">
-    <p class="flip-hint">Pasa el cursor sobre la tarjeta para doblar la esquina</p>
-    <div class="fold-scene">
-      <article
-        class="fold-card"
-        (mouseenter)="foldActive.set(true)"
-        (mouseleave)="foldActive.set(false)"
-      >
-        <div class="fold-backing"></div>
-        <div class="fold-corner" [class.active]="foldActive()"></div>
-        <div class="fold-body">
-          <span class="fold-tag">Nota</span>
-          <h3>Esquina doblada</h3>
-          <p>La esquina superior derecha se levanta como un papel real.</p>
+  <!-- Variante 3: Glossy / Satinado con Reflejo -->
+  <div class="flip-stage" data-variant="glossy">
+    <p class="flip-hint">Haz click para apreciar el reflejo de luz</p>
+    <div class="page-scene">
+      <div class="page-shadow" [class.flipped]="flipped()"></div>
+      <article class="page-card glossy-style" [class.flipped]="flipped()" (click)="toggleFlip()">
+        <div class="page-face front">
+          <span class="glossy-pill">Edición Limitada</span>
+          <span class="page-num">#001</span>
+          <h3>Acabado Satinado</h3>
+          <p>
+            Un sutil gradiente especular recorre la superficie mientras la página gira en el espacio
+            tridimensional.
+          </p>
+          <span class="page-action">Inspeccionar reverso →</span>
+        </div>
+        <div class="page-face back">
+          <span class="glossy-pill">Especificaciones</span>
+          <span class="page-num">#002</span>
+          <h3>Detalle Técnico</h3>
+          <p>
+            Construido 100% con CSS 3D Transforms y Angular Signals. Sin scripts externos ni
+            dependencias pesadas.
+          </p>
+          <span class="page-action">← Girar al frente</span>
         </div>
       </article>
     </div>

@@ -1,0 +1,95 @@
+<section class="design-section">
+  <h2 class="section-title">Corner Fold</h2>
+  <p class="section-desc">
+    Efecto de esquina doblada (dog-ear) y papel levantado con física de sombras realistas
+  </p>
+
+  <!-- Variante 1: Nota Adhesiva -->
+  <div class="fold-stage" data-variant="note">
+    <p class="fold-hint">Pasa el cursor o haz click para doblar la esquina superior</p>
+    <div class="fold-scene">
+      <article
+        class="fold-card note-card"
+        [class.active]="noteActive()"
+        (click)="toggleNote()"
+        (mouseenter)="noteActive.set(true)"
+        (mouseleave)="noteActive.set(false)"
+      >
+        <div class="fold-cutout"></div>
+        <div class="fold-flap" [class.active]="noteActive()"></div>
+        <div class="fold-content">
+          <span class="fold-tag">Recordatorio</span>
+          <h3>Revisión de Arquitectura</h3>
+          <p>
+            La esquina superior se pliega sobre sí misma simulando un doblez físico en papel
+            auténtico.
+          </p>
+          <div class="fold-meta">
+            <span>Prioridad Alta</span>
+            <span>#NOTE-104</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Variante 2: Documento Técnico -->
+  <div class="fold-stage" data-variant="document">
+    <p class="fold-hint">Pasa el cursor para revelar el código de verificación bajo el pliegue</p>
+    <div class="fold-scene">
+      <article
+        class="fold-card doc-card"
+        [class.active]="docActive()"
+        (click)="toggleDoc()"
+        (mouseenter)="docActive.set(true)"
+        (mouseleave)="docActive.set(false)"
+      >
+        <div class="fold-cutout doc-cutout">
+          <span class="hidden-seal">VERIFICADO</span>
+        </div>
+        <div class="fold-flap doc-flap" [class.active]="docActive()"></div>
+        <div class="fold-content">
+          <span class="fold-tag doc-tag">Certificado</span>
+          <h3>Licencia de Componentes</h3>
+          <p>
+            Diseñado para ser reutilizado en cualquier aplicación sin arrastrar estilos globales no
+            deseados.
+          </p>
+          <div class="fold-meta">
+            <span>SHA-256: 8F2A...</span>
+            <span>Válido</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Variante 3: Sticker / Despegue -->
+  <div class="fold-stage" data-variant="peel">
+    <p class="fold-hint">Pasa el cursor para levantar la etiqueta adhesiva</p>
+    <div class="fold-scene">
+      <article
+        class="fold-card peel-card"
+        [class.active]="peelActive()"
+        (click)="togglePeel()"
+        (mouseenter)="peelActive.set(true)"
+        (mouseleave)="peelActive.set(false)"
+      >
+        <div class="fold-cutout peel-cutout"></div>
+        <div class="fold-flap peel-flap" [class.active]="peelActive()"></div>
+        <div class="fold-content">
+          <span class="fold-tag peel-tag">Adhesivo</span>
+          <h3>Efecto Peel 3D</h3>
+          <p>
+            Un despegue gradual con reflejo metálico que reacciona a la posición del cursor o toque
+            táctil.
+          </p>
+          <div class="fold-meta">
+            <span>Angular 22+</span>
+            <span>Zero Dependencies</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
