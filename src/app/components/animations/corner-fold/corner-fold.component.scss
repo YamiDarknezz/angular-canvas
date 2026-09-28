@@ -203,10 +203,3 @@
     box-shadow: -2px 3px 10px rgb(219 39 119 / 30%);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .fold-card,
-  .fold-flap {
-    transition: none !important;
-  }
-}

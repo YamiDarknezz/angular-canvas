@@ -216,10 +216,3 @@
     font-weight: 500;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .page-card,
-  .page-shadow {
-    transition: none !important;
-  }
-}

@@ -277,9 +277,3 @@
   --bk-accent: #f59e0b;
   --bk-font-t: Georgia, serif;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .book-leaf {
-    transition: none !important;
-  }
-}
