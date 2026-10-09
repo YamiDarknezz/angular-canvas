@@ -64,6 +64,7 @@ import { SpinnerComponent } from '../../components/animations/spinner/spinner.co
 import { PageFlipComponent } from '../../components/animations/page-flip/page-flip.component';
 import { BookFlipComponent } from '../../components/animations/book-flip/book-flip.component';
 import { CornerFoldComponent } from '../../components/animations/corner-fold/corner-fold.component';
+import { MarqueeComponent } from '../../components/animations/marquee/marquee.component';
 
 // Themes
 import { ThemeDarkComponent } from '../../components/themes/dark/dark.component';
@@ -138,6 +139,7 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['animations/page-flip', PageFlipComponent],
   ['animations/book-flip', BookFlipComponent],
   ['animations/corner-fold', CornerFoldComponent],
+  ['animations/marquee', MarqueeComponent],
   // Themes
   ['themes/dark', ThemeDarkComponent],
   ['themes/light', ThemeLightComponent],

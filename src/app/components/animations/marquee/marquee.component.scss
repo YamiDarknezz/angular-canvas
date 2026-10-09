@@ -1,0 +1,174 @@
+.marquee-stage {
+  overflow: hidden;
+  padding: 2.5rem 0;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background: #07070f;
+  border: 1px solid rgb(255 255 255 / 8%);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.marquee-hint {
+  margin: 0 0 1.5rem;
+  padding-inline: 1.5rem;
+  font-size: 0.82rem;
+  color: #6b7385;
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: var(--marquee-gap, 2.25rem);
+  padding-right: var(--marquee-gap, 2.25rem);
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+// -------------------------------------------------------------
+// Variante 1: Texto
+// -------------------------------------------------------------
+.marquee-text {
+  --marquee-gap: 2.5rem;
+
+  .marquee-track {
+    animation-duration: 30s;
+  }
+}
+
+.marquee-word {
+  font-family: var(--ac-font-display, 'Bricolage Grotesque', system-ui, sans-serif);
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #e2e8f0;
+
+  &:nth-child(even) {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #818cf8;
+  }
+}
+
+.marquee-star {
+  margin-left: 0.5em;
+  font-size: 0.55em;
+  color: #6366f1;
+  vertical-align: 0.35em;
+  -webkit-text-stroke: 0;
+}
+
+// -------------------------------------------------------------
+// Variante 2: Bidireccional
+// -------------------------------------------------------------
+.marquee-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.marquee-track-left {
+  animation-duration: 26s;
+}
+
+.marquee-track-right {
+  animation-duration: 34s;
+  animation-direction: reverse;
+
+  .marquee-chip {
+    color: #fbcfe8;
+    background: rgb(236 72 153 / 12%);
+    border-color: rgb(236 72 153 / 30%);
+  }
+}
+
+.marquee-chip {
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #c7d2fe;
+  background: rgb(99 102 241 / 12%);
+  border: 1px solid rgb(99 102 241 / 30%);
+}
+
+// -------------------------------------------------------------
+// Variante 3: Logos
+// -------------------------------------------------------------
+.marquee-logos {
+  --marquee-gap: 1.25rem;
+
+  .marquee-track {
+    animation-duration: 38s;
+  }
+
+  &:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+.marquee-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 1.35rem;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  background: rgb(255 255 255 / 4%);
+  color: #94a3b8;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+
+  &:hover {
+    color: #e2e8f0;
+    border-color: rgb(129 140 248 / 45%);
+    background: rgb(99 102 241 / 10%);
+  }
+}
+
+.marquee-mark {
+  display: grid;
+  place-items: center;
+  color: #818cf8;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+  }
+
+  .filled {
+    fill: currentColor;
+    stroke: none;
+  }
+}
+
+.marquee-logo-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}

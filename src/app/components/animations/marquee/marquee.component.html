@@ -1,0 +1,97 @@
+<section class="design-section">
+  <h2 class="section-title">Marquee</h2>
+  <p class="section-desc">Desplazamiento horizontal infinito, sin cortes ni saltos</p>
+
+  <div class="marquee-stage" data-variant="text">
+    <p class="marquee-hint">Loop continuo a velocidad constante con estilos alternados</p>
+    <div class="marquee marquee-text">
+      <div class="marquee-track">
+        @for (copy of copies; track copy) {
+          <div class="marquee-group" [attr.aria-hidden]="copy === 1 ? 'true' : null">
+            @for (word of displayWords; track word) {
+              <span class="marquee-word"
+                >{{ word }}<span class="marquee-star" aria-hidden="true">✦</span></span
+              >
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee-stage" data-variant="dual">
+    <p class="marquee-hint">Dos filas en direcciones opuestas y a distinta velocidad</p>
+    <div class="marquee-chips">
+      <div class="marquee">
+        <div class="marquee-track marquee-track-left">
+          @for (copy of copies; track copy) {
+            <div class="marquee-group" [attr.aria-hidden]="copy === 1 ? 'true' : null">
+              @for (chip of topChips; track chip) {
+                <span class="marquee-chip">{{ chip }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div class="marquee">
+        <div class="marquee-track marquee-track-right">
+          @for (copy of copies; track copy) {
+            <div class="marquee-group" [attr.aria-hidden]="copy === 1 ? 'true' : null">
+              @for (chip of bottomChips; track chip) {
+                <span class="marquee-chip">{{ chip }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee-stage" data-variant="logos">
+    <p class="marquee-hint">Fila de marcas que se pausa al pasar el cursor</p>
+    <div class="marquee marquee-logos">
+      <div class="marquee-track">
+        @for (copy of copies; track copy) {
+          <div class="marquee-group" [attr.aria-hidden]="copy === 1 ? 'true' : null">
+            @for (logo of logos; track logo.name) {
+              <span class="marquee-logo">
+                <span class="marquee-mark" aria-hidden="true">
+                  @switch (logo.mark) {
+                    @case ('triangle') {
+                      <svg viewBox="0 0 18 18"><path d="M9 2.4 16 15.2H2Z" /></svg>
+                    }
+                    @case ('diamond') {
+                      <svg viewBox="0 0 18 18"><path d="M9 1.8 16.2 9 9 16.2 1.8 9Z" /></svg>
+                    }
+                    @case ('ring') {
+                      <svg viewBox="0 0 18 18">
+                        <circle cx="9" cy="9" r="6.4" />
+                        <circle cx="9" cy="9" r="2" class="filled" />
+                      </svg>
+                    }
+                    @case ('hex') {
+                      <svg viewBox="0 0 18 18">
+                        <path d="M9 1.8 15.5 5.5v7L9 16.2 2.5 12.5v-7Z" />
+                      </svg>
+                    }
+                    @case ('wave') {
+                      <svg viewBox="0 0 18 18">
+                        <path d="M1.5 11.2c2.4-5.6 4.9-5.6 7.5 0s5.1 5.6 7.5 0" />
+                      </svg>
+                    }
+                    @case ('square') {
+                      <svg viewBox="0 0 18 18">
+                        <rect x="2.8" y="2.8" width="12.4" height="12.4" rx="3" />
+                      </svg>
+                    }
+                  }
+                </span>
+                <span class="marquee-logo-name">{{ logo.name }}</span>
+              </span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

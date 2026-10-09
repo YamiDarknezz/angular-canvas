@@ -774,7 +774,7 @@ export const CATALOG: readonly CatalogGroup[] = [
     label: 'Animations',
     icon: 'animations',
     accent: '#a78bfa',
-    tagline: 'Skeleton, spinner, giro de página, libro 3D y esquina doblada',
+    tagline: 'Skeleton, spinner, giro de página, libro 3D, esquina doblada y marquee',
     components: [
       {
         id: 'skeleton',
@@ -866,6 +866,31 @@ export const CATALOG: readonly CatalogGroup[] = [
             id: 'peel',
             label: 'Despegue',
             hint: 'Efecto pegatina o sticker que se levanta interactivamente',
+          },
+        ],
+      },
+      {
+        id: 'marquee',
+        label: 'Marquee',
+        tagline: 'Desplazamiento horizontal infinito, sin cortes ni saltos',
+        selector: 'app-anim-marquee',
+        className: 'MarqueeComponent',
+        sourcePath: 'src/app/components/animations/marquee',
+        variants: [
+          {
+            id: 'text',
+            label: 'Texto',
+            hint: 'Palabras en loop con separadores y estilos alternados',
+          },
+          {
+            id: 'dual',
+            label: 'Bidireccional',
+            hint: 'Dos filas en direcciones opuestas a distinta velocidad',
+          },
+          {
+            id: 'logos',
+            label: 'Logos',
+            hint: 'Fila de marcas que se pausa al pasar el cursor',
           },
         ],
       },
