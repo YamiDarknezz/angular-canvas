@@ -126,9 +126,9 @@
             (mouseenter)="selectPoint(c, c.px, c.py)"
             (mouseleave)="clearPoint()"
           >
-            <circle [attr.cx]="c.px" [attr.cy]="c.py" r="8" class="dot-hitbox" />
-            <circle [attr.cx]="c.px" [attr.cy]="c.py" r="4.5" class="dot-outer" />
-            <circle [attr.cx]="c.px" [attr.cy]="c.py" r="2" class="dot-core" />
+            <circle [attr.cx]="c.px" [attr.cy]="c.py" r="15" class="dot-hitbox" />
+            <circle [attr.cx]="c.px" [attr.cy]="c.py" r="5" class="dot-outer" />
+            <circle [attr.cx]="c.px" [attr.cy]="c.py" r="2.5" class="dot-core" />
           </g>
 
           <!-- Etiquetas del eje X -->
@@ -153,8 +153,8 @@
                 (mouseenter)="selectPoint({ label: c.label, value: c.value2 ?? 0 }, c.px, c.py2)"
                 (mouseleave)="clearPoint()"
               >
-                <circle [attr.cx]="c.px" [attr.cy]="c.py2" r="8" class="dot-hitbox" />
-                <circle [attr.cx]="c.px" [attr.cy]="c.py2" r="4" class="dot-outer" />
+                <circle [attr.cx]="c.px" [attr.cy]="c.py2" r="15" class="dot-hitbox" />
+                <circle [attr.cx]="c.px" [attr.cy]="c.py2" r="4.5" class="dot-outer" />
                 <circle [attr.cx]="c.px" [attr.cy]="c.py2" r="2" class="dot-core" />
               </g>
             }
@@ -165,7 +165,11 @@
 
     <!-- Tooltip flotante interactivo -->
     @if (activePoint(); as ap) {
-      <div class="chart-tooltip" [style.left.px]="(ap.x / width) * 100 + '%'" [style.top.px]="ap.y">
+      <div
+        class="chart-tooltip"
+        [style.left.%]="(ap.x / width) * 100"
+        [style.top.%]="(ap.y / height) * 100"
+      >
         <span class="tip-label">{{ ap.point.label }}</span>
         <strong class="tip-val">${{ ap.point.value }}k</strong>
       </div>
