@@ -35,9 +35,9 @@
     <!-- Eje Y de frecuencias -->
     <div class="y-scale">
       <span>{{ maxCount() }}</span>
-      <span>{{ (maxCount() * 0.75) | number: '1.0-0' }}</span>
-      <span>{{ (maxCount() * 0.5) | number: '1.0-0' }}</span>
-      <span>{{ (maxCount() * 0.25) | number: '1.0-0' }}</span>
+      <span>{{ maxCount() * 0.75 | number: '1.0-0' }}</span>
+      <span>{{ maxCount() * 0.5 | number: '1.0-0' }}</span>
+      <span>{{ maxCount() * 0.25 | number: '1.0-0' }}</span>
       <span>0</span>
     </div>
 
@@ -54,14 +54,10 @@
       <div class="bins-row">
         @for (b of bins(); track b.range) {
           @let heightPct = (b.count / maxCount()) * 100;
-          @let intensity = (b.count / maxCount());
+          @let intensity = b.count / maxCount();
           <div class="bin-col" [title]="'Rango: ' + b.range + ' | Frecuencia: ' + b.count">
             <div class="bin-track">
-              <div
-                class="bin-bar"
-                [style.height.%]="heightPct"
-                [style.--bar-intensity]="intensity"
-              >
+              <div class="bin-bar" [style.height.%]="heightPct" [style.--bar-intensity]="intensity">
                 <span class="bar-tag">{{ b.count }}</span>
               </div>
             </div>

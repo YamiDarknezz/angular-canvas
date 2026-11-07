@@ -75,7 +75,9 @@
     border-radius: 50%;
     background: var(--dot-color, var(--ac-primary));
     box-shadow: 0 0 6px color-mix(in srgb, var(--dot-color) 40%, transparent);
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+    transition:
+      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.2s;
   }
 
   &:hover .color-swatch {
