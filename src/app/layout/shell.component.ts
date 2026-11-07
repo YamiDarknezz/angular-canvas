@@ -5,6 +5,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { TOTAL_COMPONENTS, TOTAL_VARIANTS } from '../core/catalog/catalog';
+import { APP_VERSION } from '../core/version';
 import { ThemeService } from '../core/theme/theme.service';
 import { IconComponent } from '../core/ui/icon.component';
 import { NavTreeComponent } from './nav-tree/nav-tree.component';
@@ -39,6 +40,7 @@ export class ShellComponent {
 
   readonly totalComponents = TOTAL_COMPONENTS;
   readonly totalVariants = TOTAL_VARIANTS;
+  readonly appVersion = APP_VERSION;
 
   readonly drawerOpen = signal(false);
 

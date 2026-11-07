@@ -55,6 +55,19 @@ $breakpoint: 1000px;
       font-weight: 800;
     }
   }
+
+  .brand-badge {
+    margin-left: auto;
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    font-family: var(--ac-font-mono, monospace);
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: color-mix(in srgb, var(--ac-primary, #6366f1) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ac-primary, #6366f1) 40%, transparent);
+    color: var(--ac-primary-soft, #818cf8);
+    letter-spacing: -0.01em;
+  }
 }
 
 .drawer-close {

@@ -7,6 +7,7 @@ import {
   TOTAL_GROUPS,
   TOTAL_VARIANTS,
 } from '../../core/catalog/catalog';
+import { APP_VERSION } from '../../core/version';
 import { ThemeService } from '../../core/theme/theme.service';
 import { IconComponent } from '../../core/ui/icon.component';
 
@@ -25,4 +26,5 @@ export class HomeComponent {
   readonly totalComponents = TOTAL_COMPONENTS;
   readonly totalVariants = TOTAL_VARIANTS;
   readonly totalThemes = this.themeService.themes.length;
+  readonly appVersion = APP_VERSION;
 }

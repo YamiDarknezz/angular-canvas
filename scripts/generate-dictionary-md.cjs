@@ -188,7 +188,7 @@ if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 const dictionaryData = {
-  version: '2.0.0',
+  version: '2.1.0',
   totalGroups: groups.length,
   totalComponents: totalComps,
   totalVariants: totalVars,

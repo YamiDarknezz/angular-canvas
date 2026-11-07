@@ -1,9 +1,9 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "totalGroups": 10,
   "totalComponents": 60,
   "totalVariants": 166,
-  "updatedAt": "2026-11-07T23:35:02.951Z",
+  "updatedAt": "2026-11-07T23:41:44.156Z",
   "groups": [
     {
       "id": "cards",
