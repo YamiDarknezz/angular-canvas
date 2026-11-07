@@ -1,0 +1,179 @@
+<section class="donut-container" [attr.data-variant]="variant()">
+  <header class="donut-header">
+    <div class="donut-title-group">
+      <h3 class="donut-title">Indicadores Radiales y Proporcionales</h3>
+      <p class="donut-subtitle">
+        @switch (variant()) {
+          @case ('gauge') {
+            Velocímetro / tacómetro semicircular de 180° con rebote elástico [10.4.2.1]
+          }
+          @case ('segmented') {
+            Dona multicategoría con proporciones relativas y leyenda reactiva [10.4.3.1]
+          }
+          @default {
+            Anillo de neón con trazado radial continuo y brillo glow [10.4.1.1]
+          }
+        }
+      </p>
+    </div>
+
+    <div class="donut-actions">
+      <button type="button" class="action-btn" (click)="randomize()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+        </svg>
+        Actualizar Datos
+      </button>
+    </div>
+  </header>
+
+  <div #chartBox class="donut-stage">
+    @if (variant() === 'gauge') {
+      <!-- Modo Semi-Gauge (Velocímetro 180°) -->
+      <div class="gauge-wrapper">
+        <svg class="gauge-svg" viewBox="0 0 220 130">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#06b6d4" />
+              <stop offset="50%" stop-color="#3b82f6" />
+              <stop offset="100%" stop-color="var(--ac-accent, #a855f7)" />
+            </linearGradient>
+            <filter id="gaugeGlow">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Pista base -->
+          <path
+            d="M 25 110 A 85 85 0 0 1 195 110"
+            fill="none"
+            stroke="color-mix(in srgb, var(--ac-border, #27272a) 60%, transparent)"
+            stroke-width="16"
+            stroke-linecap="round"
+          />
+
+          <!-- Arco animado -->
+          <path
+            #gaugeArc
+            d="M 25 110 A 85 85 0 0 1 195 110"
+            fill="none"
+            stroke="url(#gaugeGrad)"
+            stroke-width="16"
+            stroke-linecap="round"
+            filter="url(#gaugeGlow)"
+          />
+        </svg>
+
+        <div class="gauge-center-info">
+          <span class="gauge-val">
+            <span #counterText>{{ mainPercent() }}</span>%
+          </span>
+          <span class="gauge-label">Eficiencia Operativa</span>
+        </div>
+      </div>
+    } @else if (variant() === 'segmented') {
+      <!-- Modo Dona Segmentada Multicategoría -->
+      <div class="segmented-wrapper">
+        <div class="svg-box">
+          <svg class="donut-svg" viewBox="0 0 200 200">
+            <circle
+              cx="100"
+              cy="100"
+              [attr.r]="radius"
+              fill="none"
+              stroke="color-mix(in srgb, var(--ac-border, #27272a) 40%, transparent)"
+              stroke-width="20"
+            />
+            @for (s of computedSegments(); track s.id) {
+              <circle
+                class="seg-circle"
+                cx="100"
+                cy="100"
+                [attr.r]="radius"
+                fill="none"
+                [attr.stroke]="s.color"
+                stroke-width="20"
+                [attr.stroke-dasharray]="s.dashLength + ' ' + (circumference - s.dashLength!)"
+                [attr.stroke-dashoffset]="s.dashOffset"
+                [attr.data-target-offset]="s.dashOffset"
+                transform="rotate(-90 100 100)"
+              />
+            }
+          </svg>
+          <div class="center-content">
+            <span class="center-meta">Total</span>
+            <span class="center-big">100%</span>
+          </div>
+        </div>
+
+        <div class="segments-legend">
+          @for (s of computedSegments(); track s.id) {
+            <div class="legend-row">
+              <span class="legend-dot" [style.background]="s.color"></span>
+              <span class="legend-name">{{ s.label }}</span>
+              <span class="legend-pct">{{ s.pct | number: '1.0-0' }}%</span>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <!-- Modo Ring Glow Estándar -->
+      <div class="ring-wrapper">
+        <div class="svg-box">
+          <svg class="donut-svg" viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--ac-accent, #06b6d4)" />
+                <stop offset="100%" stop-color="#3b82f6" />
+              </linearGradient>
+              <filter id="ringGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Pista base de fondo -->
+            <circle
+              cx="100"
+              cy="100"
+              [attr.r]="radius"
+              fill="none"
+              stroke="color-mix(in srgb, var(--ac-border, #27272a) 40%, transparent)"
+              stroke-width="16"
+            />
+
+            <!-- Anillo animado -->
+            <circle
+              #mainRing
+              cx="100"
+              cy="100"
+              [attr.r]="radius"
+              fill="none"
+              stroke="url(#ringGrad)"
+              stroke-width="16"
+              stroke-linecap="round"
+              [attr.stroke-dasharray]="circumference"
+              [attr.stroke-dashoffset]="circumference"
+              transform="rotate(-90 100 100)"
+              filter="url(#ringGlow)"
+            />
+          </svg>
+
+          <div class="center-content">
+            <span class="center-val">
+              <span #counterText>{{ mainPercent() }}</span>%
+            </span>
+            <span class="center-label">Completado</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

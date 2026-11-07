@@ -76,6 +76,9 @@ import { ThemeCorporateComponent } from '../../components/themes/corporate/corpo
 // Charts
 import { LineChartComponent } from '../../components/charts/line-chart/line-chart.component';
 import { BarChartComponent } from '../../components/charts/bar-chart/bar-chart.component';
+import { HistogramComponent } from '../../components/charts/histogram/histogram.component';
+import { DonutChartComponent } from '../../components/charts/donut-chart/donut-chart.component';
+import { RadarChartComponent } from '../../components/charts/radar-chart/radar-chart.component';
 
 /**
  * Mapa `grupo/componente` → clase standalone.
@@ -153,6 +156,9 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   // Charts
   ['charts/line-chart', LineChartComponent],
   ['charts/bar-chart', BarChartComponent],
+  ['charts/histogram', HistogramComponent],
+  ['charts/donut-chart', DonutChartComponent],
+  ['charts/radar-chart', RadarChartComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

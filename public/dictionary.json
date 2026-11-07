@@ -1,0 +1,2157 @@
+{
+  "version": "2.0.0",
+  "totalGroups": 10,
+  "totalComponents": 60,
+  "totalVariants": 166,
+  "updatedAt": "2026-11-07T23:35:02.951Z",
+  "groups": [
+    {
+      "id": "cards",
+      "code": "1",
+      "label": "Cards",
+      "tagline": "Tarjetas con vidrio, neón, volteo 3D y estilos sobrios",
+      "icon": "cards",
+      "accent": "#6366f1",
+      "components": [
+        {
+          "id": "glassmorphism",
+          "code": "1.1",
+          "label": "Glassmorphism",
+          "tagline": "Vidrio esmerilado con transparencia y blur",
+          "selector": "app-card-glassmorphism",
+          "className": "GlassmorphismComponent",
+          "sourcePath": "src/app/components/cards/glassmorphism",
+          "routePath": "/cards/glassmorphism",
+          "variants": [
+            {
+              "id": "default",
+              "code": "1.1.1.1",
+              "label": "Base",
+              "hint": "La tarjeta de vidrio por defecto",
+              "routePath": "/cards/glassmorphism/default",
+              "embedPath": "/embed/cards/glassmorphism/default"
+            },
+            {
+              "id": "secondary",
+              "code": "1.1.2.1",
+              "label": "Secondary",
+              "hint": "Segundo nivel de jerarquía",
+              "routePath": "/cards/glassmorphism/secondary",
+              "embedPath": "/embed/cards/glassmorphism/secondary"
+            },
+            {
+              "id": "accent",
+              "code": "1.1.3.1",
+              "label": "Accent",
+              "hint": "Acento de color para destacar una tarjeta",
+              "routePath": "/cards/glassmorphism/accent",
+              "embedPath": "/embed/cards/glassmorphism/accent"
+            }
+          ]
+        },
+        {
+          "id": "neon",
+          "code": "1.2",
+          "label": "Neon",
+          "tagline": "Bordes luminosos con efecto de neón brillante",
+          "selector": "app-card-neon",
+          "className": "NeonCardComponent",
+          "sourcePath": "src/app/components/cards/neon",
+          "routePath": "/cards/neon",
+          "variants": [
+            {
+              "id": "blue",
+              "code": "1.2.1.1",
+              "label": "Neón azul",
+              "hint": "El clásico para interfaces tech y gaming",
+              "routePath": "/cards/neon/blue",
+              "embedPath": "/embed/cards/neon/blue"
+            },
+            {
+              "id": "pink",
+              "code": "1.2.2.1",
+              "label": "Neón rosa",
+              "hint": "Energía vibrante para dashboards",
+              "routePath": "/cards/neon/pink",
+              "embedPath": "/embed/cards/neon/pink"
+            },
+            {
+              "id": "green",
+              "code": "1.2.3.1",
+              "label": "Neón verde",
+              "hint": "Inspiración Matrix para herramientas dev",
+              "routePath": "/cards/neon/green",
+              "embedPath": "/embed/cards/neon/green"
+            }
+          ]
+        },
+        {
+          "id": "hover-effects",
+          "code": "1.3",
+          "label": "Hover Effects",
+          "tagline": "Diferentes respuestas al pasar el mouse",
+          "selector": "app-card-hover",
+          "className": "HoverEffectsComponent",
+          "sourcePath": "src/app/components/cards/hover-effects",
+          "routePath": "/cards/hover-effects",
+          "variants": [
+            {
+              "id": "lift",
+              "code": "1.3.1.1",
+              "label": "Lift",
+              "hint": "Elevación suave con sombra creciente",
+              "routePath": "/cards/hover-effects/lift",
+              "embedPath": "/embed/cards/hover-effects/lift"
+            },
+            {
+              "id": "scale",
+              "code": "1.3.2.1",
+              "label": "Scale",
+              "hint": "Escalado con cambio de fondo",
+              "routePath": "/cards/hover-effects/scale",
+              "embedPath": "/embed/cards/hover-effects/scale"
+            },
+            {
+              "id": "rotate",
+              "code": "1.3.3.1",
+              "label": "Rotate",
+              "hint": "Rotación 3D sutil",
+              "routePath": "/cards/hover-effects/rotate",
+              "embedPath": "/embed/cards/hover-effects/rotate"
+            },
+            {
+              "id": "border-draw",
+              "code": "1.3.4.1",
+              "label": "Border Draw",
+              "hint": "Borde que se dibuja alrededor",
+              "routePath": "/cards/hover-effects/border-draw",
+              "embedPath": "/embed/cards/hover-effects/border-draw"
+            },
+            {
+              "id": "glow",
+              "code": "1.3.5.1",
+              "label": "Glow",
+              "hint": "Brillo expansivo con sombra de color",
+              "routePath": "/cards/hover-effects/glow",
+              "embedPath": "/embed/cards/hover-effects/glow"
+            },
+            {
+              "id": "magnetic",
+              "code": "1.3.6.1",
+              "label": "Magnetic",
+              "hint": "Sigue el cursor con efecto magnético",
+              "routePath": "/cards/hover-effects/magnetic",
+              "embedPath": "/embed/cards/hover-effects/magnetic"
+            }
+          ]
+        },
+        {
+          "id": "flip",
+          "code": "1.4",
+          "label": "Flip 3D",
+          "tagline": "Tarjetas que giran en 3D al hacer click",
+          "selector": "app-card-flip",
+          "className": "FlipCardComponent",
+          "sourcePath": "src/app/components/cards/flip",
+          "routePath": "/cards/flip",
+          "variants": [
+            {
+              "id": "classic",
+              "code": "1.4.1.1",
+              "label": "Clásica",
+              "hint": "Frente y reverso con el tema actual",
+              "routePath": "/cards/flip/classic",
+              "embedPath": "/embed/cards/flip/classic"
+            },
+            {
+              "id": "gradient",
+              "code": "1.4.2.1",
+              "label": "Gradiente",
+              "hint": "Fondos degradados en ambas caras",
+              "routePath": "/cards/flip/gradient",
+              "embedPath": "/embed/cards/flip/gradient"
+            },
+            {
+              "id": "stats",
+              "code": "1.4.3.1",
+              "label": "Con métricas",
+              "hint": "Contenido denso frente y reverso",
+              "routePath": "/cards/flip/stats",
+              "embedPath": "/embed/cards/flip/stats"
+            }
+          ]
+        },
+        {
+          "id": "tilt-3d",
+          "code": "1.5",
+          "label": "3D Tilt",
+          "tagline": "Perspectiva, profundidad y brillo que siguen al cursor",
+          "selector": "app-card-tilt3d",
+          "className": "Tilt3dCardComponent",
+          "sourcePath": "src/app/components/cards/tilt-3d",
+          "routePath": "/cards/tilt-3d",
+          "variants": [
+            {
+              "id": "tilt",
+              "code": "1.5.1.1",
+              "label": "Tilt + brillo",
+              "hint": "Rota en 3D y el reflejo sigue al cursor",
+              "routePath": "/cards/tilt-3d/tilt",
+              "embedPath": "/embed/cards/tilt-3d/tilt"
+            },
+            {
+              "id": "depth",
+              "code": "1.5.2.1",
+              "label": "Profundidad",
+              "hint": "Capas a distinta altura sobre el eje Z",
+              "routePath": "/cards/tilt-3d/depth",
+              "embedPath": "/embed/cards/tilt-3d/depth"
+            },
+            {
+              "id": "shine",
+              "code": "1.5.3.1",
+              "label": "Holo",
+              "hint": "Tornasol con destello que se desplaza",
+              "routePath": "/cards/tilt-3d/shine",
+              "embedPath": "/embed/cards/tilt-3d/shine"
+            }
+          ]
+        },
+        {
+          "id": "glass-panel",
+          "code": "1.6",
+          "label": "Glass Panels",
+          "tagline": "Superficies de vidrio sobre color con blur y brillo interior",
+          "selector": "app-card-glass-panel",
+          "className": "GlassPanelComponent",
+          "sourcePath": "src/app/components/cards/glass-panel",
+          "routePath": "/cards/glass-panel",
+          "variants": [
+            {
+              "id": "stats",
+              "code": "1.6.1.1",
+              "label": "Métricas",
+              "hint": "Panel de resumen con barras translúcidas",
+              "routePath": "/cards/glass-panel/stats",
+              "embedPath": "/embed/cards/glass-panel/stats"
+            },
+            {
+              "id": "profile",
+              "code": "1.6.2.1",
+              "label": "Perfil",
+              "hint": "Tarjeta de persona con acciones",
+              "routePath": "/cards/glass-panel/profile",
+              "embedPath": "/embed/cards/glass-panel/profile"
+            },
+            {
+              "id": "overlay",
+              "code": "1.6.3.1",
+              "label": "Superposición",
+              "hint": "Texto legible sobre cualquier fondo",
+              "routePath": "/cards/glass-panel/overlay",
+              "embedPath": "/embed/cards/glass-panel/overlay"
+            }
+          ]
+        },
+        {
+          "id": "minimal",
+          "code": "1.7",
+          "label": "Minimal",
+          "tagline": "Limpio, elegante, sin distracciones",
+          "selector": "app-card-minimal",
+          "className": "MinimalCardComponent",
+          "sourcePath": "src/app/components/cards/minimal",
+          "routePath": "/cards/minimal",
+          "variants": [
+            {
+              "id": "default",
+              "code": "1.7.1.1",
+              "label": "Con acento",
+              "hint": "Barra de acento lateral",
+              "routePath": "/cards/minimal/default",
+              "embedPath": "/embed/cards/minimal/default"
+            },
+            {
+              "id": "bordered",
+              "code": "1.7.2.1",
+              "label": "Solo bordes",
+              "hint": "Sin sombras ni fondos extra",
+              "routePath": "/cards/minimal/bordered",
+              "embedPath": "/embed/cards/minimal/bordered"
+            },
+            {
+              "id": "with-tag",
+              "code": "1.7.3.1",
+              "label": "Con etiqueta",
+              "hint": "Tag sutil de categoría",
+              "routePath": "/cards/minimal/with-tag",
+              "embedPath": "/embed/cards/minimal/with-tag"
+            }
+          ]
+        },
+        {
+          "id": "dark-corporate",
+          "code": "1.8",
+          "label": "Dark Corporate",
+          "tagline": "Elegancia corporativa en modo oscuro",
+          "selector": "app-card-corporate",
+          "className": "DarkCorporateComponent",
+          "sourcePath": "src/app/components/cards/dark-corporate",
+          "routePath": "/cards/dark-corporate",
+          "variants": [
+            {
+              "id": "default",
+              "code": "1.8.1.1",
+              "label": "Estándar",
+              "hint": "Cabecera, métricas y CTA",
+              "routePath": "/cards/dark-corporate/default",
+              "embedPath": "/embed/cards/dark-corporate/default"
+            },
+            {
+              "id": "variant",
+              "code": "1.8.2.1",
+              "label": "Con badge accent",
+              "hint": "Badge de acento y otra densidad",
+              "routePath": "/cards/dark-corporate/variant",
+              "embedPath": "/embed/cards/dark-corporate/variant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "buttons",
+      "code": "2",
+      "label": "Buttons",
+      "tagline": "Botones con brillo, degradado, neumorfismo y animación",
+      "icon": "buttons",
+      "accent": "#06b6d4",
+      "components": [
+        {
+          "id": "glow",
+          "code": "2.1",
+          "label": "Glow",
+          "tagline": "Botones con efecto de brillo expansivo",
+          "selector": "app-btn-glow",
+          "className": "GlowButtonComponent",
+          "sourcePath": "src/app/components/buttons/glow",
+          "routePath": "/buttons/glow",
+          "variants": [
+            {
+              "id": "blue",
+              "code": "2.1.1.1",
+              "label": "Azul",
+              "hint": ".glow-blue",
+              "routePath": "/buttons/glow/blue",
+              "embedPath": "/embed/buttons/glow/blue"
+            },
+            {
+              "id": "purple",
+              "code": "2.1.2.1",
+              "label": "Púrpura",
+              "hint": ".glow-purple",
+              "routePath": "/buttons/glow/purple",
+              "embedPath": "/embed/buttons/glow/purple"
+            },
+            {
+              "id": "pink",
+              "code": "2.1.3.1",
+              "label": "Rosa",
+              "hint": ".glow-pink",
+              "routePath": "/buttons/glow/pink",
+              "embedPath": "/embed/buttons/glow/pink"
+            },
+            {
+              "id": "green",
+              "code": "2.1.4.1",
+              "label": "Verde",
+              "hint": ".glow-green",
+              "routePath": "/buttons/glow/green",
+              "embedPath": "/embed/buttons/glow/green"
+            },
+            {
+              "id": "orange",
+              "code": "2.1.5.1",
+              "label": "Naranja",
+              "hint": ".glow-orange",
+              "routePath": "/buttons/glow/orange",
+              "embedPath": "/embed/buttons/glow/orange"
+            }
+          ]
+        },
+        {
+          "id": "gradient",
+          "code": "2.2",
+          "label": "Gradient",
+          "tagline": "Botones con degradados animados y estáticos",
+          "selector": "app-btn-gradient",
+          "className": "GradientButtonComponent",
+          "sourcePath": "src/app/components/buttons/gradient",
+          "routePath": "/buttons/gradient",
+          "variants": [
+            {
+              "id": "sunset",
+              "code": "2.2.1.1",
+              "label": "Sunset",
+              "hint": "Naranja a magenta",
+              "routePath": "/buttons/gradient/sunset",
+              "embedPath": "/embed/buttons/gradient/sunset"
+            },
+            {
+              "id": "ocean",
+              "code": "2.2.2.1",
+              "label": "Ocean",
+              "hint": "Azules profundos",
+              "routePath": "/buttons/gradient/ocean",
+              "embedPath": "/embed/buttons/gradient/ocean"
+            },
+            {
+              "id": "aurora",
+              "code": "2.2.3.1",
+              "label": "Aurora",
+              "hint": "Verde-cyan degradado",
+              "routePath": "/buttons/gradient/aurora",
+              "embedPath": "/embed/buttons/gradient/aurora"
+            },
+            {
+              "id": "fire",
+              "code": "2.2.4.1",
+              "label": "Fire",
+              "hint": "Rojo y ámbar",
+              "routePath": "/buttons/gradient/fire",
+              "embedPath": "/embed/buttons/gradient/fire"
+            },
+            {
+              "id": "mesh",
+              "code": "2.2.5.1",
+              "label": "Mesh animado",
+              "hint": "Malla de color en movimiento",
+              "routePath": "/buttons/gradient/mesh",
+              "embedPath": "/embed/buttons/gradient/mesh"
+            }
+          ]
+        },
+        {
+          "id": "neumorphism",
+          "code": "2.3",
+          "label": "Neumorphism",
+          "tagline": "Relieve suave tipo neumorfismo",
+          "selector": "app-btn-neumorphism",
+          "className": "NeumorphismButtonComponent",
+          "sourcePath": "src/app/components/buttons/neumorphism",
+          "routePath": "/buttons/neumorphism",
+          "variants": [
+            {
+              "id": "soft",
+              "code": "2.3.1.1",
+              "label": "Suave",
+              "hint": "Relieve estándar",
+              "routePath": "/buttons/neumorphism/soft",
+              "embedPath": "/embed/buttons/neumorphism/soft"
+            },
+            {
+              "id": "pressed",
+              "code": "2.3.2.1",
+              "label": "Presionado",
+              "hint": "Estado hundido permanente",
+              "routePath": "/buttons/neumorphism/pressed",
+              "embedPath": "/embed/buttons/neumorphism/pressed"
+            },
+            {
+              "id": "flat",
+              "code": "2.3.3.1",
+              "label": "Flat",
+              "hint": "Superficie plana",
+              "routePath": "/buttons/neumorphism/flat",
+              "embedPath": "/embed/buttons/neumorphism/flat"
+            },
+            {
+              "id": "convex",
+              "code": "2.3.4.1",
+              "label": "Convexo",
+              "hint": "Relieve saliente marcado",
+              "routePath": "/buttons/neumorphism/convex",
+              "embedPath": "/embed/buttons/neumorphism/convex"
+            }
+          ]
+        },
+        {
+          "id": "pill",
+          "code": "2.4",
+          "label": "Pill",
+          "tagline": "Botones redondeados tipo píldora",
+          "selector": "app-btn-pill",
+          "className": "PillButtonComponent",
+          "sourcePath": "src/app/components/buttons/pill",
+          "routePath": "/buttons/pill",
+          "variants": [
+            {
+              "id": "outline",
+              "code": "2.4.1.1",
+              "label": "Outline",
+              "hint": "Borde sin relleno",
+              "routePath": "/buttons/pill/outline",
+              "embedPath": "/embed/buttons/pill/outline"
+            },
+            {
+              "id": "solid",
+              "code": "2.4.2.1",
+              "label": "Solid",
+              "hint": "Relleno plano",
+              "routePath": "/buttons/pill/solid",
+              "embedPath": "/embed/buttons/pill/solid"
+            },
+            {
+              "id": "ghost",
+              "code": "2.4.3.1",
+              "label": "Ghost",
+              "hint": "Transparente hasta el hover",
+              "routePath": "/buttons/pill/ghost",
+              "embedPath": "/embed/buttons/pill/ghost"
+            },
+            {
+              "id": "gradient",
+              "code": "2.4.4.1",
+              "label": "Gradient",
+              "hint": "Degradado de acento",
+              "routePath": "/buttons/pill/gradient",
+              "embedPath": "/embed/buttons/pill/gradient"
+            },
+            {
+              "id": "with-icon",
+              "code": "2.4.5.1",
+              "label": "Con icono",
+              "hint": "Icono + texto",
+              "routePath": "/buttons/pill/with-icon",
+              "embedPath": "/embed/buttons/pill/with-icon"
+            },
+            {
+              "id": "small",
+              "code": "2.4.6.1",
+              "label": "Pequeño",
+              "hint": "Tamaño compacto",
+              "routePath": "/buttons/pill/small",
+              "embedPath": "/embed/buttons/pill/small"
+            }
+          ]
+        },
+        {
+          "id": "animated",
+          "code": "2.5",
+          "label": "Animated",
+          "tagline": "Botones con animaciones al interactuar",
+          "selector": "app-btn-animated",
+          "className": "AnimatedButtonComponent",
+          "sourcePath": "src/app/components/buttons/animated",
+          "routePath": "/buttons/animated",
+          "variants": [
+            {
+              "id": "ripple",
+              "code": "2.5.1.1",
+              "label": "Ripple",
+              "hint": "Onda desde el punto de click",
+              "routePath": "/buttons/animated/ripple",
+              "embedPath": "/embed/buttons/animated/ripple"
+            },
+            {
+              "id": "pulse",
+              "code": "2.5.2.1",
+              "label": "Pulse",
+              "hint": "Latido continuo",
+              "routePath": "/buttons/animated/pulse",
+              "embedPath": "/embed/buttons/animated/pulse"
+            },
+            {
+              "id": "shake",
+              "code": "2.5.3.1",
+              "label": "Shake",
+              "hint": "Sacudida al hacer hover",
+              "routePath": "/buttons/animated/shake",
+              "embedPath": "/embed/buttons/animated/shake"
+            },
+            {
+              "id": "fill-up",
+              "code": "2.5.4.1",
+              "label": "Fill up",
+              "hint": "Relleno que sube",
+              "routePath": "/buttons/animated/fill-up",
+              "embedPath": "/embed/buttons/animated/fill-up"
+            },
+            {
+              "id": "slide-bg",
+              "code": "2.5.5.1",
+              "label": "Slide BG",
+              "hint": "Fondo que se desliza",
+              "routePath": "/buttons/animated/slide-bg",
+              "embedPath": "/embed/buttons/animated/slide-bg"
+            },
+            {
+              "id": "magnetic",
+              "code": "2.5.6.1",
+              "label": "Magnetic",
+              "hint": "Sigue el cursor",
+              "routePath": "/buttons/animated/magnetic",
+              "embedPath": "/embed/buttons/animated/magnetic"
+            }
+          ]
+        },
+        {
+          "id": "3d",
+          "code": "2.6",
+          "label": "3D",
+          "tagline": "Relieve que se hunde, volteo y levitación por capas",
+          "selector": "app-btn-3d",
+          "className": "Button3dComponent",
+          "sourcePath": "src/app/components/buttons/3d",
+          "routePath": "/buttons/3d",
+          "variants": [
+            {
+              "id": "push",
+              "code": "2.6.1.1",
+              "label": "Push",
+              "hint": "Se hunde hasta apoyarse en su base",
+              "routePath": "/buttons/3d/push",
+              "embedPath": "/embed/buttons/3d/push"
+            },
+            {
+              "id": "flip",
+              "code": "2.6.2.1",
+              "label": "Flip",
+              "hint": "Voltea en 3D al pasar el cursor",
+              "routePath": "/buttons/3d/flip",
+              "embedPath": "/embed/buttons/3d/flip"
+            },
+            {
+              "id": "levitate",
+              "code": "2.6.3.1",
+              "label": "Levitación",
+              "hint": "Pila de capas que se separa del suelo",
+              "routePath": "/buttons/3d/levitate",
+              "embedPath": "/embed/buttons/3d/levitate"
+            }
+          ]
+        },
+        {
+          "id": "glass",
+          "code": "2.7",
+          "label": "Glass",
+          "tagline": "Botones translúcidos con blur y bordes luminosos",
+          "selector": "app-btn-glass",
+          "className": "ButtonGlassComponent",
+          "sourcePath": "src/app/components/buttons/glass",
+          "routePath": "/buttons/glass",
+          "variants": [
+            {
+              "id": "glass",
+              "code": "2.7.1.1",
+              "label": "Glass",
+              "hint": "Vidrio suave con brillo interior",
+              "routePath": "/buttons/glass/glass",
+              "embedPath": "/embed/buttons/glass/glass"
+            },
+            {
+              "id": "frost",
+              "code": "2.7.2.1",
+              "label": "Frost",
+              "hint": "Escarchado con blur intenso",
+              "routePath": "/buttons/glass/frost",
+              "embedPath": "/embed/buttons/glass/frost"
+            },
+            {
+              "id": "gradient-border",
+              "code": "2.7.3.1",
+              "label": "Borde degradado",
+              "hint": "Contorno tornasol sobre vidrio",
+              "routePath": "/buttons/glass/gradient-border",
+              "embedPath": "/embed/buttons/glass/gradient-border"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backgrounds",
+      "code": "3",
+      "label": "Backgrounds",
+      "tagline": "Fondos degradados, partículas, grillas y mallas animadas",
+      "icon": "backgrounds",
+      "accent": "#a855f7",
+      "components": [
+        {
+          "id": "gradient",
+          "code": "3.1",
+          "label": "Gradient",
+          "tagline": "Degradados para secciones completas",
+          "selector": "app-bg-gradient",
+          "className": "BgGradientComponent",
+          "sourcePath": "src/app/components/backgrounds/gradient",
+          "routePath": "/backgrounds/gradient",
+          "variants": [
+            {
+              "id": "sunset",
+              "code": "3.1.1.1",
+              "label": "Sunset",
+              "hint": "Cálido, atardecer",
+              "routePath": "/backgrounds/gradient/sunset",
+              "embedPath": "/embed/backgrounds/gradient/sunset"
+            },
+            {
+              "id": "aurora",
+              "code": "3.1.2.1",
+              "label": "Aurora",
+              "hint": "Verdes y violetas",
+              "routePath": "/backgrounds/gradient/aurora",
+              "embedPath": "/embed/backgrounds/gradient/aurora"
+            },
+            {
+              "id": "deep-ocean",
+              "code": "3.1.3.1",
+              "label": "Deep Ocean",
+              "hint": "Azules profundos",
+              "routePath": "/backgrounds/gradient/deep-ocean",
+              "embedPath": "/embed/backgrounds/gradient/deep-ocean"
+            },
+            {
+              "id": "mesh",
+              "code": "3.1.4.1",
+              "label": "Mesh",
+              "hint": "Malla de color suave",
+              "routePath": "/backgrounds/gradient/mesh",
+              "embedPath": "/embed/backgrounds/gradient/mesh"
+            },
+            {
+              "id": "radial",
+              "code": "3.1.5.1",
+              "label": "Radial Focus",
+              "hint": "Foco radial centrado",
+              "routePath": "/backgrounds/gradient/radial",
+              "embedPath": "/embed/backgrounds/gradient/radial"
+            },
+            {
+              "id": "conic",
+              "code": "3.1.6.1",
+              "label": "Conic",
+              "hint": "Degradado cónico",
+              "routePath": "/backgrounds/gradient/conic",
+              "embedPath": "/embed/backgrounds/gradient/conic"
+            }
+          ]
+        },
+        {
+          "id": "particle",
+          "code": "3.2",
+          "label": "Particle",
+          "tagline": "Canvas de partículas conectadas en red",
+          "selector": "app-bg-particle",
+          "className": "BgParticleComponent",
+          "sourcePath": "src/app/components/backgrounds/particle",
+          "routePath": "/backgrounds/particle",
+          "variants": [
+            {
+              "id": "default",
+              "code": "3.2.1.1",
+              "label": "Red de partículas",
+              "hint": "Canvas con enlaces por cercanía",
+              "routePath": "/backgrounds/particle/default",
+              "embedPath": "/embed/backgrounds/particle/default"
+            }
+          ]
+        },
+        {
+          "id": "grid",
+          "code": "3.3",
+          "label": "Grid",
+          "tagline": "Patrones de cuadrícula para fondos",
+          "selector": "app-bg-grid",
+          "className": "BgGridComponent",
+          "sourcePath": "src/app/components/backgrounds/grid",
+          "routePath": "/backgrounds/grid",
+          "variants": [
+            {
+              "id": "dots",
+              "code": "3.3.1.1",
+              "label": "Dot Grid",
+              "hint": "Puntos regulares",
+              "routePath": "/backgrounds/grid/dots",
+              "embedPath": "/embed/backgrounds/grid/dots"
+            },
+            {
+              "id": "lines",
+              "code": "3.3.2.1",
+              "label": "Line Grid",
+              "hint": "Líneas ortogonales",
+              "routePath": "/backgrounds/grid/lines",
+              "embedPath": "/embed/backgrounds/grid/lines"
+            },
+            {
+              "id": "gradient",
+              "code": "3.3.3.1",
+              "label": "Fade Grid",
+              "hint": "Grilla que se desvanece",
+              "routePath": "/backgrounds/grid/gradient",
+              "embedPath": "/embed/backgrounds/grid/gradient"
+            }
+          ]
+        },
+        {
+          "id": "animated-mesh",
+          "code": "3.4",
+          "label": "Animated Mesh",
+          "tagline": "Malla animada con colores fluidos",
+          "selector": "app-bg-mesh",
+          "className": "BgAnimatedMeshComponent",
+          "sourcePath": "src/app/components/backgrounds/animated-mesh",
+          "routePath": "/backgrounds/animated-mesh",
+          "variants": [
+            {
+              "id": "default",
+              "code": "3.4.1.1",
+              "label": "Mesh animado",
+              "hint": "Blobs de color en movimiento",
+              "routePath": "/backgrounds/animated-mesh/default",
+              "embedPath": "/embed/backgrounds/animated-mesh/default"
+            }
+          ]
+        },
+        {
+          "id": "aurora",
+          "code": "3.5",
+          "label": "Aurora",
+          "tagline": "Blobs de color, haces de luz y vidrio sobre aurora",
+          "selector": "app-bg-aurora",
+          "className": "BgAuroraComponent",
+          "sourcePath": "src/app/components/backgrounds/aurora",
+          "routePath": "/backgrounds/aurora",
+          "variants": [
+            {
+              "id": "aurora",
+              "code": "3.5.1.1",
+              "label": "Aurora",
+              "hint": "Blobs difusos que derivan en diagonal",
+              "routePath": "/backgrounds/aurora/aurora",
+              "embedPath": "/embed/backgrounds/aurora/aurora"
+            },
+            {
+              "id": "beams",
+              "code": "3.5.2.1",
+              "label": "Haces",
+              "hint": "Columnas de luz que barren el fondo",
+              "routePath": "/backgrounds/aurora/beams",
+              "embedPath": "/embed/backgrounds/aurora/beams"
+            },
+            {
+              "id": "glass",
+              "code": "3.5.3.1",
+              "label": "Con vidrio",
+              "hint": "Panel translúcido sobre la aurora",
+              "routePath": "/backgrounds/aurora/glass",
+              "embedPath": "/embed/backgrounds/aurora/glass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "typography",
+      "code": "4",
+      "label": "Typography",
+      "tagline": "Texto con neón, degradados y efecto máquina de escribir",
+      "icon": "typography",
+      "accent": "#ec4899",
+      "components": [
+        {
+          "id": "glow-text",
+          "code": "4.1",
+          "label": "Glow Text",
+          "tagline": "Texto con efecto de neón brillante",
+          "selector": "app-text-glow",
+          "className": "GlowTextComponent",
+          "sourcePath": "src/app/components/typography/glow-text",
+          "routePath": "/typography/glow-text",
+          "variants": [
+            {
+              "id": "cyan",
+              "code": "4.1.1.1",
+              "label": "Cyan",
+              "hint": ".glow-cyan",
+              "routePath": "/typography/glow-text/cyan",
+              "embedPath": "/embed/typography/glow-text/cyan"
+            },
+            {
+              "id": "pink",
+              "code": "4.1.2.1",
+              "label": "Rosa",
+              "hint": ".glow-pink",
+              "routePath": "/typography/glow-text/pink",
+              "embedPath": "/embed/typography/glow-text/pink"
+            },
+            {
+              "id": "green",
+              "code": "4.1.3.1",
+              "label": "Verde Matrix",
+              "hint": ".glow-green",
+              "routePath": "/typography/glow-text/green",
+              "embedPath": "/embed/typography/glow-text/green"
+            },
+            {
+              "id": "pulse",
+              "code": "4.1.4.1",
+              "label": "Con pulso",
+              "hint": ".glow-pulse",
+              "routePath": "/typography/glow-text/pulse",
+              "embedPath": "/embed/typography/glow-text/pulse"
+            }
+          ]
+        },
+        {
+          "id": "gradient-text",
+          "code": "4.2",
+          "label": "Gradient Text",
+          "tagline": "Degradados animados y estáticos en texto",
+          "selector": "app-text-gradient",
+          "className": "GradientTextComponent",
+          "sourcePath": "src/app/components/typography/gradient-text",
+          "routePath": "/typography/gradient-text",
+          "variants": [
+            {
+              "id": "static",
+              "code": "4.2.1.1",
+              "label": "Estático",
+              "hint": ".grad-static",
+              "routePath": "/typography/gradient-text/static",
+              "embedPath": "/embed/typography/gradient-text/static"
+            },
+            {
+              "id": "animated",
+              "code": "4.2.2.1",
+              "label": "Animado",
+              "hint": ".grad-animated",
+              "routePath": "/typography/gradient-text/animated",
+              "embedPath": "/embed/typography/gradient-text/animated"
+            },
+            {
+              "id": "rainbow",
+              "code": "4.2.3.1",
+              "label": "Arcoíris",
+              "hint": ".grad-rainbow",
+              "routePath": "/typography/gradient-text/rainbow",
+              "embedPath": "/embed/typography/gradient-text/rainbow"
+            },
+            {
+              "id": "subtle",
+              "code": "4.2.4.1",
+              "label": "Sutil",
+              "hint": ".grad-subtle, para párrafos",
+              "routePath": "/typography/gradient-text/subtle",
+              "embedPath": "/embed/typography/gradient-text/subtle"
+            }
+          ]
+        },
+        {
+          "id": "typewriter",
+          "code": "4.3",
+          "label": "Typewriter",
+          "tagline": "Efecto de máquina de escribir sobre una terminal",
+          "selector": "app-text-typewriter",
+          "className": "TypewriterComponent",
+          "sourcePath": "src/app/components/typography/typewriter",
+          "routePath": "/typography/typewriter",
+          "variants": [
+            {
+              "id": "default",
+              "code": "4.3.1.1",
+              "label": "Terminal",
+              "hint": "Cursor, prompt y escribido secuencial",
+              "routePath": "/typography/typewriter/default",
+              "embedPath": "/embed/typography/typewriter/default"
+            }
+          ]
+        },
+        {
+          "id": "3d-text",
+          "code": "4.4",
+          "label": "3D Text",
+          "tagline": "Extrusión, perspectiva isométrica y levitación",
+          "selector": "app-text-3d",
+          "className": "Text3dComponent",
+          "sourcePath": "src/app/components/typography/3d-text",
+          "routePath": "/typography/3d-text",
+          "variants": [
+            {
+              "id": "extrude",
+              "code": "4.4.1.1",
+              "label": "Extrude",
+              "hint": "Canto sólido por capas de sombra",
+              "routePath": "/typography/3d-text/extrude",
+              "embedPath": "/embed/typography/3d-text/extrude"
+            },
+            {
+              "id": "isometric",
+              "code": "4.4.2.1",
+              "label": "Isométrico",
+              "hint": "Texto recostado con perspectiva",
+              "routePath": "/typography/3d-text/isometric",
+              "embedPath": "/embed/typography/3d-text/isometric"
+            },
+            {
+              "id": "floating",
+              "code": "4.4.3.1",
+              "label": "Floating",
+              "hint": "Flota con su sombra en movimiento",
+              "routePath": "/typography/3d-text/floating",
+              "embedPath": "/embed/typography/3d-text/floating"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "code": "5",
+      "label": "Navigation",
+      "tagline": "Sidebar colapsable y topbar responsiva",
+      "icon": "navigation",
+      "accent": "#14b8a6",
+      "components": [
+        {
+          "id": "sidebar",
+          "code": "5.1",
+          "label": "Sidebar",
+          "tagline": "Navegación lateral colapsable, navegable por teclado",
+          "selector": "app-nav-sidebar",
+          "className": "SidebarNavComponent",
+          "sourcePath": "src/app/components/navigation/sidebar",
+          "routePath": "/navigation/sidebar",
+          "variants": [
+            {
+              "id": "default",
+              "code": "5.1.1.1",
+              "label": "Colapsable",
+              "hint": "Colapsa con ☰ y recuerda el item activo",
+              "routePath": "/navigation/sidebar/default",
+              "embedPath": "/embed/navigation/sidebar/default"
+            }
+          ]
+        },
+        {
+          "id": "topbar",
+          "code": "5.2",
+          "label": "Topbar",
+          "tagline": "Barra superior responsiva con menú mobile accesible",
+          "selector": "app-nav-topbar",
+          "className": "TopbarNavComponent",
+          "sourcePath": "src/app/components/navigation/topbar",
+          "routePath": "/navigation/topbar",
+          "variants": [
+            {
+              "id": "default",
+              "code": "5.2.1.1",
+              "label": "Con menú mobile",
+              "hint": "Menú ☰ accesible por teclado",
+              "routePath": "/navigation/topbar/default",
+              "embedPath": "/embed/navigation/topbar/default"
+            }
+          ]
+        },
+        {
+          "id": "dock",
+          "code": "5.3",
+          "label": "Dock",
+          "tagline": "Dock inferior flotante, de cristal o barra completa",
+          "selector": "app-nav-dock",
+          "className": "DockNavComponent",
+          "sourcePath": "src/app/components/navigation/dock",
+          "routePath": "/navigation/dock",
+          "variants": [
+            {
+              "id": "floating",
+              "code": "5.3.1.1",
+              "label": "Flotante",
+              "hint": "Píldora flotante con magnificación al pasar el cursor",
+              "routePath": "/navigation/dock/floating",
+              "embedPath": "/embed/navigation/dock/floating"
+            },
+            {
+              "id": "glass",
+              "code": "5.3.2.1",
+              "label": "Cristal",
+              "hint": "Vidrio transparente sobre color",
+              "routePath": "/navigation/dock/glass",
+              "embedPath": "/embed/navigation/dock/glass"
+            },
+            {
+              "id": "bar",
+              "code": "5.3.3.1",
+              "label": "Barra",
+              "hint": "Barra inferior a ancho completo",
+              "routePath": "/navigation/dock/bar",
+              "embedPath": "/embed/navigation/dock/bar"
+            }
+          ]
+        },
+        {
+          "id": "glass-tabs",
+          "code": "5.4",
+          "label": "Glass Tabs",
+          "tagline": "Pestañas translúcidas con indicador deslizante",
+          "selector": "app-nav-tabs",
+          "className": "GlassTabsComponent",
+          "sourcePath": "src/app/components/navigation/glass-tabs",
+          "routePath": "/navigation/glass-tabs",
+          "variants": [
+            {
+              "id": "glass",
+              "code": "5.4.1.1",
+              "label": "Vidrio",
+              "hint": "Barra de vidrio con pastilla que se desliza",
+              "routePath": "/navigation/glass-tabs/glass",
+              "embedPath": "/embed/navigation/glass-tabs/glass"
+            },
+            {
+              "id": "underline",
+              "code": "5.4.2.1",
+              "label": "Subrayado",
+              "hint": "Línea luminosa que sigue a la pestaña",
+              "routePath": "/navigation/glass-tabs/underline",
+              "embedPath": "/embed/navigation/glass-tabs/underline"
+            }
+          ]
+        },
+        {
+          "id": "breadcrumbs",
+          "code": "5.5",
+          "label": "Breadcrumbs",
+          "tagline": "Migas de pan con chevron, slash y vidrio",
+          "selector": "app-nav-breadcrumbs",
+          "className": "BreadcrumbsComponent",
+          "sourcePath": "src/app/components/navigation/breadcrumbs",
+          "routePath": "/navigation/breadcrumbs",
+          "variants": [
+            {
+              "id": "chevron",
+              "code": "5.5.1.1",
+              "label": "Chevron",
+              "hint": "Flechas entre niveles",
+              "routePath": "/navigation/breadcrumbs/chevron",
+              "embedPath": "/embed/navigation/breadcrumbs/chevron"
+            },
+            {
+              "id": "slash",
+              "code": "5.5.2.1",
+              "label": "Slash",
+              "hint": "Barra monoespaciada",
+              "routePath": "/navigation/breadcrumbs/slash",
+              "embedPath": "/embed/navigation/breadcrumbs/slash"
+            },
+            {
+              "id": "glass",
+              "code": "5.5.3.1",
+              "label": "Vidrio",
+              "hint": "Píldora translúcida sobre color",
+              "routePath": "/navigation/breadcrumbs/glass",
+              "embedPath": "/embed/navigation/breadcrumbs/glass"
+            }
+          ]
+        },
+        {
+          "id": "pagination",
+          "code": "5.6",
+          "label": "Pagination",
+          "tagline": "Paginación numérica, compacta y de vidrio",
+          "selector": "app-nav-pagination",
+          "className": "PaginationComponent",
+          "sourcePath": "src/app/components/navigation/pagination",
+          "routePath": "/navigation/pagination",
+          "variants": [
+            {
+              "id": "numbers",
+              "code": "5.6.1.1",
+              "label": "Números",
+              "hint": "Página activa con elipsis dinámico",
+              "routePath": "/navigation/pagination/numbers",
+              "embedPath": "/embed/navigation/pagination/numbers"
+            },
+            {
+              "id": "compact",
+              "code": "5.6.2.1",
+              "label": "Compacta",
+              "hint": "\"Página X de Y\" con flechas",
+              "routePath": "/navigation/pagination/compact",
+              "embedPath": "/embed/navigation/pagination/compact"
+            },
+            {
+              "id": "glass",
+              "code": "5.6.3.1",
+              "label": "Vidrio",
+              "hint": "Píldora translucida sobre color",
+              "routePath": "/navigation/pagination/glass",
+              "embedPath": "/embed/navigation/pagination/glass"
+            }
+          ]
+        },
+        {
+          "id": "stepper",
+          "code": "5.7",
+          "label": "Stepper",
+          "tagline": "Pasos en horizontal, vertical y barra de progreso",
+          "selector": "app-nav-stepper",
+          "className": "StepperComponent",
+          "sourcePath": "src/app/components/navigation/stepper",
+          "routePath": "/navigation/stepper",
+          "variants": [
+            {
+              "id": "horizontal",
+              "code": "5.7.1.1",
+              "label": "Horizontal",
+              "hint": "Pasos en fila con conectores",
+              "routePath": "/navigation/stepper/horizontal",
+              "embedPath": "/embed/navigation/stepper/horizontal"
+            },
+            {
+              "id": "vertical",
+              "code": "5.7.2.1",
+              "label": "Vertical",
+              "hint": "Pasos apilados con línea izquierda",
+              "routePath": "/navigation/stepper/vertical",
+              "embedPath": "/embed/navigation/stepper/vertical"
+            },
+            {
+              "id": "progress",
+              "code": "5.7.3.1",
+              "label": "Progreso",
+              "hint": "Barra de progreso con puntos",
+              "routePath": "/navigation/stepper/progress",
+              "embedPath": "/embed/navigation/stepper/progress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forms",
+      "code": "6",
+      "label": "Forms",
+      "tagline": "Inputs de vidrio, toggles y checkboxes accesibles",
+      "icon": "forms",
+      "accent": "#f59e0b",
+      "components": [
+        {
+          "id": "glass-input",
+          "code": "6.1",
+          "label": "Glass Input",
+          "tagline": "Inputs con estilo glassmorphism",
+          "selector": "app-form-glass-input",
+          "className": "GlassInputComponent",
+          "sourcePath": "src/app/components/forms/glass-input",
+          "routePath": "/forms/glass-input",
+          "variants": [
+            {
+              "id": "default",
+              "code": "6.1.1.1",
+              "label": "Formulario",
+              "hint": "Input, email y textarea con highlight",
+              "routePath": "/forms/glass-input/default",
+              "embedPath": "/embed/forms/glass-input/default"
+            }
+          ]
+        },
+        {
+          "id": "toggle",
+          "code": "6.2",
+          "label": "Toggle",
+          "tagline": "Interruptores animados con rol switch",
+          "selector": "app-form-toggle",
+          "className": "ToggleComponent",
+          "sourcePath": "src/app/components/forms/toggle",
+          "routePath": "/forms/toggle",
+          "variants": [
+            {
+              "id": "default",
+              "code": "6.2.1.1",
+              "label": "Switches",
+              "hint": "aria-checked y navegable por teclado",
+              "routePath": "/forms/toggle/default",
+              "embedPath": "/embed/forms/toggle/default"
+            }
+          ]
+        },
+        {
+          "id": "checkbox",
+          "code": "6.3",
+          "label": "Checkbox",
+          "tagline": "Checkboxes personalizados y accesibles",
+          "selector": "app-form-checkbox",
+          "className": "CheckboxComponent",
+          "sourcePath": "src/app/components/forms/checkbox",
+          "routePath": "/forms/checkbox",
+          "variants": [
+            {
+              "id": "default",
+              "code": "6.3.1.1",
+              "label": "Checkboxes",
+              "hint": "Con icono de check animado",
+              "routePath": "/forms/checkbox/default",
+              "embedPath": "/embed/forms/checkbox/default"
+            }
+          ]
+        },
+        {
+          "id": "segmented",
+          "code": "6.4",
+          "label": "Segmented",
+          "tagline": "Selector segmentado con indicador deslizante",
+          "selector": "app-form-segmented",
+          "className": "SegmentedComponent",
+          "sourcePath": "src/app/components/forms/segmented",
+          "routePath": "/forms/segmented",
+          "variants": [
+            {
+              "id": "glass",
+              "code": "6.4.1.1",
+              "label": "Vidrio",
+              "hint": "Translúcido con pulgar que se desliza",
+              "routePath": "/forms/segmented/glass",
+              "embedPath": "/embed/forms/segmented/glass"
+            },
+            {
+              "id": "solid",
+              "code": "6.4.2.1",
+              "label": "Sólido",
+              "hint": "Pulgar sólido sobre panel oscuro",
+              "routePath": "/forms/segmented/solid",
+              "embedPath": "/embed/forms/segmented/solid"
+            }
+          ]
+        },
+        {
+          "id": "otp",
+          "code": "6.5",
+          "label": "OTP Input",
+          "tagline": "Código de verificación con avance automático",
+          "selector": "app-form-otp",
+          "className": "OtpComponent",
+          "sourcePath": "src/app/components/forms/otp",
+          "routePath": "/forms/otp",
+          "variants": [
+            {
+              "id": "boxes",
+              "code": "6.5.1.1",
+              "label": "Cajas",
+              "hint": "Dígitos en cajas de vidrio con blur",
+              "routePath": "/forms/otp/boxes",
+              "embedPath": "/embed/forms/otp/boxes"
+            },
+            {
+              "id": "underline",
+              "code": "6.5.2.1",
+              "label": "Subrayado",
+              "hint": "Dígitos mono sobre línea de color",
+              "routePath": "/forms/otp/underline",
+              "embedPath": "/embed/forms/otp/underline"
+            }
+          ]
+        },
+        {
+          "id": "rating",
+          "code": "6.6",
+          "label": "Rating",
+          "tagline": "Valoración por estrellas y segmentos",
+          "selector": "app-form-rating",
+          "className": "RatingComponent",
+          "sourcePath": "src/app/components/forms/rating",
+          "routePath": "/forms/rating",
+          "variants": [
+            {
+              "id": "stars",
+              "code": "6.6.1.1",
+              "label": "Estrellas",
+              "hint": "5 estrellas con hover dorado",
+              "routePath": "/forms/rating/stars",
+              "embedPath": "/embed/forms/rating/stars"
+            },
+            {
+              "id": "segments",
+              "code": "6.6.2.1",
+              "label": "Segmentos",
+              "hint": "Botones 1–5 con etiquetas",
+              "routePath": "/forms/rating/segments",
+              "embedPath": "/embed/forms/rating/segments"
+            }
+          ]
+        },
+        {
+          "id": "range",
+          "code": "6.7",
+          "label": "Range Slider",
+          "tagline": "Selector de rango con pista de degradado",
+          "selector": "app-form-range",
+          "className": "RangeComponent",
+          "sourcePath": "src/app/components/forms/range",
+          "routePath": "/forms/range",
+          "variants": [
+            {
+              "id": "gradient",
+              "code": "6.7.1.1",
+              "label": "Degradado",
+              "hint": "Pista indigo→rosa con pulgar blanco",
+              "routePath": "/forms/range/gradient",
+              "embedPath": "/embed/forms/range/gradient"
+            },
+            {
+              "id": "glass",
+              "code": "6.7.2.1",
+              "label": "Vidrio",
+              "hint": "Pulgar translúcido con borde luminoso",
+              "routePath": "/forms/range/glass",
+              "embedPath": "/embed/forms/range/glass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modals",
+      "code": "7",
+      "label": "Modals",
+      "tagline": "Modal de vidrio y panel lateral con foco gestionado",
+      "icon": "modals",
+      "accent": "#3b82f6",
+      "components": [
+        {
+          "id": "glass-modal",
+          "code": "7.1",
+          "label": "Glass Modal",
+          "tagline": "Modal glassmorphism con Escape y click fuera",
+          "selector": "app-modal-glass",
+          "className": "GlassModalComponent",
+          "sourcePath": "src/app/components/modals/glass-modal",
+          "routePath": "/modals/glass-modal",
+          "variants": [
+            {
+              "id": "default",
+              "code": "7.1.1.1",
+              "label": "Modal",
+              "hint": "Se abre dentro del entorno, no sobre toda la app",
+              "routePath": "/modals/glass-modal/default",
+              "embedPath": "/embed/modals/glass-modal/default"
+            }
+          ]
+        },
+        {
+          "id": "slide-in",
+          "code": "7.2",
+          "label": "Slide-in Panel",
+          "tagline": "Panel lateral con animación de entrada",
+          "selector": "app-modal-slide-in",
+          "className": "SlideInModalComponent",
+          "sourcePath": "src/app/components/modals/slide-in",
+          "routePath": "/modals/slide-in",
+          "variants": [
+            {
+              "id": "default",
+              "code": "7.2.1.1",
+              "label": "Panel lateral",
+              "hint": "Entra desde la derecha, cierra con Escape",
+              "routePath": "/modals/slide-in/default",
+              "embedPath": "/embed/modals/slide-in/default"
+            }
+          ]
+        },
+        {
+          "id": "command-palette",
+          "code": "7.3",
+          "label": "Command Palette",
+          "tagline": "Paleta translúcida con búsqueda y teclado",
+          "selector": "app-modal-palette",
+          "className": "CommandPaletteComponent",
+          "sourcePath": "src/app/components/modals/command-palette",
+          "routePath": "/modals/command-palette",
+          "variants": [
+            {
+              "id": "default",
+              "code": "7.3.1.1",
+              "label": "Paleta de comandos",
+              "hint": "Flechas para moverse, Enter para ejecutar, Escape para cerrar",
+              "routePath": "/modals/command-palette/default",
+              "embedPath": "/embed/modals/command-palette/default"
+            }
+          ]
+        },
+        {
+          "id": "confirm",
+          "code": "7.4",
+          "label": "Confirm Dialog",
+          "tagline": "Diálogo de confirmación con peligro y vidrio",
+          "selector": "app-modal-confirm",
+          "className": "ConfirmModalComponent",
+          "sourcePath": "src/app/components/modals/confirm",
+          "routePath": "/modals/confirm",
+          "variants": [
+            {
+              "id": "danger",
+              "code": "7.4.1.1",
+              "label": "Peligro",
+              "hint": "Acento rojo con icono de advertencia",
+              "routePath": "/modals/confirm/danger",
+              "embedPath": "/embed/modals/confirm/danger"
+            },
+            {
+              "id": "glass",
+              "code": "7.4.2.1",
+              "label": "Vidrio",
+              "hint": "Panel translúcido con blur",
+              "routePath": "/modals/confirm/glass",
+              "embedPath": "/embed/modals/confirm/glass"
+            }
+          ]
+        },
+        {
+          "id": "bottom-sheet",
+          "code": "7.5",
+          "label": "Bottom Sheet",
+          "tagline": "Panel inferior con manija y acciones",
+          "selector": "app-modal-sheet",
+          "className": "BottomSheetComponent",
+          "sourcePath": "src/app/components/modals/bottom-sheet",
+          "routePath": "/modals/bottom-sheet",
+          "variants": [
+            {
+              "id": "solid",
+              "code": "7.5.1.1",
+              "label": "Sólido",
+              "hint": "Panel oscuro desde abajo",
+              "routePath": "/modals/bottom-sheet/solid",
+              "embedPath": "/embed/modals/bottom-sheet/solid"
+            },
+            {
+              "id": "glass",
+              "code": "7.5.2.1",
+              "label": "Vidrio",
+              "hint": "Panel translúcido con blur",
+              "routePath": "/modals/bottom-sheet/glass",
+              "embedPath": "/embed/modals/bottom-sheet/glass"
+            }
+          ]
+        },
+        {
+          "id": "lightbox",
+          "code": "7.6",
+          "label": "Lightbox",
+          "tagline": "Visor de fotos con prev/next y vidrio",
+          "selector": "app-modal-lightbox",
+          "className": "LightboxComponent",
+          "sourcePath": "src/app/components/modals/lightbox",
+          "routePath": "/modals/lightbox",
+          "variants": [
+            {
+              "id": "photo",
+              "code": "7.6.1.1",
+              "label": "Foto",
+              "hint": "Visor oscuro con flechas",
+              "routePath": "/modals/lightbox/photo",
+              "embedPath": "/embed/modals/lightbox/photo"
+            },
+            {
+              "id": "glass",
+              "code": "7.6.2.1",
+              "label": "Vidrio",
+              "hint": "Miniaturas con efecto de vidrio",
+              "routePath": "/modals/lightbox/glass",
+              "embedPath": "/embed/modals/lightbox/glass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "themes",
+      "code": "8",
+      "label": "Themes",
+      "tagline": "Cinco temas completos basados en variables CSS",
+      "icon": "themes",
+      "accent": "#f43f5e",
+      "components": [
+        {
+          "id": "dark",
+          "code": "8.1",
+          "label": "Dark",
+          "tagline": "Paleta completa para modo oscuro",
+          "selector": "app-theme-dark",
+          "className": "ThemeDarkComponent",
+          "sourcePath": "src/app/components/themes/dark",
+          "routePath": "/themes/dark",
+          "variants": [
+            {
+              "id": "surfaces",
+              "code": "8.1.1.1",
+              "label": "Superficies",
+              "hint": "Fondos y capas",
+              "routePath": "/themes/dark/surfaces",
+              "embedPath": "/embed/themes/dark/surfaces"
+            },
+            {
+              "id": "accent",
+              "code": "8.1.2.1",
+              "label": "Acento",
+              "hint": "Indigo de marca",
+              "routePath": "/themes/dark/accent",
+              "embedPath": "/embed/themes/dark/accent"
+            },
+            {
+              "id": "neutrals",
+              "code": "8.1.3.1",
+              "label": "Neutros",
+              "hint": "Escala de grises",
+              "routePath": "/themes/dark/neutrals",
+              "embedPath": "/embed/themes/dark/neutrals"
+            }
+          ]
+        },
+        {
+          "id": "light",
+          "code": "8.2",
+          "label": "Light",
+          "tagline": "Paleta limpia para modo claro",
+          "selector": "app-theme-light",
+          "className": "ThemeLightComponent",
+          "sourcePath": "src/app/components/themes/light",
+          "routePath": "/themes/light",
+          "variants": [
+            {
+              "id": "surfaces",
+              "code": "8.2.1.1",
+              "label": "Superficies",
+              "hint": "Blancos y grises claros",
+              "routePath": "/themes/light/surfaces",
+              "embedPath": "/embed/themes/light/surfaces"
+            },
+            {
+              "id": "accent",
+              "code": "8.2.2.1",
+              "label": "Acento",
+              "hint": "Azules de marca",
+              "routePath": "/themes/light/accent",
+              "embedPath": "/embed/themes/light/accent"
+            },
+            {
+              "id": "neutrals",
+              "code": "8.2.3.1",
+              "label": "Neutros",
+              "hint": "Texto y bordes",
+              "routePath": "/themes/light/neutrals",
+              "embedPath": "/embed/themes/light/neutrals"
+            }
+          ]
+        },
+        {
+          "id": "hacker",
+          "code": "8.3",
+          "label": "Hacker",
+          "tagline": "Estilo Matrix / terminal verde sobre negro",
+          "selector": "app-theme-hacker",
+          "className": "ThemeHackerComponent",
+          "sourcePath": "src/app/components/themes/hacker",
+          "routePath": "/themes/hacker",
+          "variants": [
+            {
+              "id": "terminal",
+              "code": "8.3.1.1",
+              "label": "Terminal",
+              "hint": "Simulación de shell con cursor",
+              "routePath": "/themes/hacker/terminal",
+              "embedPath": "/embed/themes/hacker/terminal"
+            },
+            {
+              "id": "palette",
+              "code": "8.3.2.1",
+              "label": "Paleta",
+              "hint": "Verdes fosforescentes",
+              "routePath": "/themes/hacker/palette",
+              "embedPath": "/embed/themes/hacker/palette"
+            }
+          ]
+        },
+        {
+          "id": "cyberpunk",
+          "code": "8.4",
+          "label": "Cyberpunk",
+          "tagline": "Futurista con neón rosa, cyan y amarillo",
+          "selector": "app-theme-cyberpunk",
+          "className": "ThemeCyberpunkComponent",
+          "sourcePath": "src/app/components/themes/cyberpunk",
+          "routePath": "/themes/cyberpunk",
+          "variants": [
+            {
+              "id": "glitch",
+              "code": "8.4.1.1",
+              "label": "Título glitch",
+              "hint": "Texto con desplazamiento RGB",
+              "routePath": "/themes/cyberpunk/glitch",
+              "embedPath": "/embed/themes/cyberpunk/glitch"
+            },
+            {
+              "id": "subtitle",
+              "code": "8.4.2.1",
+              "label": "Subtítulo",
+              "hint": "Línea monoespaciada",
+              "routePath": "/themes/cyberpunk/subtitle",
+              "embedPath": "/embed/themes/cyberpunk/subtitle"
+            },
+            {
+              "id": "palette",
+              "code": "8.4.3.1",
+              "label": "Paleta",
+              "hint": "Neones saturados",
+              "routePath": "/themes/cyberpunk/palette",
+              "embedPath": "/embed/themes/cyberpunk/palette"
+            }
+          ]
+        },
+        {
+          "id": "corporate",
+          "code": "8.5",
+          "label": "Corporate",
+          "tagline": "Profesional y sobrio para empresas",
+          "selector": "app-theme-corporate",
+          "className": "ThemeCorporateComponent",
+          "sourcePath": "src/app/components/themes/corporate",
+          "routePath": "/themes/corporate",
+          "variants": [
+            {
+              "id": "header",
+              "code": "8.5.1.1",
+              "label": "Cabecera",
+              "hint": "Logo y jerarquía",
+              "routePath": "/themes/corporate/header",
+              "embedPath": "/embed/themes/corporate/header"
+            },
+            {
+              "id": "palette",
+              "code": "8.5.2.1",
+              "label": "Paleta",
+              "hint": "Azules corporativos y grises",
+              "routePath": "/themes/corporate/palette",
+              "embedPath": "/embed/themes/corporate/palette"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "animations",
+      "code": "9",
+      "label": "Animations",
+      "tagline": "Skeleton, spinner, giro de página, libro 3D, esquina doblada y marquee",
+      "icon": "animations",
+      "accent": "#a78bfa",
+      "components": [
+        {
+          "id": "skeleton",
+          "code": "9.1",
+          "label": "Skeleton",
+          "tagline": "Estados de carga con shimmer, pulso y onda",
+          "selector": "app-anim-skeleton",
+          "className": "SkeletonComponent",
+          "sourcePath": "src/app/components/animations/skeleton",
+          "routePath": "/animations/skeleton",
+          "variants": [
+            {
+              "id": "shimmer",
+              "code": "9.1.1.1",
+              "label": "Shimmer",
+              "hint": "Brillo que se desplaza de izquierda a derecha",
+              "routePath": "/animations/skeleton/shimmer",
+              "embedPath": "/embed/animations/skeleton/shimmer"
+            },
+            {
+              "id": "pulse",
+              "code": "9.1.2.1",
+              "label": "Pulso",
+              "hint": "Opacidad que sube y baja suavemente",
+              "routePath": "/animations/skeleton/pulse",
+              "embedPath": "/embed/animations/skeleton/pulse"
+            },
+            {
+              "id": "wave",
+              "code": "9.1.3.1",
+              "label": "Onda",
+              "hint": "Ola azul que avanza por las líneas",
+              "routePath": "/animations/skeleton/wave",
+              "embedPath": "/embed/animations/skeleton/wave"
+            }
+          ]
+        },
+        {
+          "id": "spinner",
+          "code": "9.2",
+          "label": "Spinner",
+          "tagline": "Indicadores de carga: anillo, puntos y barra",
+          "selector": "app-anim-spinner",
+          "className": "SpinnerComponent",
+          "sourcePath": "src/app/components/animations/spinner",
+          "routePath": "/animations/spinner",
+          "variants": [
+            {
+              "id": "ring",
+              "code": "9.2.1.1",
+              "label": "Anillo",
+              "hint": "Círculo que gira con borde de color",
+              "routePath": "/animations/spinner/ring",
+              "embedPath": "/embed/animations/spinner/ring"
+            },
+            {
+              "id": "dots",
+              "code": "9.2.2.1",
+              "label": "Puntos",
+              "hint": "Tres puntos que rebotan",
+              "routePath": "/animations/spinner/dots",
+              "embedPath": "/embed/animations/spinner/dots"
+            },
+            {
+              "id": "bar",
+              "code": "9.2.3.1",
+              "label": "Barra",
+              "hint": "Barra con degradado que avanza",
+              "routePath": "/animations/spinner/bar",
+              "embedPath": "/embed/animations/spinner/bar"
+            }
+          ]
+        },
+        {
+          "id": "page-flip",
+          "code": "9.3",
+          "label": "Page Flip",
+          "tagline": "Giro de página individual con bisagra lateral y perspectiva 3D",
+          "selector": "app-anim-page-flip",
+          "className": "PageFlipComponent",
+          "sourcePath": "src/app/components/animations/page-flip",
+          "routePath": "/animations/page-flip",
+          "variants": [
+            {
+              "id": "card",
+              "code": "9.3.1.1",
+              "label": "Tarjeta",
+              "hint": "Hoja interactiva frontal y reverso con click",
+              "routePath": "/animations/page-flip/card",
+              "embedPath": "/embed/animations/page-flip/card"
+            },
+            {
+              "id": "editorial",
+              "code": "9.3.2.1",
+              "label": "Editorial",
+              "hint": "Estilo página de revista con tipografía y número",
+              "routePath": "/animations/page-flip/editorial",
+              "embedPath": "/embed/animations/page-flip/editorial"
+            },
+            {
+              "id": "glossy",
+              "code": "9.3.3.1",
+              "label": "Brillo",
+              "hint": "Efecto satinado con reflejo de luz al voltear",
+              "routePath": "/animations/page-flip/glossy",
+              "embedPath": "/embed/animations/page-flip/glossy"
+            }
+          ]
+        },
+        {
+          "id": "book-flip",
+          "code": "9.4",
+          "label": "Book Flip",
+          "tagline": "Libro abierto interactivo con paso de páginas bidireccional y lomo 3D",
+          "selector": "app-anim-book-flip",
+          "className": "BookFlipComponent",
+          "sourcePath": "src/app/components/animations/book-flip",
+          "routePath": "/animations/book-flip",
+          "variants": [
+            {
+              "id": "classic",
+              "code": "9.4.1.1",
+              "label": "Clásico",
+              "hint": "Lomo realista, sombras de pliegue y navegación completa",
+              "routePath": "/animations/book-flip/classic",
+              "embedPath": "/embed/animations/book-flip/classic"
+            },
+            {
+              "id": "notebook",
+              "code": "9.4.2.1",
+              "label": "Cuaderno",
+              "hint": "Estilo cuadrícula con tipografía monoespaciada",
+              "routePath": "/animations/book-flip/notebook",
+              "embedPath": "/embed/animations/book-flip/notebook"
+            },
+            {
+              "id": "parchment",
+              "code": "9.4.3.1",
+              "label": "Pergamino",
+              "hint": "Tono editorial cálido y bordes dorados",
+              "routePath": "/animations/book-flip/parchment",
+              "embedPath": "/embed/animations/book-flip/parchment"
+            }
+          ]
+        },
+        {
+          "id": "corner-fold",
+          "code": "9.5",
+          "label": "Corner Fold",
+          "tagline": "Efecto de esquina doblada (dog-ear) y papel levantado",
+          "selector": "app-anim-corner-fold",
+          "className": "CornerFoldComponent",
+          "sourcePath": "src/app/components/animations/corner-fold",
+          "routePath": "/animations/corner-fold",
+          "variants": [
+            {
+              "id": "note",
+              "code": "9.5.1.1",
+              "label": "Nota",
+              "hint": "Esquina superior derecha doblada con elevación al hover",
+              "routePath": "/animations/corner-fold/note",
+              "embedPath": "/embed/animations/corner-fold/note"
+            },
+            {
+              "id": "document",
+              "code": "9.5.2.1",
+              "label": "Documento",
+              "hint": "Hoja técnica con pliegue pronunciado y sello de verificación",
+              "routePath": "/animations/corner-fold/document",
+              "embedPath": "/embed/animations/corner-fold/document"
+            },
+            {
+              "id": "peel",
+              "code": "9.5.3.1",
+              "label": "Despegue",
+              "hint": "Efecto pegatina o sticker que se levanta interactivamente",
+              "routePath": "/animations/corner-fold/peel",
+              "embedPath": "/embed/animations/corner-fold/peel"
+            }
+          ]
+        },
+        {
+          "id": "marquee",
+          "code": "9.6",
+          "label": "Marquee",
+          "tagline": "Desplazamiento horizontal infinito, sin cortes ni saltos",
+          "selector": "app-anim-marquee",
+          "className": "MarqueeComponent",
+          "sourcePath": "src/app/components/animations/marquee",
+          "routePath": "/animations/marquee",
+          "variants": [
+            {
+              "id": "text",
+              "code": "9.6.1.1",
+              "label": "Texto",
+              "hint": "Palabras en loop con separadores y estilos alternados",
+              "routePath": "/animations/marquee/text",
+              "embedPath": "/embed/animations/marquee/text"
+            },
+            {
+              "id": "dual",
+              "code": "9.6.2.1",
+              "label": "Bidireccional",
+              "hint": "Dos filas en direcciones opuestas a distinta velocidad",
+              "routePath": "/animations/marquee/dual",
+              "embedPath": "/embed/animations/marquee/dual"
+            },
+            {
+              "id": "logos",
+              "code": "9.6.3.1",
+              "label": "Logos",
+              "hint": "Fila de marcas que se pausa al pasar el cursor",
+              "routePath": "/animations/marquee/logos",
+              "embedPath": "/embed/animations/marquee/logos"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "charts",
+      "code": "10",
+      "label": "Charts",
+      "tagline": "Gráficos interactivos animados con GSAP y renderizado SVG/Canvas reactivo",
+      "icon": "charts",
+      "accent": "#06b6d4",
+      "components": [
+        {
+          "id": "line-chart",
+          "code": "10.1",
+          "label": "Line Chart",
+          "tagline": "Trazados continuos, áreas degradadas y puntos animados con GSAP",
+          "selector": "app-chart-line",
+          "className": "LineChartComponent",
+          "sourcePath": "src/app/components/charts/line-chart",
+          "routePath": "/charts/line-chart",
+          "variants": [
+            {
+              "id": "smooth",
+              "code": "10.1.1.1",
+              "label": "Curva Spline",
+              "hint": "Curva Bézier continua con área degradada y trazado GSAP",
+              "routePath": "/charts/line-chart/smooth",
+              "embedPath": "/embed/charts/line-chart/smooth"
+            },
+            {
+              "id": "cyber",
+              "code": "10.1.2.1",
+              "label": "Cyber Stepped",
+              "hint": "Línea escalonada digital tech con radar scan y grid",
+              "routePath": "/charts/line-chart/cyber",
+              "embedPath": "/embed/charts/line-chart/cyber"
+            },
+            {
+              "id": "multi",
+              "code": "10.1.3.1",
+              "label": "Doble Serie",
+              "hint": "Series comparativas superpuestas con leyenda y tooltips",
+              "routePath": "/charts/line-chart/multi",
+              "embedPath": "/embed/charts/line-chart/multi"
+            }
+          ]
+        },
+        {
+          "id": "bar-chart",
+          "code": "10.2",
+          "label": "Bar Chart",
+          "tagline": "Barras elásticas con rebote GSAP, glassmorphism y contadores numéricos",
+          "selector": "app-chart-bar",
+          "className": "BarChartComponent",
+          "sourcePath": "src/app/components/charts/bar-chart",
+          "routePath": "/charts/bar-chart",
+          "variants": [
+            {
+              "id": "columns",
+              "code": "10.2.1.1",
+              "label": "Columnas Neón",
+              "hint": "Columnas verticales con rebote elástico y contador numérico",
+              "routePath": "/charts/bar-chart/columns",
+              "embedPath": "/embed/charts/bar-chart/columns"
+            },
+            {
+              "id": "glass",
+              "code": "10.2.2.1",
+              "label": "Cristal Glass",
+              "hint": "Barras translúcidas con reflejos especulares y blur",
+              "routePath": "/charts/bar-chart/glass",
+              "embedPath": "/embed/charts/bar-chart/glass"
+            },
+            {
+              "id": "horizontal",
+              "code": "10.2.3.1",
+              "label": "Progreso Ranking",
+              "hint": "Barras horizontales fluidas ideales para métricas y rankings",
+              "routePath": "/charts/bar-chart/horizontal",
+              "embedPath": "/embed/charts/bar-chart/horizontal"
+            }
+          ]
+        },
+        {
+          "id": "histogram",
+          "code": "10.3",
+          "label": "Histogram",
+          "tagline": "Distribución de frecuencias estadísticas, campana de Gauss y ojivas con GSAP",
+          "selector": "app-chart-histogram",
+          "className": "HistogramComponent",
+          "sourcePath": "src/app/components/charts/histogram",
+          "routePath": "/charts/histogram",
+          "variants": [
+            {
+              "id": "gauss",
+              "code": "10.3.1.1",
+              "label": "Gauss Normal",
+              "hint": "Campana de Gauss con ajuste de densidad normal suave vía GSAP",
+              "routePath": "/charts/histogram/gauss",
+              "embedPath": "/embed/charts/histogram/gauss"
+            },
+            {
+              "id": "bins",
+              "code": "10.3.2.1",
+              "label": "Bins de Frecuencia",
+              "hint": "Bins discretos con gradientes de densidad según frecuencia",
+              "routePath": "/charts/histogram/bins",
+              "embedPath": "/embed/charts/histogram/bins"
+            },
+            {
+              "id": "cumulative",
+              "code": "10.3.3.1",
+              "label": "Ojiva Acumulada",
+              "hint": "Curva sigmoide de distribución acumulativa y percentiles",
+              "routePath": "/charts/histogram/cumulative",
+              "embedPath": "/embed/charts/histogram/cumulative"
+            }
+          ]
+        },
+        {
+          "id": "donut-chart",
+          "code": "10.4",
+          "label": "Donut & Gauge",
+          "tagline": "Indicadores radiales proporcionales, anillos de neón y velocímetro semicircular",
+          "selector": "app-chart-donut",
+          "className": "DonutChartComponent",
+          "sourcePath": "src/app/components/charts/donut-chart",
+          "routePath": "/charts/donut-chart",
+          "variants": [
+            {
+              "id": "ring",
+              "code": "10.4.1.1",
+              "label": "Anillo Neón",
+              "hint": "Anillo radial continuo con porcentaje central animado y glow",
+              "routePath": "/charts/donut-chart/ring",
+              "embedPath": "/embed/charts/donut-chart/ring"
+            },
+            {
+              "id": "gauge",
+              "code": "10.4.2.1",
+              "label": "Semi-Gauge",
+              "hint": "Velocímetro / tacómetro de 180° con rebote elástico vía GSAP",
+              "routePath": "/charts/donut-chart/gauge",
+              "embedPath": "/embed/charts/donut-chart/gauge"
+            },
+            {
+              "id": "segmented",
+              "code": "10.4.3.1",
+              "label": "Dona Segmentada",
+              "hint": "Múltiples rebanadas categóricas proporcionales con leyenda reactiva",
+              "routePath": "/charts/donut-chart/segmented",
+              "embedPath": "/embed/charts/donut-chart/segmented"
+            }
+          ]
+        },
+        {
+          "id": "radar-chart",
+          "code": "10.5",
+          "label": "Radar & Spider",
+          "tagline": "Análisis multiaxial hexagonal, polígonos de aptitudes y escáner sonar cyber",
+          "selector": "app-chart-radar",
+          "className": "RadarChartComponent",
+          "sourcePath": "src/app/components/charts/radar-chart",
+          "routePath": "/charts/radar-chart",
+          "variants": [
+            {
+              "id": "polygon",
+              "code": "10.5.1.1",
+              "label": "Polígono Cyber",
+              "hint": "Polígono radial hexagonal con rebote elástico en vértices vía GSAP",
+              "routePath": "/charts/radar-chart/polygon",
+              "embedPath": "/embed/charts/radar-chart/polygon"
+            },
+            {
+              "id": "dual",
+              "code": "10.5.2.1",
+              "label": "Comparativa Dual",
+              "hint": "Dos perfiles superpuestos A vs B con áreas semitransparentes",
+              "routePath": "/charts/radar-chart/dual",
+              "embedPath": "/embed/charts/radar-chart/dual"
+            },
+            {
+              "id": "scanner",
+              "code": "10.5.3.1",
+              "label": "Escáner Sonar",
+              "hint": "Barrido rotatorio continuo 360° con nodos de datos iluminados",
+              "routePath": "/charts/radar-chart/scanner",
+              "embedPath": "/embed/charts/radar-chart/scanner"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

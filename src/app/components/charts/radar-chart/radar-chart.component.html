@@ -1,0 +1,142 @@
+<section class="radar-container" [attr.data-variant]="variant()">
+  <header class="radar-header">
+    <div class="radar-title-group">
+      <h3 class="radar-title">Análisis Multiaxial y Radar de Capacidades</h3>
+      <p class="radar-subtitle">
+        @switch (variant()) {
+          @case ('dual') {
+            Comparativa dual de perfiles con polígonos superpuestos [10.5.2.1]
+          }
+          @case ('scanner') {
+            Escáner sonar de 360° con barrido activo y dispersión de datos [10.5.3.1]
+          }
+          @default {
+            Polígono radial hexagonal cyber con rebote elástico vía GSAP [10.5.1.1]
+          }
+        }
+      </p>
+    </div>
+
+    <div class="radar-actions">
+      @if (variant() === 'dual') {
+        <div class="dual-legend">
+          <span class="legend-badge a">Perfil Primario</span>
+          <span class="legend-badge b">Benchmark</span>
+        </div>
+      }
+      <button type="button" class="action-btn" (click)="randomize()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+        </svg>
+        Actualizar Métricas
+      </button>
+    </div>
+  </header>
+
+  <div #chartBox class="radar-stage">
+    <svg class="radar-svg" viewBox="0 0 320 320">
+      <defs>
+        <radialGradient id="radarBgGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="var(--ac-accent, #06b6d4)" stop-opacity="0.08" />
+          <stop offset="100%" stop-color="var(--ac-accent, #06b6d4)" stop-opacity="0.01" />
+        </radialGradient>
+        <filter id="radarGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Fondo radar -->
+      <circle [attr.cx]="cx" [attr.cy]="cy" [attr.r]="maxR" fill="url(#radarBgGrad)" />
+
+      <!-- Anillos concéntricos -->
+      @for (ring of rings; track ring) {
+        <polygon
+          [attr.points]="ringPolygonPoints(ring)"
+          fill="none"
+          stroke="color-mix(in srgb, var(--ac-border, #3f3f46) 30%, transparent)"
+          stroke-width="1"
+        />
+      }
+
+      <!-- Ejes radiales y etiquetas -->
+      @for (ax of axes(); track ax.label) {
+        @let x2 = cx + maxR * mathCos(ax.angle);
+        @let y2 = cy + maxR * mathSin(ax.angle);
+        @let lx = cx + (maxR + 24) * mathCos(ax.angle);
+        @let ly = cy + (maxR + 24) * mathSin(ax.angle);
+        <line
+          [attr.x1]="cx"
+          [attr.y1]="cy"
+          [attr.x2]="x2"
+          [attr.y2]="y2"
+          stroke="color-mix(in srgb, var(--ac-border, #3f3f46) 40%, transparent)"
+          stroke-width="1"
+          stroke-dasharray="3 3"
+        />
+        <text
+          [attr.x]="lx"
+          [attr.y]="ly"
+          class="axis-label"
+          text-anchor="middle"
+          dominant-baseline="central"
+        >
+          {{ ax.label }}
+        </text>
+      }
+
+      <!-- Polígono Serie B (si es dual) -->
+      @if (variant() === 'dual') {
+        <polygon
+          #polyB
+          [attr.points]="pointsB()"
+          fill="rgba(236, 72, 153, 0.25)"
+          stroke="#ec4899"
+          stroke-width="2"
+          stroke-dasharray="4 2"
+        />
+      }
+
+      <!-- Polígono Serie A -->
+      <polygon
+        #polyA
+        [attr.points]="pointsA()"
+        fill="color-mix(in srgb, var(--ac-accent, #06b6d4) 28%, transparent)"
+        stroke="var(--ac-accent, #06b6d4)"
+        stroke-width="2.5"
+        filter="url(#radarGlow)"
+      />
+
+      <!-- Vértices del polígono A -->
+      @for (ax of axes(); track ax.label) {
+        @let vx = cx + maxR * (ax.valueA / 100) * mathCos(ax.angle);
+        @let vy = cy + maxR * (ax.valueA / 100) * mathSin(ax.angle);
+        <circle
+          [attr.cx]="vx"
+          [attr.cy]="vy"
+          r="4.5"
+          fill="var(--ac-accent, #06b6d4)"
+          stroke="#fafafa"
+          stroke-width="1.5"
+        />
+      }
+
+      <!-- Haz del Escáner Sonar (modo scanner) -->
+      @if (variant() === 'scanner') {
+        <line
+          #scanBeam
+          [attr.x1]="cx"
+          [attr.y1]="cy"
+          [attr.x2]="cx + maxR"
+          [attr.y2]="cy"
+          stroke="var(--ac-accent, #06b6d4)"
+          stroke-width="2.5"
+          filter="url(#radarGlow)"
+        />
+      }
+    </svg>
+  </div>
+</section>

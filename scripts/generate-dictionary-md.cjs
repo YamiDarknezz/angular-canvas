@@ -1,5 +1,6 @@
 const ts = require('typescript');
 const fs = require('fs');
+const path = require('path');
 
 const filePath = 'src/app/core/catalog/catalog.ts';
 const sourceCode = fs.readFileSync(filePath, 'utf8');
@@ -22,7 +23,7 @@ if (!catalogNode || !ts.isArrayLiteralExpression(catalogNode)) {
 const groups = [];
 
 catalogNode.elements.forEach(gNode => {
-  let gId = '', gCode = '', gLabel = '', gTagline = '';
+  let gId = '', gCode = '', gLabel = '', gTagline = '', gIcon = '', gAccent = '';
   let compsNode = null;
 
   gNode.properties.forEach(p => {
@@ -33,6 +34,8 @@ catalogNode.elements.forEach(gNode => {
       if (name === 'code') gCode = val;
       if (name === 'label') gLabel = val;
       if (name === 'tagline') gTagline = val;
+      if (name === 'icon') gIcon = val;
+      if (name === 'accent') gAccent = val;
       if (name === 'components') compsNode = p.initializer;
     }
   });
@@ -72,7 +75,14 @@ catalogNode.elements.forEach(gNode => {
               if (name === 'hint') vHint = val;
             }
           });
-          variants.push({ id: vId, code: vCode, label: vLabel, hint: vHint });
+          variants.push({
+            id: vId,
+            code: vCode,
+            label: vLabel,
+            hint: vHint,
+            routePath: `/${gId}/${cId}/${vId}`,
+            embedPath: `/embed/${gId}/${cId}/${vId}`
+          });
         });
       }
 
@@ -84,6 +94,7 @@ catalogNode.elements.forEach(gNode => {
         selector: cSelector,
         className: cClassName,
         sourcePath: cSource,
+        routePath: `/${gId}/${cId}`,
         variants
       });
     });
@@ -94,17 +105,24 @@ catalogNode.elements.forEach(gNode => {
     code: gCode,
     label: gLabel,
     tagline: gTagline,
+    icon: gIcon,
+    accent: gAccent,
     components
   });
 });
 
 let totalVars = 0;
-groups.forEach(g => g.components.forEach(c => totalVars += c.variants.length));
+let totalComps = 0;
+groups.forEach(g => {
+  totalComps += g.components.length;
+  g.components.forEach(c => totalVars += c.variants.length);
+});
 
 let md = `# Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **${groups.length} Categorías** · **${groups.reduce((acc, g) => acc + g.components.length, 0)} Componentes** · **${totalVars} Efectos / Sub-estilos Únicos**
+> Total: **${groups.length} Categorías** · **${totalComps} Componentes** · **${totalVars} Efectos / Sub-estilos Únicos**  
+> Formato JSON Disponible: [\`public/dictionary.json\`](file:///c:/Users/Erick/Documents/Proyectos/Proyectos/Angular_Canvas/public/dictionary.json) o en la web vía \`https://canvas.darknezz.dev/dictionary.json\`
 
 ---
 
@@ -115,18 +133,23 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 \`\`\`
   [Categoría] . [Componente] . [Variante] . [Subvariante]
        │              │             │             │
-      (1-9)         (1-N)         (1-N)          (1)
+     (1-10)         (1-N)         (1-N)          (1)
 \`\`\`
 
 ### 📌 Ejemplos de uso con tu Agente de IA o Pair Programmer:
 - **"Jala el efecto 9.4.2.1 en color morado"**  
   👉 El agente busca directamente el código **9.4.2.1**: Categoría **Animations (9)**, Componente **Book Flip (9.4)**, Variante **Cuaderno (9.4.2.1)**.  
   👉 Ubicación: \`src/app/components/animations/book-flip/\`  
-  👉 Selector: \`<app-anim-book-flip variant="notebook" />\`  
+  👉 Selector: \`<app-anim-book-flip [variant]="'notebook'" [style.--ac-accent]="'#a855f7'" />\`  
   👉 No requiere descripciones subjetivas como "el libro del medio" ni "el de la derecha".
 
+- **"Jala el gráfico 10.3.1.1 en color esmeralda"**  
+  👉 El agente busca directamente el código **10.3.1.1**: Categoría **Charts (10)**, Componente **Histogram (10.3)**, Variante **Gauss Normal (10.3.1.1)**.  
+  👉 Ubicación: \`src/app/components/charts/histogram/\`  
+  👉 Selector: \`<app-chart-histogram [variant]="'gauss'" [style.--ac-accent]="'#10b981'" />\`
+
 - **"Extrae el botón 2.6.2.1 y agrégalo a mi navbar"**  
-  👉 El agente copia \`src/app/components/buttons/3d/\` y monta \`<app-btn-3d variant="flip" />\`.
+  👉 El agente copia \`src/app/components/buttons/3d/\` y monta \`<app-btn-3d [variant]="'flip'" />\`.
 
 ---
 
@@ -135,6 +158,7 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 1. **100% Autocontenido**: Cada carpeta en \`src/app/components/*/*\` contiene su \`.ts\`, \`.html\` y \`.scss\`. No depende de mixins globales ni de archivos de paleta externos fuera de su carpeta.
 2. **Aislamiento de Efecto**: Cuando un componente incluye múltiples sub-estilos, se activa mediante el input reactivo \`[variant]="'id'"\`. Si no se especifica variante, muestra la variante principal por defecto sin amontonar efectos en el mismo lienzo.
 3. **Standalone Angular**: Todos los componentes se exportan como standalone components (Angular 19/20/22+ ready), listos para importar directamente en el array \`imports: [...]\` de cualquier componente destino.
+4. **Navegación Directa por Código**: Puedes navegar a cualquier componente o variante directamente escribiendo la URL \`/c/[codigo]\` o \`/code/[codigo]\`, por ejemplo \`https://canvas.darknezz.dev/c/10.3.1.1\`.
 
 ---
 
@@ -148,7 +172,7 @@ groups.forEach(group => {
 
   group.components.forEach(comp => {
     comp.variants.forEach(variant => {
-      const usage = `\`<${comp.selector} variant="${variant.id}" />\``;
+      const usage = `\`<${comp.selector} [variant]="'${variant.id}'" />\``;
       md += `| **\`${variant.code}\`** | ${comp.label} (\`${comp.code}\`) | **${variant.label}**<br><sub>${variant.hint}</sub> | \`<${comp.selector}>\` | \`${comp.sourcePath}\` | ${usage} |\n`;
     });
   });
@@ -157,4 +181,20 @@ groups.forEach(group => {
 });
 
 fs.writeFileSync('DICTIONARY.md', md, 'utf8');
-console.log('Successfully generated DICTIONARY.md with', totalVars, 'items!');
+
+// Exportar JSON estructurado a public/dictionary.json
+const publicDir = path.join(__dirname, '..', 'public');
+if (!fs.existsSync(publicDir)) {
+  fs.mkdirSync(publicDir, { recursive: true });
+}
+const dictionaryData = {
+  version: '2.0.0',
+  totalGroups: groups.length,
+  totalComponents: totalComps,
+  totalVariants: totalVars,
+  updatedAt: new Date().toISOString(),
+  groups
+};
+fs.writeFileSync(path.join(publicDir, 'dictionary.json'), JSON.stringify(dictionaryData, null, 2), 'utf8');
+
+console.log(`Successfully generated DICTIONARY.md and public/dictionary.json with ${totalComps} components and ${totalVars} variants!`);

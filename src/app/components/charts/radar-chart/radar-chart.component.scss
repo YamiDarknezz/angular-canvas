@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.radar-container {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ac-surface, #18181b) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ac-border, #27272a) 80%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+  font-family: inherit;
+  color: var(--ac-text, #fafafa);
+}
+
+.radar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.radar-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.radar-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ac-text-faint, #a1a1aa);
+}
+
+.radar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dual-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+
+  .legend-badge {
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    font-weight: 600;
+
+    &.a {
+      background: color-mix(in srgb, var(--ac-accent, #06b6d4) 20%, transparent);
+      border: 1px solid var(--ac-accent, #06b6d4);
+      color: var(--ac-accent, #38bdf8);
+    }
+
+    &.b {
+      background: rgba(236, 72, 153, 0.2);
+      border: 1px solid #ec4899;
+      color: #f472b6;
+    }
+  }
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--ac-accent, #06b6d4) 40%, transparent);
+  background: color-mix(in srgb, var(--ac-accent, #06b6d4) 12%, transparent);
+  color: var(--ac-accent, #38bdf8);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--ac-accent, #06b6d4) 24%, transparent);
+    border-color: var(--ac-accent, #38bdf8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+  }
+}
+
+.radar-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  min-height: 320px;
+}
+
+.radar-svg {
+  width: 320px;
+  height: 320px;
+  overflow: visible;
+}
+
+.axis-label {
+  font-size: 0.72rem;
+  fill: var(--ac-text-faint, #a1a1aa);
+  font-family: var(--ac-font-mono, monospace);
+  font-weight: 600;
+}

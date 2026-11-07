@@ -1,7 +1,8 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **10 Categorías** · **57 Componentes** · **157 Efectos / Sub-estilos Únicos**
+> Total: **10 Categorías** · **60 Componentes** · **166 Efectos / Sub-estilos Únicos**  
+> Formato JSON Disponible: [`public/dictionary.json`](file:///c:/Users/Erick/Documents/Proyectos/Proyectos/Angular_Canvas/public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
 
@@ -12,18 +13,23 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 ```
   [Categoría] . [Componente] . [Variante] . [Subvariante]
        │              │             │             │
-      (1-9)         (1-N)         (1-N)          (1)
+     (1-10)         (1-N)         (1-N)          (1)
 ```
 
 ### 📌 Ejemplos de uso con tu Agente de IA o Pair Programmer:
 - **"Jala el efecto 9.4.2.1 en color morado"**  
   👉 El agente busca directamente el código **9.4.2.1**: Categoría **Animations (9)**, Componente **Book Flip (9.4)**, Variante **Cuaderno (9.4.2.1)**.  
   👉 Ubicación: `src/app/components/animations/book-flip/`  
-  👉 Selector: `<app-anim-book-flip variant="notebook" />`  
+  👉 Selector: `<app-anim-book-flip [variant]="'notebook'" [style.--ac-accent]="'#a855f7'" />`  
   👉 No requiere descripciones subjetivas como "el libro del medio" ni "el de la derecha".
 
+- **"Jala el gráfico 10.3.1.1 en color esmeralda"**  
+  👉 El agente busca directamente el código **10.3.1.1**: Categoría **Charts (10)**, Componente **Histogram (10.3)**, Variante **Gauss Normal (10.3.1.1)**.  
+  👉 Ubicación: `src/app/components/charts/histogram/`  
+  👉 Selector: `<app-chart-histogram [variant]="'gauss'" [style.--ac-accent]="'#10b981'" />`
+
 - **"Extrae el botón 2.6.2.1 y agrégalo a mi navbar"**  
-  👉 El agente copia `src/app/components/buttons/3d/` y monta `<app-btn-3d variant="flip" />`.
+  👉 El agente copia `src/app/components/buttons/3d/` y monta `<app-btn-3d [variant]="'flip'" />`.
 
 ---
 
@@ -32,6 +38,7 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 1. **100% Autocontenido**: Cada carpeta en `src/app/components/*/*` contiene su `.ts`, `.html` y `.scss`. No depende de mixins globales ni de archivos de paleta externos fuera de su carpeta.
 2. **Aislamiento de Efecto**: Cuando un componente incluye múltiples sub-estilos, se activa mediante el input reactivo `[variant]="'id'"`. Si no se especifica variante, muestra la variante principal por defecto sin amontonar efectos en el mismo lienzo.
 3. **Standalone Angular**: Todos los componentes se exportan como standalone components (Angular 19/20/22+ ready), listos para importar directamente en el array `imports: [...]` de cualquier componente destino.
+4. **Navegación Directa por Código**: Puedes navegar a cualquier componente o variante directamente escribiendo la URL `/c/[codigo]` o `/code/[codigo]`, por ejemplo `https://canvas.darknezz.dev/c/10.3.1.1`.
 
 ---
 
@@ -41,32 +48,32 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`1.1.1.1`** | Glassmorphism (`1.1`) | **Base**<br><sub>La tarjeta de vidrio por defecto</sub> | `<app-card-glassmorphism>` | `src/app/components/cards/glassmorphism` | `<app-card-glassmorphism variant="default" />` |
-| **`1.1.2.1`** | Glassmorphism (`1.1`) | **Secondary**<br><sub>Segundo nivel de jerarquía</sub> | `<app-card-glassmorphism>` | `src/app/components/cards/glassmorphism` | `<app-card-glassmorphism variant="secondary" />` |
-| **`1.1.3.1`** | Glassmorphism (`1.1`) | **Accent**<br><sub>Acento de color para destacar una tarjeta</sub> | `<app-card-glassmorphism>` | `src/app/components/cards/glassmorphism` | `<app-card-glassmorphism variant="accent" />` |
-| **`1.2.1.1`** | Neon (`1.2`) | **Neón azul**<br><sub>El clásico para interfaces tech y gaming</sub> | `<app-card-neon>` | `src/app/components/cards/neon` | `<app-card-neon variant="blue" />` |
-| **`1.2.2.1`** | Neon (`1.2`) | **Neón rosa**<br><sub>Energía vibrante para dashboards</sub> | `<app-card-neon>` | `src/app/components/cards/neon` | `<app-card-neon variant="pink" />` |
-| **`1.2.3.1`** | Neon (`1.2`) | **Neón verde**<br><sub>Inspiración Matrix para herramientas dev</sub> | `<app-card-neon>` | `src/app/components/cards/neon` | `<app-card-neon variant="green" />` |
-| **`1.3.1.1`** | Hover Effects (`1.3`) | **Lift**<br><sub>Elevación suave con sombra creciente</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover variant="lift" />` |
-| **`1.3.2.1`** | Hover Effects (`1.3`) | **Scale**<br><sub>Escalado con cambio de fondo</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover variant="scale" />` |
-| **`1.3.3.1`** | Hover Effects (`1.3`) | **Rotate**<br><sub>Rotación 3D sutil</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover variant="rotate" />` |
-| **`1.3.4.1`** | Hover Effects (`1.3`) | **Border Draw**<br><sub>Borde que se dibuja alrededor</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover variant="border-draw" />` |
-| **`1.3.5.1`** | Hover Effects (`1.3`) | **Glow**<br><sub>Brillo expansivo con sombra de color</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover variant="glow" />` |
-| **`1.3.6.1`** | Hover Effects (`1.3`) | **Magnetic**<br><sub>Sigue el cursor con efecto magnético</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover variant="magnetic" />` |
-| **`1.4.1.1`** | Flip 3D (`1.4`) | **Clásica**<br><sub>Frente y reverso con el tema actual</sub> | `<app-card-flip>` | `src/app/components/cards/flip` | `<app-card-flip variant="classic" />` |
-| **`1.4.2.1`** | Flip 3D (`1.4`) | **Gradiente**<br><sub>Fondos degradados en ambas caras</sub> | `<app-card-flip>` | `src/app/components/cards/flip` | `<app-card-flip variant="gradient" />` |
-| **`1.4.3.1`** | Flip 3D (`1.4`) | **Con métricas**<br><sub>Contenido denso frente y reverso</sub> | `<app-card-flip>` | `src/app/components/cards/flip` | `<app-card-flip variant="stats" />` |
-| **`1.5.1.1`** | 3D Tilt (`1.5`) | **Tilt + brillo**<br><sub>Rota en 3D y el reflejo sigue al cursor</sub> | `<app-card-tilt3d>` | `src/app/components/cards/tilt-3d` | `<app-card-tilt3d variant="tilt" />` |
-| **`1.5.2.1`** | 3D Tilt (`1.5`) | **Profundidad**<br><sub>Capas a distinta altura sobre el eje Z</sub> | `<app-card-tilt3d>` | `src/app/components/cards/tilt-3d` | `<app-card-tilt3d variant="depth" />` |
-| **`1.5.3.1`** | 3D Tilt (`1.5`) | **Holo**<br><sub>Tornasol con destello que se desplaza</sub> | `<app-card-tilt3d>` | `src/app/components/cards/tilt-3d` | `<app-card-tilt3d variant="shine" />` |
-| **`1.6.1.1`** | Glass Panels (`1.6`) | **Métricas**<br><sub>Panel de resumen con barras translúcidas</sub> | `<app-card-glass-panel>` | `src/app/components/cards/glass-panel` | `<app-card-glass-panel variant="stats" />` |
-| **`1.6.2.1`** | Glass Panels (`1.6`) | **Perfil**<br><sub>Tarjeta de persona con acciones</sub> | `<app-card-glass-panel>` | `src/app/components/cards/glass-panel` | `<app-card-glass-panel variant="profile" />` |
-| **`1.6.3.1`** | Glass Panels (`1.6`) | **Superposición**<br><sub>Texto legible sobre cualquier fondo</sub> | `<app-card-glass-panel>` | `src/app/components/cards/glass-panel` | `<app-card-glass-panel variant="overlay" />` |
-| **`1.7.1.1`** | Minimal (`1.7`) | **Con acento**<br><sub>Barra de acento lateral</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal variant="default" />` |
-| **`1.7.2.1`** | Minimal (`1.7`) | **Solo bordes**<br><sub>Sin sombras ni fondos extra</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal variant="bordered" />` |
-| **`1.7.3.1`** | Minimal (`1.7`) | **Con etiqueta**<br><sub>Tag sutil de categoría</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal variant="with-tag" />` |
-| **`1.8.1.1`** | Dark Corporate (`1.8`) | **Estándar**<br><sub>Cabecera, métricas y CTA</sub> | `<app-card-corporate>` | `src/app/components/cards/dark-corporate` | `<app-card-corporate variant="default" />` |
-| **`1.8.2.1`** | Dark Corporate (`1.8`) | **Con badge accent**<br><sub>Badge de acento y otra densidad</sub> | `<app-card-corporate>` | `src/app/components/cards/dark-corporate` | `<app-card-corporate variant="variant" />` |
+| **`1.1.1.1`** | Glassmorphism (`1.1`) | **Base**<br><sub>La tarjeta de vidrio por defecto</sub> | `<app-card-glassmorphism>` | `src/app/components/cards/glassmorphism` | `<app-card-glassmorphism [variant]="'default'" />` |
+| **`1.1.2.1`** | Glassmorphism (`1.1`) | **Secondary**<br><sub>Segundo nivel de jerarquía</sub> | `<app-card-glassmorphism>` | `src/app/components/cards/glassmorphism` | `<app-card-glassmorphism [variant]="'secondary'" />` |
+| **`1.1.3.1`** | Glassmorphism (`1.1`) | **Accent**<br><sub>Acento de color para destacar una tarjeta</sub> | `<app-card-glassmorphism>` | `src/app/components/cards/glassmorphism` | `<app-card-glassmorphism [variant]="'accent'" />` |
+| **`1.2.1.1`** | Neon (`1.2`) | **Neón azul**<br><sub>El clásico para interfaces tech y gaming</sub> | `<app-card-neon>` | `src/app/components/cards/neon` | `<app-card-neon [variant]="'blue'" />` |
+| **`1.2.2.1`** | Neon (`1.2`) | **Neón rosa**<br><sub>Energía vibrante para dashboards</sub> | `<app-card-neon>` | `src/app/components/cards/neon` | `<app-card-neon [variant]="'pink'" />` |
+| **`1.2.3.1`** | Neon (`1.2`) | **Neón verde**<br><sub>Inspiración Matrix para herramientas dev</sub> | `<app-card-neon>` | `src/app/components/cards/neon` | `<app-card-neon [variant]="'green'" />` |
+| **`1.3.1.1`** | Hover Effects (`1.3`) | **Lift**<br><sub>Elevación suave con sombra creciente</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover [variant]="'lift'" />` |
+| **`1.3.2.1`** | Hover Effects (`1.3`) | **Scale**<br><sub>Escalado con cambio de fondo</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover [variant]="'scale'" />` |
+| **`1.3.3.1`** | Hover Effects (`1.3`) | **Rotate**<br><sub>Rotación 3D sutil</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover [variant]="'rotate'" />` |
+| **`1.3.4.1`** | Hover Effects (`1.3`) | **Border Draw**<br><sub>Borde que se dibuja alrededor</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover [variant]="'border-draw'" />` |
+| **`1.3.5.1`** | Hover Effects (`1.3`) | **Glow**<br><sub>Brillo expansivo con sombra de color</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover [variant]="'glow'" />` |
+| **`1.3.6.1`** | Hover Effects (`1.3`) | **Magnetic**<br><sub>Sigue el cursor con efecto magnético</sub> | `<app-card-hover>` | `src/app/components/cards/hover-effects` | `<app-card-hover [variant]="'magnetic'" />` |
+| **`1.4.1.1`** | Flip 3D (`1.4`) | **Clásica**<br><sub>Frente y reverso con el tema actual</sub> | `<app-card-flip>` | `src/app/components/cards/flip` | `<app-card-flip [variant]="'classic'" />` |
+| **`1.4.2.1`** | Flip 3D (`1.4`) | **Gradiente**<br><sub>Fondos degradados en ambas caras</sub> | `<app-card-flip>` | `src/app/components/cards/flip` | `<app-card-flip [variant]="'gradient'" />` |
+| **`1.4.3.1`** | Flip 3D (`1.4`) | **Con métricas**<br><sub>Contenido denso frente y reverso</sub> | `<app-card-flip>` | `src/app/components/cards/flip` | `<app-card-flip [variant]="'stats'" />` |
+| **`1.5.1.1`** | 3D Tilt (`1.5`) | **Tilt + brillo**<br><sub>Rota en 3D y el reflejo sigue al cursor</sub> | `<app-card-tilt3d>` | `src/app/components/cards/tilt-3d` | `<app-card-tilt3d [variant]="'tilt'" />` |
+| **`1.5.2.1`** | 3D Tilt (`1.5`) | **Profundidad**<br><sub>Capas a distinta altura sobre el eje Z</sub> | `<app-card-tilt3d>` | `src/app/components/cards/tilt-3d` | `<app-card-tilt3d [variant]="'depth'" />` |
+| **`1.5.3.1`** | 3D Tilt (`1.5`) | **Holo**<br><sub>Tornasol con destello que se desplaza</sub> | `<app-card-tilt3d>` | `src/app/components/cards/tilt-3d` | `<app-card-tilt3d [variant]="'shine'" />` |
+| **`1.6.1.1`** | Glass Panels (`1.6`) | **Métricas**<br><sub>Panel de resumen con barras translúcidas</sub> | `<app-card-glass-panel>` | `src/app/components/cards/glass-panel` | `<app-card-glass-panel [variant]="'stats'" />` |
+| **`1.6.2.1`** | Glass Panels (`1.6`) | **Perfil**<br><sub>Tarjeta de persona con acciones</sub> | `<app-card-glass-panel>` | `src/app/components/cards/glass-panel` | `<app-card-glass-panel [variant]="'profile'" />` |
+| **`1.6.3.1`** | Glass Panels (`1.6`) | **Superposición**<br><sub>Texto legible sobre cualquier fondo</sub> | `<app-card-glass-panel>` | `src/app/components/cards/glass-panel` | `<app-card-glass-panel [variant]="'overlay'" />` |
+| **`1.7.1.1`** | Minimal (`1.7`) | **Con acento**<br><sub>Barra de acento lateral</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal [variant]="'default'" />` |
+| **`1.7.2.1`** | Minimal (`1.7`) | **Solo bordes**<br><sub>Sin sombras ni fondos extra</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal [variant]="'bordered'" />` |
+| **`1.7.3.1`** | Minimal (`1.7`) | **Con etiqueta**<br><sub>Tag sutil de categoría</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal [variant]="'with-tag'" />` |
+| **`1.8.1.1`** | Dark Corporate (`1.8`) | **Estándar**<br><sub>Cabecera, métricas y CTA</sub> | `<app-card-corporate>` | `src/app/components/cards/dark-corporate` | `<app-card-corporate [variant]="'default'" />` |
+| **`1.8.2.1`** | Dark Corporate (`1.8`) | **Con badge accent**<br><sub>Badge de acento y otra densidad</sub> | `<app-card-corporate>` | `src/app/components/cards/dark-corporate` | `<app-card-corporate [variant]="'variant'" />` |
 
 ---
 
@@ -76,38 +83,38 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`2.1.1.1`** | Glow (`2.1`) | **Azul**<br><sub>.glow-blue</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow variant="blue" />` |
-| **`2.1.2.1`** | Glow (`2.1`) | **Púrpura**<br><sub>.glow-purple</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow variant="purple" />` |
-| **`2.1.3.1`** | Glow (`2.1`) | **Rosa**<br><sub>.glow-pink</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow variant="pink" />` |
-| **`2.1.4.1`** | Glow (`2.1`) | **Verde**<br><sub>.glow-green</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow variant="green" />` |
-| **`2.1.5.1`** | Glow (`2.1`) | **Naranja**<br><sub>.glow-orange</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow variant="orange" />` |
-| **`2.2.1.1`** | Gradient (`2.2`) | **Sunset**<br><sub>Naranja a magenta</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient variant="sunset" />` |
-| **`2.2.2.1`** | Gradient (`2.2`) | **Ocean**<br><sub>Azules profundos</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient variant="ocean" />` |
-| **`2.2.3.1`** | Gradient (`2.2`) | **Aurora**<br><sub>Verde-cyan degradado</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient variant="aurora" />` |
-| **`2.2.4.1`** | Gradient (`2.2`) | **Fire**<br><sub>Rojo y ámbar</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient variant="fire" />` |
-| **`2.2.5.1`** | Gradient (`2.2`) | **Mesh animado**<br><sub>Malla de color en movimiento</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient variant="mesh" />` |
-| **`2.3.1.1`** | Neumorphism (`2.3`) | **Suave**<br><sub>Relieve estándar</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism variant="soft" />` |
-| **`2.3.2.1`** | Neumorphism (`2.3`) | **Presionado**<br><sub>Estado hundido permanente</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism variant="pressed" />` |
-| **`2.3.3.1`** | Neumorphism (`2.3`) | **Flat**<br><sub>Superficie plana</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism variant="flat" />` |
-| **`2.3.4.1`** | Neumorphism (`2.3`) | **Convexo**<br><sub>Relieve saliente marcado</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism variant="convex" />` |
-| **`2.4.1.1`** | Pill (`2.4`) | **Outline**<br><sub>Borde sin relleno</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill variant="outline" />` |
-| **`2.4.2.1`** | Pill (`2.4`) | **Solid**<br><sub>Relleno plano</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill variant="solid" />` |
-| **`2.4.3.1`** | Pill (`2.4`) | **Ghost**<br><sub>Transparente hasta el hover</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill variant="ghost" />` |
-| **`2.4.4.1`** | Pill (`2.4`) | **Gradient**<br><sub>Degradado de acento</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill variant="gradient" />` |
-| **`2.4.5.1`** | Pill (`2.4`) | **Con icono**<br><sub>Icono + texto</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill variant="with-icon" />` |
-| **`2.4.6.1`** | Pill (`2.4`) | **Pequeño**<br><sub>Tamaño compacto</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill variant="small" />` |
-| **`2.5.1.1`** | Animated (`2.5`) | **Ripple**<br><sub>Onda desde el punto de click</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated variant="ripple" />` |
-| **`2.5.2.1`** | Animated (`2.5`) | **Pulse**<br><sub>Latido continuo</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated variant="pulse" />` |
-| **`2.5.3.1`** | Animated (`2.5`) | **Shake**<br><sub>Sacudida al hacer hover</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated variant="shake" />` |
-| **`2.5.4.1`** | Animated (`2.5`) | **Fill up**<br><sub>Relleno que sube</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated variant="fill-up" />` |
-| **`2.5.5.1`** | Animated (`2.5`) | **Slide BG**<br><sub>Fondo que se desliza</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated variant="slide-bg" />` |
-| **`2.5.6.1`** | Animated (`2.5`) | **Magnetic**<br><sub>Sigue el cursor</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated variant="magnetic" />` |
-| **`2.6.1.1`** | 3D (`2.6`) | **Push**<br><sub>Se hunde hasta apoyarse en su base</sub> | `<app-btn-3d>` | `src/app/components/buttons/3d` | `<app-btn-3d variant="push" />` |
-| **`2.6.2.1`** | 3D (`2.6`) | **Flip**<br><sub>Voltea en 3D al pasar el cursor</sub> | `<app-btn-3d>` | `src/app/components/buttons/3d` | `<app-btn-3d variant="flip" />` |
-| **`2.6.3.1`** | 3D (`2.6`) | **Levitación**<br><sub>Pila de capas que se separa del suelo</sub> | `<app-btn-3d>` | `src/app/components/buttons/3d` | `<app-btn-3d variant="levitate" />` |
-| **`2.7.1.1`** | Glass (`2.7`) | **Glass**<br><sub>Vidrio suave con brillo interior</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass variant="glass" />` |
-| **`2.7.2.1`** | Glass (`2.7`) | **Frost**<br><sub>Escarchado con blur intenso</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass variant="frost" />` |
-| **`2.7.3.1`** | Glass (`2.7`) | **Borde degradado**<br><sub>Contorno tornasol sobre vidrio</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass variant="gradient-border" />` |
+| **`2.1.1.1`** | Glow (`2.1`) | **Azul**<br><sub>.glow-blue</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow [variant]="'blue'" />` |
+| **`2.1.2.1`** | Glow (`2.1`) | **Púrpura**<br><sub>.glow-purple</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow [variant]="'purple'" />` |
+| **`2.1.3.1`** | Glow (`2.1`) | **Rosa**<br><sub>.glow-pink</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow [variant]="'pink'" />` |
+| **`2.1.4.1`** | Glow (`2.1`) | **Verde**<br><sub>.glow-green</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow [variant]="'green'" />` |
+| **`2.1.5.1`** | Glow (`2.1`) | **Naranja**<br><sub>.glow-orange</sub> | `<app-btn-glow>` | `src/app/components/buttons/glow` | `<app-btn-glow [variant]="'orange'" />` |
+| **`2.2.1.1`** | Gradient (`2.2`) | **Sunset**<br><sub>Naranja a magenta</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient [variant]="'sunset'" />` |
+| **`2.2.2.1`** | Gradient (`2.2`) | **Ocean**<br><sub>Azules profundos</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient [variant]="'ocean'" />` |
+| **`2.2.3.1`** | Gradient (`2.2`) | **Aurora**<br><sub>Verde-cyan degradado</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient [variant]="'aurora'" />` |
+| **`2.2.4.1`** | Gradient (`2.2`) | **Fire**<br><sub>Rojo y ámbar</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient [variant]="'fire'" />` |
+| **`2.2.5.1`** | Gradient (`2.2`) | **Mesh animado**<br><sub>Malla de color en movimiento</sub> | `<app-btn-gradient>` | `src/app/components/buttons/gradient` | `<app-btn-gradient [variant]="'mesh'" />` |
+| **`2.3.1.1`** | Neumorphism (`2.3`) | **Suave**<br><sub>Relieve estándar</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism [variant]="'soft'" />` |
+| **`2.3.2.1`** | Neumorphism (`2.3`) | **Presionado**<br><sub>Estado hundido permanente</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism [variant]="'pressed'" />` |
+| **`2.3.3.1`** | Neumorphism (`2.3`) | **Flat**<br><sub>Superficie plana</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism [variant]="'flat'" />` |
+| **`2.3.4.1`** | Neumorphism (`2.3`) | **Convexo**<br><sub>Relieve saliente marcado</sub> | `<app-btn-neumorphism>` | `src/app/components/buttons/neumorphism` | `<app-btn-neumorphism [variant]="'convex'" />` |
+| **`2.4.1.1`** | Pill (`2.4`) | **Outline**<br><sub>Borde sin relleno</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill [variant]="'outline'" />` |
+| **`2.4.2.1`** | Pill (`2.4`) | **Solid**<br><sub>Relleno plano</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill [variant]="'solid'" />` |
+| **`2.4.3.1`** | Pill (`2.4`) | **Ghost**<br><sub>Transparente hasta el hover</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill [variant]="'ghost'" />` |
+| **`2.4.4.1`** | Pill (`2.4`) | **Gradient**<br><sub>Degradado de acento</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill [variant]="'gradient'" />` |
+| **`2.4.5.1`** | Pill (`2.4`) | **Con icono**<br><sub>Icono + texto</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill [variant]="'with-icon'" />` |
+| **`2.4.6.1`** | Pill (`2.4`) | **Pequeño**<br><sub>Tamaño compacto</sub> | `<app-btn-pill>` | `src/app/components/buttons/pill` | `<app-btn-pill [variant]="'small'" />` |
+| **`2.5.1.1`** | Animated (`2.5`) | **Ripple**<br><sub>Onda desde el punto de click</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated [variant]="'ripple'" />` |
+| **`2.5.2.1`** | Animated (`2.5`) | **Pulse**<br><sub>Latido continuo</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated [variant]="'pulse'" />` |
+| **`2.5.3.1`** | Animated (`2.5`) | **Shake**<br><sub>Sacudida al hacer hover</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated [variant]="'shake'" />` |
+| **`2.5.4.1`** | Animated (`2.5`) | **Fill up**<br><sub>Relleno que sube</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated [variant]="'fill-up'" />` |
+| **`2.5.5.1`** | Animated (`2.5`) | **Slide BG**<br><sub>Fondo que se desliza</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated [variant]="'slide-bg'" />` |
+| **`2.5.6.1`** | Animated (`2.5`) | **Magnetic**<br><sub>Sigue el cursor</sub> | `<app-btn-animated>` | `src/app/components/buttons/animated` | `<app-btn-animated [variant]="'magnetic'" />` |
+| **`2.6.1.1`** | 3D (`2.6`) | **Push**<br><sub>Se hunde hasta apoyarse en su base</sub> | `<app-btn-3d>` | `src/app/components/buttons/3d` | `<app-btn-3d [variant]="'push'" />` |
+| **`2.6.2.1`** | 3D (`2.6`) | **Flip**<br><sub>Voltea en 3D al pasar el cursor</sub> | `<app-btn-3d>` | `src/app/components/buttons/3d` | `<app-btn-3d [variant]="'flip'" />` |
+| **`2.6.3.1`** | 3D (`2.6`) | **Levitación**<br><sub>Pila de capas que se separa del suelo</sub> | `<app-btn-3d>` | `src/app/components/buttons/3d` | `<app-btn-3d [variant]="'levitate'" />` |
+| **`2.7.1.1`** | Glass (`2.7`) | **Glass**<br><sub>Vidrio suave con brillo interior</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass [variant]="'glass'" />` |
+| **`2.7.2.1`** | Glass (`2.7`) | **Frost**<br><sub>Escarchado con blur intenso</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass [variant]="'frost'" />` |
+| **`2.7.3.1`** | Glass (`2.7`) | **Borde degradado**<br><sub>Contorno tornasol sobre vidrio</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass [variant]="'gradient-border'" />` |
 
 ---
 
@@ -117,20 +124,20 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`3.1.1.1`** | Gradient (`3.1`) | **Sunset**<br><sub>Cálido, atardecer</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient variant="sunset" />` |
-| **`3.1.2.1`** | Gradient (`3.1`) | **Aurora**<br><sub>Verdes y violetas</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient variant="aurora" />` |
-| **`3.1.3.1`** | Gradient (`3.1`) | **Deep Ocean**<br><sub>Azules profundos</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient variant="deep-ocean" />` |
-| **`3.1.4.1`** | Gradient (`3.1`) | **Mesh**<br><sub>Malla de color suave</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient variant="mesh" />` |
-| **`3.1.5.1`** | Gradient (`3.1`) | **Radial Focus**<br><sub>Foco radial centrado</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient variant="radial" />` |
-| **`3.1.6.1`** | Gradient (`3.1`) | **Conic**<br><sub>Degradado cónico</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient variant="conic" />` |
-| **`3.2.1.1`** | Particle (`3.2`) | **Red de partículas**<br><sub>Canvas con enlaces por cercanía</sub> | `<app-bg-particle>` | `src/app/components/backgrounds/particle` | `<app-bg-particle variant="default" />` |
-| **`3.3.1.1`** | Grid (`3.3`) | **Dot Grid**<br><sub>Puntos regulares</sub> | `<app-bg-grid>` | `src/app/components/backgrounds/grid` | `<app-bg-grid variant="dots" />` |
-| **`3.3.2.1`** | Grid (`3.3`) | **Line Grid**<br><sub>Líneas ortogonales</sub> | `<app-bg-grid>` | `src/app/components/backgrounds/grid` | `<app-bg-grid variant="lines" />` |
-| **`3.3.3.1`** | Grid (`3.3`) | **Fade Grid**<br><sub>Grilla que se desvanece</sub> | `<app-bg-grid>` | `src/app/components/backgrounds/grid` | `<app-bg-grid variant="gradient" />` |
-| **`3.4.1.1`** | Animated Mesh (`3.4`) | **Mesh animado**<br><sub>Blobs de color en movimiento</sub> | `<app-bg-mesh>` | `src/app/components/backgrounds/animated-mesh` | `<app-bg-mesh variant="default" />` |
-| **`3.5.1.1`** | Aurora (`3.5`) | **Aurora**<br><sub>Blobs difusos que derivan en diagonal</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora variant="aurora" />` |
-| **`3.5.2.1`** | Aurora (`3.5`) | **Haces**<br><sub>Columnas de luz que barren el fondo</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora variant="beams" />` |
-| **`3.5.3.1`** | Aurora (`3.5`) | **Con vidrio**<br><sub>Panel translúcido sobre la aurora</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora variant="glass" />` |
+| **`3.1.1.1`** | Gradient (`3.1`) | **Sunset**<br><sub>Cálido, atardecer</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient [variant]="'sunset'" />` |
+| **`3.1.2.1`** | Gradient (`3.1`) | **Aurora**<br><sub>Verdes y violetas</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient [variant]="'aurora'" />` |
+| **`3.1.3.1`** | Gradient (`3.1`) | **Deep Ocean**<br><sub>Azules profundos</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient [variant]="'deep-ocean'" />` |
+| **`3.1.4.1`** | Gradient (`3.1`) | **Mesh**<br><sub>Malla de color suave</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient [variant]="'mesh'" />` |
+| **`3.1.5.1`** | Gradient (`3.1`) | **Radial Focus**<br><sub>Foco radial centrado</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient [variant]="'radial'" />` |
+| **`3.1.6.1`** | Gradient (`3.1`) | **Conic**<br><sub>Degradado cónico</sub> | `<app-bg-gradient>` | `src/app/components/backgrounds/gradient` | `<app-bg-gradient [variant]="'conic'" />` |
+| **`3.2.1.1`** | Particle (`3.2`) | **Red de partículas**<br><sub>Canvas con enlaces por cercanía</sub> | `<app-bg-particle>` | `src/app/components/backgrounds/particle` | `<app-bg-particle [variant]="'default'" />` |
+| **`3.3.1.1`** | Grid (`3.3`) | **Dot Grid**<br><sub>Puntos regulares</sub> | `<app-bg-grid>` | `src/app/components/backgrounds/grid` | `<app-bg-grid [variant]="'dots'" />` |
+| **`3.3.2.1`** | Grid (`3.3`) | **Line Grid**<br><sub>Líneas ortogonales</sub> | `<app-bg-grid>` | `src/app/components/backgrounds/grid` | `<app-bg-grid [variant]="'lines'" />` |
+| **`3.3.3.1`** | Grid (`3.3`) | **Fade Grid**<br><sub>Grilla que se desvanece</sub> | `<app-bg-grid>` | `src/app/components/backgrounds/grid` | `<app-bg-grid [variant]="'gradient'" />` |
+| **`3.4.1.1`** | Animated Mesh (`3.4`) | **Mesh animado**<br><sub>Blobs de color en movimiento</sub> | `<app-bg-mesh>` | `src/app/components/backgrounds/animated-mesh` | `<app-bg-mesh [variant]="'default'" />` |
+| **`3.5.1.1`** | Aurora (`3.5`) | **Aurora**<br><sub>Blobs difusos que derivan en diagonal</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora [variant]="'aurora'" />` |
+| **`3.5.2.1`** | Aurora (`3.5`) | **Haces**<br><sub>Columnas de luz que barren el fondo</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora [variant]="'beams'" />` |
+| **`3.5.3.1`** | Aurora (`3.5`) | **Con vidrio**<br><sub>Panel translúcido sobre la aurora</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora [variant]="'glass'" />` |
 
 ---
 
@@ -140,18 +147,18 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`4.1.1.1`** | Glow Text (`4.1`) | **Cyan**<br><sub>.glow-cyan</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow variant="cyan" />` |
-| **`4.1.2.1`** | Glow Text (`4.1`) | **Rosa**<br><sub>.glow-pink</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow variant="pink" />` |
-| **`4.1.3.1`** | Glow Text (`4.1`) | **Verde Matrix**<br><sub>.glow-green</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow variant="green" />` |
-| **`4.1.4.1`** | Glow Text (`4.1`) | **Con pulso**<br><sub>.glow-pulse</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow variant="pulse" />` |
-| **`4.2.1.1`** | Gradient Text (`4.2`) | **Estático**<br><sub>.grad-static</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient variant="static" />` |
-| **`4.2.2.1`** | Gradient Text (`4.2`) | **Animado**<br><sub>.grad-animated</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient variant="animated" />` |
-| **`4.2.3.1`** | Gradient Text (`4.2`) | **Arcoíris**<br><sub>.grad-rainbow</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient variant="rainbow" />` |
-| **`4.2.4.1`** | Gradient Text (`4.2`) | **Sutil**<br><sub>.grad-subtle, para párrafos</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient variant="subtle" />` |
-| **`4.3.1.1`** | Typewriter (`4.3`) | **Terminal**<br><sub>Cursor, prompt y escribido secuencial</sub> | `<app-text-typewriter>` | `src/app/components/typography/typewriter` | `<app-text-typewriter variant="default" />` |
-| **`4.4.1.1`** | 3D Text (`4.4`) | **Extrude**<br><sub>Canto sólido por capas de sombra</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d variant="extrude" />` |
-| **`4.4.2.1`** | 3D Text (`4.4`) | **Isométrico**<br><sub>Texto recostado con perspectiva</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d variant="isometric" />` |
-| **`4.4.3.1`** | 3D Text (`4.4`) | **Floating**<br><sub>Flota con su sombra en movimiento</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d variant="floating" />` |
+| **`4.1.1.1`** | Glow Text (`4.1`) | **Cyan**<br><sub>.glow-cyan</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow [variant]="'cyan'" />` |
+| **`4.1.2.1`** | Glow Text (`4.1`) | **Rosa**<br><sub>.glow-pink</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow [variant]="'pink'" />` |
+| **`4.1.3.1`** | Glow Text (`4.1`) | **Verde Matrix**<br><sub>.glow-green</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow [variant]="'green'" />` |
+| **`4.1.4.1`** | Glow Text (`4.1`) | **Con pulso**<br><sub>.glow-pulse</sub> | `<app-text-glow>` | `src/app/components/typography/glow-text` | `<app-text-glow [variant]="'pulse'" />` |
+| **`4.2.1.1`** | Gradient Text (`4.2`) | **Estático**<br><sub>.grad-static</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient [variant]="'static'" />` |
+| **`4.2.2.1`** | Gradient Text (`4.2`) | **Animado**<br><sub>.grad-animated</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient [variant]="'animated'" />` |
+| **`4.2.3.1`** | Gradient Text (`4.2`) | **Arcoíris**<br><sub>.grad-rainbow</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient [variant]="'rainbow'" />` |
+| **`4.2.4.1`** | Gradient Text (`4.2`) | **Sutil**<br><sub>.grad-subtle, para párrafos</sub> | `<app-text-gradient>` | `src/app/components/typography/gradient-text` | `<app-text-gradient [variant]="'subtle'" />` |
+| **`4.3.1.1`** | Typewriter (`4.3`) | **Terminal**<br><sub>Cursor, prompt y escribido secuencial</sub> | `<app-text-typewriter>` | `src/app/components/typography/typewriter` | `<app-text-typewriter [variant]="'default'" />` |
+| **`4.4.1.1`** | 3D Text (`4.4`) | **Extrude**<br><sub>Canto sólido por capas de sombra</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d [variant]="'extrude'" />` |
+| **`4.4.2.1`** | 3D Text (`4.4`) | **Isométrico**<br><sub>Texto recostado con perspectiva</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d [variant]="'isometric'" />` |
+| **`4.4.3.1`** | 3D Text (`4.4`) | **Floating**<br><sub>Flota con su sombra en movimiento</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d [variant]="'floating'" />` |
 
 ---
 
@@ -161,22 +168,22 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`5.1.1.1`** | Sidebar (`5.1`) | **Colapsable**<br><sub>Colapsa con ☰ y recuerda el item activo</sub> | `<app-nav-sidebar>` | `src/app/components/navigation/sidebar` | `<app-nav-sidebar variant="default" />` |
-| **`5.2.1.1`** | Topbar (`5.2`) | **Con menú mobile**<br><sub>Menú ☰ accesible por teclado</sub> | `<app-nav-topbar>` | `src/app/components/navigation/topbar` | `<app-nav-topbar variant="default" />` |
-| **`5.3.1.1`** | Dock (`5.3`) | **Flotante**<br><sub>Píldora flotante con magnificación al pasar el cursor</sub> | `<app-nav-dock>` | `src/app/components/navigation/dock` | `<app-nav-dock variant="floating" />` |
-| **`5.3.2.1`** | Dock (`5.3`) | **Cristal**<br><sub>Vidrio transparente sobre color</sub> | `<app-nav-dock>` | `src/app/components/navigation/dock` | `<app-nav-dock variant="glass" />` |
-| **`5.3.3.1`** | Dock (`5.3`) | **Barra**<br><sub>Barra inferior a ancho completo</sub> | `<app-nav-dock>` | `src/app/components/navigation/dock` | `<app-nav-dock variant="bar" />` |
-| **`5.4.1.1`** | Glass Tabs (`5.4`) | **Vidrio**<br><sub>Barra de vidrio con pastilla que se desliza</sub> | `<app-nav-tabs>` | `src/app/components/navigation/glass-tabs` | `<app-nav-tabs variant="glass" />` |
-| **`5.4.2.1`** | Glass Tabs (`5.4`) | **Subrayado**<br><sub>Línea luminosa que sigue a la pestaña</sub> | `<app-nav-tabs>` | `src/app/components/navigation/glass-tabs` | `<app-nav-tabs variant="underline" />` |
-| **`5.5.1.1`** | Breadcrumbs (`5.5`) | **Chevron**<br><sub>Flechas entre niveles</sub> | `<app-nav-breadcrumbs>` | `src/app/components/navigation/breadcrumbs` | `<app-nav-breadcrumbs variant="chevron" />` |
-| **`5.5.2.1`** | Breadcrumbs (`5.5`) | **Slash**<br><sub>Barra monoespaciada</sub> | `<app-nav-breadcrumbs>` | `src/app/components/navigation/breadcrumbs` | `<app-nav-breadcrumbs variant="slash" />` |
-| **`5.5.3.1`** | Breadcrumbs (`5.5`) | **Vidrio**<br><sub>Píldora translúcida sobre color</sub> | `<app-nav-breadcrumbs>` | `src/app/components/navigation/breadcrumbs` | `<app-nav-breadcrumbs variant="glass" />` |
-| **`5.6.1.1`** | Pagination (`5.6`) | **Números**<br><sub>Página activa con elipsis dinámico</sub> | `<app-nav-pagination>` | `src/app/components/navigation/pagination` | `<app-nav-pagination variant="numbers" />` |
-| **`5.6.2.1`** | Pagination (`5.6`) | **Compacta**<br><sub>"Página X de Y" con flechas</sub> | `<app-nav-pagination>` | `src/app/components/navigation/pagination` | `<app-nav-pagination variant="compact" />` |
-| **`5.6.3.1`** | Pagination (`5.6`) | **Vidrio**<br><sub>Píldora translucida sobre color</sub> | `<app-nav-pagination>` | `src/app/components/navigation/pagination` | `<app-nav-pagination variant="glass" />` |
-| **`5.7.1.1`** | Stepper (`5.7`) | **Horizontal**<br><sub>Pasos en fila con conectores</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper variant="horizontal" />` |
-| **`5.7.2.1`** | Stepper (`5.7`) | **Vertical**<br><sub>Pasos apilados con línea izquierda</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper variant="vertical" />` |
-| **`5.7.3.1`** | Stepper (`5.7`) | **Progreso**<br><sub>Barra de progreso con puntos</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper variant="progress" />` |
+| **`5.1.1.1`** | Sidebar (`5.1`) | **Colapsable**<br><sub>Colapsa con ☰ y recuerda el item activo</sub> | `<app-nav-sidebar>` | `src/app/components/navigation/sidebar` | `<app-nav-sidebar [variant]="'default'" />` |
+| **`5.2.1.1`** | Topbar (`5.2`) | **Con menú mobile**<br><sub>Menú ☰ accesible por teclado</sub> | `<app-nav-topbar>` | `src/app/components/navigation/topbar` | `<app-nav-topbar [variant]="'default'" />` |
+| **`5.3.1.1`** | Dock (`5.3`) | **Flotante**<br><sub>Píldora flotante con magnificación al pasar el cursor</sub> | `<app-nav-dock>` | `src/app/components/navigation/dock` | `<app-nav-dock [variant]="'floating'" />` |
+| **`5.3.2.1`** | Dock (`5.3`) | **Cristal**<br><sub>Vidrio transparente sobre color</sub> | `<app-nav-dock>` | `src/app/components/navigation/dock` | `<app-nav-dock [variant]="'glass'" />` |
+| **`5.3.3.1`** | Dock (`5.3`) | **Barra**<br><sub>Barra inferior a ancho completo</sub> | `<app-nav-dock>` | `src/app/components/navigation/dock` | `<app-nav-dock [variant]="'bar'" />` |
+| **`5.4.1.1`** | Glass Tabs (`5.4`) | **Vidrio**<br><sub>Barra de vidrio con pastilla que se desliza</sub> | `<app-nav-tabs>` | `src/app/components/navigation/glass-tabs` | `<app-nav-tabs [variant]="'glass'" />` |
+| **`5.4.2.1`** | Glass Tabs (`5.4`) | **Subrayado**<br><sub>Línea luminosa que sigue a la pestaña</sub> | `<app-nav-tabs>` | `src/app/components/navigation/glass-tabs` | `<app-nav-tabs [variant]="'underline'" />` |
+| **`5.5.1.1`** | Breadcrumbs (`5.5`) | **Chevron**<br><sub>Flechas entre niveles</sub> | `<app-nav-breadcrumbs>` | `src/app/components/navigation/breadcrumbs` | `<app-nav-breadcrumbs [variant]="'chevron'" />` |
+| **`5.5.2.1`** | Breadcrumbs (`5.5`) | **Slash**<br><sub>Barra monoespaciada</sub> | `<app-nav-breadcrumbs>` | `src/app/components/navigation/breadcrumbs` | `<app-nav-breadcrumbs [variant]="'slash'" />` |
+| **`5.5.3.1`** | Breadcrumbs (`5.5`) | **Vidrio**<br><sub>Píldora translúcida sobre color</sub> | `<app-nav-breadcrumbs>` | `src/app/components/navigation/breadcrumbs` | `<app-nav-breadcrumbs [variant]="'glass'" />` |
+| **`5.6.1.1`** | Pagination (`5.6`) | **Números**<br><sub>Página activa con elipsis dinámico</sub> | `<app-nav-pagination>` | `src/app/components/navigation/pagination` | `<app-nav-pagination [variant]="'numbers'" />` |
+| **`5.6.2.1`** | Pagination (`5.6`) | **Compacta**<br><sub>"Página X de Y" con flechas</sub> | `<app-nav-pagination>` | `src/app/components/navigation/pagination` | `<app-nav-pagination [variant]="'compact'" />` |
+| **`5.6.3.1`** | Pagination (`5.6`) | **Vidrio**<br><sub>Píldora translucida sobre color</sub> | `<app-nav-pagination>` | `src/app/components/navigation/pagination` | `<app-nav-pagination [variant]="'glass'" />` |
+| **`5.7.1.1`** | Stepper (`5.7`) | **Horizontal**<br><sub>Pasos en fila con conectores</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper [variant]="'horizontal'" />` |
+| **`5.7.2.1`** | Stepper (`5.7`) | **Vertical**<br><sub>Pasos apilados con línea izquierda</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper [variant]="'vertical'" />` |
+| **`5.7.3.1`** | Stepper (`5.7`) | **Progreso**<br><sub>Barra de progreso con puntos</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper [variant]="'progress'" />` |
 
 ---
 
@@ -186,17 +193,17 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`6.1.1.1`** | Glass Input (`6.1`) | **Formulario**<br><sub>Input, email y textarea con highlight</sub> | `<app-form-glass-input>` | `src/app/components/forms/glass-input` | `<app-form-glass-input variant="default" />` |
-| **`6.2.1.1`** | Toggle (`6.2`) | **Switches**<br><sub>aria-checked y navegable por teclado</sub> | `<app-form-toggle>` | `src/app/components/forms/toggle` | `<app-form-toggle variant="default" />` |
-| **`6.3.1.1`** | Checkbox (`6.3`) | **Checkboxes**<br><sub>Con icono de check animado</sub> | `<app-form-checkbox>` | `src/app/components/forms/checkbox` | `<app-form-checkbox variant="default" />` |
-| **`6.4.1.1`** | Segmented (`6.4`) | **Vidrio**<br><sub>Translúcido con pulgar que se desliza</sub> | `<app-form-segmented>` | `src/app/components/forms/segmented` | `<app-form-segmented variant="glass" />` |
-| **`6.4.2.1`** | Segmented (`6.4`) | **Sólido**<br><sub>Pulgar sólido sobre panel oscuro</sub> | `<app-form-segmented>` | `src/app/components/forms/segmented` | `<app-form-segmented variant="solid" />` |
-| **`6.5.1.1`** | OTP Input (`6.5`) | **Cajas**<br><sub>Dígitos en cajas de vidrio con blur</sub> | `<app-form-otp>` | `src/app/components/forms/otp` | `<app-form-otp variant="boxes" />` |
-| **`6.5.2.1`** | OTP Input (`6.5`) | **Subrayado**<br><sub>Dígitos mono sobre línea de color</sub> | `<app-form-otp>` | `src/app/components/forms/otp` | `<app-form-otp variant="underline" />` |
-| **`6.6.1.1`** | Rating (`6.6`) | **Estrellas**<br><sub>5 estrellas con hover dorado</sub> | `<app-form-rating>` | `src/app/components/forms/rating` | `<app-form-rating variant="stars" />` |
-| **`6.6.2.1`** | Rating (`6.6`) | **Segmentos**<br><sub>Botones 1–5 con etiquetas</sub> | `<app-form-rating>` | `src/app/components/forms/rating` | `<app-form-rating variant="segments" />` |
-| **`6.7.1.1`** | Range Slider (`6.7`) | **Degradado**<br><sub>Pista indigo→rosa con pulgar blanco</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range variant="gradient" />` |
-| **`6.7.2.1`** | Range Slider (`6.7`) | **Vidrio**<br><sub>Pulgar translúcido con borde luminoso</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range variant="glass" />` |
+| **`6.1.1.1`** | Glass Input (`6.1`) | **Formulario**<br><sub>Input, email y textarea con highlight</sub> | `<app-form-glass-input>` | `src/app/components/forms/glass-input` | `<app-form-glass-input [variant]="'default'" />` |
+| **`6.2.1.1`** | Toggle (`6.2`) | **Switches**<br><sub>aria-checked y navegable por teclado</sub> | `<app-form-toggle>` | `src/app/components/forms/toggle` | `<app-form-toggle [variant]="'default'" />` |
+| **`6.3.1.1`** | Checkbox (`6.3`) | **Checkboxes**<br><sub>Con icono de check animado</sub> | `<app-form-checkbox>` | `src/app/components/forms/checkbox` | `<app-form-checkbox [variant]="'default'" />` |
+| **`6.4.1.1`** | Segmented (`6.4`) | **Vidrio**<br><sub>Translúcido con pulgar que se desliza</sub> | `<app-form-segmented>` | `src/app/components/forms/segmented` | `<app-form-segmented [variant]="'glass'" />` |
+| **`6.4.2.1`** | Segmented (`6.4`) | **Sólido**<br><sub>Pulgar sólido sobre panel oscuro</sub> | `<app-form-segmented>` | `src/app/components/forms/segmented` | `<app-form-segmented [variant]="'solid'" />` |
+| **`6.5.1.1`** | OTP Input (`6.5`) | **Cajas**<br><sub>Dígitos en cajas de vidrio con blur</sub> | `<app-form-otp>` | `src/app/components/forms/otp` | `<app-form-otp [variant]="'boxes'" />` |
+| **`6.5.2.1`** | OTP Input (`6.5`) | **Subrayado**<br><sub>Dígitos mono sobre línea de color</sub> | `<app-form-otp>` | `src/app/components/forms/otp` | `<app-form-otp [variant]="'underline'" />` |
+| **`6.6.1.1`** | Rating (`6.6`) | **Estrellas**<br><sub>5 estrellas con hover dorado</sub> | `<app-form-rating>` | `src/app/components/forms/rating` | `<app-form-rating [variant]="'stars'" />` |
+| **`6.6.2.1`** | Rating (`6.6`) | **Segmentos**<br><sub>Botones 1–5 con etiquetas</sub> | `<app-form-rating>` | `src/app/components/forms/rating` | `<app-form-rating [variant]="'segments'" />` |
+| **`6.7.1.1`** | Range Slider (`6.7`) | **Degradado**<br><sub>Pista indigo→rosa con pulgar blanco</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'gradient'" />` |
+| **`6.7.2.1`** | Range Slider (`6.7`) | **Vidrio**<br><sub>Pulgar translúcido con borde luminoso</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'glass'" />` |
 
 ---
 
@@ -206,15 +213,15 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`7.1.1.1`** | Glass Modal (`7.1`) | **Modal**<br><sub>Se abre dentro del entorno, no sobre toda la app</sub> | `<app-modal-glass>` | `src/app/components/modals/glass-modal` | `<app-modal-glass variant="default" />` |
-| **`7.2.1.1`** | Slide-in Panel (`7.2`) | **Panel lateral**<br><sub>Entra desde la derecha, cierra con Escape</sub> | `<app-modal-slide-in>` | `src/app/components/modals/slide-in` | `<app-modal-slide-in variant="default" />` |
-| **`7.3.1.1`** | Command Palette (`7.3`) | **Paleta de comandos**<br><sub>Flechas para moverse, Enter para ejecutar, Escape para cerrar</sub> | `<app-modal-palette>` | `src/app/components/modals/command-palette` | `<app-modal-palette variant="default" />` |
-| **`7.4.1.1`** | Confirm Dialog (`7.4`) | **Peligro**<br><sub>Acento rojo con icono de advertencia</sub> | `<app-modal-confirm>` | `src/app/components/modals/confirm` | `<app-modal-confirm variant="danger" />` |
-| **`7.4.2.1`** | Confirm Dialog (`7.4`) | **Vidrio**<br><sub>Panel translúcido con blur</sub> | `<app-modal-confirm>` | `src/app/components/modals/confirm` | `<app-modal-confirm variant="glass" />` |
-| **`7.5.1.1`** | Bottom Sheet (`7.5`) | **Sólido**<br><sub>Panel oscuro desde abajo</sub> | `<app-modal-sheet>` | `src/app/components/modals/bottom-sheet` | `<app-modal-sheet variant="solid" />` |
-| **`7.5.2.1`** | Bottom Sheet (`7.5`) | **Vidrio**<br><sub>Panel translúcido con blur</sub> | `<app-modal-sheet>` | `src/app/components/modals/bottom-sheet` | `<app-modal-sheet variant="glass" />` |
-| **`7.6.1.1`** | Lightbox (`7.6`) | **Foto**<br><sub>Visor oscuro con flechas</sub> | `<app-modal-lightbox>` | `src/app/components/modals/lightbox` | `<app-modal-lightbox variant="photo" />` |
-| **`7.6.2.1`** | Lightbox (`7.6`) | **Vidrio**<br><sub>Miniaturas con efecto de vidrio</sub> | `<app-modal-lightbox>` | `src/app/components/modals/lightbox` | `<app-modal-lightbox variant="glass" />` |
+| **`7.1.1.1`** | Glass Modal (`7.1`) | **Modal**<br><sub>Se abre dentro del entorno, no sobre toda la app</sub> | `<app-modal-glass>` | `src/app/components/modals/glass-modal` | `<app-modal-glass [variant]="'default'" />` |
+| **`7.2.1.1`** | Slide-in Panel (`7.2`) | **Panel lateral**<br><sub>Entra desde la derecha, cierra con Escape</sub> | `<app-modal-slide-in>` | `src/app/components/modals/slide-in` | `<app-modal-slide-in [variant]="'default'" />` |
+| **`7.3.1.1`** | Command Palette (`7.3`) | **Paleta de comandos**<br><sub>Flechas para moverse, Enter para ejecutar, Escape para cerrar</sub> | `<app-modal-palette>` | `src/app/components/modals/command-palette` | `<app-modal-palette [variant]="'default'" />` |
+| **`7.4.1.1`** | Confirm Dialog (`7.4`) | **Peligro**<br><sub>Acento rojo con icono de advertencia</sub> | `<app-modal-confirm>` | `src/app/components/modals/confirm` | `<app-modal-confirm [variant]="'danger'" />` |
+| **`7.4.2.1`** | Confirm Dialog (`7.4`) | **Vidrio**<br><sub>Panel translúcido con blur</sub> | `<app-modal-confirm>` | `src/app/components/modals/confirm` | `<app-modal-confirm [variant]="'glass'" />` |
+| **`7.5.1.1`** | Bottom Sheet (`7.5`) | **Sólido**<br><sub>Panel oscuro desde abajo</sub> | `<app-modal-sheet>` | `src/app/components/modals/bottom-sheet` | `<app-modal-sheet [variant]="'solid'" />` |
+| **`7.5.2.1`** | Bottom Sheet (`7.5`) | **Vidrio**<br><sub>Panel translúcido con blur</sub> | `<app-modal-sheet>` | `src/app/components/modals/bottom-sheet` | `<app-modal-sheet [variant]="'glass'" />` |
+| **`7.6.1.1`** | Lightbox (`7.6`) | **Foto**<br><sub>Visor oscuro con flechas</sub> | `<app-modal-lightbox>` | `src/app/components/modals/lightbox` | `<app-modal-lightbox [variant]="'photo'" />` |
+| **`7.6.2.1`** | Lightbox (`7.6`) | **Vidrio**<br><sub>Miniaturas con efecto de vidrio</sub> | `<app-modal-lightbox>` | `src/app/components/modals/lightbox` | `<app-modal-lightbox [variant]="'glass'" />` |
 
 ---
 
@@ -224,19 +231,19 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`8.1.1.1`** | Dark (`8.1`) | **Superficies**<br><sub>Fondos y capas</sub> | `<app-theme-dark>` | `src/app/components/themes/dark` | `<app-theme-dark variant="surfaces" />` |
-| **`8.1.2.1`** | Dark (`8.1`) | **Acento**<br><sub>Indigo de marca</sub> | `<app-theme-dark>` | `src/app/components/themes/dark` | `<app-theme-dark variant="accent" />` |
-| **`8.1.3.1`** | Dark (`8.1`) | **Neutros**<br><sub>Escala de grises</sub> | `<app-theme-dark>` | `src/app/components/themes/dark` | `<app-theme-dark variant="neutrals" />` |
-| **`8.2.1.1`** | Light (`8.2`) | **Superficies**<br><sub>Blancos y grises claros</sub> | `<app-theme-light>` | `src/app/components/themes/light` | `<app-theme-light variant="surfaces" />` |
-| **`8.2.2.1`** | Light (`8.2`) | **Acento**<br><sub>Azules de marca</sub> | `<app-theme-light>` | `src/app/components/themes/light` | `<app-theme-light variant="accent" />` |
-| **`8.2.3.1`** | Light (`8.2`) | **Neutros**<br><sub>Texto y bordes</sub> | `<app-theme-light>` | `src/app/components/themes/light` | `<app-theme-light variant="neutrals" />` |
-| **`8.3.1.1`** | Hacker (`8.3`) | **Terminal**<br><sub>Simulación de shell con cursor</sub> | `<app-theme-hacker>` | `src/app/components/themes/hacker` | `<app-theme-hacker variant="terminal" />` |
-| **`8.3.2.1`** | Hacker (`8.3`) | **Paleta**<br><sub>Verdes fosforescentes</sub> | `<app-theme-hacker>` | `src/app/components/themes/hacker` | `<app-theme-hacker variant="palette" />` |
-| **`8.4.1.1`** | Cyberpunk (`8.4`) | **Título glitch**<br><sub>Texto con desplazamiento RGB</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk variant="glitch" />` |
-| **`8.4.2.1`** | Cyberpunk (`8.4`) | **Subtítulo**<br><sub>Línea monoespaciada</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk variant="subtitle" />` |
-| **`8.4.3.1`** | Cyberpunk (`8.4`) | **Paleta**<br><sub>Neones saturados</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk variant="palette" />` |
-| **`8.5.1.1`** | Corporate (`8.5`) | **Cabecera**<br><sub>Logo y jerarquía</sub> | `<app-theme-corporate>` | `src/app/components/themes/corporate` | `<app-theme-corporate variant="header" />` |
-| **`8.5.2.1`** | Corporate (`8.5`) | **Paleta**<br><sub>Azules corporativos y grises</sub> | `<app-theme-corporate>` | `src/app/components/themes/corporate` | `<app-theme-corporate variant="palette" />` |
+| **`8.1.1.1`** | Dark (`8.1`) | **Superficies**<br><sub>Fondos y capas</sub> | `<app-theme-dark>` | `src/app/components/themes/dark` | `<app-theme-dark [variant]="'surfaces'" />` |
+| **`8.1.2.1`** | Dark (`8.1`) | **Acento**<br><sub>Indigo de marca</sub> | `<app-theme-dark>` | `src/app/components/themes/dark` | `<app-theme-dark [variant]="'accent'" />` |
+| **`8.1.3.1`** | Dark (`8.1`) | **Neutros**<br><sub>Escala de grises</sub> | `<app-theme-dark>` | `src/app/components/themes/dark` | `<app-theme-dark [variant]="'neutrals'" />` |
+| **`8.2.1.1`** | Light (`8.2`) | **Superficies**<br><sub>Blancos y grises claros</sub> | `<app-theme-light>` | `src/app/components/themes/light` | `<app-theme-light [variant]="'surfaces'" />` |
+| **`8.2.2.1`** | Light (`8.2`) | **Acento**<br><sub>Azules de marca</sub> | `<app-theme-light>` | `src/app/components/themes/light` | `<app-theme-light [variant]="'accent'" />` |
+| **`8.2.3.1`** | Light (`8.2`) | **Neutros**<br><sub>Texto y bordes</sub> | `<app-theme-light>` | `src/app/components/themes/light` | `<app-theme-light [variant]="'neutrals'" />` |
+| **`8.3.1.1`** | Hacker (`8.3`) | **Terminal**<br><sub>Simulación de shell con cursor</sub> | `<app-theme-hacker>` | `src/app/components/themes/hacker` | `<app-theme-hacker [variant]="'terminal'" />` |
+| **`8.3.2.1`** | Hacker (`8.3`) | **Paleta**<br><sub>Verdes fosforescentes</sub> | `<app-theme-hacker>` | `src/app/components/themes/hacker` | `<app-theme-hacker [variant]="'palette'" />` |
+| **`8.4.1.1`** | Cyberpunk (`8.4`) | **Título glitch**<br><sub>Texto con desplazamiento RGB</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk [variant]="'glitch'" />` |
+| **`8.4.2.1`** | Cyberpunk (`8.4`) | **Subtítulo**<br><sub>Línea monoespaciada</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk [variant]="'subtitle'" />` |
+| **`8.4.3.1`** | Cyberpunk (`8.4`) | **Paleta**<br><sub>Neones saturados</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk [variant]="'palette'" />` |
+| **`8.5.1.1`** | Corporate (`8.5`) | **Cabecera**<br><sub>Logo y jerarquía</sub> | `<app-theme-corporate>` | `src/app/components/themes/corporate` | `<app-theme-corporate [variant]="'header'" />` |
+| **`8.5.2.1`** | Corporate (`8.5`) | **Paleta**<br><sub>Azules corporativos y grises</sub> | `<app-theme-corporate>` | `src/app/components/themes/corporate` | `<app-theme-corporate [variant]="'palette'" />` |
 
 ---
 
@@ -246,24 +253,24 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`9.1.1.1`** | Skeleton (`9.1`) | **Shimmer**<br><sub>Brillo que se desplaza de izquierda a derecha</sub> | `<app-anim-skeleton>` | `src/app/components/animations/skeleton` | `<app-anim-skeleton variant="shimmer" />` |
-| **`9.1.2.1`** | Skeleton (`9.1`) | **Pulso**<br><sub>Opacidad que sube y baja suavemente</sub> | `<app-anim-skeleton>` | `src/app/components/animations/skeleton` | `<app-anim-skeleton variant="pulse" />` |
-| **`9.1.3.1`** | Skeleton (`9.1`) | **Onda**<br><sub>Ola azul que avanza por las líneas</sub> | `<app-anim-skeleton>` | `src/app/components/animations/skeleton` | `<app-anim-skeleton variant="wave" />` |
-| **`9.2.1.1`** | Spinner (`9.2`) | **Anillo**<br><sub>Círculo que gira con borde de color</sub> | `<app-anim-spinner>` | `src/app/components/animations/spinner` | `<app-anim-spinner variant="ring" />` |
-| **`9.2.2.1`** | Spinner (`9.2`) | **Puntos**<br><sub>Tres puntos que rebotan</sub> | `<app-anim-spinner>` | `src/app/components/animations/spinner` | `<app-anim-spinner variant="dots" />` |
-| **`9.2.3.1`** | Spinner (`9.2`) | **Barra**<br><sub>Barra con degradado que avanza</sub> | `<app-anim-spinner>` | `src/app/components/animations/spinner` | `<app-anim-spinner variant="bar" />` |
-| **`9.3.1.1`** | Page Flip (`9.3`) | **Tarjeta**<br><sub>Hoja interactiva frontal y reverso con click</sub> | `<app-anim-page-flip>` | `src/app/components/animations/page-flip` | `<app-anim-page-flip variant="card" />` |
-| **`9.3.2.1`** | Page Flip (`9.3`) | **Editorial**<br><sub>Estilo página de revista con tipografía y número</sub> | `<app-anim-page-flip>` | `src/app/components/animations/page-flip` | `<app-anim-page-flip variant="editorial" />` |
-| **`9.3.3.1`** | Page Flip (`9.3`) | **Brillo**<br><sub>Efecto satinado con reflejo de luz al voltear</sub> | `<app-anim-page-flip>` | `src/app/components/animations/page-flip` | `<app-anim-page-flip variant="glossy" />` |
-| **`9.4.1.1`** | Book Flip (`9.4`) | **Clásico**<br><sub>Lomo realista, sombras de pliegue y navegación completa</sub> | `<app-anim-book-flip>` | `src/app/components/animations/book-flip` | `<app-anim-book-flip variant="classic" />` |
-| **`9.4.2.1`** | Book Flip (`9.4`) | **Cuaderno**<br><sub>Estilo cuadrícula con tipografía monoespaciada</sub> | `<app-anim-book-flip>` | `src/app/components/animations/book-flip` | `<app-anim-book-flip variant="notebook" />` |
-| **`9.4.3.1`** | Book Flip (`9.4`) | **Pergamino**<br><sub>Tono editorial cálido y bordes dorados</sub> | `<app-anim-book-flip>` | `src/app/components/animations/book-flip` | `<app-anim-book-flip variant="parchment" />` |
-| **`9.5.1.1`** | Corner Fold (`9.5`) | **Nota**<br><sub>Esquina superior derecha doblada con elevación al hover</sub> | `<app-anim-corner-fold>` | `src/app/components/animations/corner-fold` | `<app-anim-corner-fold variant="note" />` |
-| **`9.5.2.1`** | Corner Fold (`9.5`) | **Documento**<br><sub>Hoja técnica con pliegue pronunciado y sello de verificación</sub> | `<app-anim-corner-fold>` | `src/app/components/animations/corner-fold` | `<app-anim-corner-fold variant="document" />` |
-| **`9.5.3.1`** | Corner Fold (`9.5`) | **Despegue**<br><sub>Efecto pegatina o sticker que se levanta interactivamente</sub> | `<app-anim-corner-fold>` | `src/app/components/animations/corner-fold` | `<app-anim-corner-fold variant="peel" />` |
-| **`9.6.1.1`** | Marquee (`9.6`) | **Texto**<br><sub>Palabras en loop con separadores y estilos alternados</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee variant="text" />` |
-| **`9.6.2.1`** | Marquee (`9.6`) | **Bidireccional**<br><sub>Dos filas en direcciones opuestas a distinta velocidad</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee variant="dual" />` |
-| **`9.6.3.1`** | Marquee (`9.6`) | **Logos**<br><sub>Fila de marcas que se pausa al pasar el cursor</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee variant="logos" />` |
+| **`9.1.1.1`** | Skeleton (`9.1`) | **Shimmer**<br><sub>Brillo que se desplaza de izquierda a derecha</sub> | `<app-anim-skeleton>` | `src/app/components/animations/skeleton` | `<app-anim-skeleton [variant]="'shimmer'" />` |
+| **`9.1.2.1`** | Skeleton (`9.1`) | **Pulso**<br><sub>Opacidad que sube y baja suavemente</sub> | `<app-anim-skeleton>` | `src/app/components/animations/skeleton` | `<app-anim-skeleton [variant]="'pulse'" />` |
+| **`9.1.3.1`** | Skeleton (`9.1`) | **Onda**<br><sub>Ola azul que avanza por las líneas</sub> | `<app-anim-skeleton>` | `src/app/components/animations/skeleton` | `<app-anim-skeleton [variant]="'wave'" />` |
+| **`9.2.1.1`** | Spinner (`9.2`) | **Anillo**<br><sub>Círculo que gira con borde de color</sub> | `<app-anim-spinner>` | `src/app/components/animations/spinner` | `<app-anim-spinner [variant]="'ring'" />` |
+| **`9.2.2.1`** | Spinner (`9.2`) | **Puntos**<br><sub>Tres puntos que rebotan</sub> | `<app-anim-spinner>` | `src/app/components/animations/spinner` | `<app-anim-spinner [variant]="'dots'" />` |
+| **`9.2.3.1`** | Spinner (`9.2`) | **Barra**<br><sub>Barra con degradado que avanza</sub> | `<app-anim-spinner>` | `src/app/components/animations/spinner` | `<app-anim-spinner [variant]="'bar'" />` |
+| **`9.3.1.1`** | Page Flip (`9.3`) | **Tarjeta**<br><sub>Hoja interactiva frontal y reverso con click</sub> | `<app-anim-page-flip>` | `src/app/components/animations/page-flip` | `<app-anim-page-flip [variant]="'card'" />` |
+| **`9.3.2.1`** | Page Flip (`9.3`) | **Editorial**<br><sub>Estilo página de revista con tipografía y número</sub> | `<app-anim-page-flip>` | `src/app/components/animations/page-flip` | `<app-anim-page-flip [variant]="'editorial'" />` |
+| **`9.3.3.1`** | Page Flip (`9.3`) | **Brillo**<br><sub>Efecto satinado con reflejo de luz al voltear</sub> | `<app-anim-page-flip>` | `src/app/components/animations/page-flip` | `<app-anim-page-flip [variant]="'glossy'" />` |
+| **`9.4.1.1`** | Book Flip (`9.4`) | **Clásico**<br><sub>Lomo realista, sombras de pliegue y navegación completa</sub> | `<app-anim-book-flip>` | `src/app/components/animations/book-flip` | `<app-anim-book-flip [variant]="'classic'" />` |
+| **`9.4.2.1`** | Book Flip (`9.4`) | **Cuaderno**<br><sub>Estilo cuadrícula con tipografía monoespaciada</sub> | `<app-anim-book-flip>` | `src/app/components/animations/book-flip` | `<app-anim-book-flip [variant]="'notebook'" />` |
+| **`9.4.3.1`** | Book Flip (`9.4`) | **Pergamino**<br><sub>Tono editorial cálido y bordes dorados</sub> | `<app-anim-book-flip>` | `src/app/components/animations/book-flip` | `<app-anim-book-flip [variant]="'parchment'" />` |
+| **`9.5.1.1`** | Corner Fold (`9.5`) | **Nota**<br><sub>Esquina superior derecha doblada con elevación al hover</sub> | `<app-anim-corner-fold>` | `src/app/components/animations/corner-fold` | `<app-anim-corner-fold [variant]="'note'" />` |
+| **`9.5.2.1`** | Corner Fold (`9.5`) | **Documento**<br><sub>Hoja técnica con pliegue pronunciado y sello de verificación</sub> | `<app-anim-corner-fold>` | `src/app/components/animations/corner-fold` | `<app-anim-corner-fold [variant]="'document'" />` |
+| **`9.5.3.1`** | Corner Fold (`9.5`) | **Despegue**<br><sub>Efecto pegatina o sticker que se levanta interactivamente</sub> | `<app-anim-corner-fold>` | `src/app/components/animations/corner-fold` | `<app-anim-corner-fold [variant]="'peel'" />` |
+| **`9.6.1.1`** | Marquee (`9.6`) | **Texto**<br><sub>Palabras en loop con separadores y estilos alternados</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee [variant]="'text'" />` |
+| **`9.6.2.1`** | Marquee (`9.6`) | **Bidireccional**<br><sub>Dos filas en direcciones opuestas a distinta velocidad</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee [variant]="'dual'" />` |
+| **`9.6.3.1`** | Marquee (`9.6`) | **Logos**<br><sub>Fila de marcas que se pausa al pasar el cursor</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee [variant]="'logos'" />` |
 
 ---
 
@@ -273,12 +280,21 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 | Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **`10.1.1.1`** | Line Chart (`10.1`) | **Curva Spline**<br><sub>Curva Bézier continua con área degradada y trazado GSAP</sub> | `<app-chart-line>` | `src/app/components/charts/line-chart` | `<app-chart-line variant="smooth" />` |
-| **`10.1.2.1`** | Line Chart (`10.1`) | **Cyber Stepped**<br><sub>Línea escalonada digital tech con radar scan y grid</sub> | `<app-chart-line>` | `src/app/components/charts/line-chart` | `<app-chart-line variant="cyber" />` |
-| **`10.1.3.1`** | Line Chart (`10.1`) | **Doble Serie**<br><sub>Series comparativas superpuestas con leyenda y tooltips</sub> | `<app-chart-line>` | `src/app/components/charts/line-chart` | `<app-chart-line variant="multi" />` |
-| **`10.2.1.1`** | Bar Chart (`10.2`) | **Columnas Neón**<br><sub>Columnas verticales con rebote elástico y contador numérico</sub> | `<app-chart-bar>` | `src/app/components/charts/bar-chart` | `<app-chart-bar variant="columns" />` |
-| **`10.2.2.1`** | Bar Chart (`10.2`) | **Cristal Glass**<br><sub>Barras translúcidas con reflejos especulares y blur</sub> | `<app-chart-bar>` | `src/app/components/charts/bar-chart` | `<app-chart-bar variant="glass" />` |
-| **`10.2.3.1`** | Bar Chart (`10.2`) | **Progreso Ranking**<br><sub>Barras horizontales fluidas ideales para métricas y rankings</sub> | `<app-chart-bar>` | `src/app/components/charts/bar-chart` | `<app-chart-bar variant="horizontal" />` |
+| **`10.1.1.1`** | Line Chart (`10.1`) | **Curva Spline**<br><sub>Curva Bézier continua con área degradada y trazado GSAP</sub> | `<app-chart-line>` | `src/app/components/charts/line-chart` | `<app-chart-line [variant]="'smooth'" />` |
+| **`10.1.2.1`** | Line Chart (`10.1`) | **Cyber Stepped**<br><sub>Línea escalonada digital tech con radar scan y grid</sub> | `<app-chart-line>` | `src/app/components/charts/line-chart` | `<app-chart-line [variant]="'cyber'" />` |
+| **`10.1.3.1`** | Line Chart (`10.1`) | **Doble Serie**<br><sub>Series comparativas superpuestas con leyenda y tooltips</sub> | `<app-chart-line>` | `src/app/components/charts/line-chart` | `<app-chart-line [variant]="'multi'" />` |
+| **`10.2.1.1`** | Bar Chart (`10.2`) | **Columnas Neón**<br><sub>Columnas verticales con rebote elástico y contador numérico</sub> | `<app-chart-bar>` | `src/app/components/charts/bar-chart` | `<app-chart-bar [variant]="'columns'" />` |
+| **`10.2.2.1`** | Bar Chart (`10.2`) | **Cristal Glass**<br><sub>Barras translúcidas con reflejos especulares y blur</sub> | `<app-chart-bar>` | `src/app/components/charts/bar-chart` | `<app-chart-bar [variant]="'glass'" />` |
+| **`10.2.3.1`** | Bar Chart (`10.2`) | **Progreso Ranking**<br><sub>Barras horizontales fluidas ideales para métricas y rankings</sub> | `<app-chart-bar>` | `src/app/components/charts/bar-chart` | `<app-chart-bar [variant]="'horizontal'" />` |
+| **`10.3.1.1`** | Histogram (`10.3`) | **Gauss Normal**<br><sub>Campana de Gauss con ajuste de densidad normal suave vía GSAP</sub> | `<app-chart-histogram>` | `src/app/components/charts/histogram` | `<app-chart-histogram [variant]="'gauss'" />` |
+| **`10.3.2.1`** | Histogram (`10.3`) | **Bins de Frecuencia**<br><sub>Bins discretos con gradientes de densidad según frecuencia</sub> | `<app-chart-histogram>` | `src/app/components/charts/histogram` | `<app-chart-histogram [variant]="'bins'" />` |
+| **`10.3.3.1`** | Histogram (`10.3`) | **Ojiva Acumulada**<br><sub>Curva sigmoide de distribución acumulativa y percentiles</sub> | `<app-chart-histogram>` | `src/app/components/charts/histogram` | `<app-chart-histogram [variant]="'cumulative'" />` |
+| **`10.4.1.1`** | Donut & Gauge (`10.4`) | **Anillo Neón**<br><sub>Anillo radial continuo con porcentaje central animado y glow</sub> | `<app-chart-donut>` | `src/app/components/charts/donut-chart` | `<app-chart-donut [variant]="'ring'" />` |
+| **`10.4.2.1`** | Donut & Gauge (`10.4`) | **Semi-Gauge**<br><sub>Velocímetro / tacómetro de 180° con rebote elástico vía GSAP</sub> | `<app-chart-donut>` | `src/app/components/charts/donut-chart` | `<app-chart-donut [variant]="'gauge'" />` |
+| **`10.4.3.1`** | Donut & Gauge (`10.4`) | **Dona Segmentada**<br><sub>Múltiples rebanadas categóricas proporcionales con leyenda reactiva</sub> | `<app-chart-donut>` | `src/app/components/charts/donut-chart` | `<app-chart-donut [variant]="'segmented'" />` |
+| **`10.5.1.1`** | Radar & Spider (`10.5`) | **Polígono Cyber**<br><sub>Polígono radial hexagonal con rebote elástico en vértices vía GSAP</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'polygon'" />` |
+| **`10.5.2.1`** | Radar & Spider (`10.5`) | **Comparativa Dual**<br><sub>Dos perfiles superpuestos A vs B con áreas semitransparentes</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'dual'" />` |
+| **`10.5.3.1`** | Radar & Spider (`10.5`) | **Escáner Sonar**<br><sub>Barrido rotatorio continuo 360° con nodos de datos iluminados</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'scanner'" />` |
 
 ---
 
