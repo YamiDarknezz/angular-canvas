@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Panel inferior tipo bottom-sheet con manija de arrastre visual (CSS) y
@@ -8,10 +9,13 @@ import { Component, signal } from '@angular/core';
  */
 @Component({
   selector: 'app-modal-sheet',
+  imports: [NgTemplateOutlet],
   templateUrl: './bottom-sheet.component.html',
   styleUrl: './bottom-sheet.component.scss',
 })
 export class BottomSheetComponent {
+  readonly variant = input<string>();
+
   readonly open = signal<string | null>(null);
   readonly confirmed = signal<string | null>(null);
 

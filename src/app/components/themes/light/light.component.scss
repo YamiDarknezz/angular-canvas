@@ -1,5 +1,3 @@
-@use '../palette' as *;
-
 .light-palette {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -7,10 +5,41 @@
   padding: 1.5rem;
 }
 
-@include palette(80px);
+.palette-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 
-// Sobre fondo claro, la etiqueta necesita contraste invertido.
-.swatch span {
-  color: #1e293b;
-  background: rgba(255, 255, 255, 0.75);
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.swatch {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  span {
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: #1e293b;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

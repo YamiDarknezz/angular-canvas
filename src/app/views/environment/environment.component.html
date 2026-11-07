@@ -3,9 +3,13 @@
     <nav class="env-crumbs" aria-label="Ruta en el catálogo">
       <a routerLink="/">Catálogo</a>
       <span class="crumb-sep" aria-hidden="true">/</span>
-      <span class="crumb-dim">{{ groupData()!.label }}</span>
+      <span class="crumb-dim">{{ groupData()!.code }}. {{ groupData()!.label }}</span>
       <span class="crumb-sep" aria-hidden="true">/</span>
-      <span class="crumb-current" aria-current="page">{{ entry.label }}</span>
+      <span class="crumb-dim">{{ entry.code }} {{ entry.label }}</span>
+      @if (activeVariant(); as av) {
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        <span class="crumb-current" aria-current="page">{{ av.code }} {{ av.label }}</span>
+      }
 
       <button
         type="button"
@@ -28,7 +32,15 @@
       </span>
 
       <div class="env-heading">
-        <h1>{{ entry.label }}</h1>
+        <div class="env-title-row">
+          <h1>{{ entry.label }}</h1>
+          <span
+            class="env-code-pill"
+            [title]="'Código de catálogo: ' + (activeVariant()?.code || entry.code)"
+          >
+            COD {{ activeVariant()?.code || entry.code }}
+          </span>
+        </div>
         <p class="env-tagline">{{ entry.tagline }}</p>
       </div>
 
@@ -62,7 +74,8 @@
               [attr.aria-current]="activeVariant()?.id === variant.id ? 'true' : null"
               [title]="variant.hint"
             >
-              {{ variant.label }}
+              <span class="chip-code">{{ variant.code }}</span>
+              <span class="chip-label">{{ variant.label }}</span>
             </a>
           }
         </nav>

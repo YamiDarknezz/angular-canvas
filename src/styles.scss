@@ -80,11 +80,10 @@ textarea {
   outline-offset: 2px;
 }
 
-// ---- Estilos compartidos de la librería ----
-// Estos SÍ forman parte de los componentes: son las clases que las plantillas
-// de cada efecto usan (.design-section, .card-grid, .btn-showcase…) y viajan
-// con ellos cuando copias un componente. Viven en global para que ningún
-// componente necesite `::ng-deep` para aplicarlas.
+// ---- Estilos base del catálogo y showcase ----
+// Clases de presentación general para las vistas de entorno.
+// Cada componente encapsula sus propios estilos de layout (.card-grid, .btn-showcase)
+// para garantizar que sea 100% autocontenido al copiarse.
 .design-section {
   margin-bottom: 3rem;
   padding-bottom: 3rem;
@@ -142,5 +141,27 @@ textarea {
 
   &:hover {
     background: var(--ac-text-faint);
+  }
+}
+
+// ---- Control y diagnóstico de animaciones (Motion diagnostic) ----
+[data-motion='forced'],
+[data-motion-mode='forced'] {
+  *,
+  *::before,
+  *::after {
+    animation-play-state: running !important;
+  }
+}
+
+[data-motion='reduced'],
+[data-motion-mode='reduced'] {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * Fondos tipo aurora: blobs de color en movimiento, haces de luz y un panel de
@@ -11,4 +11,6 @@ import { Component } from '@angular/core';
   templateUrl: './aurora.component.html',
   styleUrl: './aurora.component.scss',
 })
-export class BgAuroraComponent {}
+export class BgAuroraComponent {
+  readonly variant = input<string>();
+}

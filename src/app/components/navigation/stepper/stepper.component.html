@@ -2,8 +2,28 @@
   <h2 class="section-title">Stepper</h2>
   <p class="section-desc">Pasos en horizontal, vertical y barra de progreso</p>
 
-  <div class="step-stage" data-variant="horizontal">
-    <ol class="steps" aria-label="Pasos del proceso">
+  @if (variant(); as v) {
+    @if (v === 'progress') {
+      <ng-container *ngTemplateOutlet="progressTpl" />
+    } @else {
+      <ng-container
+        *ngTemplateOutlet="stepsTpl; context: { isVertical: v === 'vertical', variant: v }"
+      />
+    }
+  } @else {
+    <ng-container
+      *ngTemplateOutlet="stepsTpl; context: { isVertical: false, variant: 'horizontal' }"
+    />
+    <ng-container
+      *ngTemplateOutlet="stepsTpl; context: { isVertical: true, variant: 'vertical' }"
+    />
+    <ng-container *ngTemplateOutlet="progressTpl" />
+  }
+</section>
+
+<ng-template #stepsTpl let-isVertical="isVertical" let-v="variant">
+  <div class="step-stage" [attr.data-variant]="v">
+    <ol class="steps" [class.vertical]="isVertical" aria-label="Pasos del proceso">
       @for (step of steps; track step.label; let i = $index; let last = $last) {
         <li class="step" [class.done]="i < current()" [class.active]="i === current()">
           <button
@@ -40,46 +60,9 @@
       }
     </ol>
   </div>
+</ng-template>
 
-  <div class="step-stage" data-variant="vertical">
-    <ol class="steps vertical" aria-label="Pasos del proceso">
-      @for (step of steps; track step.label; let i = $index; let last = $last) {
-        <li class="step" [class.done]="i < current()" [class.active]="i === current()">
-          <button
-            type="button"
-            class="step-btn"
-            [attr.aria-current]="i === current() ? 'step' : null"
-            (click)="select(i)"
-          >
-            <span class="step-marker" aria-hidden="true">
-              @if (i < current()) {
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m5 12.5 4.5 4.5L19 7" />
-                </svg>
-              } @else {
-                {{ i + 1 }}
-              }
-            </span>
-            <span class="step-text">
-              <span class="step-label">{{ step.label }}</span>
-              <span class="step-hint">{{ step.hint }}</span>
-            </span>
-          </button>
-          @if (!last) {
-            <span class="step-line" aria-hidden="true"></span>
-          }
-        </li>
-      }
-    </ol>
-  </div>
-
+<ng-template #progressTpl>
   <div class="step-stage" data-variant="progress">
     <div class="progress">
       <div class="progress-head">
@@ -103,4 +86,4 @@
       </div>
     </div>
   </div>
-</section>
+</ng-template>

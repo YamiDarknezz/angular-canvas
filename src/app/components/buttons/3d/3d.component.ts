@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * Botones con volumen real: relieve que se hunde al pulsar, volteo en 3D y
@@ -11,4 +11,6 @@ import { Component } from '@angular/core';
   templateUrl: './3d.component.html',
   styleUrl: './3d.component.scss',
 })
-export class Button3dComponent {}
+export class Button3dComponent {
+  readonly variant = input<string>();
+}

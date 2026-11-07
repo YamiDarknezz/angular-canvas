@@ -3,8 +3,17 @@
   <p class="section-desc">Extrusión por capas, perspectiva isométrica y levitación</p>
 
   <div class="text3d-stage">
-    <p class="t3d extrude" data-variant="extrude">EXTRUDE</p>
-    <p class="t3d isometric" data-variant="isometric">Isométrico</p>
-    <p class="t3d floating" data-variant="floating">Floating</p>
+    @let v = variant() || 'extrude';
+    @switch (v) {
+      @case ('isometric') {
+        <p class="t3d isometric" data-variant="isometric">Isométrico</p>
+      }
+      @case ('floating') {
+        <p class="t3d floating" data-variant="floating">Floating</p>
+      }
+      @default {
+        <p class="t3d extrude" data-variant="extrude">EXTRUDE</p>
+      }
+    }
   </div>
 </section>

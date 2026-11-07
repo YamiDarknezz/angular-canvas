@@ -2,90 +2,90 @@
   <h2 class="section-title">Bottom Sheet</h2>
   <p class="section-desc">Panel inferior con manija y variantes sólida y de vidrio</p>
 
-  <div class="sheet-stage" data-variant="solid">
-    <button type="button" class="sheet-trigger" (click)="show('solid')">Compartir</button>
-    @if (confirmed() === 'solid') {
-      <p class="sheet-done">Compartido: {{ confirmed() }} ✓</p>
+  @if (variant(); as v) {
+    <ng-container
+      *ngTemplateOutlet="
+        sheetTpl;
+        context: {
+          key: v,
+          isGlass: v === 'glass',
+          triggerLabel: v === 'glass' ? 'Agregar imagen' : 'Compartir',
+          title: v === 'glass' ? 'Agregar imagen' : 'Compartir enlace',
+          options:
+            v === 'glass'
+              ? ['Galería de fotos', 'Tomar foto', 'Elegir archivo']
+              : ['Copiar enlace', 'Enviar por email', 'Generar código QR', 'Compartir en X'],
+        }
+      "
+    />
+  } @else {
+    <ng-container
+      *ngTemplateOutlet="
+        sheetTpl;
+        context: {
+          key: 'solid',
+          isGlass: false,
+          triggerLabel: 'Compartir',
+          title: 'Compartir enlace',
+          options: ['Copiar enlace', 'Enviar por email', 'Generar código QR', 'Compartir en X'],
+        }
+      "
+    />
+    <ng-container
+      *ngTemplateOutlet="
+        sheetTpl;
+        context: {
+          key: 'glass',
+          isGlass: true,
+          triggerLabel: 'Agregar imagen',
+          title: 'Agregar imagen',
+          options: ['Galería de fotos', 'Tomar foto', 'Elegir archivo'],
+        }
+      "
+    />
+  }
+</section>
+
+<ng-template
+  #sheetTpl
+  let-key="key"
+  let-isGlass="isGlass"
+  let-triggerLabel="triggerLabel"
+  let-title="title"
+  let-options="options"
+>
+  <div class="sheet-stage" [attr.data-variant]="key">
+    <button type="button" class="sheet-trigger" [class.glass]="isGlass" (click)="show(key)">
+      {{ triggerLabel }}
+    </button>
+    @if (confirmed() && open() === null) {
+      <p class="sheet-done">Seleccionado: {{ confirmed() }} ✓</p>
     }
   </div>
 
-  @if (open() === 'solid') {
+  @if (open() === key) {
     <div class="sheet-overlay" (click)="close()">
       <div
         class="sheet"
+        [class.glass]="isGlass"
         role="dialog"
         aria-modal="true"
-        aria-label="Compartir enlace"
+        [attr.aria-label]="title"
         (click)="$event.stopPropagation()"
       >
         <div class="sheet-handle" aria-hidden="true"></div>
-        <h3 class="sheet-title">Compartir enlace</h3>
+        <h3 class="sheet-title">{{ title }}</h3>
         <ul class="sheet-list">
-          <li>
-            <button type="button" class="sheet-option" (click)="select('Copiado')">
-              Copiar enlace
-            </button>
-          </li>
-          <li>
-            <button type="button" class="sheet-option" (click)="select('Email')">
-              Enviar por email
-            </button>
-          </li>
-          <li>
-            <button type="button" class="sheet-option" (click)="select('QR')">
-              Generar código QR
-            </button>
-          </li>
-          <li>
-            <button type="button" class="sheet-option" (click)="select('Twitter')">
-              Compartir en X
-            </button>
-          </li>
+          @for (option of options; track option) {
+            <li>
+              <button type="button" class="sheet-option" (click)="select(option)">
+                {{ option }}
+              </button>
+            </li>
+          }
         </ul>
         <button type="button" class="sheet-cancel" (click)="close()">Cancelar</button>
       </div>
     </div>
   }
-
-  <div class="sheet-stage" data-variant="glass">
-    <button type="button" class="sheet-trigger glass" (click)="show('glass')">
-      Agregar imagen
-    </button>
-    @if (confirmed() === 'glass') {
-      <p class="sheet-done">{{ confirmed() }} ✓</p>
-    }
-  </div>
-
-  @if (open() === 'glass') {
-    <div class="sheet-overlay" (click)="close()">
-      <div
-        class="sheet glass"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Agregar imagen"
-        (click)="$event.stopPropagation()"
-      >
-        <div class="sheet-handle" aria-hidden="true"></div>
-        <h3 class="sheet-title">Agregar imagen</h3>
-        <ul class="sheet-list">
-          <li>
-            <button type="button" class="sheet-option" (click)="select('Galería')">
-              Galería de fotos
-            </button>
-          </li>
-          <li>
-            <button type="button" class="sheet-option" (click)="select('Cámara')">
-              Tomar foto
-            </button>
-          </li>
-          <li>
-            <button type="button" class="sheet-option" (click)="select('Archivo')">
-              Elegir archivo
-            </button>
-          </li>
-        </ul>
-        <button type="button" class="sheet-cancel" (click)="close()">Cancelar</button>
-      </div>
-    </div>
-  }
-</section>
+</ng-template>

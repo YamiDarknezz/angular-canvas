@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * Tipografía en tres dimensiones: extrusión por capas de sombra, perspectiva
@@ -11,4 +11,6 @@ import { Component } from '@angular/core';
   templateUrl: './3d-text.component.html',
   styleUrl: './3d-text.component.scss',
 })
-export class Text3dComponent {}
+export class Text3dComponent {
+  readonly variant = input<string>();
+}

@@ -1,3 +1,9 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 1.5rem;
+}
+
 .corp-card {
   background: #0f0f1a;
   border: 1px solid #1e1e32;

@@ -73,6 +73,10 @@ import { ThemeHackerComponent } from '../../components/themes/hacker/hacker.comp
 import { ThemeCyberpunkComponent } from '../../components/themes/cyberpunk/cyberpunk.component';
 import { ThemeCorporateComponent } from '../../components/themes/corporate/corporate.component';
 
+// Charts
+import { LineChartComponent } from '../../components/charts/line-chart/line-chart.component';
+import { BarChartComponent } from '../../components/charts/bar-chart/bar-chart.component';
+
 /**
  * Mapa `grupo/componente` → clase standalone.
  *
@@ -146,6 +150,9 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['themes/hacker', ThemeHackerComponent],
   ['themes/cyberpunk', ThemeCyberpunkComponent],
   ['themes/corporate', ThemeCorporateComponent],
+  // Charts
+  ['charts/line-chart', LineChartComponent],
+  ['charts/bar-chart', BarChartComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

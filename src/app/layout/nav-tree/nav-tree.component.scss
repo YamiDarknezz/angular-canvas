@@ -221,6 +221,17 @@
     font-weight: 600;
   }
 
+  .entry-code {
+    font-family: var(--ac-font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--ac-text-faint);
+    background: color-mix(in srgb, var(--ac-border) 40%, transparent);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+    letter-spacing: -0.02em;
+  }
+
   .entry-label {
     flex: 1;
     min-width: 0;

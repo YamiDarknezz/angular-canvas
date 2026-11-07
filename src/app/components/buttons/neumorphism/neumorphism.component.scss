@@ -4,6 +4,13 @@
   border-radius: 20px;
 }
 
+.btn-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
 .neu-btn {
   padding: 0.8rem 2rem;
   border: none;

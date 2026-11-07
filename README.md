@@ -1,14 +1,35 @@
-# 🎨 AngularCanvas
+# 🎨 AngularCanvas — Diccionario de Estilos y Galería de Efectos
 
-Biblioteca viva de **efectos y diseños para Angular**. Es un catálogo navegable
-de 55 componentes visuales pensados para copiar y pegar: cada efecto vive aislado
-en su propia carpeta, con su `.ts`, su `.html` y su `.scss`, listo para llevarlo
-a cualquier otro proyecto.
+Biblioteca viva de **efectos y diseños para Angular** estructurada como un **Diccionario de Estilos Jerárquico**.  
+Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `9.4.2.1`), vive 100% aislado y autocontenido en su propia carpeta (`.ts`, `.html`, `.scss`), y se puede extraer o jalar con una sola instrucción sin ambigüedades.
 
-Construido con **Angular 22** (standalone components, signals, router y control
-flow nativo `@if` / `@for`).
+Construido con **Angular 22** (standalone components, signals, router, `@if` / `@for` y control flow reactivo).
 
-**9 categorías · 55 componentes · 151 sub-estilos · 5 temas.**
+**10 categorías · 57 componentes · 157 sub-estilos indexados · 5 temas.**
+
+> 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de todos los códigos `1.1.1.1` al `10.2.3.1`.
+
+---
+
+## 🎯 Protocolo de Códigos de Estilo (Style Dictionary)
+
+Olvídate de descripciones subjetivas como "el libro del medio" o "el botón de la derecha". Ahora cada efecto se invoca con su código decimal jerárquico de 4 niveles:
+
+```
+  [Categoría] . [Componente] . [Variante] . [Subvariante]
+       │              │             │             │
+      (1-9)         (1-N)         (1-N)          (1)
+```
+
+- **Uso con Agentes de IA / Copilot**:  
+  *"Jala el efecto `9.4.2.1` en color morado"*  
+  👉 Resuelve directamente a **Animations > Book Flip > Cuaderno** (`src/app/components/animations/book-flip`, `<app-anim-book-flip variant="notebook" />`).
+- **Navegación y búsqueda instantánea**:
+  - Desde el navegador: `/code/9.4.2.1` o `/c/9.4.2.1` redirige directo al entorno.
+  - En la galería: Presiona `⌘K` o `Ctrl+K` y escribe `9.4` o `9.4.2.1` para saltar inmediatamente.
+- **Efecto Único Limpio (Single-Effect Rendering)**:
+  - Cada entorno renderiza **exclusivamente el efecto activo**.
+  - Si no se especifica variante, se muestra la variante base predeterminada sin encajar 3 efectos distintos en el mismo lienzo.
 
 ---
 
@@ -121,8 +142,9 @@ src/
         ├── navigation/   sidebar/  topbar/  dock/  glass-tabs/
         ├── forms/        glass-input/  toggle/  checkbox/  segmented/
         ├── modals/       glass-modal/  slide-in/  command-palette/
-        └── themes/       dark/  light/  hacker/  cyberpunk/  corporate/
-        └── animations/ skeleton/  spinner/  page-flip/
+        ├── themes/       dark/  light/  hacker/  cyberpunk/  corporate/
+        ├── animations/   skeleton/  spinner/  page-flip/  book-flip/  corner-fold/  marquee/
+        └── charts/       line-chart/  bar-chart/
 ```
 
 La separación importa: **`components/` es la librería** (autocontenida, sin

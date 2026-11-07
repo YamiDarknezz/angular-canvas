@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * Indicadores de carga: anillo rotatorio, puntos rebotantes y barra
@@ -11,4 +11,6 @@ import { Component } from '@angular/core';
   templateUrl: './spinner.component.html',
   styleUrl: './spinner.component.scss',
 })
-export class SpinnerComponent {}
+export class SpinnerComponent {
+  readonly variant = input<string>();
+}

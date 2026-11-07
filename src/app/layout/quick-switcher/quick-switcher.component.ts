@@ -8,6 +8,7 @@ import { QuickSwitcherService } from './quick-switcher.service';
 
 interface SwitcherItem {
   readonly key: string;
+  readonly code: string;
   readonly label: string;
   readonly route: string;
   readonly path: readonly string[];
@@ -136,7 +137,7 @@ export class QuickSwitcherComponent {
   }
 
   private matches(item: SwitcherItem, query: string): boolean {
-    return `${item.label} ${item.route} ${item.group.label} ${item.hint}`
+    return `${item.code} ${item.label} ${item.route} ${item.group.label} ${item.hint}`
       .toLowerCase()
       .includes(query);
   }
@@ -144,6 +145,7 @@ export class QuickSwitcherComponent {
   private toItem(group: CatalogGroup, entry: CatalogEntry): SwitcherItem {
     return {
       key: `${group.id}/${entry.id}`,
+      code: entry.code,
       label: entry.label,
       route: `/${group.id}/${entry.id}`,
       path: ['/', group.id, entry.id],
@@ -160,6 +162,7 @@ export class QuickSwitcherComponent {
   ): SwitcherItem {
     return {
       key: `${group.id}/${entry.id}/${variant.id}`,
+      code: variant.code,
       label: `${entry.label} · ${variant.label}`,
       route: `/${group.id}/${entry.id}/${variant.id}`,
       path: ['/', group.id, entry.id, variant.id],

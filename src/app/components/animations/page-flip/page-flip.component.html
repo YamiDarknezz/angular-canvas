@@ -4,7 +4,22 @@
     Giro de página individual con perspectiva 3D, bisagra lateral y sombra proyectada
   </p>
 
-  <!-- Variante 1: Tarjeta 3D Moderna -->
+  @let v = variant() || 'card';
+  @switch (v) {
+    @case ('editorial') {
+      <ng-container *ngTemplateOutlet="editorialTpl" />
+    }
+    @case ('glossy') {
+      <ng-container *ngTemplateOutlet="glossyTpl" />
+    }
+    @default {
+      <ng-container *ngTemplateOutlet="cardTpl" />
+    }
+  }
+</section>
+
+<!-- Variante 1: Tarjeta 3D Moderna -->
+<ng-template #cardTpl>
   <div class="flip-stage" data-variant="card">
     <p class="flip-hint">Haz click para girar la página</p>
     <div class="page-scene">
@@ -27,8 +42,10 @@
       </article>
     </div>
   </div>
+</ng-template>
 
-  <!-- Variante 2: Editorial / Libro -->
+<!-- Variante 2: Editorial / Libro -->
+<ng-template #editorialTpl>
   <div class="flip-stage" data-variant="editorial">
     <p class="flip-hint">Haz click para pasar de página</p>
     <div class="page-scene">
@@ -67,8 +84,10 @@
       </article>
     </div>
   </div>
+</ng-template>
 
-  <!-- Variante 3: Glossy / Satinado con Reflejo -->
+<!-- Variante 3: Glossy / Satinado con Reflejo -->
+<ng-template #glossyTpl>
   <div class="flip-stage" data-variant="glossy">
     <p class="flip-hint">Haz click para apreciar el reflejo de luz</p>
     <div class="page-scene">
@@ -97,4 +116,4 @@
       </article>
     </div>
   </div>
-</section>
+</ng-template>

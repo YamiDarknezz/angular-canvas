@@ -58,10 +58,15 @@ const ICONS: Readonly<Record<string, IconDefinition>> = {
     ],
   },
   animations: { paths: ['M8 5.5v13l11-6.5z'] },
+  charts: {
+    paths: ['M3 20h18', 'M6 16v-4', 'M11 16V9', 'M16 16v-11', 'm4 11 5-4 5 3 6-6'],
+  },
 
   // Acciones
   search: { paths: ['M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z', 'm20 20-3.8-3.8'] },
   bolt: { paths: ['M13 2.5 4.5 13.5H11l-1 8L18.5 10H12l1-7.5Z'] },
+  motion: { paths: ['M13 2.5 4.5 13.5H11l-1 8L18.5 10H12l1-7.5Z'] },
+  'motion-off': { paths: ['M13 2.5 4.5 13.5H11l-1 8L18.5 10H12l1-7.5Z', 'M3 3l18 18'] },
   chevron: { paths: ['m6.5 9.5 5.5 5.5 5.5-5.5'] },
   star: {
     paths: ['m12 3.6 2.6 5.4 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.9L12 3.6Z'],

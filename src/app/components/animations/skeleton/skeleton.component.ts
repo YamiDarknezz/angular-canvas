@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Estados de carga (skeleton): shimmer con brillo deslizante, pulso suave y
@@ -8,7 +9,10 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'app-anim-skeleton',
+  imports: [NgTemplateOutlet],
   templateUrl: './skeleton.component.html',
   styleUrl: './skeleton.component.scss',
 })
-export class SkeletonComponent {}
+export class SkeletonComponent {
+  readonly variant = input<string>();
+}

@@ -28,12 +28,22 @@ import { ThemeService } from '../../core/theme/theme.service';
   host: {
     class: 'ac-viewport',
     '[attr.data-focus]': 'focus()',
+    '[attr.data-motion]': 'motionMode()',
+    '[style.--ac-accent]': 'tintColor()',
+    '[style.--ac-primary]': 'tintColor()',
+    '[style.--accent]': 'tintColor()',
   },
 })
 export class EmbedComponent {
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
   private readonly themeService = inject(ThemeService);
+
+  /** Modo de movimiento sincronizado con la ventana de entorno. */
+  readonly motionMode = signal<'auto' | 'forced' | 'reduced'>('auto');
+
+  /** Tinte o color personalizado de previsualización. */
+  readonly tintColor = signal<string | null>(null);
 
   /** Parámetro de ruta: categoría (`cards`). */
   readonly group = input<string>();
@@ -59,10 +69,19 @@ export class EmbedComponent {
     const entry = this.item()?.entry;
     const requested =
       this.liveVariant() !== undefined ? this.liveVariant() : (this.variant() ?? null);
-    if (!entry || !requested) {
+    if (!entry) {
       return null;
     }
-    return entry.variants.some((variant) => variant.id === requested) ? requested : null;
+    if (requested && entry.variants.some((variant) => variant.id === requested)) {
+      return requested;
+    }
+    return entry.variants[0]?.id ?? null;
+  });
+
+  /** Entradas reactivas para el componente montado dinámicamente. */
+  readonly componentInputs = computed<Record<string, unknown>>(() => {
+    const active = this.focus();
+    return active ? { variant: active } : {};
   });
 
   constructor() {
@@ -80,6 +99,12 @@ export class EmbedComponent {
       }
       if (event.data.type === 'ac:theme') {
         this.themeService.setTheme(event.data.theme);
+      }
+      if (event.data.type === 'ac:motion') {
+        this.motionMode.set(event.data.mode);
+      }
+      if (event.data.type === 'ac:tint') {
+        this.tintColor.set(event.data.color);
       }
     };
 

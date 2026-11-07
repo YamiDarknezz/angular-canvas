@@ -2,27 +2,34 @@
   <h2 class="section-title">Spinners</h2>
   <p class="section-desc">Anillo, puntos y barra para estados de carga</p>
 
-  <div class="spin-stage" data-variant="ring">
-    <div class="spinner ring" role="status" aria-label="Cargando">
-      <span class="sr-only">Cargando…</span>
-    </div>
-    <span class="spin-label">Cargando datos…</span>
-  </div>
-
-  <div class="spin-stage" data-variant="dots">
-    <div class="spinner dots" role="status" aria-label="Cargando">
-      <span class="sr-only">Cargando…</span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-    <span class="spin-label">Sincronizando…</span>
-  </div>
-
-  <div class="spin-stage" data-variant="bar">
-    <div class="spinner bar" role="status" aria-label="Cargando">
-      <span class="sr-only">Cargando…</span>
-    </div>
-    <span class="spin-label">Procesando…</span>
-  </div>
+  @let v = variant() || 'ring';
+  @switch (v) {
+    @case ('dots') {
+      <div class="spin-stage" data-variant="dots">
+        <div class="spinner dots" role="status" aria-label="Cargando">
+          <span class="sr-only">Cargando…</span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <span class="spin-label">Sincronizando… [9.2.2.1]</span>
+      </div>
+    }
+    @case ('bar') {
+      <div class="spin-stage" data-variant="bar">
+        <div class="spinner bar" role="status" aria-label="Cargando">
+          <span class="sr-only">Cargando…</span>
+        </div>
+        <span class="spin-label">Procesando… [9.2.3.1]</span>
+      </div>
+    }
+    @default {
+      <div class="spin-stage" data-variant="ring">
+        <div class="spinner ring" role="status" aria-label="Cargando">
+          <span class="sr-only">Cargando…</span>
+        </div>
+        <span class="spin-label">Cargando datos… [9.2.1.1]</span>
+      </div>
+    }
+  }
 </section>

@@ -1,11 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-anim-corner-fold',
+  imports: [NgTemplateOutlet],
   templateUrl: './corner-fold.component.html',
   styleUrl: './corner-fold.component.scss',
 })
 export class CornerFoldComponent {
+  readonly variant = input<string>();
+
   readonly noteActive = signal(false);
   readonly docActive = signal(false);
   readonly peelActive = signal(false);

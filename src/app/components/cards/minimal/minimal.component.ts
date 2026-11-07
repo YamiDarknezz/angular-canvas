@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-card-minimal',
   templateUrl: './minimal.component.html',
   styleUrl: './minimal.component.scss',
 })
-export class MinimalCardComponent {}
+export class MinimalCardComponent {
+  readonly variant = input<string>();
+}

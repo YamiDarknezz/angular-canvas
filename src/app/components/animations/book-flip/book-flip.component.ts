@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 
 export interface BookPage {
   num: string;
@@ -16,6 +16,8 @@ export interface BookPage {
   styleUrl: './book-flip.component.scss',
 })
 export class BookFlipComponent {
+  readonly variant = input<string>();
+
   readonly page1: BookPage = {
     num: '01',
     tag: 'Capítulo I',

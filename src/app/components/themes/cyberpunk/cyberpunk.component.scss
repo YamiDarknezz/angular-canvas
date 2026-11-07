@@ -1,5 +1,3 @@
-@use '../palette' as *;
-
 .cyber-card {
   background: #0a0a1a;
   border: 1px solid rgba(255, 0, 255, 0.19);
@@ -7,19 +5,53 @@
   padding: 2rem;
 }
 
-@include palette;
+.palette-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.swatch {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 72px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  span {
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
 
 .cyber-glitch {
   position: relative;
-  // Escala con el viewport: "CYBERPUNK" es una palabra que no puede partirse
-  // y a tamaño fijo desborda en pantallas estrechas.
   font-size: clamp(1.4rem, 8.5vw, 3rem);
   font-weight: 900;
   color: #ff00ff;
   text-align: center;
   letter-spacing: 0.1em;
 
-  // Dos capas desplazadas usando el atributo data-text del markup.
   &::before,
   &::after {
     content: attr(data-text);

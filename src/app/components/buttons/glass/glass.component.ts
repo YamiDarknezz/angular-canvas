@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * Botones de vidrio: transparencia con blur, acabado escarchado y borde
@@ -12,4 +12,6 @@ import { Component } from '@angular/core';
   templateUrl: './glass.component.html',
   styleUrl: './glass.component.scss',
 })
-export class ButtonGlassComponent {}
+export class ButtonGlassComponent {
+  readonly variant = input<string>();
+}

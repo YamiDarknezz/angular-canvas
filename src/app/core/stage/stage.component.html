@@ -25,6 +25,60 @@
         }
       </div>
 
+      <!-- Selector de color de acento / tinte (Morado, Cian, Esmeralda, etc.) -->
+      <div class="color-palette" role="group" aria-label="Tinte de acento">
+        @for (c of colorPresets; track c.id) {
+          <button
+            type="button"
+            class="color-dot-btn"
+            [class.active]="selectedColor() === c.hex"
+            [style.--dot-color]="c.hex || group().accent"
+            [title]="'Color: ' + c.label + (c.hex ? ' (' + c.hex + ')' : ' original')"
+            (click)="selectedColor.set(c.hex)"
+          >
+            <span class="color-swatch"></span>
+          </button>
+        }
+      </div>
+
+      <!-- Diagnóstico y Forzar Animaciones (para laptops/PCs con animaciones desactivadas) -->
+      <button
+        type="button"
+        class="tool-btn text motion-toggle"
+        [class.warning]="motionService.systemReduced() && motionService.mode() === 'auto'"
+        [class.forced]="motionService.mode() === 'forced'"
+        [attr.aria-pressed]="motionService.mode() === 'forced'"
+        [title]="
+          motionService.systemReduced()
+            ? motionService.mode() === 'forced'
+              ? 'Animaciones: FORZADAS (tu sistema operativo las tiene desactivadas)'
+              : 'Diagnóstico: Tu sistema/laptop tiene las animaciones desactivadas en Accesibilidad. Click para forzarlas.'
+            : motionService.mode() === 'forced'
+              ? 'Animaciones: Forzadas activas'
+              : 'Animaciones: Normales (control del sistema)'
+        "
+        (click)="motionService.toggleForced()"
+      >
+        <ac-icon
+          [name]="
+            motionService.mode() === 'forced'
+              ? 'motion'
+              : motionService.systemReduced()
+                ? 'motion-off'
+                : 'motion'
+          "
+        />
+        <span class="tool-label">
+          @if (motionService.mode() === 'forced') {
+            Forzadas
+          } @else if (motionService.systemReduced()) {
+            SO: Reducidas
+          } @else {
+            Efectos
+          }
+        </span>
+      </button>
+
       <a
         class="tool-btn text"
         [href]="embedPath()"

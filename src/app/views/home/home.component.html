@@ -27,7 +27,9 @@
     <section class="chapter" [style.--accent]="group.accent" [attr.aria-label]="group.label">
       <header class="chapter-head">
         <span class="chapter-glyph" aria-hidden="true"><ac-icon [name]="group.icon" /></span>
-        <h2>{{ group.label }}</h2>
+        <h2>
+          <span class="chapter-code">{{ group.code }}.</span> {{ group.label }}
+        </h2>
         <p class="chapter-tagline">{{ group.tagline }}</p>
         <p class="chapter-count">
           {{ group.components.length }}
@@ -39,7 +41,7 @@
         @for (entry of group.components; track entry.id) {
           <li class="specimen">
             <a class="specimen-main" [routerLink]="['/', group.id, entry.id]">
-              <span class="specimen-route">/{{ group.id }}/{{ entry.id }}</span>
+              <span class="specimen-route">[{{ entry.code }}] /{{ group.id }}/{{ entry.id }}</span>
               <span class="specimen-name">{{ entry.label }}</span>
               <span class="specimen-desc">{{ entry.tagline }}</span>
             </a>
@@ -52,6 +54,7 @@
                     [routerLink]="['/', group.id, entry.id, variant.id]"
                     [title]="variant.hint"
                   >
+                    <span class="chip-code">{{ variant.code }}</span>
                     {{ variant.label }}
                   </a>
                 </li>

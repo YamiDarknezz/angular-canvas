@@ -11,4 +11,6 @@ import { ThemeName } from '../theme/theme.service';
  */
 export type StageMessage =
   | { readonly type: 'ac:variant'; readonly variant: string | null }
-  | { readonly type: 'ac:theme'; readonly theme: ThemeName };
+  | { readonly type: 'ac:theme'; readonly theme: ThemeName }
+  | { readonly type: 'ac:motion'; readonly mode: 'auto' | 'forced' | 'reduced' }
+  | { readonly type: 'ac:tint'; readonly color: string | null };

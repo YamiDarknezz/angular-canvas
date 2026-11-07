@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 interface Step {
   readonly label: string;
@@ -13,10 +14,13 @@ interface Step {
  */
 @Component({
   selector: 'app-nav-stepper',
+  imports: [NgTemplateOutlet],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
 })
 export class StepperComponent {
+  readonly variant = input<string>();
+
   readonly steps: readonly Step[] = [
     { label: 'Datos', hint: 'Nombre y correo' },
     { label: 'Cuenta', hint: 'Usuario y contraseña' },

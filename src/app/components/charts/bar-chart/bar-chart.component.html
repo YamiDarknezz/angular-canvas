@@ -1,0 +1,79 @@
+<section class="chart-container" [attr.data-variant]="variant()">
+  <header class="chart-header">
+    <div class="chart-title-group">
+      <h3 class="chart-title">Métricas de Actividad Semanal</h3>
+      <p class="chart-subtitle">
+        @switch (variant()) {
+          @case ('glass') {
+            Barras translúcidas de cristal con efecto glassmorphism [10.2.2.1]
+          }
+          @case ('horizontal') {
+            Ranking horizontal con barras de progreso animadas [10.2.3.1]
+          }
+          @default {
+            Columnas de neón con rebote elástico vía GSAP [10.2.1.1]
+          }
+        }
+      </p>
+    </div>
+
+    <div class="chart-actions">
+      <button type="button" class="action-btn" (click)="randomizeData()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+        </svg>
+        Actualizar Métricas
+      </button>
+    </div>
+  </header>
+
+  <div #chartBox class="chart-stage">
+    @if (variant() === 'horizontal') {
+      <!-- Modo Horizontal -->
+      <div class="horizontal-list">
+        @for (item of items(); track item.id) {
+          @let pct = (item.value / maxValue()) * 100;
+          <div class="h-row">
+            <span class="h-label">{{ item.label }}</span>
+            <div class="h-track">
+              <div
+                class="bar-fill h-bar"
+                [style.width.%]="pct"
+                [style.background]="item.color"
+                [style.box-shadow]="'0 0 12px ' + item.color + '66'"
+              ></div>
+            </div>
+            <span class="h-val">
+              <span class="bar-val-text">{{ item.value }}</span> pts
+            </span>
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Modo Vertical (Columns o Glass) -->
+      <div class="vertical-grid">
+        <div class="v-bars-wrapper">
+          @for (item of items(); track item.id) {
+            @let pct = (item.value / maxValue()) * 100;
+            <div class="v-col">
+              <span class="v-val">
+                <span class="bar-val-text">{{ item.value }}</span>
+              </span>
+              <div class="v-track">
+                <div
+                  class="bar-fill v-bar"
+                  [class.glass-style]="variant() === 'glass'"
+                  [style.height.%]="pct"
+                  [style.--bar-color]="item.color"
+                >
+                  <div class="bar-shine"></div>
+                </div>
+              </div>
+              <span class="v-label">{{ item.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

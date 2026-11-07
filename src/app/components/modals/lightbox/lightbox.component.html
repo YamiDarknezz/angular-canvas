@@ -2,27 +2,12 @@
   <h2 class="section-title">Lightbox</h2>
   <p class="section-desc">Visor de fotos con prev/next y variantes oscura y de vidrio</p>
 
-  <div class="lb-stage" data-variant="photo">
-    <div class="lb-grid">
-      @for (photo of photos; track photo.id) {
-        <button type="button" class="lb-thumb" (click)="show(photo.id)">
-          <span class="lb-thumb-art" [style.background]="photo.gradient"></span>
-          <span class="lb-thumb-title">{{ photo.title }}</span>
-        </button>
-      }
-    </div>
-  </div>
-
-  <div class="lb-stage" data-variant="glass">
-    <div class="lb-grid">
-      @for (photo of photos; track photo.id) {
-        <button type="button" class="lb-thumb glass" (click)="show(photo.id)">
-          <span class="lb-thumb-art" [style.background]="photo.gradient"></span>
-          <span class="lb-thumb-title">{{ photo.title }}</span>
-        </button>
-      }
-    </div>
-  </div>
+  @if (variant(); as v) {
+    <ng-container *ngTemplateOutlet="gridTpl; context: { isGlass: v === 'glass', variant: v }" />
+  } @else {
+    <ng-container *ngTemplateOutlet="gridTpl; context: { isGlass: false, variant: 'photo' }" />
+    <ng-container *ngTemplateOutlet="gridTpl; context: { isGlass: true, variant: 'glass' }" />
+  }
 
   @if (current(); as photo) {
     <div class="lb-overlay" (click)="close()">
@@ -80,3 +65,16 @@
     </div>
   }
 </section>
+
+<ng-template #gridTpl let-isGlass="isGlass" let-v="variant">
+  <div class="lb-stage" [attr.data-variant]="v">
+    <div class="lb-grid">
+      @for (photo of photos; track photo.id) {
+        <button type="button" class="lb-thumb" [class.glass]="isGlass" (click)="show(photo.id)">
+          <span class="lb-thumb-art" [style.background]="photo.gradient"></span>
+          <span class="lb-thumb-title">{{ photo.title }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</ng-template>

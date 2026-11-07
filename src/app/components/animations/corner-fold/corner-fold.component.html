@@ -4,7 +4,22 @@
     Efecto de esquina doblada (dog-ear) y papel levantado con física de sombras realistas
   </p>
 
-  <!-- Variante 1: Nota Adhesiva -->
+  @let v = variant() || 'note';
+  @switch (v) {
+    @case ('document') {
+      <ng-container *ngTemplateOutlet="docTpl" />
+    }
+    @case ('peel') {
+      <ng-container *ngTemplateOutlet="peelTpl" />
+    }
+    @default {
+      <ng-container *ngTemplateOutlet="noteTpl" />
+    }
+  }
+</section>
+
+<!-- Variante 1: Nota Adhesiva -->
+<ng-template #noteTpl>
   <div class="fold-stage" data-variant="note">
     <p class="fold-hint">Pasa el cursor o haz click para doblar la esquina superior</p>
     <div class="fold-scene">
@@ -32,8 +47,10 @@
       </article>
     </div>
   </div>
+</ng-template>
 
-  <!-- Variante 2: Documento Técnico -->
+<!-- Variante 2: Documento Técnico -->
+<ng-template #docTpl>
   <div class="fold-stage" data-variant="document">
     <p class="fold-hint">Pasa el cursor para revelar el código de verificación bajo el pliegue</p>
     <div class="fold-scene">
@@ -63,8 +80,10 @@
       </article>
     </div>
   </div>
+</ng-template>
 
-  <!-- Variante 3: Sticker / Despegue -->
+<!-- Variante 3: Sticker / Despegue -->
+<ng-template #peelTpl>
   <div class="fold-stage" data-variant="peel">
     <p class="fold-hint">Pasa el cursor para levantar la etiqueta adhesiva</p>
     <div class="fold-scene">
@@ -92,4 +111,4 @@
       </article>
     </div>
   </div>
-</section>
+</ng-template>

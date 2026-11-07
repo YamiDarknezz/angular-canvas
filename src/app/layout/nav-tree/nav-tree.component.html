@@ -57,6 +57,7 @@
                   [class.active]="isEntryActive(group.id, entry.id)"
                   [attr.aria-current]="isEntryActive(group.id, entry.id) ? 'page' : null"
                 >
+                  <span class="entry-code">{{ entry.code }}</span>
                   <span class="entry-label">{{ entry.label }}</span>
                   @if (entry.variants.length > 1) {
                     <span class="variant-count">{{ entry.variants.length }}</span>

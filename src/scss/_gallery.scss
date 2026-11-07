@@ -15,6 +15,7 @@
 .chip {
   display: inline-flex;
   align-items: center;
+  gap: 0.35rem;
   padding: 0.18rem 0.55rem;
   border: 1px solid var(--ac-border);
   border-radius: 999px;
@@ -28,6 +29,16 @@
     color 0.2s,
     background 0.2s;
 
+  .chip-code {
+    font-family: var(--ac-font-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    opacity: 0.85;
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--ac-border) 60%, transparent);
+  }
+
   &:hover {
     border-color: color-mix(in srgb, var(--accent, var(--ac-primary)) 55%, transparent);
     color: var(--ac-text);
@@ -37,6 +48,11 @@
     border-color: color-mix(in srgb, var(--accent, var(--ac-primary)) 70%, transparent);
     background: color-mix(in srgb, var(--accent, var(--ac-primary)) 15%, transparent);
     color: color-mix(in srgb, var(--accent, var(--ac-primary)) 65%, var(--ac-text));
+
+    .chip-code {
+      background: color-mix(in srgb, var(--accent, var(--ac-primary)) 30%, transparent);
+      color: var(--ac-text);
+    }
   }
 }
 

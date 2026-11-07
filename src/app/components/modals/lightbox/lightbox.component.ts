@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 interface Photo {
   readonly id: string;
@@ -14,10 +15,13 @@ interface Photo {
  */
 @Component({
   selector: 'app-modal-lightbox',
+  imports: [NgTemplateOutlet],
   templateUrl: './lightbox.component.html',
   styleUrl: './lightbox.component.scss',
 })
 export class LightboxComponent {
+  readonly variant = input<string>();
+
   readonly photos: readonly Photo[] = [
     { id: 'aurora', title: 'Aurora boreal', gradient: 'linear-gradient(135deg, #6366f1, #06b6d4)' },
     {

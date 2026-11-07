@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * Diálogo de confirmación con variantes de peligro y vidrio. Cada variante
@@ -8,10 +9,13 @@ import { Component, signal } from '@angular/core';
  */
 @Component({
   selector: 'app-modal-confirm',
+  imports: [NgTemplateOutlet],
   templateUrl: './confirm.component.html',
   styleUrl: './confirm.component.scss',
 })
 export class ConfirmModalComponent {
+  readonly variant = input<string>();
+
   readonly open = signal<string | null>(null);
   readonly confirmed = signal<string | null>(null);
 

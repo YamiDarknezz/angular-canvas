@@ -35,6 +35,7 @@
               <span class="qs-icon" [style.color]="item.group.accent">
                 <ac-icon [name]="item.group.icon" />
               </span>
+              <span class="qs-code">{{ item.code }}</span>
               <span class="qs-label">{{ item.label }}</span>
               @if (item.kind === 'variant') {
                 <span class="qs-kind">sub-estilo</span>

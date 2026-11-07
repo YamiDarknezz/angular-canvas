@@ -1,5 +1,5 @@
 @if (component(); as cmp) {
-  <ng-container [ngComponentOutlet]="cmp" />
+  <ng-container [ngComponentOutlet]="cmp" [ngComponentOutletInputs]="componentInputs()" />
 } @else {
   <p class="embed-missing">Ese entorno no existe en el catálogo.</p>
 }

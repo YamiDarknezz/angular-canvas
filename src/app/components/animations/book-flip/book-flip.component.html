@@ -4,34 +4,19 @@
     Libro abierto 3D interactivo con paso de páginas bidireccional y hojas físicas
   </p>
 
-  <!-- Variante 1: Clásico -->
-  <div class="book-stage" data-variant="classic">
+  @let v = variant() || 'classic';
+  <div class="book-stage" [attr.data-variant]="v">
     <ng-container
       *ngTemplateOutlet="
         bookTpl;
         context: {
-          hint: 'Haz click en las páginas (← izquierda / derecha →) o usa los botones para hojear',
+          hint:
+            v === 'notebook'
+              ? 'Estilo cuaderno técnico con cuadrícula y tipografía monoespaciada [9.4.2.1]'
+              : v === 'parchment'
+                ? 'Estilo editorial clásico con tonos cálidos y tipografía con serifa [9.4.3.1]'
+                : 'Haz click en las páginas (← izquierda / derecha →) o usa los botones para hojear [9.4.1.1]',
         }
-      "
-    />
-  </div>
-
-  <!-- Variante 2: Cuaderno de Notas -->
-  <div class="book-stage" data-variant="notebook">
-    <ng-container
-      *ngTemplateOutlet="
-        bookTpl;
-        context: { hint: 'Estilo cuaderno técnico con cuadrícula y tipografía monoespaciada' }
-      "
-    />
-  </div>
-
-  <!-- Variante 3: Pergamino Editorial -->
-  <div class="book-stage" data-variant="parchment">
-    <ng-container
-      *ngTemplateOutlet="
-        bookTpl;
-        context: { hint: 'Estilo editorial clásico con tonos cálidos y tipografía con serifa' }
       "
     />
   </div>

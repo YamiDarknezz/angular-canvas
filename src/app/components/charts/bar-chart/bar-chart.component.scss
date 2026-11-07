@@ -1,0 +1,219 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ac-surface, #18181b) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ac-border, #27272a) 80%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+  font-family: inherit;
+  color: var(--ac-text, #fafafa);
+  overflow: hidden;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.chart-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ac-text-faint, #a1a1aa);
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, #3b82f6 40%, transparent);
+  background: color-mix(in srgb, #3b82f6 12%, transparent);
+  color: #60a5fa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, #3b82f6 22%, transparent);
+    border-color: #60a5fa;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.chart-stage {
+  width: 100%;
+}
+
+// ---- Modo Vertical ----
+.vertical-grid {
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.v-bars-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 240px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ac-border, #3f3f46) 40%, transparent);
+  padding-bottom: 0.5rem;
+}
+
+.v-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.v-track {
+  flex: 1;
+  width: 100%;
+  max-width: 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: color-mix(in srgb, var(--ac-border, #27272a) 25%, transparent);
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.v-bar {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  background: var(--bar-color, #06b6d4);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--bar-color) 40%, transparent);
+  position: relative;
+  transition: filter 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+
+  &.glass-style {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bar-color) 70%, #ffffff) 0%,
+      color-mix(in srgb, var(--bar-color) 30%, transparent) 100%
+    );
+    border: 1px solid color-mix(in srgb, var(--bar-color) 60%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow:
+      inset 0 2px 6px rgba(255, 255, 255, 0.4),
+      0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.bar-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px 8px 0 0;
+}
+
+.v-val {
+  font-family: var(--ac-font-mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ac-text-muted, #d4d4d8);
+}
+
+.v-label {
+  font-size: 0.75rem;
+  color: var(--ac-text-faint, #a1a1aa);
+  margin-top: 0.25rem;
+}
+
+// ---- Modo Horizontal ----
+.horizontal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
+}
+
+.h-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.h-label {
+  width: 85px;
+  font-size: 0.82rem;
+  color: var(--ac-text-muted, #d4d4d8);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.h-track {
+  flex: 1;
+  height: 20px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ac-border, #27272a) 40%, transparent);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.h-bar {
+  height: 100%;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.h-val {
+  width: 75px;
+  font-family: var(--ac-font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ac-text-faint, #a1a1aa);
+  flex-shrink: 0;
+}

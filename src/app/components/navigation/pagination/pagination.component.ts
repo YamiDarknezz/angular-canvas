@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 type PageItem = number | '…';
 
@@ -10,10 +11,13 @@ type PageItem = number | '…';
  */
 @Component({
   selector: 'app-nav-pagination',
+  imports: [NgTemplateOutlet],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
 })
 export class PaginationComponent {
+  readonly variant = input<string>();
+
   readonly total = 12;
   readonly page = signal(4);
 
