@@ -79,6 +79,8 @@
         </span>
       </button>
 
+      <span class="fps-pill" title="Rendimiento en tiempo real">⚡ {{ fps() }} FPS</span>
+
       <a
         class="tool-btn text"
         [href]="embedPath()"
@@ -106,7 +108,33 @@
   @if (codeOpen()) {
     <div class="stage-code" id="stage-code">
       <div class="code-head">
-        <code>{{ entry().sourcePath }}/</code>
+        <div class="code-tabs" role="tablist">
+          <button
+            type="button"
+            class="tab-btn"
+            [class.active]="activeCodeTab() === 'snippet'"
+            (click)="activeCodeTab.set('snippet')"
+          >
+            Snippet Completo
+          </button>
+          <button
+            type="button"
+            class="tab-btn"
+            [class.active]="activeCodeTab() === 'html'"
+            (click)="activeCodeTab.set('html')"
+          >
+            HTML
+          </button>
+          <button
+            type="button"
+            class="tab-btn"
+            [class.active]="activeCodeTab() === 'ts'"
+            (click)="activeCodeTab.set('ts')"
+          >
+            TypeScript
+          </button>
+        </div>
+
         <button type="button" class="copy-btn" (click)="copySnippet()">
           @switch (copyState()) {
             @case ('ok') {
@@ -117,14 +145,17 @@
             }
             @default {
               Copiar
+              {{
+                activeCodeTab() === 'html' ? 'HTML' : activeCodeTab() === 'ts' ? 'TS' : 'Snippet'
+              }}
             }
           }
         </button>
       </div>
-      <pre class="code-body"><code>{{ snippet() }}</code></pre>
+      <pre class="code-body"><code>{{ currentCode() }}</code></pre>
       <p class="code-note">
-        Los componentes que usan variables <code>var(--ac-*)</code> se integran con el sistema de
-        temas: copia también <code>src/scss/_tokens.scss</code> si quieres los 5 temas.
+        Ubicación: <code>{{ entry().sourcePath }}/</code> · Extrae con CLI:
+        <code>node scripts/extract.cjs {{ activeVariant()?.code ?? entry().code }}</code>
       </p>
     </div>
   }

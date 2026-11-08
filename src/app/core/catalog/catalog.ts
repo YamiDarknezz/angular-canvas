@@ -1487,6 +1487,202 @@ export const CATALOG: readonly CatalogGroup[] = [
       },
     ],
   },
+  {
+    id: 'feedback',
+    code: '11',
+    label: 'Feedback',
+    icon: 'feedback',
+    accent: '#f43f5e',
+    tagline: 'Microinteracciones, islas dinámicas, toasts apilables y efectos de celebración',
+    components: [
+      {
+        id: 'dynamic-island',
+        code: '11.1',
+        label: 'Dynamic Island',
+        tagline: 'Cápsula flotante interactiva expandible con estados de música, timer y llamadas',
+        selector: 'app-dynamic-island',
+        className: 'DynamicIslandComponent',
+        sourcePath: 'src/app/components/feedback/dynamic-island',
+        variants: [
+          {
+            id: 'music',
+            code: '11.1.1.1',
+            label: 'Player Música',
+            hint: 'Mini reproductor con ecualizador animado y controles expandibles',
+          },
+          {
+            id: 'timer',
+            code: '11.1.2.1',
+            label: 'Timer de Enfoque',
+            hint: 'Temporizador con cuenta regresiva circular y barra de progreso',
+          },
+          {
+            id: 'call',
+            code: '11.1.3.1',
+            label: 'Llamada Entrante',
+            hint: 'Alerta de llamada con pulso de estado y botones de acción',
+          },
+        ],
+      },
+      {
+        id: 'toast',
+        code: '11.2',
+        label: 'Stacked Toast',
+        tagline: 'Notificaciones flotantes apiladas en cascada 3D con descarte táctil',
+        selector: 'app-toast-stack',
+        className: 'ToastComponent',
+        sourcePath: 'src/app/components/feedback/toast',
+        variants: [
+          {
+            id: 'stacked',
+            code: '11.2.1.1',
+            label: 'Pila 3D',
+            hint: 'Notificaciones apiladas en perspectiva con descarte interactivo',
+          },
+          {
+            id: 'swipe',
+            code: '11.2.2.1',
+            label: 'Swipe Descarte',
+            hint: 'Descarte lateral de notificaciones con feedback táctil',
+          },
+          {
+            id: 'morph',
+            code: '11.2.3.1',
+            label: 'Morph Check',
+            hint: 'Transición morphing de spinner a checkmark de éxito animado',
+          },
+        ],
+      },
+      {
+        id: 'confetti',
+        code: '11.3',
+        label: 'Confetti & Bursts',
+        tagline: 'Explosiones de partículas y confeti Canvas 2D a 60 FPS para celebraciones',
+        selector: 'app-confetti-burst',
+        className: 'ConfettiComponent',
+        sourcePath: 'src/app/components/feedback/confetti',
+        variants: [
+          {
+            id: 'explosion',
+            code: '11.3.1.1',
+            label: 'Explosión Radial',
+            hint: 'Estallido radial de 110 partículas multicolor con física de gravedad',
+          },
+          {
+            id: 'cannons',
+            code: '11.3.2.1',
+            label: 'Doble Cañón',
+            hint: 'Disparo cruzado en arco desde las esquinas inferiores',
+          },
+          {
+            id: 'fireworks',
+            code: '11.3.3.1',
+            label: 'Fuegos Artificiales',
+            hint: 'Estallidos múltiples en cascada superior con estelas luminosas',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'media-3d',
+    code: '12',
+    label: 'Media & 3D',
+    icon: 'media-3d',
+    accent: '#8b5cf6',
+    tagline:
+      'Experiencias inmersivas, giroscopio 3D, comparadores visuales y visualizadores de audio',
+    components: [
+      {
+        id: 'tilt-card',
+        code: '12.1',
+        label: 'Tilt Card 3D',
+        tagline:
+          'Tarjeta con inclinación 3D en tiempo real siguiendo el cursor con inercia y brillo',
+        selector: 'app-media-tilt-card',
+        className: 'TiltCardComponent',
+        sourcePath: 'src/app/components/media-3d/tilt-card',
+        variants: [
+          {
+            id: 'gyro',
+            code: '12.1.1.1',
+            label: 'Giroscopio 3D',
+            hint: 'Inclinación reactiva según el puntero con reflejo especular dinámico',
+          },
+          {
+            id: 'layers',
+            code: '12.1.2.1',
+            label: 'Capas Parallax Z',
+            hint: 'Capas desacopladas flotando en el eje Z con sensación de profundidad',
+          },
+          {
+            id: 'hologram',
+            code: '12.1.3.1',
+            label: 'Prisma Holográfico',
+            hint: 'Gradiente iridiscente que muta de tono según el ángulo de inclinación',
+          },
+        ],
+      },
+      {
+        id: 'before-after',
+        code: '12.2',
+        label: 'Before & After',
+        tagline: 'Comparador visual interactivo con línea divisoria táctil de cristal y cross-fade',
+        selector: 'app-media-before-after',
+        className: 'BeforeAfterComponent',
+        sourcePath: 'src/app/components/media-3d/before-after',
+        variants: [
+          {
+            id: 'split',
+            code: '12.2.1.1',
+            label: 'Split Slider',
+            hint: 'Divisor vertical interactivo arrastrable con clip-path dinámico',
+          },
+          {
+            id: 'fade',
+            code: '12.2.2.1',
+            label: 'Cross-Fade',
+            hint: 'Fundido suave y continuo entre estados con control de opacidad',
+          },
+          {
+            id: 'scanner',
+            code: '12.2.3.1',
+            label: 'Escáner Automático',
+            hint: 'Barrido oscilante continuo de izquierda a derecha estilo escáner',
+          },
+        ],
+      },
+      {
+        id: 'audio-visualizer',
+        code: '12.3',
+        label: 'Audio Visualizer',
+        tagline: 'Ecualizador de ondas sonoras y barras de neón a 60 FPS con Canvas 2D',
+        selector: 'app-media-audio-visualizer',
+        className: 'AudioVisualizerComponent',
+        sourcePath: 'src/app/components/media-3d/audio-visualizer',
+        variants: [
+          {
+            id: 'bars',
+            code: '12.3.1.1',
+            label: 'Ecualizador Estéreo',
+            hint: '32 bandas de frecuencia con oscilación reactiva y reflejo de piso',
+          },
+          {
+            id: 'radial',
+            code: '12.3.2.1',
+            label: 'Anillos de Pulso',
+            hint: 'Ondas circulares concéntricas de pulso radial acústico',
+          },
+          {
+            id: 'wave',
+            code: '12.3.3.1',
+            label: 'Onda Sinusoidal',
+            hint: 'Trazado continuo suave con oscilación espectral y resplandor neón',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Categorías del catálogo. */

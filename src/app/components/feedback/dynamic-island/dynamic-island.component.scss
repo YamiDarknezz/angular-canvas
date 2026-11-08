@@ -1,0 +1,311 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.island-stage {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem;
+}
+
+.dynamic-island {
+  position: relative;
+  background: #000000;
+  color: #fafafa;
+  border-radius: 999px;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+
+  // Tamaño compacto (cápsula)
+  width: 170px;
+  height: 40px;
+
+  &.expanded {
+    width: 320px;
+    height: 160px;
+    border-radius: 32px;
+  }
+}
+
+.island-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Vista compacta
+.compact-view {
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-family: var(--ac-font-mono, monospace);
+  font-weight: 600;
+}
+
+// Vista expandida
+.expanded-view {
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: viewFade 0.25s ease-out;
+}
+
+@keyframes viewFade {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.island-hint {
+  margin: 0;
+  font-size: 0.68rem;
+  color: #71717a;
+  text-align: center;
+}
+
+// Mini ecualizador de música
+.mini-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+
+  span {
+    width: 3px;
+    height: 100%;
+    background: var(--ac-accent, #06b6d4);
+    border-radius: 2px;
+    animation: eqBounce 0.8s ease-in-out infinite alternate;
+
+    &:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+  }
+
+  &.paused span {
+    animation-play-state: paused;
+    height: 4px;
+  }
+}
+
+@keyframes eqBounce {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 14px;
+  }
+}
+
+// Música expandida
+.music-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .album-art-lg {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #18181b;
+    display: grid;
+    place-items: center;
+    font-size: 1.3rem;
+  }
+
+  .track-details {
+    h4 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    span {
+      font-size: 0.75rem;
+      color: #a1a1aa;
+    }
+  }
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  .ctrl-btn {
+    background: transparent;
+    border: none;
+    color: #fafafa;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.15s;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+
+    &.play {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #fafafa;
+      color: #000000;
+      display: grid;
+      place-items: center;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Timer mode
+.timer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.expanded-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .badge-tag {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+
+  .time-big {
+    font-family: var(--ac-font-mono, monospace);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fafafa;
+  }
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: #27272a;
+  border-radius: 999px;
+  overflow: hidden;
+
+  .progress-fill {
+    height: 100%;
+    background: #f59e0b;
+    border-radius: 999px;
+    transition: width 1s linear;
+  }
+}
+
+// Call mode
+.caller-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseGreen 1s infinite;
+}
+
+@keyframes pulseGreen {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+.caller-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .caller-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #000;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+  }
+
+  .caller-info {
+    h4 {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    span {
+      font-size: 0.75rem;
+      color: #a1a1aa;
+    }
+  }
+}
+
+.call-actions {
+  display: flex;
+  gap: 1rem;
+
+  button {
+    flex: 1;
+    height: 38px;
+    border-radius: 999px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    &.btn-decline {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    &.btn-accept {
+      background: #10b981;
+      color: #000;
+    }
+  }
+}

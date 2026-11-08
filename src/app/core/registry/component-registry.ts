@@ -80,6 +80,16 @@ import { HistogramComponent } from '../../components/charts/histogram/histogram.
 import { DonutChartComponent } from '../../components/charts/donut-chart/donut-chart.component';
 import { RadarChartComponent } from '../../components/charts/radar-chart/radar-chart.component';
 
+// Feedback
+import { DynamicIslandComponent } from '../../components/feedback/dynamic-island/dynamic-island.component';
+import { ToastComponent } from '../../components/feedback/toast/toast.component';
+import { ConfettiComponent } from '../../components/feedback/confetti/confetti.component';
+
+// Media & 3D
+import { TiltCardComponent } from '../../components/media-3d/tilt-card/tilt-card.component';
+import { BeforeAfterComponent } from '../../components/media-3d/before-after/before-after.component';
+import { AudioVisualizerComponent } from '../../components/media-3d/audio-visualizer/audio-visualizer.component';
+
 /**
  * Mapa `grupo/componente` → clase standalone.
  *
@@ -159,6 +169,14 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['charts/histogram', HistogramComponent],
   ['charts/donut-chart', DonutChartComponent],
   ['charts/radar-chart', RadarChartComponent],
+  // Feedback
+  ['feedback/dynamic-island', DynamicIslandComponent],
+  ['feedback/toast', ToastComponent],
+  ['feedback/confetti', ConfettiComponent],
+  // Media & 3D
+  ['media-3d/tilt-card', TiltCardComponent],
+  ['media-3d/before-after', BeforeAfterComponent],
+  ['media-3d/audio-visualizer', AudioVisualizerComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

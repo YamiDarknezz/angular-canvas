@@ -82,10 +82,13 @@ export class StageComponent {
   readonly width = this.stageWidth.width;
   readonly codeOpen = signal(false);
   readonly copyState = signal<'idle' | 'ok' | 'error'>('idle');
+  readonly activeCodeTab = signal<'snippet' | 'html' | 'ts'>('snippet');
+  readonly fps = signal<number>(60);
 
   private readonly frame = viewChild<ElementRef<HTMLIFrameElement>>('frame');
 
   private resetTimer?: ReturnType<typeof setTimeout>;
+  private fpsAnimId?: number;
 
   /** `true` cuando se previsualiza en un marco de dispositivo. */
   readonly isDevice = computed(() => this.width() !== 'full');
@@ -154,6 +157,42 @@ export class StageComponent {
     return lines.join('\n');
   });
 
+  /** Solo el tag HTML para usar directamente en la plantilla */
+  readonly htmlSnippet = computed(() => {
+    const entry = this.entry();
+    const active = this.activeVariant();
+    const selectorAttr = active ? ` variant="${active.id}"` : '';
+    const tint = this.selectedColor();
+    const tintAttr = tint ? ` [style.--ac-accent]="'${tint}'"` : '';
+    return `<${entry.selector}${selectorAttr}${tintAttr} />`;
+  });
+
+  /** Solo el bloque TypeScript */
+  readonly tsSnippet = computed(() => {
+    const entry = this.entry();
+    const group = this.group();
+    return [
+      `import { ${entry.className} } from './components/${group.id}/${entry.id}/${entry.id}.component';`,
+      '',
+      '@Component({',
+      `  imports: [${entry.className}],`,
+      '  ...',
+      '})',
+      'export class MiComponente {}',
+    ].join('\n');
+  });
+
+  readonly currentCode = computed(() => {
+    switch (this.activeCodeTab()) {
+      case 'html':
+        return this.htmlSnippet();
+      case 'ts':
+        return this.tsSnippet();
+      default:
+        return this.snippet();
+    }
+  });
+
   constructor() {
     // Elegir sub-estilo, tema, modo de animación o color se reenvía al iframe sin recargarlo.
     effect(() => {
@@ -167,7 +206,25 @@ export class StageComponent {
       this.post({ type: 'ac:tint', color });
     });
 
-    this.destroyRef.onDestroy(() => clearTimeout(this.resetTimer));
+    this.destroyRef.onDestroy(() => {
+      clearTimeout(this.resetTimer);
+      if (this.fpsAnimId) cancelAnimationFrame(this.fpsAnimId);
+    });
+
+    // Monitor de FPS en tiempo real
+    let lastTime = performance.now();
+    let frames = 0;
+    const calcFps = () => {
+      frames++;
+      const now = performance.now();
+      if (now - lastTime >= 1000) {
+        this.fps.set(Math.min(60, Math.round((frames * 1000) / (now - lastTime))));
+        frames = 0;
+        lastTime = now;
+      }
+      this.fpsAnimId = requestAnimationFrame(calcFps);
+    };
+    this.fpsAnimId = requestAnimationFrame(calcFps);
   }
 
   /** El iframe acaba de cargar: se pone al día con el estado de la galería. */
@@ -184,7 +241,7 @@ export class StageComponent {
 
   async copySnippet(): Promise<void> {
     try {
-      await navigator.clipboard.writeText(this.snippet());
+      await navigator.clipboard.writeText(this.currentCode());
       this.copyState.set('ok');
     } catch {
       // clipboard puede fallar sin permisos o fuera de un contexto seguro.

@@ -1,0 +1,78 @@
+<section class="ba-stage" [attr.data-variant]="variant()">
+  <div
+    #boxEl
+    class="ba-container"
+    (mousedown)="onPointerDown($event)"
+    (mousemove)="onPointerMove($event)"
+    (mouseup)="onPointerUp()"
+  >
+    <!-- Capa Antes (Wireframe / Blueprint) -->
+    <div class="ba-layer layer-before">
+      <div class="blueprint-art">
+        <div class="wire-grid"></div>
+        <div class="blueprint-content">
+          <span class="layer-pill">Wireframe</span>
+          <h3>Arquitectura Base</h3>
+          <p>Estructura sin renderizar ni iluminación.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capa Después (Renderizado Final Neón) con Clip-Path dinámico -->
+    <div
+      class="ba-layer layer-after"
+      [style.clip-path]="variant() === 'fade' ? 'none' : 'inset(0 0 0 ' + position() + '%)'"
+      [style.opacity]="variant() === 'fade' ? position() / 100 : 1"
+    >
+      <div class="render-art">
+        <div class="glow-orb"></div>
+        <div class="render-content">
+          <span class="layer-pill neon-pill">Render Final</span>
+          <h3>Acabado Iluminado</h3>
+          <p>Sombreado PBR con reflejos y partículas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tirador Divisor de Cristal (Split mode y Scanner) -->
+    @if (variant() !== 'fade') {
+      <div class="ba-handle" [style.left.%]="position()">
+        <div class="handle-line"></div>
+        <div class="handle-thumb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="m8 7-5 5 5 5M16 7l5 5-5 5" />
+          </svg>
+        </div>
+      </div>
+    }
+
+    <!-- Control deslizante inferior si es modo Fade -->
+    @if (variant() === 'fade') {
+      <div class="fade-slider-box" (mousedown)="$event.stopPropagation()">
+        <span>Wireframe</span>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          [value]="position()"
+          (input)="position.set(+$any($event.target).value)"
+        />
+        <span>Render</span>
+      </div>
+    }
+  </div>
+
+  <p class="ba-hint">
+    @switch (variant()) {
+      @case ('fade') {
+        Desliza el control para fundir las dos capas [12.2.2.1]
+      }
+      @case ('scanner') {
+        Barrido continuo automático oscilante [12.2.3.1]
+      }
+      @default {
+        Arrastra el divisor central con el cursor [12.2.1.1]
+      }
+    }
+  </p>
+</section>

@@ -61,6 +61,12 @@ const ICONS: Readonly<Record<string, IconDefinition>> = {
   charts: {
     paths: ['M3 20h18', 'M6 16v-4', 'M11 16V9', 'M16 16v-11', 'm4 11 5-4 5 3 6-6'],
   },
+  feedback: {
+    paths: ['M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9', 'M13.73 21a2 2 0 0 1-3.46 0'],
+  },
+  'media-3d': {
+    paths: ['m21 16-9 5-9-5V8l9-5 9 5v8Z', 'm3 8 9 5 9-5', 'M12 13v8'],
+  },
 
   // Acciones
   search: { paths: ['M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z', 'm20 20-3.8-3.8'] },

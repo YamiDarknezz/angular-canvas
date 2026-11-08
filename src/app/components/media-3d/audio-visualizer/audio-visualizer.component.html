@@ -1,0 +1,28 @@
+<section class="vis-stage" [attr.data-variant]="variant()">
+  <header class="vis-header">
+    <div class="vis-title-group">
+      <h3 class="vis-title">Ecualizador & Visualizador de Frecuencias</h3>
+      <p class="vis-subtitle">
+        @switch (variant()) {
+          @case ('radial') {
+            Anillos de pulso acústico concéntricos con resplandor neón [12.3.2.1]
+          }
+          @case ('wave') {
+            Onda sinusoidal fluida con oscilación espectral continua [12.3.3.1]
+          }
+          @default {
+            32 bandas de ecualizador estéreo con reflejo en el suelo [12.3.1.1]
+          }
+        }
+      </p>
+    </div>
+
+    <button type="button" class="action-btn" (click)="togglePlay()">
+      {{ isPlaying() ? '⏸ Pausar Oscilación' : '▶ Reanudar' }}
+    </button>
+  </header>
+
+  <div class="canvas-box">
+    <canvas #visCanvas class="vis-canvas"></canvas>
+  </div>
+</section>

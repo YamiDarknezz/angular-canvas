@@ -1,0 +1,26 @@
+<section class="confetti-stage" [attr.data-variant]="variant()">
+  <div class="canvas-box">
+    <canvas #confettiCanvas class="confetti-canvas"></canvas>
+  </div>
+
+  <div class="confetti-overlay">
+    <div class="confetti-info">
+      <h3>
+        @switch (variant()) {
+          @case ('cannons') {
+            Doble Cañón Lateral Cruzado [11.3.2.1]
+          }
+          @case ('fireworks') {
+            Fuegos Artificiales en Cascada [11.3.3.1]
+          }
+          @default {
+            Explosión Radial de Partículas [11.3.1.1]
+          }
+        }
+      </h3>
+      <p>Renderizado Canvas 2D a 60 FPS con física de gravedad, rebote y fricción aérea.</p>
+    </div>
+
+    <button type="button" class="burst-btn" (click)="trigger()">🎉 Disparar Confeti</button>
+  </div>
+</section>

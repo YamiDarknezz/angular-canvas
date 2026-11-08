@@ -1,9 +1,9 @@
 {
-  "version": "2.1.0",
-  "totalGroups": 10,
-  "totalComponents": 60,
-  "totalVariants": 166,
-  "updatedAt": "2026-11-07T23:41:44.156Z",
+  "version": "2.2.0",
+  "totalGroups": 12,
+  "totalComponents": 66,
+  "totalVariants": 184,
+  "updatedAt": "2026-11-08T00:11:36.604Z",
   "groups": [
     {
       "id": "cards",
@@ -2148,6 +2148,242 @@
               "hint": "Barrido rotatorio continuo 360° con nodos de datos iluminados",
               "routePath": "/charts/radar-chart/scanner",
               "embedPath": "/embed/charts/radar-chart/scanner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feedback",
+      "code": "11",
+      "label": "Feedback",
+      "tagline": "Microinteracciones, islas dinámicas, toasts apilables y efectos de celebración",
+      "icon": "feedback",
+      "accent": "#f43f5e",
+      "components": [
+        {
+          "id": "dynamic-island",
+          "code": "11.1",
+          "label": "Dynamic Island",
+          "tagline": "Cápsula flotante interactiva expandible con estados de música, timer y llamadas",
+          "selector": "app-dynamic-island",
+          "className": "DynamicIslandComponent",
+          "sourcePath": "src/app/components/feedback/dynamic-island",
+          "routePath": "/feedback/dynamic-island",
+          "variants": [
+            {
+              "id": "music",
+              "code": "11.1.1.1",
+              "label": "Player Música",
+              "hint": "Mini reproductor con ecualizador animado y controles expandibles",
+              "routePath": "/feedback/dynamic-island/music",
+              "embedPath": "/embed/feedback/dynamic-island/music"
+            },
+            {
+              "id": "timer",
+              "code": "11.1.2.1",
+              "label": "Timer de Enfoque",
+              "hint": "Temporizador con cuenta regresiva circular y barra de progreso",
+              "routePath": "/feedback/dynamic-island/timer",
+              "embedPath": "/embed/feedback/dynamic-island/timer"
+            },
+            {
+              "id": "call",
+              "code": "11.1.3.1",
+              "label": "Llamada Entrante",
+              "hint": "Alerta de llamada con pulso de estado y botones de acción",
+              "routePath": "/feedback/dynamic-island/call",
+              "embedPath": "/embed/feedback/dynamic-island/call"
+            }
+          ]
+        },
+        {
+          "id": "toast",
+          "code": "11.2",
+          "label": "Stacked Toast",
+          "tagline": "Notificaciones flotantes apiladas en cascada 3D con descarte táctil",
+          "selector": "app-toast-stack",
+          "className": "ToastComponent",
+          "sourcePath": "src/app/components/feedback/toast",
+          "routePath": "/feedback/toast",
+          "variants": [
+            {
+              "id": "stacked",
+              "code": "11.2.1.1",
+              "label": "Pila 3D",
+              "hint": "Notificaciones apiladas en perspectiva con descarte interactivo",
+              "routePath": "/feedback/toast/stacked",
+              "embedPath": "/embed/feedback/toast/stacked"
+            },
+            {
+              "id": "swipe",
+              "code": "11.2.2.1",
+              "label": "Swipe Descarte",
+              "hint": "Descarte lateral de notificaciones con feedback táctil",
+              "routePath": "/feedback/toast/swipe",
+              "embedPath": "/embed/feedback/toast/swipe"
+            },
+            {
+              "id": "morph",
+              "code": "11.2.3.1",
+              "label": "Morph Check",
+              "hint": "Transición morphing de spinner a checkmark de éxito animado",
+              "routePath": "/feedback/toast/morph",
+              "embedPath": "/embed/feedback/toast/morph"
+            }
+          ]
+        },
+        {
+          "id": "confetti",
+          "code": "11.3",
+          "label": "Confetti & Bursts",
+          "tagline": "Explosiones de partículas y confeti Canvas 2D a 60 FPS para celebraciones",
+          "selector": "app-confetti-burst",
+          "className": "ConfettiComponent",
+          "sourcePath": "src/app/components/feedback/confetti",
+          "routePath": "/feedback/confetti",
+          "variants": [
+            {
+              "id": "explosion",
+              "code": "11.3.1.1",
+              "label": "Explosión Radial",
+              "hint": "Estallido radial de 110 partículas multicolor con física de gravedad",
+              "routePath": "/feedback/confetti/explosion",
+              "embedPath": "/embed/feedback/confetti/explosion"
+            },
+            {
+              "id": "cannons",
+              "code": "11.3.2.1",
+              "label": "Doble Cañón",
+              "hint": "Disparo cruzado en arco desde las esquinas inferiores",
+              "routePath": "/feedback/confetti/cannons",
+              "embedPath": "/embed/feedback/confetti/cannons"
+            },
+            {
+              "id": "fireworks",
+              "code": "11.3.3.1",
+              "label": "Fuegos Artificiales",
+              "hint": "Estallidos múltiples en cascada superior con estelas luminosas",
+              "routePath": "/feedback/confetti/fireworks",
+              "embedPath": "/embed/feedback/confetti/fireworks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media-3d",
+      "code": "12",
+      "label": "Media & 3D",
+      "tagline": "Experiencias inmersivas, giroscopio 3D, comparadores visuales y visualizadores de audio",
+      "icon": "media-3d",
+      "accent": "#8b5cf6",
+      "components": [
+        {
+          "id": "tilt-card",
+          "code": "12.1",
+          "label": "Tilt Card 3D",
+          "tagline": "Tarjeta con inclinación 3D en tiempo real siguiendo el cursor con inercia y brillo",
+          "selector": "app-media-tilt-card",
+          "className": "TiltCardComponent",
+          "sourcePath": "src/app/components/media-3d/tilt-card",
+          "routePath": "/media-3d/tilt-card",
+          "variants": [
+            {
+              "id": "gyro",
+              "code": "12.1.1.1",
+              "label": "Giroscopio 3D",
+              "hint": "Inclinación reactiva según el puntero con reflejo especular dinámico",
+              "routePath": "/media-3d/tilt-card/gyro",
+              "embedPath": "/embed/media-3d/tilt-card/gyro"
+            },
+            {
+              "id": "layers",
+              "code": "12.1.2.1",
+              "label": "Capas Parallax Z",
+              "hint": "Capas desacopladas flotando en el eje Z con sensación de profundidad",
+              "routePath": "/media-3d/tilt-card/layers",
+              "embedPath": "/embed/media-3d/tilt-card/layers"
+            },
+            {
+              "id": "hologram",
+              "code": "12.1.3.1",
+              "label": "Prisma Holográfico",
+              "hint": "Gradiente iridiscente que muta de tono según el ángulo de inclinación",
+              "routePath": "/media-3d/tilt-card/hologram",
+              "embedPath": "/embed/media-3d/tilt-card/hologram"
+            }
+          ]
+        },
+        {
+          "id": "before-after",
+          "code": "12.2",
+          "label": "Before & After",
+          "tagline": "Comparador visual interactivo con línea divisoria táctil de cristal y cross-fade",
+          "selector": "app-media-before-after",
+          "className": "BeforeAfterComponent",
+          "sourcePath": "src/app/components/media-3d/before-after",
+          "routePath": "/media-3d/before-after",
+          "variants": [
+            {
+              "id": "split",
+              "code": "12.2.1.1",
+              "label": "Split Slider",
+              "hint": "Divisor vertical interactivo arrastrable con clip-path dinámico",
+              "routePath": "/media-3d/before-after/split",
+              "embedPath": "/embed/media-3d/before-after/split"
+            },
+            {
+              "id": "fade",
+              "code": "12.2.2.1",
+              "label": "Cross-Fade",
+              "hint": "Fundido suave y continuo entre estados con control de opacidad",
+              "routePath": "/media-3d/before-after/fade",
+              "embedPath": "/embed/media-3d/before-after/fade"
+            },
+            {
+              "id": "scanner",
+              "code": "12.2.3.1",
+              "label": "Escáner Automático",
+              "hint": "Barrido oscilante continuo de izquierda a derecha estilo escáner",
+              "routePath": "/media-3d/before-after/scanner",
+              "embedPath": "/embed/media-3d/before-after/scanner"
+            }
+          ]
+        },
+        {
+          "id": "audio-visualizer",
+          "code": "12.3",
+          "label": "Audio Visualizer",
+          "tagline": "Ecualizador de ondas sonoras y barras de neón a 60 FPS con Canvas 2D",
+          "selector": "app-media-audio-visualizer",
+          "className": "AudioVisualizerComponent",
+          "sourcePath": "src/app/components/media-3d/audio-visualizer",
+          "routePath": "/media-3d/audio-visualizer",
+          "variants": [
+            {
+              "id": "bars",
+              "code": "12.3.1.1",
+              "label": "Ecualizador Estéreo",
+              "hint": "32 bandas de frecuencia con oscilación reactiva y reflejo de piso",
+              "routePath": "/media-3d/audio-visualizer/bars",
+              "embedPath": "/embed/media-3d/audio-visualizer/bars"
+            },
+            {
+              "id": "radial",
+              "code": "12.3.2.1",
+              "label": "Anillos de Pulso",
+              "hint": "Ondas circulares concéntricas de pulso radial acústico",
+              "routePath": "/media-3d/audio-visualizer/radial",
+              "embedPath": "/embed/media-3d/audio-visualizer/radial"
+            },
+            {
+              "id": "wave",
+              "code": "12.3.3.1",
+              "label": "Onda Sinusoidal",
+              "hint": "Trazado continuo suave con oscilación espectral y resplandor neón",
+              "routePath": "/media-3d/audio-visualizer/wave",
+              "embedPath": "/embed/media-3d/audio-visualizer/wave"
             }
           ]
         }

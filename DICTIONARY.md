@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **10 Categorías** · **60 Componentes** · **166 Efectos / Sub-estilos Únicos**  
+> Total: **12 Categorías** · **66 Componentes** · **184 Efectos / Sub-estilos Únicos**  
 > Formato JSON Disponible: [`public/dictionary.json`](file:///c:/Users/Erick/Documents/Proyectos/Proyectos/Angular_Canvas/public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -295,6 +295,42 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`10.5.1.1`** | Radar & Spider (`10.5`) | **Polígono Cyber**<br><sub>Polígono radial hexagonal con rebote elástico en vértices vía GSAP</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'polygon'" />` |
 | **`10.5.2.1`** | Radar & Spider (`10.5`) | **Comparativa Dual**<br><sub>Dos perfiles superpuestos A vs B con áreas semitransparentes</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'dual'" />` |
 | **`10.5.3.1`** | Radar & Spider (`10.5`) | **Escáner Sonar**<br><sub>Barrido rotatorio continuo 360° con nodos de datos iluminados</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'scanner'" />` |
+
+---
+
+## 11. Feedback
+
+*Microinteracciones, islas dinámicas, toasts apilables y efectos de celebración*
+
+| Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **`11.1.1.1`** | Dynamic Island (`11.1`) | **Player Música**<br><sub>Mini reproductor con ecualizador animado y controles expandibles</sub> | `<app-dynamic-island>` | `src/app/components/feedback/dynamic-island` | `<app-dynamic-island [variant]="'music'" />` |
+| **`11.1.2.1`** | Dynamic Island (`11.1`) | **Timer de Enfoque**<br><sub>Temporizador con cuenta regresiva circular y barra de progreso</sub> | `<app-dynamic-island>` | `src/app/components/feedback/dynamic-island` | `<app-dynamic-island [variant]="'timer'" />` |
+| **`11.1.3.1`** | Dynamic Island (`11.1`) | **Llamada Entrante**<br><sub>Alerta de llamada con pulso de estado y botones de acción</sub> | `<app-dynamic-island>` | `src/app/components/feedback/dynamic-island` | `<app-dynamic-island [variant]="'call'" />` |
+| **`11.2.1.1`** | Stacked Toast (`11.2`) | **Pila 3D**<br><sub>Notificaciones apiladas en perspectiva con descarte interactivo</sub> | `<app-toast-stack>` | `src/app/components/feedback/toast` | `<app-toast-stack [variant]="'stacked'" />` |
+| **`11.2.2.1`** | Stacked Toast (`11.2`) | **Swipe Descarte**<br><sub>Descarte lateral de notificaciones con feedback táctil</sub> | `<app-toast-stack>` | `src/app/components/feedback/toast` | `<app-toast-stack [variant]="'swipe'" />` |
+| **`11.2.3.1`** | Stacked Toast (`11.2`) | **Morph Check**<br><sub>Transición morphing de spinner a checkmark de éxito animado</sub> | `<app-toast-stack>` | `src/app/components/feedback/toast` | `<app-toast-stack [variant]="'morph'" />` |
+| **`11.3.1.1`** | Confetti & Bursts (`11.3`) | **Explosión Radial**<br><sub>Estallido radial de 110 partículas multicolor con física de gravedad</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'explosion'" />` |
+| **`11.3.2.1`** | Confetti & Bursts (`11.3`) | **Doble Cañón**<br><sub>Disparo cruzado en arco desde las esquinas inferiores</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'cannons'" />` |
+| **`11.3.3.1`** | Confetti & Bursts (`11.3`) | **Fuegos Artificiales**<br><sub>Estallidos múltiples en cascada superior con estelas luminosas</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'fireworks'" />` |
+
+---
+
+## 12. Media & 3D
+
+*Experiencias inmersivas, giroscopio 3D, comparadores visuales y visualizadores de audio*
+
+| Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **`12.1.1.1`** | Tilt Card 3D (`12.1`) | **Giroscopio 3D**<br><sub>Inclinación reactiva según el puntero con reflejo especular dinámico</sub> | `<app-media-tilt-card>` | `src/app/components/media-3d/tilt-card` | `<app-media-tilt-card [variant]="'gyro'" />` |
+| **`12.1.2.1`** | Tilt Card 3D (`12.1`) | **Capas Parallax Z**<br><sub>Capas desacopladas flotando en el eje Z con sensación de profundidad</sub> | `<app-media-tilt-card>` | `src/app/components/media-3d/tilt-card` | `<app-media-tilt-card [variant]="'layers'" />` |
+| **`12.1.3.1`** | Tilt Card 3D (`12.1`) | **Prisma Holográfico**<br><sub>Gradiente iridiscente que muta de tono según el ángulo de inclinación</sub> | `<app-media-tilt-card>` | `src/app/components/media-3d/tilt-card` | `<app-media-tilt-card [variant]="'hologram'" />` |
+| **`12.2.1.1`** | Before & After (`12.2`) | **Split Slider**<br><sub>Divisor vertical interactivo arrastrable con clip-path dinámico</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'split'" />` |
+| **`12.2.2.1`** | Before & After (`12.2`) | **Cross-Fade**<br><sub>Fundido suave y continuo entre estados con control de opacidad</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'fade'" />` |
+| **`12.2.3.1`** | Before & After (`12.2`) | **Escáner Automático**<br><sub>Barrido oscilante continuo de izquierda a derecha estilo escáner</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'scanner'" />` |
+| **`12.3.1.1`** | Audio Visualizer (`12.3`) | **Ecualizador Estéreo**<br><sub>32 bandas de frecuencia con oscilación reactiva y reflejo de piso</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'bars'" />` |
+| **`12.3.2.1`** | Audio Visualizer (`12.3`) | **Anillos de Pulso**<br><sub>Ondas circulares concéntricas de pulso radial acústico</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'radial'" />` |
+| **`12.3.3.1`** | Audio Visualizer (`12.3`) | **Onda Sinusoidal**<br><sub>Trazado continuo suave con oscilación espectral y resplandor neón</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'wave'" />` |
 
 ---
 

@@ -1,0 +1,147 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.tilt-stage {
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.tilt-scene {
+  perspective: 1000px;
+}
+
+.tilt-card {
+  position: relative;
+  width: 280px;
+  height: 380px;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--ac-surface, #18181b) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ac-border, #27272a) 80%, transparent);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 30px 60px -15px rgba(0, 0, 0, 0.6),
+    0 0 20px -5px color-mix(in srgb, var(--ac-accent, #06b6d4) 20%, transparent);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+
+  &:hover {
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.7),
+      0 0 30px color-mix(in srgb, var(--ac-accent, #06b6d4) 40%, transparent);
+    border-color: color-mix(in srgb, var(--ac-accent, #06b6d4) 60%, transparent);
+  }
+}
+
+.card-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.2s;
+  mix-blend-mode: overlay;
+}
+
+.layer-content {
+  position: relative;
+  height: 100%;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 3;
+  transform-style: preserve-3d;
+}
+
+.card-badge {
+  align-self: flex-start;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--ac-accent, #06b6d4) 20%, transparent);
+  color: var(--ac-accent, #38bdf8);
+  border: 1px solid color-mix(in srgb, var(--ac-accent, #06b6d4) 40%, transparent);
+  margin-bottom: 0.75rem;
+
+  &.holo-badge {
+    background: linear-gradient(90deg, #ec4899, #8b5cf6, #06b6d4);
+    color: #fff;
+    border: none;
+  }
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--ac-text, #fafafa);
+  letter-spacing: -0.02em;
+}
+
+.card-desc {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ac-text-muted, #d4d4d8);
+  line-height: 1.4;
+}
+
+.card-code-tag {
+  margin-top: 1.25rem;
+  font-family: var(--ac-font-mono, monospace);
+  font-size: 0.72rem;
+  color: var(--ac-text-faint, #71717a);
+}
+
+// Parallax Layers
+.layer-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.2), transparent 70%);
+}
+
+.layer-art {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.cube-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--ac-accent, #06b6d4), #3b82f6);
+  display: grid;
+  place-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 15px 35px rgba(6, 182, 212, 0.4);
+}
+
+// Hologram Overlay
+.holo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 128, 0.2) 0%,
+    rgba(0, 255, 255, 0.2) 50%,
+    rgba(255, 255, 0, 0.2) 100%
+  );
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+  opacity: 0.7;
+}

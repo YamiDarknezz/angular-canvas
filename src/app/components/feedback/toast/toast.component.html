@@ -1,0 +1,76 @@
+<section class="toast-stage" [attr.data-variant]="variant()">
+  @if (variant() === 'morph') {
+    <!-- Modo Morph Checkmark -->
+    <div class="morph-container">
+      <div class="morph-card" [class.success]="morphDone()">
+        <div class="status-icon-box">
+          @if (!morphDone()) {
+            <div class="spinner-ring"></div>
+          } @else {
+            <svg
+              class="check-svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            >
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          }
+        </div>
+        <div class="morph-text">
+          <h4>{{ morphDone() ? '¡Operación Completada!' : 'Procesando Transacción...' }}</h4>
+          <p>
+            {{
+              morphDone()
+                ? 'Tokens guardados en el Style Dictionary.'
+                : 'Sincronizando estado con el servidor...'
+            }}
+          </p>
+        </div>
+      </div>
+      <button type="button" class="action-btn" (click)="triggerMorph()">
+        Reintentar Animación [11.2.3.1]
+      </button>
+    </div>
+  } @else {
+    <!-- Modo Stacked o Swipe -->
+    <div class="stack-container">
+      <div class="stack-wrapper">
+        @for (t of toasts(); track t.id; let i = $index) {
+          @if (i < 3) {
+            <div
+              class="toast-item"
+              [class.top]="i === 0"
+              [style.--stack-idx]="i"
+              (click)="i === 0 ? dismissTop() : null"
+              title="Click para descartar"
+            >
+              <div class="toast-indicator" [attr.data-type]="t.type"></div>
+              <div class="toast-body">
+                <div class="toast-header">
+                  <strong>{{ t.title }}</strong>
+                  <span class="toast-time">{{ t.time }}</span>
+                </div>
+                <p class="toast-msg">{{ t.message }}</p>
+              </div>
+              <button
+                type="button"
+                class="toast-close"
+                (click)="dismissTop(); $event.stopPropagation()"
+              >
+                ✕
+              </button>
+            </div>
+          }
+        }
+      </div>
+
+      <div class="toast-actions">
+        <button type="button" class="action-btn" (click)="resetToasts()">
+          Restablecer Notificaciones [{{ variant() === 'swipe' ? '11.2.2.1' : '11.2.1.1' }}]
+        </button>
+      </div>
+    </div>
+  }
+</section>

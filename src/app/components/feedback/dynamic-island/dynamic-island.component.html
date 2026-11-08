@@ -1,0 +1,103 @@
+<div class="island-stage" [attr.data-variant]="variant()">
+  <div
+    #islandBox
+    class="dynamic-island"
+    [class.expanded]="isExpanded()"
+    (click)="toggleExpand()"
+    role="button"
+    tabindex="0"
+    [attr.aria-expanded]="isExpanded()"
+  >
+    @switch (variant()) {
+      @case ('timer') {
+        <!-- Modo Timer de Enfoque -->
+        <div class="island-content timer-mode">
+          @if (!isExpanded()) {
+            <div class="compact-view">
+              <span class="timer-dot"></span>
+              <span class="timer-text">{{ timerSeconds() }}s</span>
+            </div>
+          } @else {
+            <div class="expanded-view">
+              <div class="expanded-head">
+                <span class="badge-tag">Temporizador</span>
+                <span class="time-big"
+                  >00:{{ timerSeconds() < 10 ? '0' : '' }}{{ timerSeconds() }}</span
+                >
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" [style.width.%]="(timerSeconds() / 60) * 100"></div>
+              </div>
+              <p class="island-hint">Click para contraer [11.1.2.1]</p>
+            </div>
+          }
+        </div>
+      }
+
+      @case ('call') {
+        <!-- Modo Llamada Entrante -->
+        <div class="island-content call-mode">
+          @if (!isExpanded()) {
+            <div class="compact-view">
+              <span class="caller-pulse"></span>
+              <span class="caller-name">Sara Connor</span>
+            </div>
+          } @else {
+            <div class="expanded-view">
+              <div class="caller-card">
+                <div class="caller-avatar">SC</div>
+                <div class="caller-info">
+                  <h4>Sara Connor</h4>
+                  <span>Llamada entrante...</span>
+                </div>
+              </div>
+              <div class="call-actions">
+                <button type="button" class="btn-decline" (click)="$event.stopPropagation()">
+                  ✕
+                </button>
+                <button type="button" class="btn-accept" (click)="$event.stopPropagation()">
+                  ✓
+                </button>
+              </div>
+              <p class="island-hint">Click para contraer [11.1.3.1]</p>
+            </div>
+          }
+        </div>
+      }
+
+      @default {
+        <!-- Modo Reproductor de Música -->
+        <div class="island-content music-mode">
+          @if (!isExpanded()) {
+            <div class="compact-view">
+              <div class="album-thumb">🎵</div>
+              <div class="mini-eq" [class.paused]="!isPlaying()">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          } @else {
+            <div class="expanded-view">
+              <div class="music-header">
+                <div class="album-art-lg">🎵</div>
+                <div class="track-details">
+                  <h4>Midnight City</h4>
+                  <span>M83 · Synthwave</span>
+                </div>
+              </div>
+              <div class="music-controls">
+                <button type="button" class="ctrl-btn" (click)="$event.stopPropagation()">⏮</button>
+                <button type="button" class="ctrl-btn play" (click)="togglePlay($event)">
+                  {{ isPlaying() ? '⏸' : '▶' }}
+                </button>
+                <button type="button" class="ctrl-btn" (click)="$event.stopPropagation()">⏭</button>
+              </div>
+              <p class="island-hint">Click para contraer [11.1.1.1]</p>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</div>
