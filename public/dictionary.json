@@ -2,8 +2,8 @@
   "version": "2.2.0",
   "totalGroups": 12,
   "totalComponents": 68,
-  "totalVariants": 212,
-  "updatedAt": "2026-11-13T15:38:35.116Z",
+  "totalVariants": 213,
+  "updatedAt": "2026-11-13T17:17:18.797Z",
   "groups": [
     {
       "id": "cards",
@@ -2512,7 +2512,7 @@
               "id": "sales",
               "code": "12.4.12.1",
               "label": "Embudo comercial",
-              "hint": "Separa una etapa del embudo para consultar sus cifras de ejemplo",
+              "hint": "Showroom comercial con auto concepto en plataforma giratoria, pod ejecutivo y bahía VIP",
               "routePath": "/media-3d/three-scenes/sales",
               "embedPath": "/embed/media-3d/three-scenes/sales"
             },
@@ -2520,7 +2520,7 @@
               "id": "teams",
               "code": "12.4.13.1",
               "label": "Mapa de equipos",
-              "hint": "Eleva y resalta los equipos de talento, desarrollo o bienestar",
+              "hint": "Campus colaborativo con puestos ultrawide, tablero Kanban de talento y lounge biofílico",
               "routePath": "/media-3d/three-scenes/teams",
               "embedPath": "/embed/media-3d/three-scenes/teams"
             },
@@ -2528,7 +2528,7 @@
               "id": "negotiation",
               "code": "12.4.14.1",
               "label": "Sala de negociación",
-              "hint": "Cambia la propuesta entre borrador, enviada y aceptada.",
+              "hint": "Pod ejecutivo con panel holográfico de propuestas comerciales y métricas de cierre.",
               "routePath": "/media-3d/three-scenes/negotiation",
               "embedPath": "/embed/media-3d/three-scenes/negotiation"
             },
@@ -2536,7 +2536,7 @@
               "id": "delivery",
               "code": "12.4.15.1",
               "label": "Ruta de entrega",
-              "hint": "Elige un cliente y sigue el vehículo hasta su destino.",
+              "hint": "Bahía VIP de entrega de vehículos con pórtico LED y baliza de formalización.",
               "routePath": "/media-3d/three-scenes/delivery",
               "embedPath": "/embed/media-3d/three-scenes/delivery"
             },
@@ -2544,7 +2544,7 @@
               "id": "showroom",
               "code": "12.4.16.1",
               "label": "Catálogo de productos",
-              "hint": "Gira la vitrina y selecciona un producto para ver su ficha.",
+              "hint": "Exhibición giratoria de vehículos conceptuales con acabados de lujo y reflectores LED.",
               "routePath": "/media-3d/three-scenes/showroom",
               "embedPath": "/embed/media-3d/three-scenes/showroom"
             },
@@ -2552,7 +2552,7 @@
               "id": "office",
               "code": "12.4.17.1",
               "label": "Equipo y áreas",
-              "hint": "Explora los espacios de Talento, Desarrollo y Bienestar.",
+              "hint": "Estaciones de trabajo ágiles compartidas con monitores curvos ultrawide y paneles acústicos.",
               "routePath": "/media-3d/three-scenes/office",
               "embedPath": "/embed/media-3d/three-scenes/office"
             },
@@ -2560,7 +2560,7 @@
               "id": "onboarding",
               "code": "12.4.18.1",
               "label": "Recorrido de incorporación",
-              "hint": "Lleva al personaje a cada estación de bienvenida.",
+              "hint": "Mural Kanban interactivo para seguimiento del recorrido y bienvenida de candidatos.",
               "routePath": "/media-3d/three-scenes/onboarding",
               "embedPath": "/embed/media-3d/three-scenes/onboarding"
             },
@@ -2568,7 +2568,7 @@
               "id": "team-calendar",
               "code": "12.4.19.1",
               "label": "Agenda de equipo",
-              "hint": "Selecciona una cita y cambia su horario y estado de ejemplo.",
+              "hint": "Espacio de integración y bienestar con lounge nórdico, muro vegetal y área de café.",
               "routePath": "/media-3d/three-scenes/team-calendar",
               "embedPath": "/embed/media-3d/three-scenes/team-calendar"
             },
@@ -2576,7 +2576,7 @@
               "id": "cash-flow",
               "code": "12.4.20.1",
               "label": "Flujo de caja",
-              "hint": "Simula cambios en ingresos y gastos y observa el saldo.",
+              "hint": "Terminal de trading algorítmico con velas financieras 3D y gráficos de liquidez.",
               "routePath": "/media-3d/three-scenes/cash-flow",
               "embedPath": "/embed/media-3d/three-scenes/cash-flow"
             },
@@ -2584,7 +2584,7 @@
               "id": "financial-board",
               "code": "12.4.21.1",
               "label": "Panel financiero",
-              "hint": "Compara los ingresos, gastos y resultado de dos periodos.",
+              "hint": "Bóveda acorazada con lingotes de oro, trading en tiempo real y servidores criptográficos.",
               "routePath": "/media-3d/three-scenes/financial-board",
               "embedPath": "/embed/media-3d/three-scenes/financial-board"
             },
@@ -2592,7 +2592,7 @@
               "id": "budget",
               "code": "12.4.22.1",
               "label": "Distribución de presupuesto",
-              "hint": "Redistribuye el presupuesto entre áreas con distintos escenarios.",
+              "hint": "Distribución y auditoría presupuestaria con matriz de servidores y ticker en vivo.",
               "routePath": "/media-3d/three-scenes/budget",
               "embedPath": "/embed/media-3d/three-scenes/budget"
             }
@@ -2643,7 +2643,7 @@
               "id": "operations",
               "code": "12.5.4.1",
               "label": "Acceso de Operaciones",
-              "hint": "Portal de inventario y despachos con un almacén isométrico",
+              "hint": "Portal de inventario y despachos con almacén isométrico y camiones en movimiento",
               "routePath": "/media-3d/three-login/operations",
               "embedPath": "/embed/media-3d/three-login/operations"
             },
@@ -2651,15 +2651,23 @@
               "id": "commercial",
               "code": "12.5.5.1",
               "label": "Acceso Comercial",
-              "hint": "Portal de clientes y oportunidades con un embudo comercial 3D",
+              "hint": "Portal comercial con showroom giratorio de vehículos, pod ejecutivo y bahía VIP",
               "routePath": "/media-3d/three-login/commercial",
               "embedPath": "/embed/media-3d/three-login/commercial"
             },
             {
-              "id": "hr",
+              "id": "finance",
               "code": "12.5.6.1",
+              "label": "Acceso Financiero",
+              "hint": "Portal financiero con bóveda de lingotes de oro, trading con velas 3D y servidores",
+              "routePath": "/media-3d/three-login/finance",
+              "embedPath": "/embed/media-3d/three-login/finance"
+            },
+            {
+              "id": "hr",
+              "code": "12.5.7.1",
               "label": "Acceso de RR. HH.",
-              "hint": "Portal de personal con grupos de figuras y una paleta violeta",
+              "hint": "Portal de talento con estaciones ágiles ultrawide, muro Kanban y lounge biofílico",
               "routePath": "/media-3d/three-login/hr",
               "embedPath": "/embed/media-3d/three-login/hr"
             }

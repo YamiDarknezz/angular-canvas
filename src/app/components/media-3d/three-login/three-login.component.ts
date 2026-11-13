@@ -46,6 +46,13 @@ const THEMES = {
     title: 'Portal comercial',
     description: 'Ingresa con tu cuenta para gestionar clientes y oportunidades.',
   },
+  finance: {
+    scene: 'financial-board',
+    accent: '#7ce3b1',
+    panel: '#15342a',
+    title: 'Portal financiero',
+    description: 'Ingresa con tu cuenta para consultar tesorería, presupuestos y balances.',
+  },
   hr: {
     scene: 'teams',
     accent: '#bcb5ff',
