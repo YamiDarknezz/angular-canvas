@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **68 Componentes** · **203 Efectos / Sub-estilos Únicos**
+> Total: **12 Categorías** · **68 Componentes** · **212 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -358,6 +358,15 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`12.4.11.1`** | Escenas Three.js (`12.4`) | **Almacén interactivo**<br><sub>Dos camiones entran y salen por muelles distintos. Selecciona un camión o una zona</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'warehouse'" />` |
 | **`12.4.12.1`** | Escenas Three.js (`12.4`) | **Embudo comercial**<br><sub>Separa una etapa del embudo para consultar sus cifras de ejemplo</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'sales'" />` |
 | **`12.4.13.1`** | Escenas Three.js (`12.4`) | **Mapa de equipos**<br><sub>Eleva y resalta los equipos de talento, desarrollo o bienestar</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'teams'" />` |
+| **`12.4.14.1`** | Escenas Three.js (`12.4`) | **Sala de negociación**<br><sub>Cambia la propuesta entre borrador, enviada y aceptada.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'negotiation'" />` |
+| **`12.4.15.1`** | Escenas Three.js (`12.4`) | **Ruta de entrega**<br><sub>Elige un cliente y sigue el vehículo hasta su destino.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'delivery'" />` |
+| **`12.4.16.1`** | Escenas Three.js (`12.4`) | **Catálogo de productos**<br><sub>Gira la vitrina y selecciona un producto para ver su ficha.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'showroom'" />` |
+| **`12.4.17.1`** | Escenas Three.js (`12.4`) | **Equipo y áreas**<br><sub>Explora los espacios de Talento, Desarrollo y Bienestar.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'office'" />` |
+| **`12.4.18.1`** | Escenas Three.js (`12.4`) | **Recorrido de incorporación**<br><sub>Lleva al personaje a cada estación de bienvenida.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'onboarding'" />` |
+| **`12.4.19.1`** | Escenas Three.js (`12.4`) | **Agenda de equipo**<br><sub>Selecciona una cita y cambia su horario y estado de ejemplo.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'team-calendar'" />` |
+| **`12.4.20.1`** | Escenas Three.js (`12.4`) | **Flujo de caja**<br><sub>Simula cambios en ingresos y gastos y observa el saldo.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'cash-flow'" />` |
+| **`12.4.21.1`** | Escenas Three.js (`12.4`) | **Panel financiero**<br><sub>Compara los ingresos, gastos y resultado de dos periodos.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'financial-board'" />` |
+| **`12.4.22.1`** | Escenas Three.js (`12.4`) | **Distribución de presupuesto**<br><sub>Redistribuye el presupuesto entre áreas con distintos escenarios.</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'budget'" />` |
 | **`12.5.1.1`** | Login 3D (`12.5`) | **Acceso con ondas**<br><sub>Formulario junto al campo de ondas 3D en color menta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'waves'" />` |
 | **`12.5.2.1`** | Login 3D (`12.5`) | **Acceso con nebulosa**<br><sub>Partículas en espiral con una paleta violeta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'nebula'" />` |
 | **`12.5.3.1`** | Login 3D (`12.5`) | **Acceso con mosaico**<br><sub>Baldosas animadas sobre un fondo azul</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'tiles'" />` |

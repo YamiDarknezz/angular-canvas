@@ -2,8 +2,8 @@
   "version": "2.2.0",
   "totalGroups": 12,
   "totalComponents": 68,
-  "totalVariants": 203,
-  "updatedAt": "2026-11-13T15:19:31.600Z",
+  "totalVariants": 212,
+  "updatedAt": "2026-11-13T15:38:35.116Z",
   "groups": [
     {
       "id": "cards",
@@ -2523,6 +2523,78 @@
               "hint": "Eleva y resalta los equipos de talento, desarrollo o bienestar",
               "routePath": "/media-3d/three-scenes/teams",
               "embedPath": "/embed/media-3d/three-scenes/teams"
+            },
+            {
+              "id": "negotiation",
+              "code": "12.4.14.1",
+              "label": "Sala de negociación",
+              "hint": "Cambia la propuesta entre borrador, enviada y aceptada.",
+              "routePath": "/media-3d/three-scenes/negotiation",
+              "embedPath": "/embed/media-3d/three-scenes/negotiation"
+            },
+            {
+              "id": "delivery",
+              "code": "12.4.15.1",
+              "label": "Ruta de entrega",
+              "hint": "Elige un cliente y sigue el vehículo hasta su destino.",
+              "routePath": "/media-3d/three-scenes/delivery",
+              "embedPath": "/embed/media-3d/three-scenes/delivery"
+            },
+            {
+              "id": "showroom",
+              "code": "12.4.16.1",
+              "label": "Catálogo de productos",
+              "hint": "Gira la vitrina y selecciona un producto para ver su ficha.",
+              "routePath": "/media-3d/three-scenes/showroom",
+              "embedPath": "/embed/media-3d/three-scenes/showroom"
+            },
+            {
+              "id": "office",
+              "code": "12.4.17.1",
+              "label": "Equipo y áreas",
+              "hint": "Explora los espacios de Talento, Desarrollo y Bienestar.",
+              "routePath": "/media-3d/three-scenes/office",
+              "embedPath": "/embed/media-3d/three-scenes/office"
+            },
+            {
+              "id": "onboarding",
+              "code": "12.4.18.1",
+              "label": "Recorrido de incorporación",
+              "hint": "Lleva al personaje a cada estación de bienvenida.",
+              "routePath": "/media-3d/three-scenes/onboarding",
+              "embedPath": "/embed/media-3d/three-scenes/onboarding"
+            },
+            {
+              "id": "team-calendar",
+              "code": "12.4.19.1",
+              "label": "Agenda de equipo",
+              "hint": "Selecciona una cita y cambia su horario y estado de ejemplo.",
+              "routePath": "/media-3d/three-scenes/team-calendar",
+              "embedPath": "/embed/media-3d/three-scenes/team-calendar"
+            },
+            {
+              "id": "cash-flow",
+              "code": "12.4.20.1",
+              "label": "Flujo de caja",
+              "hint": "Simula cambios en ingresos y gastos y observa el saldo.",
+              "routePath": "/media-3d/three-scenes/cash-flow",
+              "embedPath": "/embed/media-3d/three-scenes/cash-flow"
+            },
+            {
+              "id": "financial-board",
+              "code": "12.4.21.1",
+              "label": "Panel financiero",
+              "hint": "Compara los ingresos, gastos y resultado de dos periodos.",
+              "routePath": "/media-3d/three-scenes/financial-board",
+              "embedPath": "/embed/media-3d/three-scenes/financial-board"
+            },
+            {
+              "id": "budget",
+              "code": "12.4.22.1",
+              "label": "Distribución de presupuesto",
+              "hint": "Redistribuye el presupuesto entre áreas con distintos escenarios.",
+              "routePath": "/media-3d/three-scenes/budget",
+              "embedPath": "/embed/media-3d/three-scenes/budget"
             }
           ]
         },

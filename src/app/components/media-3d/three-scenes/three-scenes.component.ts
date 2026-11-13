@@ -30,6 +30,15 @@ const SCENES = {
   warehouse: { title: 'Almacén interactivo', accent: '#66dabb' },
   sales: { title: 'Embudo comercial', accent: '#efa967' },
   teams: { title: 'Mapa de equipos', accent: '#acacff' },
+  negotiation: { title: 'Sala de negociación', accent: '#eab279' },
+  delivery: { title: 'Ruta de entrega', accent: '#f4bd6d' },
+  showroom: { title: 'Catálogo de productos', accent: '#f3a48a' },
+  office: { title: 'Equipo y áreas', accent: '#aeb7ff' },
+  onboarding: { title: 'Recorrido de incorporación', accent: '#a3c9ff' },
+  'team-calendar': { title: 'Agenda de equipo', accent: '#c6acff' },
+  'cash-flow': { title: 'Flujo de caja', accent: '#7ce3b1' },
+  'financial-board': { title: 'Panel financiero', accent: '#80d9ed' },
+  budget: { title: 'Distribución de presupuesto', accent: '#9be5a3' },
 } satisfies Record<SceneVariant, { title: string; accent: string }>;
 
 /**
@@ -65,10 +74,7 @@ export class ThreeScenesComponent {
   private readonly controller = signal<SceneController | null>(null);
   protected readonly choices = signal<readonly SceneChoice[]>([]);
   protected readonly selectedIndex = signal<number | undefined>(undefined);
-  protected readonly selectedChoice = computed(() => {
-    const index = this.selectedIndex();
-    return index === undefined ? undefined : this.choices()[index];
-  });
+  protected readonly selectedChoice = signal<SceneChoice | undefined>(undefined);
   private tapStart?: { id: number; x: number; y: number };
 
   constructor() {
@@ -80,6 +86,7 @@ export class ThreeScenesComponent {
       );
       this.choices.set(choices ?? []);
       this.selectedIndex.set(undefined);
+      this.selectedChoice.set(undefined);
       this.tapStart = undefined;
     });
     effect(() => this.controller()?.setPlaying(this.playing()));
@@ -134,7 +141,9 @@ export class ThreeScenesComponent {
     if (!choice || this.decorative() || this.status() !== 'ready') return;
     this.controller()?.select(index);
     this.selectedIndex.set(index);
-    this.choiceSelected.emit(choice);
+    const snapshot = { ...choice };
+    this.selectedChoice.set(snapshot);
+    this.choiceSelected.emit(snapshot);
   }
 
   private async mount(): Promise<void> {
