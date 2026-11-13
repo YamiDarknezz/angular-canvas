@@ -1,3 +1,24 @@
+.design-section {
+  margin-block-end: 3rem;
+  padding-block-end: 3rem;
+  border-block-end: 1px solid var(--ac-border, #343744);
+  &:last-child {
+    margin-block-end: 0;
+    border-block-end: 0;
+  }
+}
+.section-title {
+  margin: 0 0 0.5rem;
+  color: var(--ac-text, inherit);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.section-desc {
+  margin: 0 0 1.5rem;
+  color: var(--ac-text-faint, inherit);
+  font-size: 0.95rem;
+}
+
 .marquee-stage {
   overflow: hidden;
   padding: 2.5rem 0;

@@ -24,6 +24,9 @@ export interface HistogramBin {
   styleUrl: './histogram.component.scss',
 })
 export class HistogramComponent implements OnInit, OnDestroy {
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-histogram-' + HistogramComponent.nextId++;
+
   readonly variant = input<string>('gauss');
 
   readonly containerRef = viewChild<ElementRef<HTMLElement>>('histBox');

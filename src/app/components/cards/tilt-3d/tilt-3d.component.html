@@ -3,7 +3,11 @@
   <p class="section-desc">Perspectiva, profundidad y brillo que siguen al cursor</p>
 
   <div class="tilt-grid">
-    <div class="tilt-scene" data-variant="tilt">
+    <div
+      class="tilt-scene"
+      data-variant="tilt"
+      [style.display]="this.variant() && this.variant() !== 'tilt' ? 'none' : null"
+    >
       <article
         class="tilt-card"
         (pointermove)="onPointerMove($event)"
@@ -22,7 +26,11 @@
       </article>
     </div>
 
-    <div class="tilt-scene" data-variant="depth">
+    <div
+      class="tilt-scene"
+      data-variant="depth"
+      [style.display]="this.variant() && this.variant() !== 'depth' ? 'none' : null"
+    >
       <article
         class="tilt-card depth-card"
         (pointermove)="onPointerMove($event)"
@@ -39,7 +47,11 @@
       </article>
     </div>
 
-    <div class="tilt-scene" data-variant="shine">
+    <div
+      class="tilt-scene"
+      data-variant="shine"
+      [style.display]="this.variant() && this.variant() !== 'shine' ? 'none' : null"
+    >
       <article
         class="tilt-card shine-card"
         (pointermove)="onPointerMove($event)"

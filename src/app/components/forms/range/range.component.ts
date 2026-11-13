@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input } from '@angular/core';
 
 /**
  * Selector de rango con pista de degradado y pulgar de vidrio. Dos acabados:
@@ -12,6 +12,11 @@ import { Component, signal } from '@angular/core';
   styleUrl: './range.component.scss',
 })
 export class RangeComponent {
+  readonly variant = input<string>();
+
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-range-' + RangeComponent.nextId++;
+
   readonly value = signal(64);
 
   onInput(event: Event): void {

@@ -14,11 +14,11 @@
     class="slide-panel"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="slide-panel-title"
+    [attr.aria-labelledby]="instanceId + '-slide-panel-title'"
     (click)="$event.stopPropagation()"
   >
     <header class="slide-header">
-      <h3 id="slide-panel-title">Panel Lateral</h3>
+      <h3 [attr.id]="instanceId + '-slide-panel-title'">Panel Lateral</h3>
       <button
         #closeButton
         type="button"

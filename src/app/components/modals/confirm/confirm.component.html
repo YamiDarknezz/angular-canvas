@@ -103,8 +103,8 @@
         [class.glass]="!isDanger"
         role="alertdialog"
         aria-modal="true"
-        [attr.aria-labelledby]="key + '-title'"
-        [attr.aria-describedby]="key + '-desc'"
+        [attr.aria-labelledby]="instanceId + '-' + key + '-title'"
+        [attr.aria-describedby]="instanceId + '-' + key + '-desc'"
         (click)="$event.stopPropagation()"
       >
         <div class="confirm-icon" [class.danger-icon]="isDanger" [class.glass-icon]="!isDanger">
@@ -125,8 +125,8 @@
             }
           </svg>
         </div>
-        <h3 [id]="key + '-title'" class="confirm-title">{{ title }}</h3>
-        <p [id]="key + '-desc'" class="confirm-text">{{ desc }}</p>
+        <h3 [attr.id]="instanceId + '-' + key + '-title'" class="confirm-title">{{ title }}</h3>
+        <p [attr.id]="instanceId + '-' + key + '-desc'" class="confirm-text">{{ desc }}</p>
         <div class="confirm-actions">
           <button type="button" class="confirm-btn secondary" (click)="close()">Cancelar</button>
           <button type="button" class="confirm-btn" [class]="actionClass" (click)="confirm(key)">

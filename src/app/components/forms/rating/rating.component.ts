@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, input } from '@angular/core';
 
 /**
  * Valoración por estrellas y por segmentos numéricos, con previsualización
@@ -12,6 +12,8 @@ import { Component, computed, signal } from '@angular/core';
   styleUrl: './rating.component.scss',
 })
 export class RatingComponent {
+  readonly variant = input<string>();
+
   readonly stars = [1, 2, 3, 4, 5];
   readonly segments = [
     { value: 1, label: 'Malo' },

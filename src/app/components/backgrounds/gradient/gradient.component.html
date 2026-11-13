@@ -2,22 +2,46 @@
   <h2 class="section-title">Gradient Backgrounds</h2>
   <p class="section-desc">Fondos degradados para secciones completas</p>
   <div class="bg-grid">
-    <div class="bg-demo bg-sunset" data-variant="sunset">
+    <div
+      class="bg-demo bg-sunset"
+      data-variant="sunset"
+      [style.display]="this.variant() && this.variant() !== 'sunset' ? 'none' : null"
+    >
       <span>Sunset</span>
     </div>
-    <div class="bg-demo bg-aurora" data-variant="aurora">
+    <div
+      class="bg-demo bg-aurora"
+      data-variant="aurora"
+      [style.display]="this.variant() && this.variant() !== 'aurora' ? 'none' : null"
+    >
       <span>Aurora</span>
     </div>
-    <div class="bg-demo bg-deep-ocean" data-variant="deep-ocean">
+    <div
+      class="bg-demo bg-deep-ocean"
+      data-variant="deep-ocean"
+      [style.display]="this.variant() && this.variant() !== 'deep-ocean' ? 'none' : null"
+    >
       <span>Deep Ocean</span>
     </div>
-    <div class="bg-demo bg-mesh" data-variant="mesh">
+    <div
+      class="bg-demo bg-mesh"
+      data-variant="mesh"
+      [style.display]="this.variant() && this.variant() !== 'mesh' ? 'none' : null"
+    >
       <span>Mesh Gradient</span>
     </div>
-    <div class="bg-demo bg-radial" data-variant="radial">
+    <div
+      class="bg-demo bg-radial"
+      data-variant="radial"
+      [style.display]="this.variant() && this.variant() !== 'radial' ? 'none' : null"
+    >
       <span>Radial Focus</span>
     </div>
-    <div class="bg-demo bg-conic" data-variant="conic">
+    <div
+      class="bg-demo bg-conic"
+      data-variant="conic"
+      [style.display]="this.variant() && this.variant() !== 'conic' ? 'none' : null"
+    >
       <span>Conic</span>
     </div>
   </div>

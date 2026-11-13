@@ -1,4 +1,4 @@
-import { Component, ElementRef, afterRenderEffect, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, afterRenderEffect, signal, viewChild, input } from '@angular/core';
 
 @Component({
   selector: 'app-modal-slide-in',
@@ -9,6 +9,11 @@ import { Component, ElementRef, afterRenderEffect, signal, viewChild } from '@an
   },
 })
 export class SlideInModalComponent {
+  readonly variant = input<string>();
+
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-slide-in-' + SlideInModalComponent.nextId++;
+
   readonly isOpen = signal(false);
 
   readonly placeholders = [1, 2, 3, 4];

@@ -14,6 +14,9 @@ import { NgTemplateOutlet } from '@angular/common';
   styleUrl: './confirm.component.scss',
 })
 export class ConfirmModalComponent {
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-confirm-' + ConfirmModalComponent.nextId++;
+
   readonly variant = input<string>();
 
   readonly open = signal<string | null>(null);

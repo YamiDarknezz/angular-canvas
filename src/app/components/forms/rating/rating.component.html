@@ -2,7 +2,11 @@
   <h2 class="section-title">Rating</h2>
   <p class="section-desc">Valoración por estrellas y por segmentos con previsualización</p>
 
-  <div class="rating-stage" data-variant="stars">
+  <div
+    class="rating-stage"
+    data-variant="stars"
+    [style.display]="this.variant() && this.variant() !== 'stars' ? 'none' : null"
+  >
     <p class="rating-title">¿Cómo te fue?</p>
     <div class="rating-stars" role="radiogroup" aria-label="Valoración por estrellas">
       @for (n of stars; track n) {
@@ -35,7 +39,11 @@
     <p class="rating-value">{{ value() }}/5</p>
   </div>
 
-  <div class="rating-stage" data-variant="segments">
+  <div
+    class="rating-stage"
+    data-variant="segments"
+    [style.display]="this.variant() && this.variant() !== 'segments' ? 'none' : null"
+  >
     <p class="rating-title">Nivel de satisfacción</p>
     <div class="rating-segments" role="radiogroup" aria-label="Nivel de satisfacción">
       @for (seg of segments; track seg.value) {

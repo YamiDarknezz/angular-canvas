@@ -27,7 +27,7 @@
         type="button"
         class="mobile-toggle"
         [attr.aria-expanded]="mobileMenuOpen()"
-        aria-controls="mobile-menu"
+        [attr.aria-controls]="instanceId + '-mobile-menu'"
         aria-label="Abrir menú de navegación"
         (click)="toggleMobile()"
       >
@@ -36,7 +36,7 @@
     </header>
 
     <nav
-      id="mobile-menu"
+      [attr.id]="instanceId + '-mobile-menu'"
       class="mobile-menu"
       [class.open]="mobileMenuOpen()"
       aria-label="Navegación móvil"

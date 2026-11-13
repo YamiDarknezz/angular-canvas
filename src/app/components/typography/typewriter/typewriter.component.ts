@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, input } from '@angular/core';
 
 const TEXTS: readonly string[] = [
   'Hola Mundo',
@@ -18,6 +18,8 @@ const NEXT_MS = 300;
   styleUrl: './typewriter.component.scss',
 })
 export class TypewriterComponent implements OnInit, OnDestroy {
+  readonly variant = input<string>();
+
   readonly currentText = signal('');
 
   private textIndex = 0;

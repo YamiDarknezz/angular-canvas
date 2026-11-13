@@ -70,7 +70,7 @@ if (!match) {
   process.exit(1);
 }
 
-const isVariant = match.id !== parentComp.id;
+const isVariant = match !== parentComp;
 console.log(`\n======================================================`);
 console.log(`🎯 COMPONENTE LOCALIZADO: [${match.code}]`);
 console.log(`   Categoría : ${parentGroup.label} [${parentGroup.code}]`);
@@ -80,6 +80,12 @@ if (isVariant) {
 }
 console.log(`   Selector  : <${parentComp.selector} ${isVariant ? `[variant]="'${match.id}'"` : ''} />`);
 console.log(`   Ubicación : ${parentComp.sourcePath}`);
+for (const command of parentComp.npmInstall ?? []) {
+  console.log(`   Instalar  : ${command}`);
+}
+if (parentComp.requiresForms) {
+  console.log('   Requiere  : @angular/forms en la misma versión que @angular/core');
+}
 console.log(`======================================================\n`);
 
 if (destDir) {

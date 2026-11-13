@@ -17,7 +17,7 @@
     class="glass-modal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="glass-modal-title"
+    [attr.aria-labelledby]="instanceId + '-glass-modal-title'"
     (click)="$event.stopPropagation()"
   >
     <button
@@ -30,7 +30,7 @@
       ✕
     </button>
     <div class="modal-icon" aria-hidden="true">✨</div>
-    <h3 id="glass-modal-title">Modal Glassmorphism</h3>
+    <h3 [attr.id]="instanceId + '-glass-modal-title'">Modal Glassmorphism</h3>
     <p>
       Este modal tiene un efecto de vidrio esmerilado con blur y transparencia. Se cierra con
       Escape, con el botón ✕ o haciendo click fuera.

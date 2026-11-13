@@ -24,6 +24,9 @@ export interface DataPoint {
   styleUrl: './line-chart.component.scss',
 })
 export class LineChartComponent implements OnInit, OnDestroy {
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-line-chart-' + LineChartComponent.nextId++;
+
   readonly variant = input<string>('smooth');
 
   readonly pathRef = viewChild<ElementRef<SVGPathElement>>('chartPath');

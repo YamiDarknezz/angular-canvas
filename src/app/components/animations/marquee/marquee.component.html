@@ -2,7 +2,11 @@
   <h2 class="section-title">Marquee</h2>
   <p class="section-desc">Desplazamiento horizontal infinito, sin cortes ni saltos</p>
 
-  <div class="marquee-stage" data-variant="text">
+  <div
+    class="marquee-stage"
+    data-variant="text"
+    [style.display]="this.variant() && this.variant() !== 'text' ? 'none' : null"
+  >
     <p class="marquee-hint">Loop continuo a velocidad constante con estilos alternados</p>
     <div class="marquee marquee-text">
       <div class="marquee-track">
@@ -19,7 +23,11 @@
     </div>
   </div>
 
-  <div class="marquee-stage" data-variant="dual">
+  <div
+    class="marquee-stage"
+    data-variant="dual"
+    [style.display]="this.variant() && this.variant() !== 'dual' ? 'none' : null"
+  >
     <p class="marquee-hint">Dos filas en direcciones opuestas y a distinta velocidad</p>
     <div class="marquee-chips">
       <div class="marquee">
@@ -47,7 +55,11 @@
     </div>
   </div>
 
-  <div class="marquee-stage" data-variant="logos">
+  <div
+    class="marquee-stage"
+    data-variant="logos"
+    [style.display]="this.variant() && this.variant() !== 'logos' ? 'none' : null"
+  >
     <p class="marquee-hint">Fila de marcas que se pausa al pasar el cursor</p>
     <div class="marquee marquee-logos">
       <div class="marquee-track">

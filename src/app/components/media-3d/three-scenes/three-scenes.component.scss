@@ -1,0 +1,96 @@
+:host {
+  display: block;
+  min-inline-size: 0;
+}
+
+.scene {
+  overflow: hidden;
+  max-inline-size: 70rem;
+  margin-inline: auto;
+  border: 1px solid #343744;
+  border-radius: 1rem;
+  background: #10131b;
+  color: #f7f4f0;
+  font-family: inherit;
+}
+
+.viewport {
+  position: relative;
+  block-size: clamp(17rem, 54dvh, 35rem);
+  background: radial-gradient(ellipse at 50% 55%, #262737, #0e1017 74%);
+}
+
+canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.notice {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(0.875rem, 3vw, 1.5rem);
+  border-block-start: 1px solid #343744;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0.35rem 0 0;
+  color: #c2c5d2;
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+button {
+  min-block-size: 44px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #545867;
+  border-radius: 0.45rem;
+  background: #20232d;
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+
+  &:enabled:hover {
+    border-color: var(--scene-accent);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+}
+
+:where(button, canvas):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}

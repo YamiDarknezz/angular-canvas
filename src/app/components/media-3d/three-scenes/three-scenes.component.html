@@ -1,0 +1,51 @@
+<section
+  class="scene"
+  [attr.aria-label]="scene().title"
+  [style.--scene-accent]="accent() || scene().accent"
+>
+  <div class="viewport">
+    <canvas
+      #canvas
+      [attr.aria-label]="
+        scene().title +
+        '. Usa las flechas para girar y las teclas más y menos para acercar o alejar.'
+      "
+      [attr.tabindex]="status() === 'ready' ? 0 : -1"
+      [attr.aria-hidden]="status() !== 'ready' ? 'true' : null"
+      (keydown)="moveCamera($event)"
+    ></canvas>
+    @if (status() !== 'ready') {
+      <p class="notice" role="status">
+        @switch (status()) {
+          @case ('loading') {
+            Cargando escena 3D…
+          }
+          @case ('lost') {
+            Se interrumpió la conexión con el renderizador 3D.
+          }
+          @case ('unavailable') {
+            La escena requiere WebGL 2. Comprueba la aceleración gráfica del navegador.
+          }
+        }
+      </p>
+    }
+  </div>
+  <div class="controls">
+    <div>
+      <h2>{{ scene().title }}</h2>
+      <p>Arrastra para girar o usa las flechas.</p>
+    </div>
+    <div class="actions">
+      <button
+        type="button"
+        [disabled]="status() !== 'ready' || animate() === false"
+        (click)="toggleAnimation()"
+      >
+        {{ playing() ? 'Pausar' : 'Animar' }}
+      </button>
+      <button type="button" [disabled]="status() !== 'ready'" (click)="resetView()">
+        Restablecer vista
+      </button>
+    </div>
+  </div>
+</section>

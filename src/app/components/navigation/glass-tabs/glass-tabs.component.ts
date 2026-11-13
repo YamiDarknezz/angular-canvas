@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, input } from '@angular/core';
 
 interface TabItem {
   readonly id: string;
@@ -19,6 +19,11 @@ interface TabItem {
   styleUrl: './glass-tabs.component.scss',
 })
 export class GlassTabsComponent {
+  readonly variant = input<string>();
+
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-glass-tabs-' + GlassTabsComponent.nextId++;
+
   readonly active = signal(0);
 
   readonly variants = [{ id: 'glass' }, { id: 'underline' }] as const;

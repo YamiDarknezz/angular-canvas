@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-card-hover',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './hover-effects.component.scss',
 })
 export class HoverEffectsComponent {
+  readonly variant = input<string>();
+
   /** Desplaza la tarjeta hacia el cursor (efecto magnético real). */
   onMagneticMove(event: MouseEvent): void {
     const el = event.currentTarget as HTMLElement;

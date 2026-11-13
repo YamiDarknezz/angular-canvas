@@ -80,49 +80,6 @@ textarea {
   outline-offset: 2px;
 }
 
-// ---- Estilos base del catálogo y showcase ----
-// Clases de presentación general para las vistas de entorno.
-// Cada componente encapsula sus propios estilos de layout (.card-grid, .btn-showcase)
-// para garantizar que sea 100% autocontenido al copiarse.
-.design-section {
-  margin-bottom: 3rem;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid var(--ac-border);
-
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-}
-
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--ac-text);
-  margin-bottom: 0.5rem;
-}
-
-.section-desc {
-  color: var(--ac-text-faint);
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-}
-
-.card-grid {
-  display: grid;
-  // min(300px, 100%) evita que la columna fuerce scroll horizontal en
-  // viewports de 320px, donde el mínimo de 300px no cabe.
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  gap: 1.5rem;
-}
-
-.btn-showcase {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-}
-
 // ---- Estilos de la galería (no de la librería) ----
 // Se importan arriba, junto a los tokens: Sass exige que todo `@use` esté antes
 // de la primera regla. El archivo explica qué se considera andamiaje.

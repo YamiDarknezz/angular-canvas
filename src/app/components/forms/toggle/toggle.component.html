@@ -4,14 +4,16 @@
   <div class="toggle-showcase" data-variant="default">
     @for (item of toggles; track item.id) {
       <div class="toggle-item">
-        <span class="toggle-label" [id]="item.id + '-label'">{{ item.label }}</span>
+        <span class="toggle-label" [attr.id]="instanceId + '-' + item.id + '-label'">{{
+          item.label
+        }}</span>
         <button
           type="button"
           class="toggle-switch"
           role="switch"
           [class.active]="item.checked()"
           [attr.aria-checked]="item.checked()"
-          [attr.aria-labelledby]="item.id + '-label'"
+          [attr.aria-labelledby]="instanceId + '-' + item.id + '-label'"
           (click)="toggle(item)"
         >
           <span class="toggle-thumb"></span>

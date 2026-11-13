@@ -1,4 +1,4 @@
-import { Component, computed, effect, signal, viewChild, ElementRef } from '@angular/core';
+import { Component, computed, effect, signal, viewChild, ElementRef, input } from '@angular/core';
 
 interface PaletteCommand {
   readonly id: string;
@@ -23,6 +23,8 @@ interface PaletteCommand {
   },
 })
 export class CommandPaletteComponent {
+  readonly variant = input<string>();
+
   private readonly search = viewChild<ElementRef<HTMLInputElement>>('search');
 
   readonly open = signal(false);

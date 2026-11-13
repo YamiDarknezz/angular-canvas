@@ -69,12 +69,18 @@
       <!-- SVG Overlay para Curva Normal / Acumulada -->
       <svg class="curve-overlay" viewBox="0 0 700 200" preserveAspectRatio="none">
         <defs>
-          <linearGradient id="bellGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient [attr.id]="instanceId + '-bellGrad'" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="var(--ac-accent, #06b6d4)" stop-opacity="0.3" />
             <stop offset="50%" stop-color="var(--ac-accent, #38bdf8)" stop-opacity="1" />
             <stop offset="100%" stop-color="var(--ac-accent, #06b6d4)" stop-opacity="0.3" />
           </linearGradient>
-          <filter id="curveGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <filter
+            [attr.id]="instanceId + '-curveGlow'"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+          >
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
@@ -88,18 +94,18 @@
             #bellCurve
             [attr.d]="cumulativePath()"
             fill="none"
-            stroke="url(#bellGrad)"
+            [attr.stroke]="'url(#' + instanceId + '-bellGrad)'"
             stroke-width="3.5"
-            filter="url(#curveGlow)"
+            [attr.filter]="'url(#' + instanceId + '-curveGlow)'"
           />
         } @else {
           <path
             #bellCurve
             [attr.d]="bellCurvePath()"
             fill="none"
-            stroke="url(#bellGrad)"
+            [attr.stroke]="'url(#' + instanceId + '-bellGrad)'"
             stroke-width="3"
-            filter="url(#curveGlow)"
+            [attr.filter]="'url(#' + instanceId + '-curveGlow)'"
           />
         }
       </svg>

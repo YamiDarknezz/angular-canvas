@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * Tarjetas con perspectiva 3D: se inclinan hacia el cursor y el brillo
@@ -15,6 +15,8 @@ import { Component } from '@angular/core';
   styleUrl: './tilt-3d.component.scss',
 })
 export class Tilt3dCardComponent {
+  readonly variant = input<string>();
+
   onPointerMove(event: PointerEvent): void {
     if (event.pointerType === 'touch') {
       return;

@@ -2,19 +2,31 @@
   <h2 class="section-title">Glassmorphism Cards</h2>
   <p class="section-desc">Efecto de vidrio esmerilado con transparencia y blur</p>
   <div class="card-grid">
-    <div class="glass-card" data-variant="default">
+    <div
+      class="glass-card"
+      data-variant="default"
+      [style.display]="this.variant() && this.variant() !== 'default' ? 'none' : null"
+    >
       <div class="glass-icon">🎨</div>
       <h3>Diseño Creativo</h3>
       <p>Transforma tus ideas en interfaces que enamoran desde el primer vistazo.</p>
       <button type="button" class="glass-btn">Explorar</button>
     </div>
-    <div class="glass-card card-secondary" data-variant="secondary">
+    <div
+      class="glass-card card-secondary"
+      data-variant="secondary"
+      [style.display]="this.variant() && this.variant() !== 'secondary' ? 'none' : null"
+    >
       <div class="glass-icon">⚡</div>
       <h3>Rendimiento</h3>
       <p>Componentes optimizados que cargan en milisegundos sin sacrificar estilo.</p>
       <button type="button" class="glass-btn">Descubrir</button>
     </div>
-    <div class="glass-card card-accent" data-variant="accent">
+    <div
+      class="glass-card card-accent"
+      data-variant="accent"
+      [style.display]="this.variant() && this.variant() !== 'accent' ? 'none' : null"
+    >
       <div class="glass-icon">🚀</div>
       <h3>Innovación</h3>
       <p>Efectos modernos que mantienen tu app un paso adelante de la competencia.</p>

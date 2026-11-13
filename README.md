@@ -1,11 +1,11 @@
 # 🎨 AngularCanvas — Diccionario de Estilos y Galería de Efectos
 
 Biblioteca viva de **efectos y diseños para Angular** estructurada como un **Diccionario de Estilos Jerárquico**.  
-Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `9.4.2.1`), vive 100% aislado y autocontenido en su propia carpeta (`.ts`, `.html`, `.scss`), y se puede extraer o jalar con una sola instrucción sin ambigüedades.
+Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `9.4.2.1`), vive en su propia carpeta (`.ts`, `.html`, `.scss`), y se puede extraer o jalar con una sola instrucción sin ambigüedades.
 
 Construido con **Angular 22** (standalone components, signals, router, `@if` / `@for` y control flow reactivo).
 
-**10 categorías · 57 componentes · 157 sub-estilos indexados · 5 temas.**
+**12 categorías · 67 componentes · 187 sub-estilos indexados · 5 temas.**
 
 > 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de todos los códigos `1.1.1.1` al `10.2.3.1`.
 
@@ -83,7 +83,7 @@ npm run format     # formatea con Prettier
 
 | URL | Qué muestra |
 | --- | --- |
-| `/` | Portada: contadores y tarjetas de los 8 grupos, con chips a cada sub-estilo |
+| `/` | Portada: contadores y tarjetas de las 12 categorías, con chips a cada sub-estilo |
 | `/cards/neon` | El entorno `Neon` con todas sus variantes |
 | `/cards/neon/blue` | El mismo entorno filtrado a la variante `blue` |
 | `/embed/cards/neon/blue` | El componente **solo**, sin galería: es lo que carga el iframe de la ventana |
@@ -177,14 +177,15 @@ lista que mantener en sincronía.
 }
 ```
 
-### ➕ Añadir un componente (3 pasos + 1)
+### ➕ Añadir un componente
 
 1. Crea la carpeta en `src/app/components/<categoría>/<nombre>/`
    (`<nombre>.component.ts|html|scss`), standalone y con estilos propios.
 2. Registra la clase en `core/registry/component-registry.ts`
    (`['<categoría>/<nombre>', MiComponente]`).
-3. Añade su entrada al catálogo con sus variantes.
-4. Marca cada sub-estilo en la plantilla con `data-variant="<id>"`.
+3. Añade su entrada al catálogo con códigos únicos, variantes y comandos `npmInstall` si usa paquetes externos.
+4. Declara un input `variant` y úsalo para elegir el efecto dentro del componente.
+5. Ejecuta `npm run dictionary` para publicar los códigos para el extractor.
 
 Con eso ya tiene URL, aparece en el sidebar (con contador si tiene 2+ variantes),
 en la portada, y su ficha de código sale sola.
@@ -207,22 +208,10 @@ ventana de previsualización y no al de tu monitor, y ningún `z-index` puede
 saltar de un documento a otro. Galería e iframe solo se hablan por
 `postMessage` (`ac:variant`, `ac:theme`).
 
-**3. Las variantes se filtran con CSS generado, no con DOM.**
-Cada sub-estilo de la plantilla lleva `data-variant="id"`. Al arrancar,
-`VariantFocusStyles` inyecta un único `<style>` con una regla por variante:
-
-```css
-.ac-viewport[data-focus='magnetic'] [data-variant]:not([data-variant='magnetic']) {
-  display: none !important;
-}
-```
-
-El CSS tiene que ser global (los nodos están dentro de componentes y Angular
-encapsula los estilos), pero se **genera desde el catálogo**, así que no puede
-desincronizarse ni duplicarse. Y `data-variant` es un atributo **inerte**: no
-arrastra ninguna dependencia si copias el componente a otro proyecto. En la
-galería, `.ac-viewport` es el host de la vista `/embed/...` (cada documento
-instala su propio `<style>`).
+**3. El input `variant` selecciona el efecto.** La vista embebida pasa el id
+del catálogo al componente. Usa ese mismo input al copiar el efecto a otra app.
+Si omites el input, los efectos de múltiples muestras muestran su galería local
+y las escenas Three.js muestran el nudo por defecto.
 
 ---
 
@@ -232,24 +221,57 @@ Cada componente se anuncia en su ficha de código (botón **Código** dentro de 
 ventana) y se copia con el botón **Copiar**. El resumen:
 
 1. Copia la carpeta, por ejemplo `src/app/components/cards/neon/`.
-2. Si el componente importa `FormsModule` (el de `forms/glass-input`), necesitas
-   `@angular/forms` instalado.
+2. Consulta las dependencias en la ficha **Código** o con `node scripts/extract.cjs <código>`.
+   Los gráficos y Dynamic Island usan GSAP. Glass Input requiere `@angular/forms` en la misma versión que `@angular/core`.
 3. Úsalo como standalone (sin NgModule):
 
 ```ts
+import { Component } from '@angular/core';
 import { NeonCardComponent } from './components/cards/neon/neon.component';
 
 @Component({
+  selector: 'app-mi-pagina',
   imports: [NeonCardComponent],
-  template: `<app-card-neon />`,
+  template: `<app-card-neon variant="blue" />`,
 })
 export class MiPaginaComponent {}
 ```
 
-Los estilos de cada componente son **autocontenidos**: no dependen de
-`styles.scss`, salvo las clases compartidas (`.card-grid`, `.btn-showcase`) y las
-variables de tema (`var(--ac-*)`). Si quieres los 5 temas, copia también
-`src/scss/_tokens.scss`.
+Los estilos de presentación viajan en la carpeta de cada efecto. Si quieres replicar
+los colores de la galería y sus cinco temas, copia también `src/scss/_tokens.scss`.
+El proyecto se verifica con Angular 22.
+
+### Escenas Three.js
+
+| Código | Variante | Escena |
+| --- | --- | --- |
+| `12.4.1.1` | `sculpture` | Nudo toroidal iluminado |
+| `12.4.2.1` | `orbit` | Anillos y satélites alrededor de un núcleo facetado |
+| `12.4.3.1` | `waves` | Onda radial en una cuadrícula de 289 columnas |
+
+Desde AngularCanvas, copia la carpeta completa con el extractor.
+
+```bash
+node scripts/extract.cjs 12.4.3.1 --dest ../mi-app/src/app/components
+```
+
+En el proyecto destino, instala las dependencias e importa `ThreeScenesComponent`.
+
+```bash
+npm install three@^0.184.0
+npm install -D @types/three@^0.184.1
+```
+
+```html
+<app-media-three-scenes variant="waves" accent="#5ce2bd" />
+```
+
+El visor requiere WebGL 2 y carga Three.js al montarse en el navegador. El input
+`animate` admite `false` para una vista fija y usa la preferencia de movimiento
+reducido del sistema por defecto. Para añadir otra escena, amplía `SceneVariant`
+y `buildDesign()` en `three-scene.ts`, añade su nombre y color en el componente,
+y registra su variante en el catálogo. Libera en `dispose()` las geometrías,
+materiales y texturas que cree la escena.
 
 ---
 
@@ -273,7 +295,7 @@ dentro se re-tematiza en vivo, sin recargar.
 
 ---
 
-## 🧩 Componentes (55)
+## 🧩 Componentes
 
 Formato: **grupo (n)** → componente (`sub-estilos`).
 
@@ -324,8 +346,8 @@ texto, bidireccional, logos)
 - **Signals** para estado local (`signal()`, `computed()`, `input()`, `effect()`).
 - **Control flow nativo** `@if` / `@for` / `@switch` en lugar de `*ngIf` /
   `*ngFor`, con `track` obligatorio. Por eso no se importa `CommonModule`.
-- **Sin `::ng-deep`** — los estilos compartidos son globales (`styles.scss`), y el
-  filtrado de variantes usa CSS generado en runtime.
+- **Estilos encapsulados**. Los componentes incluyen sus reglas de presentación y usan
+  las variables de tema como personalización opcional.
 - **Sin fugas de memoria** — todo `requestAnimationFrame`, `ResizeObserver`,
   `setTimeout`, listener o clase añadida al `<body>` se libera en `ngOnDestroy` o
   con `DestroyRef`.

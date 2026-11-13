@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 interface PanelMetric {
   readonly label: string;
@@ -18,6 +18,8 @@ interface PanelMetric {
   styleUrl: './glass-panel.component.scss',
 })
 export class GlassPanelComponent {
+  readonly variant = input<string>();
+
   readonly metrics: readonly PanelMetric[] = [
     { label: 'Ingresos', value: '24.8k', percent: 72 },
     { label: 'Usuarios', value: '8.1k', percent: 54 },

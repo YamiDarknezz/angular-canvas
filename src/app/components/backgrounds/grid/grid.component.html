@@ -2,13 +2,25 @@
   <h2 class="section-title">Grid Backgrounds</h2>
   <p class="section-desc">Patrones de cuadrícula para fondos</p>
   <div class="bg-grid">
-    <div class="bg-demo grid-dots" data-variant="dots">
+    <div
+      class="bg-demo grid-dots"
+      data-variant="dots"
+      [style.display]="this.variant() && this.variant() !== 'dots' ? 'none' : null"
+    >
       <span>Dot Grid</span>
     </div>
-    <div class="bg-demo grid-lines" data-variant="lines">
+    <div
+      class="bg-demo grid-lines"
+      data-variant="lines"
+      [style.display]="this.variant() && this.variant() !== 'lines' ? 'none' : null"
+    >
       <span>Line Grid</span>
     </div>
-    <div class="bg-demo grid-gradient" data-variant="gradient">
+    <div
+      class="bg-demo grid-gradient"
+      data-variant="gradient"
+      [style.display]="this.variant() && this.variant() !== 'gradient' ? 'none' : null"
+    >
       <span>Fade Grid</span>
     </div>
   </div>

@@ -2,10 +2,45 @@
   <h2 class="section-title">Gradient Buttons</h2>
   <p class="section-desc">Botones con degradados animados y estáticos</p>
   <div class="btn-showcase">
-    <button type="button" class="grad-btn grad-sunset" data-variant="sunset">Sunset</button>
-    <button type="button" class="grad-btn grad-ocean" data-variant="ocean">Ocean</button>
-    <button type="button" class="grad-btn grad-aurora" data-variant="aurora">Aurora</button>
-    <button type="button" class="grad-btn grad-fire" data-variant="fire">Fire</button>
-    <button type="button" class="grad-btn grad-mesh" data-variant="mesh">Mesh Animated</button>
+    <button
+      type="button"
+      class="grad-btn grad-sunset"
+      data-variant="sunset"
+      [style.display]="this.variant() && this.variant() !== 'sunset' ? 'none' : null"
+    >
+      Sunset
+    </button>
+    <button
+      type="button"
+      class="grad-btn grad-ocean"
+      data-variant="ocean"
+      [style.display]="this.variant() && this.variant() !== 'ocean' ? 'none' : null"
+    >
+      Ocean
+    </button>
+    <button
+      type="button"
+      class="grad-btn grad-aurora"
+      data-variant="aurora"
+      [style.display]="this.variant() && this.variant() !== 'aurora' ? 'none' : null"
+    >
+      Aurora
+    </button>
+    <button
+      type="button"
+      class="grad-btn grad-fire"
+      data-variant="fire"
+      [style.display]="this.variant() && this.variant() !== 'fire' ? 'none' : null"
+    >
+      Fire
+    </button>
+    <button
+      type="button"
+      class="grad-btn grad-mesh"
+      data-variant="mesh"
+      [style.display]="this.variant() && this.variant() !== 'mesh' ? 'none' : null"
+    >
+      Mesh Animated
+    </button>
   </div>
 </section>

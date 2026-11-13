@@ -36,27 +36,27 @@
     >
       <defs>
         <!-- Gradiente de área primaria -->
-        <linearGradient id="primaryAreaGrad" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient [attr.id]="instanceId + '-primaryAreaGrad'" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45" />
           <stop offset="60%" stop-color="#06b6d4" stop-opacity="0.1" />
           <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.0" />
         </linearGradient>
 
         <!-- Gradiente de trazo cian a azul -->
-        <linearGradient id="primaryLineGrad" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient [attr.id]="instanceId + '-primaryLineGrad'" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stop-color="#06b6d4" />
           <stop offset="50%" stop-color="#3b82f6" />
           <stop offset="100%" stop-color="#8b5cf6" />
         </linearGradient>
 
         <!-- Gradiente de serie 2 (púrpura a rosa) -->
-        <linearGradient id="secondaryLineGrad" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient [attr.id]="instanceId + '-secondaryLineGrad'" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stop-color="#ec4899" />
           <stop offset="100%" stop-color="#f43f5e" />
         </linearGradient>
 
         <!-- Filtro de resplandor Neón -->
-        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <filter [attr.id]="instanceId + '-neonGlow'" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="3" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -89,7 +89,12 @@
 
       <!-- Área degradada rellena (solo para smooth o cyber) -->
       @if (variant() !== 'multi') {
-        <path #chartArea [attr.d]="areaD()" fill="url(#primaryAreaGrad)" class="chart-area" />
+        <path
+          #chartArea
+          [attr.d]="areaD()"
+          [attr.fill]="'url(#' + instanceId + '-primaryAreaGrad)'"
+          class="chart-area"
+        />
       }
 
       <!-- Serie 2 si es multi -->
@@ -98,7 +103,7 @@
           #chartPath2
           [attr.d]="path2D()"
           fill="none"
-          stroke="url(#secondaryLineGrad)"
+          [attr.stroke]="'url(#' + instanceId + '-secondaryLineGrad)'"
           stroke-width="3"
           stroke-linecap="round"
           class="chart-line line-2"
@@ -110,12 +115,12 @@
         #chartPath
         [attr.d]="pathD()"
         fill="none"
-        stroke="url(#primaryLineGrad)"
+        [attr.stroke]="'url(#' + instanceId + '-primaryLineGrad)'"
         stroke-width="3.5"
         stroke-linecap="round"
         stroke-linejoin="round"
         class="chart-line"
-        filter="url(#neonGlow)"
+        [attr.filter]="'url(#' + instanceId + '-neonGlow)'"
       />
 
       <!-- Puntos interactivos Serie 1 -->

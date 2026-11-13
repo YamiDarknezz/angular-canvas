@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-card-flip',
   templateUrl: './flip.component.html',
   styleUrl: './flip.component.scss',
 })
-export class FlipCardComponent {}
+export class FlipCardComponent {
+  readonly variant = input<string>();
+}

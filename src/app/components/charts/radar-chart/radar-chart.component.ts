@@ -24,6 +24,9 @@ export interface RadarAxis {
   styleUrl: './radar-chart.component.scss',
 })
 export class RadarChartComponent implements OnInit, OnDestroy {
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-radar-chart-' + RadarChartComponent.nextId++;
+
   readonly variant = input<string>('polygon');
 
   readonly chartBox = viewChild<ElementRef<HTMLElement>>('chartBox');

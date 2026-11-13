@@ -1,11 +1,19 @@
-import { Component, ElementRef, OnDestroy, OnInit, input, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  afterNextRender,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-media-audio-visualizer',
   templateUrl: './audio-visualizer.component.html',
   styleUrl: './audio-visualizer.component.scss',
 })
-export class AudioVisualizerComponent implements OnInit, OnDestroy {
+export class AudioVisualizerComponent implements OnDestroy {
   readonly variant = input<string>('bars');
 
   readonly canvasRef = viewChild<ElementRef<HTMLCanvasElement>>('visCanvas');
@@ -19,10 +27,8 @@ export class AudioVisualizerComponent implements OnInit, OnDestroy {
   private readonly barCount = 32;
   private readonly barHeights = new Float32Array(32);
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.initCanvas();
-    }, 50);
+  constructor() {
+    afterNextRender(() => this.initCanvas());
   }
 
   ngOnDestroy(): void {

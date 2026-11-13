@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, input } from '@angular/core';
 
 /**
  * Código OTP de 6 dígitos con avance automático, retroceso al borrar y
@@ -12,6 +12,8 @@ import { Component, computed, signal } from '@angular/core';
   styleUrl: './otp.component.scss',
 })
 export class OtpComponent {
+  readonly variant = input<string>();
+
   readonly digits = signal<readonly string[]>(['2', '0', '2', '6', '', '']);
 
   readonly filled = computed(() => this.digits().filter((digit) => digit !== '').length);

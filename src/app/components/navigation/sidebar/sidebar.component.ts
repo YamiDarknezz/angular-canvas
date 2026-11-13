@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input } from '@angular/core';
 
 interface MenuItem {
   readonly id: string;
@@ -12,6 +12,8 @@ interface MenuItem {
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarNavComponent {
+  readonly variant = input<string>();
+
   readonly collapsed = signal(false);
   readonly activeItem = signal('dashboard');
 

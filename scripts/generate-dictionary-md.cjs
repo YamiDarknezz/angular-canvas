@@ -45,6 +45,8 @@ catalogNode.elements.forEach(gNode => {
     compsNode.elements.forEach(cNode => {
       let cId = '', cCode = '', cLabel = '', cTagline = '', cSelector = '', cClassName = '', cSource = '';
       let varsNode = null;
+      let npmInstall = [];
+      let requiresForms = false;
 
       cNode.properties.forEach(p => {
         if (ts.isPropertyAssignment(p)) {
@@ -58,6 +60,10 @@ catalogNode.elements.forEach(gNode => {
           if (name === 'className') cClassName = val;
           if (name === 'sourcePath') cSource = val;
           if (name === 'variants') varsNode = p.initializer;
+          if (name === 'requiresForms') requiresForms = p.initializer.kind === ts.SyntaxKind.TrueKeyword;
+          if (name === 'npmInstall' && ts.isArrayLiteralExpression(p.initializer)) {
+            npmInstall = p.initializer.elements.map((element) => element.text);
+          }
         }
       });
 
@@ -94,6 +100,8 @@ catalogNode.elements.forEach(gNode => {
         selector: cSelector,
         className: cClassName,
         sourcePath: cSource,
+        ...(npmInstall.length && { npmInstall }),
+        ...(requiresForms && { requiresForms }),
         routePath: `/${gId}/${cId}`,
         variants
       });
@@ -121,8 +129,8 @@ groups.forEach(g => {
 let md = `# Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **${groups.length} Categorías** · **${totalComps} Componentes** · **${totalVars} Efectos / Sub-estilos Únicos**  
-> Formato JSON Disponible: [\`public/dictionary.json\`](file:///c:/Users/Erick/Documents/Proyectos/Proyectos/Angular_Canvas/public/dictionary.json) o en la web vía \`https://canvas.darknezz.dev/dictionary.json\`
+> Total: **${groups.length} Categorías** · **${totalComps} Componentes** · **${totalVars} Efectos / Sub-estilos Únicos**
+> Formato JSON disponible en [\`public/dictionary.json\`](public/dictionary.json) o en la web vía \`https://canvas.darknezz.dev/dictionary.json\`
 
 ---
 
@@ -133,7 +141,7 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 \`\`\`
   [Categoría] . [Componente] . [Variante] . [Subvariante]
        │              │             │             │
-     (1-10)         (1-N)         (1-N)          (1)
+     (1-N)          (1-N)         (1-N)          (1)
 \`\`\`
 
 ### 📌 Ejemplos de uso con tu Agente de IA o Pair Programmer:
@@ -155,9 +163,9 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 ## 📦 Autocontención y Reglas de Extracción
 
-1. **100% Autocontenido**: Cada carpeta en \`src/app/components/*/*\` contiene su \`.ts\`, \`.html\` y \`.scss\`. No depende de mixins globales ni de archivos de paleta externos fuera de su carpeta.
+1. **Carpeta de origen**. Copia la carpeta completa de cada efecto y consulta sus dependencias en el extractor o en la ficha de código.
 2. **Aislamiento de Efecto**: Cuando un componente incluye múltiples sub-estilos, se activa mediante el input reactivo \`[variant]="'id'"\`. Si no se especifica variante, muestra la variante principal por defecto sin amontonar efectos en el mismo lienzo.
-3. **Standalone Angular**: Todos los componentes se exportan como standalone components (Angular 19/20/22+ ready), listos para importar directamente en el array \`imports: [...]\` de cualquier componente destino.
+3. **Standalone Angular**: Todos los componentes se exportan como standalone components (verificados con Angular 22), listos para importar directamente en el array \`imports: [...]\` de cualquier componente destino.
 4. **Navegación Directa por Código**: Puedes navegar a cualquier componente o variante directamente escribiendo la URL \`/c/[codigo]\` o \`/code/[codigo]\`, por ejemplo \`https://canvas.darknezz.dev/c/10.3.1.1\`.
 
 ---
@@ -177,6 +185,10 @@ groups.forEach(group => {
     });
   });
 
+  for (const comp of group.components) {
+    if (comp.npmInstall) md += `\n**${comp.label}** · ${comp.npmInstall.map(command => '`' + command + '`').join(' · ')}\n`;
+    if (comp.requiresForms) md += `\n**${comp.label}** requiere @angular/forms en la misma versión que @angular/core.\n`;
+  }
   md += `\n---\n\n`;
 });
 

@@ -28,6 +28,9 @@ export interface DonutSegment {
   styleUrl: './donut-chart.component.scss',
 })
 export class DonutChartComponent implements OnInit, OnDestroy {
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-donut-chart-' + DonutChartComponent.nextId++;
+
   readonly variant = input<string>('ring');
 
   readonly chartBox = viewChild<ElementRef<HTMLElement>>('chartBox');

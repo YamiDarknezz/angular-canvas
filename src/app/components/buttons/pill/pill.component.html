@@ -2,13 +2,53 @@
   <h2 class="section-title">Pill Buttons</h2>
   <p class="section-desc">Botones redondeados tipo píldora</p>
   <div class="btn-showcase">
-    <button type="button" class="pill-btn pill-outline" data-variant="outline">Outline</button>
-    <button type="button" class="pill-btn pill-solid" data-variant="solid">Solid</button>
-    <button type="button" class="pill-btn pill-ghost" data-variant="ghost">Ghost</button>
-    <button type="button" class="pill-btn pill-gradient" data-variant="gradient">Gradient</button>
-    <button type="button" class="pill-btn pill-with-icon" data-variant="with-icon">
+    <button
+      type="button"
+      class="pill-btn pill-outline"
+      data-variant="outline"
+      [style.display]="this.variant() && this.variant() !== 'outline' ? 'none' : null"
+    >
+      Outline
+    </button>
+    <button
+      type="button"
+      class="pill-btn pill-solid"
+      data-variant="solid"
+      [style.display]="this.variant() && this.variant() !== 'solid' ? 'none' : null"
+    >
+      Solid
+    </button>
+    <button
+      type="button"
+      class="pill-btn pill-ghost"
+      data-variant="ghost"
+      [style.display]="this.variant() && this.variant() !== 'ghost' ? 'none' : null"
+    >
+      Ghost
+    </button>
+    <button
+      type="button"
+      class="pill-btn pill-gradient"
+      data-variant="gradient"
+      [style.display]="this.variant() && this.variant() !== 'gradient' ? 'none' : null"
+    >
+      Gradient
+    </button>
+    <button
+      type="button"
+      class="pill-btn pill-with-icon"
+      data-variant="with-icon"
+      [style.display]="this.variant() && this.variant() !== 'with-icon' ? 'none' : null"
+    >
       🚀 Lanzar
     </button>
-    <button type="button" class="pill-btn pill-pill-sm" data-variant="small">Pequeño</button>
+    <button
+      type="button"
+      class="pill-btn pill-pill-sm"
+      data-variant="small"
+      [style.display]="this.variant() && this.variant() !== 'small' ? 'none' : null"
+    >
+      Pequeño
+    </button>
   </div>
 </section>

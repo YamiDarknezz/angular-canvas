@@ -1,8 +1,8 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **66 Componentes** · **184 Efectos / Sub-estilos Únicos**  
-> Formato JSON Disponible: [`public/dictionary.json`](file:///c:/Users/Erick/Documents/Proyectos/Proyectos/Angular_Canvas/public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
+> Total: **12 Categorías** · **67 Componentes** · **187 Efectos / Sub-estilos Únicos**
+> Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
 
@@ -13,7 +13,7 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 ```
   [Categoría] . [Componente] . [Variante] . [Subvariante]
        │              │             │             │
-     (1-10)         (1-N)         (1-N)          (1)
+     (1-N)          (1-N)         (1-N)          (1)
 ```
 
 ### 📌 Ejemplos de uso con tu Agente de IA o Pair Programmer:
@@ -35,9 +35,9 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 
 ## 📦 Autocontención y Reglas de Extracción
 
-1. **100% Autocontenido**: Cada carpeta en `src/app/components/*/*` contiene su `.ts`, `.html` y `.scss`. No depende de mixins globales ni de archivos de paleta externos fuera de su carpeta.
+1. **Carpeta de origen**. Copia la carpeta completa de cada efecto y consulta sus dependencias en el extractor o en la ficha de código.
 2. **Aislamiento de Efecto**: Cuando un componente incluye múltiples sub-estilos, se activa mediante el input reactivo `[variant]="'id'"`. Si no se especifica variante, muestra la variante principal por defecto sin amontonar efectos en el mismo lienzo.
-3. **Standalone Angular**: Todos los componentes se exportan como standalone components (Angular 19/20/22+ ready), listos para importar directamente en el array `imports: [...]` de cualquier componente destino.
+3. **Standalone Angular**: Todos los componentes se exportan como standalone components (verificados con Angular 22), listos para importar directamente en el array `imports: [...]` de cualquier componente destino.
 4. **Navegación Directa por Código**: Puedes navegar a cualquier componente o variante directamente escribiendo la URL `/c/[codigo]` o `/code/[codigo]`, por ejemplo `https://canvas.darknezz.dev/c/10.3.1.1`.
 
 ---
@@ -205,6 +205,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`6.7.1.1`** | Range Slider (`6.7`) | **Degradado**<br><sub>Pista indigo→rosa con pulgar blanco</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'gradient'" />` |
 | **`6.7.2.1`** | Range Slider (`6.7`) | **Vidrio**<br><sub>Pulgar translúcido con borde luminoso</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'glass'" />` |
 
+**Glass Input** requiere @angular/forms en la misma versión que @angular/core.
+
 ---
 
 ## 7. Modals
@@ -296,6 +298,16 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`10.5.2.1`** | Radar & Spider (`10.5`) | **Comparativa Dual**<br><sub>Dos perfiles superpuestos A vs B con áreas semitransparentes</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'dual'" />` |
 | **`10.5.3.1`** | Radar & Spider (`10.5`) | **Escáner Sonar**<br><sub>Barrido rotatorio continuo 360° con nodos de datos iluminados</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'scanner'" />` |
 
+**Line Chart** · `npm install gsap@^3.15.1`
+
+**Bar Chart** · `npm install gsap@^3.15.1`
+
+**Histogram** · `npm install gsap@^3.15.1`
+
+**Donut & Gauge** · `npm install gsap@^3.15.1`
+
+**Radar & Spider** · `npm install gsap@^3.15.1`
+
 ---
 
 ## 11. Feedback
@@ -314,6 +326,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`11.3.2.1`** | Confetti & Bursts (`11.3`) | **Doble Cañón**<br><sub>Disparo cruzado en arco desde las esquinas inferiores</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'cannons'" />` |
 | **`11.3.3.1`** | Confetti & Bursts (`11.3`) | **Fuegos Artificiales**<br><sub>Estallidos múltiples en cascada superior con estelas luminosas</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'fireworks'" />` |
 
+**Dynamic Island** · `npm install gsap@^3.15.1`
+
 ---
 
 ## 12. Media & 3D
@@ -331,6 +345,11 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`12.3.1.1`** | Audio Visualizer (`12.3`) | **Ecualizador Estéreo**<br><sub>32 bandas de frecuencia con oscilación reactiva y reflejo de piso</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'bars'" />` |
 | **`12.3.2.1`** | Audio Visualizer (`12.3`) | **Anillos de Pulso**<br><sub>Ondas circulares concéntricas de pulso radial acústico</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'radial'" />` |
 | **`12.3.3.1`** | Audio Visualizer (`12.3`) | **Onda Sinusoidal**<br><sub>Trazado continuo suave con oscilación espectral y resplandor neón</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'wave'" />` |
+| **`12.4.1.1`** | Escenas Three.js (`12.4`) | **Nudo escultórico**<br><sub>Nudo toroidal giratorio con iluminación cálida y contraluz</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'sculpture'" />` |
+| **`12.4.2.1`** | Escenas Three.js (`12.4`) | **Anillos orbitales**<br><sub>Tres satélites recorren órbitas inclinadas alrededor de un núcleo facetado</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'orbit'" />` |
+| **`12.4.3.1`** | Escenas Three.js (`12.4`) | **Campo de ondas**<br><sub>Una onda radial recorre 289 columnas renderizadas con InstancedMesh</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'waves'" />` |
+
+**Escenas Three.js** · `npm install three@^0.184.0` · `npm install -D @types/three@^0.184.1`
 
 ---
 

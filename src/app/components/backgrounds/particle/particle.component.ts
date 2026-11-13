@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild, afterNextRender, input } from '@angular/core';
 
 interface Particle {
   x: number;
@@ -17,7 +17,9 @@ const RGB = '99, 102, 241';
   templateUrl: './particle.component.html',
   styleUrl: './particle.component.scss',
 })
-export class BgParticleComponent implements AfterViewInit, OnDestroy {
+export class BgParticleComponent implements OnDestroy {
+  readonly variant = input<string>();
+
   @ViewChild('particleCanvas', { static: true })
   private readonly canvasRef!: ElementRef<HTMLCanvasElement>;
 
@@ -26,7 +28,11 @@ export class BgParticleComponent implements AfterViewInit, OnDestroy {
   private resizeObserver?: ResizeObserver;
   private rafId = 0;
 
-  ngAfterViewInit(): void {
+  constructor() {
+    afterNextRender(() => this.initCanvas());
+  }
+
+  private initCanvas(): void {
     const canvas = this.canvasRef.nativeElement;
     const ctx = canvas.getContext('2d');
     if (!ctx) {
@@ -49,7 +55,7 @@ export class BgParticleComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Sin esto el loop seguía animando un canvas ya desmontado.
-    cancelAnimationFrame(this.rafId);
+    if (this.rafId) cancelAnimationFrame(this.rafId);
     this.resizeObserver?.disconnect();
   }
 

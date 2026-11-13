@@ -86,6 +86,7 @@ import { ToastComponent } from '../../components/feedback/toast/toast.component'
 import { ConfettiComponent } from '../../components/feedback/confetti/confetti.component';
 
 // Media & 3D
+import { ThreeScenesComponent } from '../../components/media-3d/three-scenes/three-scenes.component';
 import { TiltCardComponent } from '../../components/media-3d/tilt-card/tilt-card.component';
 import { BeforeAfterComponent } from '../../components/media-3d/before-after/before-after.component';
 import { AudioVisualizerComponent } from '../../components/media-3d/audio-visualizer/audio-visualizer.component';
@@ -177,6 +178,7 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['media-3d/tilt-card', TiltCardComponent],
   ['media-3d/before-after', BeforeAfterComponent],
   ['media-3d/audio-visualizer', AudioVisualizerComponent],
+  ['media-3d/three-scenes', ThreeScenesComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

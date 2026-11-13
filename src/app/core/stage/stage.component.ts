@@ -104,7 +104,8 @@ export class StageComponent {
   /** Nombre de los archivos que el usuario tiene que copiar. */
   readonly fileNames = computed(() => {
     const id = this.entry().id;
-    return [`${id}.component.ts`, `${id}.component.html`, `${id}.component.scss`];
+    const files = [`${id}.component.ts`, `${id}.component.html`, `${id}.component.scss`];
+    return this.isThreeScene() ? [...files, 'three-scene.ts'] : files;
   });
 
   /** Sub-estilos de la plantilla, para la ficha de código. */
@@ -121,21 +122,23 @@ export class StageComponent {
     const active = this.activeVariant();
     const selectorAttr = active ? ` variant="${active.id}"` : '';
     const tint = this.selectedColor();
-    const tintAttr = tint ? ` [style.--ac-accent]="'${tint}'"` : '';
+    const tintAttr = this.tintAttribute(tint);
     const code = active?.code ?? entry.code;
 
     const lines: string[] = [
       `// DICCIONARIO DE ESTILOS — CÓDIGO: [${code}]`,
       `// Categoría: ${group.label} [${group.code}] · Componente: ${entry.label} [${entry.code}]${active ? ` · Sub-estilo: ${active.label} [${active.code}]` : ''}`,
       tint ? `// Color de acento personalizado: ${tint}` : '',
-      '// 1) Copia la carpeta completa (100% autocontenida):',
-      `${entry.sourcePath}/`,
+      '// Copia la carpeta completa y ajusta la ruta de importación:',
+      `//    ${entry.sourcePath}/`,
       `//    ${this.fileNames().join(' · ')}`,
+      ...this.installCommands().map((command) => `// ${command}`),
       '',
-      '// 2) Úsalo como standalone (sin NgModule). Ajusta la ruta a tu estructura:',
+      "import { Component } from '@angular/core';",
       `import { ${entry.className} } from './components/${group.id}/${entry.id}/${entry.id}.component';`,
       '',
       '@Component({',
+      "  selector: 'app-mi-pagina',",
       `  imports: [${entry.className}],`,
       `  template: \`<${entry.selector}${selectorAttr}${tintAttr} />\`,`,
       '})',
@@ -150,10 +153,6 @@ export class StageComponent {
       );
     }
 
-    if (entry.requiresForms) {
-      lines.push('', '// Ojo: importa FormsModule, así que necesitas @angular/forms.');
-    }
-
     return lines.join('\n');
   });
 
@@ -163,7 +162,7 @@ export class StageComponent {
     const active = this.activeVariant();
     const selectorAttr = active ? ` variant="${active.id}"` : '';
     const tint = this.selectedColor();
-    const tintAttr = tint ? ` [style.--ac-accent]="'${tint}'"` : '';
+    const tintAttr = this.tintAttribute(tint);
     return `<${entry.selector}${selectorAttr}${tintAttr} />`;
   });
 
@@ -172,15 +171,34 @@ export class StageComponent {
     const entry = this.entry();
     const group = this.group();
     return [
+      ...this.installCommands().map((command) => `// ${command}`),
+      "import { Component } from '@angular/core';",
       `import { ${entry.className} } from './components/${group.id}/${entry.id}/${entry.id}.component';`,
       '',
       '@Component({',
+      "  selector: 'app-mi-pagina',",
       `  imports: [${entry.className}],`,
-      '  ...',
+      `  template: \`${this.htmlSnippet()}\`,`,
       '})',
       'export class MiComponente {}',
     ].join('\n');
   });
+
+  private isThreeScene(): boolean {
+    return this.group().id === 'media-3d' && this.entry().id === 'three-scenes';
+  }
+
+  private tintAttribute(tint: string): string {
+    if (!tint) return '';
+    return this.isThreeScene() ? ` accent="${tint}"` : ` [style.--ac-accent]="'${tint}'"`;
+  }
+
+  private installCommands(): readonly string[] {
+    const entry = this.entry();
+    return entry.requiresForms
+      ? ['Instala @angular/forms en la misma versión que @angular/core.']
+      : (entry.npmInstall ?? []);
+  }
 
   readonly currentCode = computed(() => {
     switch (this.activeCodeTab()) {

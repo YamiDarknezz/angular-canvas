@@ -2,35 +2,55 @@
   <h2 class="section-title">Hover Effects</h2>
   <p class="section-desc">Diferentes efectos al pasar el mouse</p>
   <div class="card-grid">
-    <div class="hover-card effect-lift" data-variant="lift">
+    <div
+      class="hover-card effect-lift"
+      data-variant="lift"
+      [style.display]="this.variant() && this.variant() !== 'lift' ? 'none' : null"
+    >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">✨</span>
         <h3>Lift Effect</h3>
         <p>Elevación suave con sombra creciente</p>
       </div>
     </div>
-    <div class="hover-card effect-scale" data-variant="scale">
+    <div
+      class="hover-card effect-scale"
+      data-variant="scale"
+      [style.display]="this.variant() && this.variant() !== 'scale' ? 'none' : null"
+    >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">🔍</span>
         <h3>Scale Effect</h3>
         <p>Escalado con cambio de color de fondo</p>
       </div>
     </div>
-    <div class="hover-card effect-rotate" data-variant="rotate">
+    <div
+      class="hover-card effect-rotate"
+      data-variant="rotate"
+      [style.display]="this.variant() && this.variant() !== 'rotate' ? 'none' : null"
+    >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">🌀</span>
         <h3>Rotate Effect</h3>
         <p>Rotación 3D sutil al hacer hover</p>
       </div>
     </div>
-    <div class="hover-card effect-border-draw" data-variant="border-draw">
+    <div
+      class="hover-card effect-border-draw"
+      data-variant="border-draw"
+      [style.display]="this.variant() && this.variant() !== 'border-draw' ? 'none' : null"
+    >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">✏️</span>
         <h3>Border Draw</h3>
         <p>Borde que se dibuja alrededor del card</p>
       </div>
     </div>
-    <div class="hover-card effect-glow" data-variant="glow">
+    <div
+      class="hover-card effect-glow"
+      data-variant="glow"
+      [style.display]="this.variant() && this.variant() !== 'glow' ? 'none' : null"
+    >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">💡</span>
         <h3>Glow Effect</h3>
@@ -42,6 +62,7 @@
       (mousemove)="onMagneticMove($event)"
       (mouseleave)="resetMagnetic($event)"
       data-variant="magnetic"
+      [style.display]="this.variant() && this.variant() !== 'magnetic' ? 'none' : null"
     >
       <div class="card-content">
         <span class="card-emoji" aria-hidden="true">🧲</span>

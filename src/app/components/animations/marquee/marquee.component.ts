@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 type MarqueeMark = 'triangle' | 'diamond' | 'ring' | 'hex' | 'wave' | 'square';
 
@@ -13,6 +13,8 @@ interface MarqueeLogo {
   styleUrl: './marquee.component.scss',
 })
 export class MarqueeComponent {
+  readonly variant = input<string>();
+
   readonly copies = [0, 1];
 
   readonly displayWords = ['Angular', 'Diseño', 'Animación', 'Señales', 'Canvas'];

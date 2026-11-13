@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input } from '@angular/core';
 
 @Component({
   selector: 'app-nav-topbar',
@@ -6,6 +6,11 @@ import { Component, signal } from '@angular/core';
   styleUrl: './topbar.component.scss',
 })
 export class TopbarNavComponent {
+  readonly variant = input<string>();
+
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-topbar-' + TopbarNavComponent.nextId++;
+
   readonly mobileMenuOpen = signal(false);
   readonly activeLink = signal('Inicio');
 

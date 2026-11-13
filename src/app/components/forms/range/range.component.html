@@ -2,12 +2,16 @@
   <h2 class="section-title">Range Slider</h2>
   <p class="section-desc">Selector de rango con pista de degradado y pulgar de vidrio</p>
 
-  <div class="range-stage" data-variant="gradient">
-    <label class="range-label" for="range-gradient">Volumen</label>
+  <div
+    class="range-stage"
+    data-variant="gradient"
+    [style.display]="this.variant() && this.variant() !== 'gradient' ? 'none' : null"
+  >
+    <label class="range-label" [attr.for]="instanceId + '-range-gradient'">Volumen</label>
     <div class="range-row">
       <span class="range-min">0</span>
       <input
-        id="range-gradient"
+        [attr.id]="instanceId + '-range-gradient'"
         type="range"
         min="0"
         max="100"
@@ -24,12 +28,16 @@
     <output class="range-output">{{ value() }}%</output>
   </div>
 
-  <div class="range-stage glass" data-variant="glass">
-    <label class="range-label" for="range-glass">Brillo</label>
+  <div
+    class="range-stage glass"
+    data-variant="glass"
+    [style.display]="this.variant() && this.variant() !== 'glass' ? 'none' : null"
+  >
+    <label class="range-label" [attr.for]="instanceId + '-range-glass'">Brillo</label>
     <div class="range-row">
       <span class="range-min">0</span>
       <input
-        id="range-glass"
+        [attr.id]="instanceId + '-range-glass'"
         type="range"
         min="0"
         max="100"

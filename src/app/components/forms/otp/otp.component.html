@@ -2,7 +2,11 @@
   <h2 class="section-title">OTP Input</h2>
   <p class="section-desc">Código de 6 dígitos con avance automático y navegación por teclado</p>
 
-  <div class="otp-stage" data-variant="boxes">
+  <div
+    class="otp-stage"
+    data-variant="boxes"
+    [style.display]="this.variant() && this.variant() !== 'boxes' ? 'none' : null"
+  >
     <p class="otp-title">Verifica tu correo</p>
     <p class="otp-copy">Escribe el código que enviamos a tu bandeja.</p>
 
@@ -28,7 +32,11 @@
     </p>
   </div>
 
-  <div class="otp-stage underline" data-variant="underline">
+  <div
+    class="otp-stage underline"
+    data-variant="underline"
+    [style.display]="this.variant() && this.variant() !== 'underline' ? 'none' : null"
+  >
     <p class="otp-title">Código de seguridad</p>
     <p class="otp-copy">Revisa tu mensajería: expira en 5 minutos.</p>
 

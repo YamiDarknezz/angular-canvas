@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input } from '@angular/core';
 
 interface SegmentOption {
   readonly id: string;
@@ -17,6 +17,8 @@ interface SegmentOption {
   styleUrl: './segmented.component.scss',
 })
 export class SegmentedComponent {
+  readonly variant = input<string>();
+
   readonly active = signal(1);
 
   readonly variants = [{ id: 'glass' }, { id: 'solid' }] as const;

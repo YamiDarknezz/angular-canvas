@@ -2,9 +2,37 @@
   <h2 class="section-title">Neumorphism Buttons</h2>
   <p class="section-desc">Efecto de relieve suave tipo neumorfismo</p>
   <div class="btn-showcase neu-bg">
-    <button type="button" class="neu-btn" data-variant="soft">Suave</button>
-    <button type="button" class="neu-btn pressed" data-variant="pressed">Presionado</button>
-    <button type="button" class="neu-btn-flat" data-variant="flat">Flat</button>
-    <button type="button" class="neu-btn-convex" data-variant="convex">Convexo</button>
+    <button
+      type="button"
+      class="neu-btn"
+      data-variant="soft"
+      [style.display]="this.variant() && this.variant() !== 'soft' ? 'none' : null"
+    >
+      Suave
+    </button>
+    <button
+      type="button"
+      class="neu-btn pressed"
+      data-variant="pressed"
+      [style.display]="this.variant() && this.variant() !== 'pressed' ? 'none' : null"
+    >
+      Presionado
+    </button>
+    <button
+      type="button"
+      class="neu-btn-flat"
+      data-variant="flat"
+      [style.display]="this.variant() && this.variant() !== 'flat' ? 'none' : null"
+    >
+      Flat
+    </button>
+    <button
+      type="button"
+      class="neu-btn-convex"
+      data-variant="convex"
+      [style.display]="this.variant() && this.variant() !== 'convex' ? 'none' : null"
+    >
+      Convexo
+    </button>
   </div>
 </section>

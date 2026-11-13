@@ -1,4 +1,4 @@
-import { Component, ElementRef, afterRenderEffect, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, afterRenderEffect, signal, viewChild, input } from '@angular/core';
 
 @Component({
   selector: 'app-modal-glass',
@@ -9,6 +9,11 @@ import { Component, ElementRef, afterRenderEffect, signal, viewChild } from '@an
   },
 })
 export class GlassModalComponent {
+  readonly variant = input<string>();
+
+  private static nextId = 0;
+  protected readonly instanceId = 'ac-glass-modal-' + GlassModalComponent.nextId++;
+
   readonly isOpen = signal(false);
 
   private readonly closeButton = viewChild<ElementRef<HTMLButtonElement>>('closeButton');

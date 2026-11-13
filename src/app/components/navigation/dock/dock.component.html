@@ -10,6 +10,7 @@
       [class.scene-glass]="scene.id === 'glass'"
       [class.scene-bar]="scene.id === 'bar'"
       [attr.data-variant]="scene.id"
+      [style.display]="this.variant() && this.variant() !== scene.id ? 'none' : null"
     >
       <nav
         class="dock"

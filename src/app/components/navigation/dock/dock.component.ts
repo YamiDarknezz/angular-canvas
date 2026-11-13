@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input } from '@angular/core';
 
 interface DockItem {
   readonly id: string;
@@ -24,6 +24,8 @@ interface DockItem {
   styleUrl: './dock.component.scss',
 })
 export class DockNavComponent {
+  readonly variant = input<string>();
+
   readonly active = signal('inicio');
 
   /** Escenarios que se ven (y se filtran) como variantes del componente. */

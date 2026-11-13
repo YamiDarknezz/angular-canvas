@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, signal, WritableSignal, input } from '@angular/core';
 
 interface CheckboxItem {
   readonly id: string;
@@ -12,6 +12,8 @@ interface CheckboxItem {
   styleUrl: './checkbox.component.scss',
 })
 export class CheckboxComponent {
+  readonly variant = input<string>();
+
   readonly items: readonly CheckboxItem[] = [
     { id: 'typescript', label: 'TypeScript', checked: signal(true) },
     { id: 'angular', label: 'Angular', checked: signal(true) },

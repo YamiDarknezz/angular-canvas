@@ -7,6 +7,7 @@
       class="segment-scene"
       [class.scene-solid]="variant.id === 'solid'"
       [attr.data-variant]="variant.id"
+      [style.display]="this.variant() && this.variant() !== variant.id ? 'none' : null"
     >
       <div
         class="segments"

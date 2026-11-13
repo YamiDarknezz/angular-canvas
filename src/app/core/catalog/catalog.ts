@@ -41,6 +41,7 @@ export interface CatalogEntry {
   readonly sourcePath: string;
   /** `true` si la plantilla importa `FormsModule` (necesita `@angular/forms`). */
   readonly requiresForms?: boolean;
+  readonly npmInstall?: readonly string[];
   readonly variants: readonly CatalogVariant[];
   readonly code: string;
 }
@@ -1347,6 +1348,7 @@ export const CATALOG: readonly CatalogGroup[] = [
         tagline: 'Trazados continuos, áreas degradadas y puntos animados con GSAP',
         selector: 'app-chart-line',
         className: 'LineChartComponent',
+        npmInstall: ['npm install gsap@^3.15.1'],
         sourcePath: 'src/app/components/charts/line-chart',
         variants: [
           {
@@ -1376,6 +1378,7 @@ export const CATALOG: readonly CatalogGroup[] = [
         tagline: 'Barras elásticas con rebote GSAP, glassmorphism y contadores numéricos',
         selector: 'app-chart-bar',
         className: 'BarChartComponent',
+        npmInstall: ['npm install gsap@^3.15.1'],
         sourcePath: 'src/app/components/charts/bar-chart',
         variants: [
           {
@@ -1405,6 +1408,7 @@ export const CATALOG: readonly CatalogGroup[] = [
         tagline: 'Distribución de frecuencias estadísticas, campana de Gauss y ojivas con GSAP',
         selector: 'app-chart-histogram',
         className: 'HistogramComponent',
+        npmInstall: ['npm install gsap@^3.15.1'],
         sourcePath: 'src/app/components/charts/histogram',
         variants: [
           {
@@ -1434,6 +1438,7 @@ export const CATALOG: readonly CatalogGroup[] = [
         tagline: 'Indicadores radiales proporcionales, anillos de neón y velocímetro semicircular',
         selector: 'app-chart-donut',
         className: 'DonutChartComponent',
+        npmInstall: ['npm install gsap@^3.15.1'],
         sourcePath: 'src/app/components/charts/donut-chart',
         variants: [
           {
@@ -1463,6 +1468,7 @@ export const CATALOG: readonly CatalogGroup[] = [
         tagline: 'Análisis multiaxial hexagonal, polígonos de aptitudes y escáner sonar cyber',
         selector: 'app-chart-radar',
         className: 'RadarChartComponent',
+        npmInstall: ['npm install gsap@^3.15.1'],
         sourcePath: 'src/app/components/charts/radar-chart',
         variants: [
           {
@@ -1502,6 +1508,7 @@ export const CATALOG: readonly CatalogGroup[] = [
         tagline: 'Cápsula flotante interactiva expandible con estados de música, timer y llamadas',
         selector: 'app-dynamic-island',
         className: 'DynamicIslandComponent',
+        npmInstall: ['npm install gsap@^3.15.1'],
         sourcePath: 'src/app/components/feedback/dynamic-island',
         variants: [
           {
@@ -1678,6 +1685,36 @@ export const CATALOG: readonly CatalogGroup[] = [
             code: '12.3.3.1',
             label: 'Onda Sinusoidal',
             hint: 'Trazado continuo suave con oscilación espectral y resplandor neón',
+          },
+        ],
+      },
+      {
+        id: 'three-scenes',
+        code: '12.4',
+        label: 'Escenas Three.js',
+        tagline: 'Tres escenas WebGL 2 con iluminación, cámara orbital y control de animación',
+        selector: 'app-media-three-scenes',
+        className: 'ThreeScenesComponent',
+        sourcePath: 'src/app/components/media-3d/three-scenes',
+        npmInstall: ['npm install three@^0.184.0', 'npm install -D @types/three@^0.184.1'],
+        variants: [
+          {
+            id: 'sculpture',
+            code: '12.4.1.1',
+            label: 'Nudo escultórico',
+            hint: 'Nudo toroidal giratorio con iluminación cálida y contraluz',
+          },
+          {
+            id: 'orbit',
+            code: '12.4.2.1',
+            label: 'Anillos orbitales',
+            hint: 'Tres satélites recorren órbitas inclinadas alrededor de un núcleo facetado',
+          },
+          {
+            id: 'waves',
+            code: '12.4.3.1',
+            label: 'Campo de ondas',
+            hint: 'Una onda radial recorre 289 columnas renderizadas con InstancedMesh',
           },
         ],
       },

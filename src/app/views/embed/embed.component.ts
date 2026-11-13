@@ -81,6 +81,14 @@ export class EmbedComponent {
   /** Entradas reactivas para el componente montado dinámicamente. */
   readonly componentInputs = computed<Record<string, unknown>>(() => {
     const active = this.focus();
+    if (this.group() === 'media-3d' && this.entry() === 'three-scenes') {
+      const motion = this.motionMode();
+      return {
+        variant: active,
+        accent: this.tintColor(),
+        animate: motion === 'auto' ? null : motion === 'forced',
+      };
+    }
     return active ? { variant: active } : {};
   });
 
