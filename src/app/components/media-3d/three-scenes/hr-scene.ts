@@ -11,6 +11,7 @@ import {
 } from 'three';
 
 import type { Design } from './three-scene';
+import { createDiorama } from './diorama-details';
 
 const CHOICES = [
   {
@@ -29,8 +30,9 @@ const CHOICES = [
   },
 ] as const;
 
-export function buildHrDesign(accent: string, variant = 'teams'): Design {
+export function buildHrDesign(accent: string, document: Document): Design {
   const group = new Group();
+  const details = createDiorama(document, group);
   const scale = 0.8;
   group.scale.setScalar(scale);
 
@@ -111,6 +113,20 @@ export function buildHrDesign(accent: string, variant = 'teams'): Design {
   // 1. Base y arquitectura general
   box(group, baseMat, [4.74, 0.23, 5.14], [0, floor - 0.131, 0.15]);
   box(group, parquetMat, [4.7, 0.05, 5.14], [0, floor - 0.026, 0.15]);
+  for (const [index, label] of ['TALENTO', 'DESARROLLO', 'BIENESTAR'].entries()) {
+    const x = (index - 1) * 1.47;
+    details.sign(
+      group,
+      label,
+      [1.18, 0.23],
+      [x, floor + 0.009, 1.67],
+      '#303c52',
+      '#eae9f6',
+      index,
+      true,
+    );
+    details.contact(group, 1.43, 1.73, [x, floor + 0.006, 0.02]);
+  }
   box(group, borderMat, [4.68, 0.008, 0.03], [0, floor + 0.002, -1.9]);
   box(group, borderMat, [4.68, 0.008, 0.03], [0, floor + 0.002, 2.45]);
 
@@ -307,6 +323,7 @@ export function buildHrDesign(accent: string, variant = 'teams'): Design {
       boxGeometry.dispose();
       cylinderGeometry.dispose();
       materials.forEach((m) => m.dispose());
+      details.dispose();
     },
   };
 }

@@ -2,8 +2,8 @@
   "version": "2.2.0",
   "totalGroups": 12,
   "totalComponents": 68,
-  "totalVariants": 213,
-  "updatedAt": "2026-11-13T17:37:04.454Z",
+  "totalVariants": 214,
+  "updatedAt": "2026-11-13T22:17:41.328Z",
   "groups": [
     {
       "id": "cards",
@@ -2512,7 +2512,7 @@
               "id": "sales",
               "code": "12.4.12.1",
               "label": "Embudo comercial",
-              "hint": "Embudo de conversión cónico con anillos de prospectos, propuestas y cierres con partículas",
+              "hint": "Embudo con anillos abiertos, partículas y cifras de prospectos, propuestas y cierres",
               "routePath": "/media-3d/three-scenes/sales",
               "embedPath": "/embed/media-3d/three-scenes/sales"
             },
@@ -2528,7 +2528,7 @@
               "id": "negotiation",
               "code": "12.4.14.1",
               "label": "Sala de negociación",
-              "hint": "Mesa de negociación ejecutiva con propuesta que se traslada entre partes y sello de aprobación",
+              "hint": "Sala de ventas con pantalla de cotización y propuesta que se mueve entre las dos partes",
               "routePath": "/media-3d/three-scenes/negotiation",
               "embedPath": "/embed/media-3d/three-scenes/negotiation"
             },
@@ -2536,7 +2536,7 @@
               "id": "delivery",
               "code": "12.4.15.1",
               "label": "Ruta de entrega",
-              "hint": "Ruta urbana con furgoneta de reparto que visita tres destinos de clientes",
+              "hint": "Furgoneta con ruedas animadas que reparte pedidos al mercado, al café o a la farmacia",
               "routePath": "/media-3d/three-scenes/delivery",
               "embedPath": "/embed/media-3d/three-scenes/delivery"
             },
@@ -2544,7 +2544,7 @@
               "id": "showroom",
               "code": "12.4.16.1",
               "label": "Catálogo de productos",
-              "hint": "Vitrina giratoria con tres productos en pedestales individuales (caja, botella, difusor)",
+              "hint": "Escaparate de tienda con productos modelados, precios y vitrina que gira hacia tu selección",
               "routePath": "/media-3d/three-scenes/showroom",
               "embedPath": "/embed/media-3d/three-scenes/showroom"
             },
@@ -2584,7 +2584,7 @@
               "id": "financial-board",
               "code": "12.4.21.1",
               "label": "Panel financiero",
-              "hint": "Bóveda acorazada con lingotes de oro, terminal de trading en tiempo real y servidores criptográficos",
+              "hint": "Bóveda, mesa de operaciones con gráficos de ejemplo y servidores de auditoría",
               "routePath": "/media-3d/three-scenes/financial-board",
               "embedPath": "/embed/media-3d/three-scenes/financial-board"
             },
@@ -2595,6 +2595,14 @@
               "hint": "Barras de presupuesto proporcionales que se redistribuyen según el escenario seleccionado",
               "routePath": "/media-3d/three-scenes/budget",
               "embedPath": "/embed/media-3d/three-scenes/budget"
+            },
+            {
+              "id": "checkout",
+              "code": "12.4.23.1",
+              "label": "Caja y punto de venta",
+              "hint": "Mostrador con cinta y lector. Escanea un pedido, cobra y emite el recibo",
+              "routePath": "/media-3d/three-scenes/checkout",
+              "embedPath": "/embed/media-3d/three-scenes/checkout"
             }
           ]
         },

@@ -11,6 +11,7 @@ import {
 } from 'three';
 
 import type { Design } from './three-scene';
+import { createDiorama } from './diorama-details';
 
 const CHOICES = [
   {
@@ -20,18 +21,18 @@ const CHOICES = [
   },
   {
     label: 'Mesa de Operaciones',
-    detail:
-      'Terminal de trading algorítmico con pantallas de velas financieras y gráficos en tiempo real.',
+    detail: 'Terminal de operaciones con pantallas y gráficos animados de ejemplo.',
   },
   {
     label: 'Servidores & Auditoría',
     detail:
-      'Batería de servidores criptográficos con LEDs de transacción y panel de ticker financiero.',
+      'Servidores de auditoría con indicadores de transacciones y un panel financiero animado.',
   },
 ] as const;
 
-export function buildFinanceDesign(accent: string, variant = 'financial-board'): Design {
+export function buildFinanceDesign(accent: string, document: Document): Design {
   const group = new Group();
+  const details = createDiorama(document, group);
   const scale = 0.8;
   group.scale.setScalar(scale);
 
@@ -105,6 +106,20 @@ export function buildFinanceDesign(accent: string, variant = 'financial-board'):
   // 1. Base y arquitectura de búnker financiero
   box(group, baseMat, [4.74, 0.23, 5.14], [0, floor - 0.131, 0.15]);
   box(group, floorMat, [4.7, 0.05, 5.14], [0, floor - 0.026, 0.15]);
+  for (const [index, label] of ['TESORERÍA', 'MESA DE OPERACIONES', 'AUDITORÍA'].entries()) {
+    const x = (index - 1) * 1.46;
+    details.sign(
+      group,
+      label,
+      [1.26, 0.23],
+      [x, floor + 0.01, 1.71],
+      '#26384b',
+      '#d8e6ed',
+      index,
+      true,
+    );
+    details.contact(group, 1.42, 1.72, [x, floor + 0.007, 0.06]);
+  }
 
   // Guías de seguridad láser en el suelo
   box(group, laserMat, [4.68, 0.008, 0.02], [0, floor + 0.002, -1.9]);
@@ -280,6 +295,14 @@ export function buildFinanceDesign(accent: string, variant = 'financial-board'):
     const mat = i % 2 === 0 ? mintMat : goldMat;
     return box(tickerGroup, mat, [0.45, 0.08, 0.03], [x, 0, 0.02], 2);
   });
+  details.sign(
+    group,
+    'TESORERÍA Y CONTROL',
+    [2.75, 0.22],
+    [0, floor + 2.02, -1.98],
+    '#26384b',
+    '#d8e6ed',
+  );
 
   return {
     group,
@@ -330,6 +353,7 @@ export function buildFinanceDesign(accent: string, variant = 'financial-board'):
       boxGeometry.dispose();
       cylinderGeometry.dispose();
       materials.forEach((m) => m.dispose());
+      details.dispose();
     },
   };
 }

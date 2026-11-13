@@ -112,6 +112,11 @@ export class StageComponent {
           'interactive-scenes.ts',
           'warehouse-scene.ts',
           'department-scenes.ts',
+          'diorama-details.ts',
+          'retail-scenes.ts',
+          'sales-scene.ts',
+          'hr-scene.ts',
+          'finance-scene.ts',
         ]
       : files;
   });

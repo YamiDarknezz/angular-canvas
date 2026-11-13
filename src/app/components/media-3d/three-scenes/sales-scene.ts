@@ -4,12 +4,15 @@ import {
   Color,
   CylinderGeometry,
   Group,
+  LatheGeometry,
   Mesh,
   MeshStandardMaterial,
   Object3D,
   SphereGeometry,
+  Vector2,
 } from 'three';
 
+import { createDiorama } from './diorama-details';
 import type { Design } from './three-scene';
 
 const CHOICES = [
@@ -27,8 +30,9 @@ const CHOICES = [
   },
 ] as const;
 
-export function buildSalesDesign(accent: string): Design {
+export function buildSalesDesign(accent: string, document: Document): Design {
   const group = new Group();
+  const details = createDiorama(document, group);
   const scale = 0.8;
   group.scale.setScalar(scale);
 
@@ -36,6 +40,18 @@ export function buildSalesDesign(accent: string): Design {
   const boxGeometry = new BoxGeometry();
   const cylinderGeometry = new CylinderGeometry(0.5, 0.5, 1, 32);
   const sphereGeometry = new SphereGeometry(0.5, 16, 12);
+  // Sección cerrada del anillo. El hueco deja ver las partículas entre etapas.
+  const ringGeometry = new LatheGeometry(
+    [
+      [0.37, -0.5],
+      [0.49, 0.4],
+      [0.5, 0.5],
+      [0.43, 0.5],
+      [0.33, -0.44],
+      [0.37, -0.5],
+    ].map(([x, y]) => new Vector2(x, y)),
+    40,
+  );
   const materials: MeshStandardMaterial[] = [];
 
   const material = (color: string | Color, roughness = 0.4, metalness = 0.25) => {
@@ -98,6 +114,17 @@ export function buildSalesDesign(accent: string): Design {
   // Pedestal central de soporte
   cyl(group, darkMat, [2.4, 0.08, 2.4], [0, floor + 0.04, 0]);
   cyl(group, steelMat, [1.8, 0.04, 1.8], [0, floor + 0.08, 0]);
+  details.contact(group, 3.4, 2.8, [0, floor + 0.006, 0.12]);
+  details.sign(
+    group,
+    'CONVERSIÓN COMERCIAL',
+    [1.94, 0.27],
+    [0.52, floor + 0.008, 1.97],
+    '#293a48',
+    '#f8e6d0',
+    undefined,
+    true,
+  );
 
   // Cuenca receptora de cierres en la base
   cyl(group, steelMat, [0.95, 0.18, 0.95], [0, floor + 0.18, 0], 2);
@@ -110,25 +137,24 @@ export function buildSalesDesign(accent: string): Design {
   funnelGroup.position.set(0, floor + 0.3, 0);
   group.add(funnelGroup);
 
-  // Nivel 0 (Superior - Prospectos)
-  const tierTop = cyl(funnelGroup, leadMat, [2.6, 0.44, 2.6], [0, 1.45, 0], 0);
-  // Nivel 1 (Medio - Propuestas)
-  const tierMid = cyl(funnelGroup, propMat, [1.9, 0.42, 1.9], [0, 0.95, 0], 1);
-  // Nivel 2 (Inferior - Cierres)
-  const tierBtm = cyl(funnelGroup, wonMat, [1.2, 0.4, 1.2], [0, 0.45, 0], 2);
-
-  const tiers = [
-    { mesh: tierTop, mat: leadMat, origY: 1.45 },
-    { mesh: tierMid, mat: propMat, origY: 0.95 },
-    { mesh: tierBtm, mat: wonMat, origY: 0.45 },
-  ];
+  const tiers = [leadMat, propMat, wonMat].map((mat, index) => {
+    const width = 2.6 - index * 0.7;
+    const origY = 1.45 - index * 0.5;
+    const mesh = new Mesh(ringGeometry, mat);
+    mesh.position.y = origY;
+    mesh.scale.set(width, 0.44, width);
+    mesh.userData['choice'] = index;
+    funnelGroup.add(mesh);
+    return { mesh, mat, origY };
+  });
 
   // Columnas guía verticales de cristal / acero
-  for (let i = 0; i < 4; i++) {
-    const angle = (i * Math.PI) / 2;
+  for (let i = 0; i < 3; i++) {
+    const angle = Math.PI + (i * Math.PI) / 2;
     const x = Math.cos(angle) * 1.55;
     const z = Math.sin(angle) * 1.55;
-    cyl(funnelGroup, steelMat, [0.05, 1.8, 0.05], [x, 0.9, z]);
+    cyl(funnelGroup, steelMat, [0.064, 1.53, 0.064], [x, 0.765, z]);
+    cyl(funnelGroup, steelMat, [0.19, 0.075, 0.19], [x, 0.035, z]);
   }
 
   // -------------------------------------------------------------
@@ -144,8 +170,8 @@ export function buildSalesDesign(accent: string): Design {
     particles.push({
       mesh,
       speed: 0.6 + (i % 5) * 0.15,
-      phase: (i / particleCount) * Math.PI * 2,
-      radius: 0.3 + (i % 3) * 0.35,
+      phase: i / particleCount,
+      radius: 0.45 + (i % 3) * 0.2,
     });
   }
 
@@ -158,19 +184,27 @@ export function buildSalesDesign(accent: string): Design {
     pos: [number, number, number];
     choice: number;
   }[] = [
-    { label: '120 Leads', color: leadMat, pos: [-1.8, 1.75, 0], choice: 0 },
-    { label: '48 Oportunidades', color: propMat, pos: [1.75, 1.25, 0], choice: 1 },
-    { label: '16 Cierres', color: wonMat, pos: [-1.55, 0.75, 0], choice: 2 },
+    { label: '120 PROSPECTOS', color: leadMat, pos: [-1.52, 1.44, 0.85], choice: 0 },
+    { label: '48 PROPUESTAS', color: propMat, pos: [1.49, 0.88, 0.28], choice: 1 },
+    { label: '16 CIERRES', color: wonMat, pos: [-0.55, 0.35, 1.58], choice: 2 },
   ];
 
-  const kpiPanels = kpiData.map((d, index) => {
+  const kpiPanels = kpiData.map((d) => {
     const pGroup = new Group();
     pGroup.position.set(d.pos[0], d.pos[1], d.pos[2]);
     group.add(pGroup);
 
     box(pGroup, darkMat, [1.1, 0.36, 0.05], [0, 0, 0], d.choice);
     box(pGroup, d.color, [1.02, 0.05, 0.06], [0, -0.15, 0], d.choice);
-    box(pGroup, d.color, [0.8, 0.16, 0.06], [0, 0.04, 0.01], d.choice);
+    details.sign(
+      pGroup,
+      d.label,
+      [1.04, 0.24],
+      [0, 0.023, 0.028],
+      '#1b2530',
+      ['#ffdda9', '#f6c16b', '#9ee3c7'][d.choice],
+      d.choice,
+    );
 
     return { pGroup, choice: d.choice, mat: d.color };
   });
@@ -179,34 +213,20 @@ export function buildSalesDesign(accent: string): Design {
     group,
     choices: CHOICES,
     select(index) {
-      materials.forEach((m) => {
-        m.emissiveIntensity = 0;
+      tiers.forEach(({ mesh, mat, origY }, current) => {
+        mat.emissiveIntensity = index === current ? 0.48 : 0;
+        mesh.position.y = origY + (index === current ? 0.105 : 0);
       });
-      if (index === 0) {
-        leadMat.emissiveIntensity = 0.7;
-        tiers[0].mesh.position.y = tiers[0].origY + 0.1;
-      } else if (index === 1) {
-        propMat.emissiveIntensity = 0.7;
-        tiers[1].mesh.position.y = tiers[1].origY + 0.1;
-      } else if (index === 2) {
-        wonMat.emissiveIntensity = 0.75;
-        tiers[2].mesh.position.y = tiers[2].origY + 0.1;
-      }
     },
     update(time) {
-      // Rotación suave de los anillos del embudo
-      tierTop.rotation.y = time * 0.25;
-      tierMid.rotation.y = -time * 0.3;
-      tierBtm.rotation.y = time * 0.35;
-
       // Partículas descendentes en espiral a través del embudo
-      particles.forEach((p, idx) => {
+      particles.forEach((p) => {
         const t = (time * p.speed + p.phase) % 1;
         // Altura: desciende desde y = 1.75 hasta y = 0.15
         const y = 1.75 - t * 1.6;
         // Radio: se estrecha conforme desciende (forma cónica de embudo)
-        const currentR = 1.3 * (1 - t * 0.75);
-        const angle = time * 2.5 + p.phase + t * Math.PI * 3;
+        const currentR = p.radius * (1 - t * 0.77);
+        const angle = time * 2.5 + p.phase * Math.PI * 2 + t * Math.PI * 3;
         p.mesh.position.set(Math.cos(angle) * currentR, y, Math.sin(angle) * currentR);
       });
 
@@ -219,7 +239,9 @@ export function buildSalesDesign(accent: string): Design {
       boxGeometry.dispose();
       cylinderGeometry.dispose();
       sphereGeometry.dispose();
+      ringGeometry.dispose();
       materials.forEach((m) => m.dispose());
+      details.dispose();
     },
   };
 }

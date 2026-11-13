@@ -33,6 +33,7 @@ const SCENES = {
   negotiation: { title: 'Sala de negociación', accent: '#eab279' },
   delivery: { title: 'Ruta de entrega', accent: '#f4bd6d' },
   showroom: { title: 'Catálogo de productos', accent: '#f3a48a' },
+  checkout: { title: 'Caja y punto de venta', accent: '#ecc187' },
   office: { title: 'Equipo y áreas', accent: '#aeb7ff' },
   onboarding: { title: 'Recorrido de incorporación', accent: '#a3c9ff' },
   'team-calendar': { title: 'Agenda de equipo', accent: '#c6acff' },

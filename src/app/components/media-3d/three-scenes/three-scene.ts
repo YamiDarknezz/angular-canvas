@@ -40,6 +40,7 @@ import { buildSalesDesign } from './sales-scene';
 import { buildFinanceDesign } from './finance-scene';
 import { buildHrDesign } from './hr-scene';
 import { buildDepartmentDesign, type DepartmentVariant } from './department-scenes';
+import { buildRetailDesign, type RetailVariant } from './retail-scenes';
 
 export type SceneVariant =
   | 'sculpture'
@@ -55,7 +56,9 @@ export type SceneVariant =
   | 'warehouse'
   | 'sales'
   | 'teams'
-  | DepartmentVariant;
+  | 'financial-board'
+  | DepartmentVariant
+  | RetailVariant;
 
 export interface Design {
   readonly group: Group;
@@ -77,7 +80,7 @@ export interface SceneController {
 }
 
 /** Añade nuevas escenas aquí. Cada diseño es dueño de sus propios recursos GPU. */
-function buildDesign(variant: SceneVariant, accent: string): Design {
+function buildDesign(variant: SceneVariant, accent: string, document: Document): Design {
   switch (variant) {
     case 'dunes':
       return buildDunes(accent);
@@ -96,20 +99,22 @@ function buildDesign(variant: SceneVariant, accent: string): Design {
     case 'warehouse':
       return buildWarehouseDesign(accent);
     case 'sales':
-      return buildSalesDesign(accent);
+      return buildSalesDesign(accent, document);
     case 'teams':
-      return buildHrDesign(accent);
+      return buildHrDesign(accent, document);
     case 'financial-board':
-      return buildFinanceDesign(accent);
+      return buildFinanceDesign(accent, document);
     case 'negotiation':
     case 'delivery':
     case 'showroom':
+    case 'checkout':
+      return buildRetailDesign(variant, accent, document);
     case 'office':
     case 'onboarding':
     case 'team-calendar':
     case 'cash-flow':
     case 'budget':
-      return buildDepartmentDesign(variant, accent);
+      return buildDepartmentDesign(variant, accent, document);
   }
 
   const group = new Group();
@@ -611,7 +616,7 @@ export function createThreeScene(
       }
       elapsed = 0;
       lastTime = undefined;
-      design = buildDesign(variant, accent);
+      design = buildDesign(variant, accent, document);
       design.update(0);
       scene.add(design.group);
       schedule();
@@ -631,6 +636,10 @@ export function createThreeScene(
       design.group.updateMatrixWorld(true);
       raycaster.setFromCamera(cursor, camera);
       for (const { object, point } of raycaster.intersectObject(design.group)) {
+        if (object.userData['ignorePick']) continue;
+        let visibleParent: Object3D | null = object;
+        while (visibleParent?.visible) visibleParent = visibleParent.parent;
+        if (visibleParent) continue;
         // Ignora la parte de los vehículos recortada al salir del patio.
         if (
           object instanceof Mesh &&

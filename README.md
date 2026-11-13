@@ -256,17 +256,18 @@ El proyecto se verifica con Angular 22.
 | `12.4.9.1` | `light-trails` | Luces en trayectorias curvas |
 | `12.4.10.1` | `exploded` | Rotor que se abre para mostrar sus piezas |
 | `12.4.11.1` | `warehouse` | Dos camiones, portones sincronizados y zonas seleccionables |
-| `12.4.12.1` | `sales` | Embudo que separa la etapa seleccionada y muestra sus cifras de ejemplo |
+| `12.4.12.1` | `sales` | Embudo con anillos abiertos y cifras de las etapas de conversión |
 | `12.4.13.1` | `teams` | Grupos de talento, desarrollo y bienestar seleccionables |
-| `12.4.14.1` | `negotiation` | Sala de negociación. Cambia la propuesta entre borrador, enviada y aceptada. |
-| `12.4.15.1` | `delivery` | Ruta de entrega. Elige un cliente y sigue el vehículo hasta su destino. |
-| `12.4.16.1` | `showroom` | Catálogo de productos. Gira la vitrina y selecciona un producto para ver su ficha. |
+| `12.4.14.1` | `negotiation` | Sala de ventas con pantalla de cotización, propuesta y sello de aprobación. |
+| `12.4.15.1` | `delivery` | Furgoneta de reparto con ruedas animadas y tres comercios seleccionables. |
+| `12.4.16.1` | `showroom` | Escaparate con productos detallados, precios y una vitrina giratoria. |
 | `12.4.17.1` | `office` | Equipo y áreas. Explora los espacios de Talento, Desarrollo y Bienestar. |
 | `12.4.18.1` | `onboarding` | Recorrido de incorporación. Lleva al personaje a cada estación de bienvenida. |
 | `12.4.19.1` | `team-calendar` | Agenda de equipo. Selecciona una cita y cambia su horario y estado de ejemplo. |
 | `12.4.20.1` | `cash-flow` | Flujo de caja. Simula cambios en ingresos y gastos y observa el saldo. |
-| `12.4.21.1` | `financial-board` | Panel financiero. Compara los ingresos, gastos y resultado de dos periodos. |
+| `12.4.21.1` | `financial-board` | Sala de tesorería con bóveda, mesa de operaciones y servidores de auditoría. |
 | `12.4.22.1` | `budget` | Distribución de presupuesto. Redistribuye el presupuesto entre áreas con distintos escenarios. |
+| `12.4.23.1` | `checkout` | Caja y punto de venta con lector, terminal de cobro y recibo. |
 
 Desde AngularCanvas, copia la carpeta completa con el extractor.
 
