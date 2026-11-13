@@ -316,20 +316,29 @@ export function buildRetailDesign(
       const van = new Group();
       group.add(van);
       const vanShadow = contact(group, 1.13, 0.68, [0, floor + 0.018, 0]);
-      part(van, ink, [0.87, 0.1, 0.39], [-0.012, 0.154, 0]);
-      part(van, cream, [0.57, 0.36, 0.39], [-0.155, 0.33, 0]);
-      part(van, accent, [0.34, 0.3, 0.38], [0.285, 0.28, 0]);
-      part(van, accent, [0.17, 0.19, 0.39], [0.456, 0.205, 0]);
+      const cargoWidth = 0.39;
+      const cabWidth = 0.38;
+      // El chasis y el capó quedan retranqueados para evitar caras laterales coplanares.
+      part(van, ink, [0.87, 0.1, 0.35], [-0.012, 0.154, 0]);
+      part(van, cream, [0.57, 0.36, cargoWidth], [-0.155, 0.33, 0]);
+      part(van, accent, [0.34, 0.3, cabWidth], [0.285, 0.28, 0]);
+      part(van, accent, [0.17, 0.19, 0.368], [0.456, 0.205, 0]);
       part(van, '#324e59', [0.027, 0.138, 0.32], [0.445, 0.346, 0]);
       part(van, ink, [0.022, 0.087, 0.29], [0.544, 0.156, 0]);
       part(van, '#b8c6c3', [0.045, 0.05, 0.41], [0.545, 0.098, 0]);
       const wheels: Group[] = [];
       for (const side of [-1, 1]) {
-        part(van, '#476978', [0.18, 0.115, 0.014], [0.302, 0.344, side * 0.193]);
+        part(van, '#476978', [0.18, 0.115, 0.014], [0.302, 0.344, side * (cabWidth / 2 + 0.003)]);
         part(van, cream, [0.04, 0.065, 0.082], [0.544, 0.233, side * 0.145]);
         part(van, '#cc6455', [0.022, 0.072, 0.048], [-0.451, 0.19, side * 0.15]);
         part(van, ink, [0.048, 0.044, 0.023], [0.23, 0.255, side * 0.199]);
-        const badge = sign(van, 'REPARTO', [0.42, 0.115], [-0.154, 0.35, side * 0.198], '#2e474a');
+        const badge = sign(
+          van,
+          'REPARTO',
+          [0.42, 0.115],
+          [-0.154, 0.35, side * (cargoWidth / 2 + 0.008)],
+          '#2e474a',
+        );
         if (badge && side < 0) badge.rotation.y = Math.PI;
         for (const x of [-0.29, 0.34]) {
           const wheel = new Group();
