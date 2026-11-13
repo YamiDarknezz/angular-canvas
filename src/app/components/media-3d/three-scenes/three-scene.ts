@@ -14,6 +14,7 @@ import {
   Group,
   IcosahedronGeometry,
   InstancedMesh,
+  Material,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
@@ -34,6 +35,7 @@ import {
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { buildInteractiveDesign, type SceneChoice } from './interactive-scenes';
+import { buildWarehouseDesign } from './warehouse-scene';
 
 export type SceneVariant =
   | 'sculpture'
@@ -87,6 +89,7 @@ function buildDesign(variant: SceneVariant, accent: string): Design {
     case 'exploded':
       return buildExplodedAssembly(accent);
     case 'warehouse':
+      return buildWarehouseDesign(accent);
     case 'sales':
     case 'teams':
       return buildInteractiveDesign(variant, accent);
@@ -483,6 +486,7 @@ export function createThreeScene(
   if (!context) throw new Error('WebGL 2 no disponible');
 
   const renderer = new WebGLRenderer({ canvas, context, alpha: true });
+  renderer.localClippingEnabled = true;
   const scene = new Scene();
   const camera = new PerspectiveCamera(38, 1, 0.1, 50);
   const raycaster = new Raycaster();
@@ -609,10 +613,17 @@ export function createThreeScene(
       camera.updateMatrixWorld();
       design.group.updateMatrixWorld(true);
       raycaster.setFromCamera(cursor, camera);
-      for (const { object } of raycaster.intersectObject(design.group)) {
-        // Cada pieza puede tener varias mallas que comparten la misma opción.
-        const index = object.userData['choice'];
-        if (typeof index === 'number') return index;
+      for (const { object, point } of raycaster.intersectObject(design.group)) {
+        // Ignora la parte de los vehículos recortada al salir del patio.
+        if (
+          object instanceof Mesh &&
+          object.material instanceof Material &&
+          object.material.clippingPlanes?.some((plane) => plane.distanceToPoint(point) < 0)
+        ) {
+          continue;
+        }
+        const index: unknown = object.userData['choice'];
+        return typeof index === 'number' ? index : undefined;
       }
       return undefined;
     },

@@ -3,7 +3,7 @@
   "totalGroups": 12,
   "totalComponents": 68,
   "totalVariants": 203,
-  "updatedAt": "2026-11-13T14:34:11.043Z",
+  "updatedAt": "2026-11-13T15:19:31.600Z",
   "groups": [
     {
       "id": "cards",
@@ -2504,7 +2504,7 @@
               "id": "warehouse",
               "code": "12.4.11.1",
               "label": "Almacén interactivo",
-              "hint": "Selecciona recepción, almacenaje o despacho para destacar su zona y ver su detalle",
+              "hint": "Dos camiones entran y salen por muelles distintos. Selecciona un camión o una zona",
               "routePath": "/media-3d/three-scenes/warehouse",
               "embedPath": "/embed/media-3d/three-scenes/warehouse"
             },

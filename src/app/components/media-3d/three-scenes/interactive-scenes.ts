@@ -15,13 +15,7 @@ export interface SceneChoice {
   readonly detail: string;
 }
 
-type InteractiveVariant = 'warehouse' | 'sales' | 'teams';
-
-const WAREHOUSE = [
-  { label: 'Recepción', detail: '12 pallets ilustran la entrada y clasificación de mercancía.' },
-  { label: 'Almacenaje', detail: 'La zona central reúne 18 pallets listos para preparación.' },
-  { label: 'Despacho', detail: '6 pallets esperan su salida en la última zona.' },
-] as const;
+type InteractiveVariant = 'sales' | 'teams';
 
 const SALES = [
   { label: 'Prospectos', detail: '120 prospectos de ejemplo entran al embudo.' },
@@ -69,24 +63,6 @@ export function buildInteractiveDesign(variant: InteractiveVariant, accent: stri
   const geometries: (BoxGeometry | SphereGeometry | CylinderGeometry)[] = [];
   let choices: readonly SceneChoice[];
   switch (variant) {
-    case 'warehouse': {
-      const platform = new BoxGeometry(1.18, 0.14, 2.05);
-      const box = new BoxGeometry(0.32, 0.34, 0.34);
-      geometries.push(platform, box);
-      pieces.forEach(({ add }, index) => {
-        add(platform, 0, -0.53);
-        for (let i = 0; i < [12, 18, 6][index]; i++) {
-          add(
-            box,
-            ((i % 2) - 0.5) * 0.39,
-            -0.29 + Math.floor(i / 8) * 0.35,
-            ((Math.floor(i / 2) % 4) - 1.5) * 0.43,
-          );
-        }
-      });
-      choices = WAREHOUSE;
-      break;
-    }
     case 'sales':
       pieces.forEach(({ add, piece }, index) => {
         const radius = 1.38 - index * 0.33;

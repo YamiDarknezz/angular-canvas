@@ -1769,7 +1769,7 @@ export const CATALOG: readonly CatalogGroup[] = [
             id: 'warehouse',
             code: '12.4.11.1',
             label: 'Almacén interactivo',
-            hint: 'Selecciona recepción, almacenaje o despacho para destacar su zona y ver su detalle',
+            hint: 'Dos camiones entran y salen por muelles distintos. Selecciona un camión o una zona',
           },
           {
             id: 'sales',

@@ -255,7 +255,7 @@ El proyecto se verifica con Angular 22.
 | `12.4.8.1` | `pendulums` | Trece péndulos que oscilan con periodos distintos |
 | `12.4.9.1` | `light-trails` | Luces en trayectorias curvas |
 | `12.4.10.1` | `exploded` | Rotor que se abre para mostrar sus piezas |
-| `12.4.11.1` | `warehouse` | Zonas de recepción, almacenaje y despacho seleccionables |
+| `12.4.11.1` | `warehouse` | Dos camiones, portones sincronizados y zonas seleccionables |
 | `12.4.12.1` | `sales` | Embudo que separa la etapa seleccionada y muestra sus cifras de ejemplo |
 | `12.4.13.1` | `teams` | Grupos de talento, desarrollo y bienestar seleccionables |
 
