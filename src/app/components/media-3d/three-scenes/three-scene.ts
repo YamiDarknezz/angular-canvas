@@ -36,10 +36,10 @@ import {
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { type SceneChoice } from './interactive-scenes';
 import { buildWarehouseDesign } from './warehouse-scene';
-import { buildCommercialDesign } from './commercial-scene';
+import { buildSalesDesign } from './sales-scene';
 import { buildFinanceDesign } from './finance-scene';
 import { buildHrDesign } from './hr-scene';
-import { type DepartmentVariant } from './department-scenes';
+import { buildDepartmentDesign, type DepartmentVariant } from './department-scenes';
 
 export type SceneVariant =
   | 'sculpture'
@@ -96,19 +96,20 @@ function buildDesign(variant: SceneVariant, accent: string): Design {
     case 'warehouse':
       return buildWarehouseDesign(accent);
     case 'sales':
+      return buildSalesDesign(accent);
+    case 'teams':
+      return buildHrDesign(accent);
+    case 'financial-board':
+      return buildFinanceDesign(accent);
     case 'negotiation':
     case 'delivery':
     case 'showroom':
-      return buildCommercialDesign(accent, variant);
-    case 'cash-flow':
-    case 'financial-board':
-    case 'budget':
-      return buildFinanceDesign(accent, variant);
-    case 'teams':
     case 'office':
     case 'onboarding':
     case 'team-calendar':
-      return buildHrDesign(accent, variant);
+    case 'cash-flow':
+    case 'budget':
+      return buildDepartmentDesign(variant, accent);
   }
 
   const group = new Group();
