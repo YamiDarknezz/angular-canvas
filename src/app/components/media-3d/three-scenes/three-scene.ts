@@ -5,7 +5,9 @@ import {
   BoxGeometry,
   BufferAttribute,
   BufferGeometry,
+  CatmullRomCurve3,
   Color,
+  CylinderGeometry,
   DirectionalLight,
   DoubleSide,
   DynamicDrawUsage,
@@ -20,23 +22,46 @@ import {
   PlaneGeometry,
   Points,
   PointsMaterial,
+  Raycaster,
   Scene,
+  SphereGeometry,
   TorusGeometry,
   TorusKnotGeometry,
+  TubeGeometry,
+  Vector2,
+  Vector3,
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { buildInteractiveDesign, type SceneChoice } from './interactive-scenes';
 
-export type SceneVariant = 'sculpture' | 'orbit' | 'waves' | 'dunes' | 'nebula' | 'helix' | 'tiles';
+export type SceneVariant =
+  | 'sculpture'
+  | 'orbit'
+  | 'waves'
+  | 'dunes'
+  | 'nebula'
+  | 'helix'
+  | 'tiles'
+  | 'pendulums'
+  | 'light-trails'
+  | 'exploded'
+  | 'warehouse'
+  | 'sales'
+  | 'teams';
 
-interface Design {
+export interface Design {
   readonly group: Group;
+  readonly choices?: readonly SceneChoice[];
+  select?(index: number): void;
   update(time: number): void;
   dispose(): void;
 }
 
 export interface SceneController {
-  setScene(variant: SceneVariant, accent: string): void;
+  setScene(variant: SceneVariant, accent: string): readonly SceneChoice[];
+  select(index: number): void;
+  pick(clientX: number, clientY: number): number | undefined;
   setPlaying(playing: boolean): void;
   setInteractive(interactive: boolean): void;
   moveCamera(key: string): boolean;
@@ -55,6 +80,16 @@ function buildDesign(variant: SceneVariant, accent: string): Design {
       return buildHelix(accent);
     case 'tiles':
       return buildTiles(accent);
+    case 'pendulums':
+      return buildPendulums(accent);
+    case 'light-trails':
+      return buildLightTrails(accent);
+    case 'exploded':
+      return buildExplodedAssembly(accent);
+    case 'warehouse':
+    case 'sales':
+    case 'teams':
+      return buildInteractiveDesign(variant, accent);
   }
 
   const group = new Group();
@@ -320,6 +355,124 @@ function buildTiles(accent: string): Design {
   };
 }
 
+function buildPendulums(accent: string): Design {
+  const group = new Group();
+  const beam = new BoxGeometry(4.15, 0.08, 0.1);
+  const rod = new CylinderGeometry(0.012, 0.012, 1, 8).translate(0, -0.5, 0);
+  const weight = new SphereGeometry(0.13, 18, 12);
+  const metal = new MeshStandardMaterial({ color: '#b1b9cf', metalness: 0.4, roughness: 0.4 });
+  const weights = new MeshStandardMaterial({ color: accent, metalness: 0.28, roughness: 0.24 });
+  const rail = new Mesh(beam, metal);
+  rail.position.y = 1.08;
+  group.add(rail);
+  const pendulums = Array.from({ length: 13 }, (_, index) => {
+    const pivot = new Group();
+    pivot.position.set((index - 6) * 0.31, 1.04, 0);
+    const length = 2.1 - index * 0.085;
+    const string = new Mesh(rod, metal);
+    string.scale.y = length;
+    const bob = new Mesh(weight, weights);
+    bob.position.y = -length;
+    pivot.add(string, bob);
+    group.add(pivot);
+    return { pivot, length };
+  });
+  return {
+    group,
+    update(time) {
+      for (const { pivot, length } of pendulums) {
+        // Longitudes distintas producen periodos distintos y una onda aparente.
+        pivot.rotation.x = 0.72 * Math.cos((time * 2.1) / Math.sqrt(length));
+      }
+    },
+    dispose() {
+      beam.dispose();
+      rod.dispose();
+      weight.dispose();
+      metal.dispose();
+      weights.dispose();
+    },
+  };
+}
+
+function buildLightTrails(accent: string): Design {
+  const group = new Group();
+  const bead = new SphereGeometry(0.085, 14, 10);
+  const colors = [new Color(accent), new Color('#a4adff'), new Color('#f2b886')];
+  const routes = colors.map((color, index) => {
+    const points = Array.from({ length: 84 }, (_, point) => {
+      const t = (point / 84) * Math.PI * 2;
+      const phase = (index * Math.PI * 2) / 3;
+      const radius = 1.55 + 0.32 * Math.cos(t * 3 + phase);
+      return new Vector3(
+        Math.cos(t) * radius,
+        0.68 * Math.sin(t * 3 + phase),
+        Math.sin(t) * radius,
+      );
+    });
+    const path = new CatmullRomCurve3(points, true);
+    const tube = new TubeGeometry(path, 160, 0.014, 6, true);
+    const trace = new MeshBasicMaterial({ color, transparent: true, opacity: 0.48 });
+    const light = new MeshBasicMaterial({ color: color.clone().lerp(new Color('#ffffff'), 0.5) });
+    const particle = new Mesh(bead, light);
+    group.add(new Mesh(tube, trace), particle);
+    return { path, tube, trace, light, particle };
+  });
+  return {
+    group,
+    update(time) {
+      routes.forEach(({ path, particle }, index) => {
+        path.getPointAt((time * (0.13 + index * 0.035) + index / 3) % 1, particle.position);
+      });
+      group.rotation.y = time * 0.14;
+    },
+    dispose() {
+      for (const { tube, trace, light } of routes) {
+        tube.dispose();
+        trace.dispose();
+        light.dispose();
+      }
+      bead.dispose();
+    },
+  };
+}
+
+function buildExplodedAssembly(accent: string): Design {
+  const group = new Group();
+  const plate = new CylinderGeometry(0.91, 0.91, 0.13, 6);
+  const rings = new TorusGeometry(0.7, 0.095, 14, 56).rotateX(-Math.PI / 2);
+  const shaft = new CylinderGeometry(0.13, 0.13, 0.8, 16);
+  const casing = new MeshStandardMaterial({ color: accent, metalness: 0.36, roughness: 0.32 });
+  const core = new MeshStandardMaterial({ color: '#dce6ff', metalness: 0.42, roughness: 0.22 });
+  const parts = [
+    new Mesh(plate, casing),
+    new Mesh(rings, core),
+    new Mesh(rings, casing),
+    new Mesh(rings, core),
+    new Mesh(plate, casing),
+  ];
+  group.add(new Mesh(shaft, core), ...parts);
+  return {
+    group,
+    update(time) {
+      // El giro acompaña la apertura para mostrar cada pieza sin cambiar la cámara.
+      const separation = 0.23 + 0.49 * (0.5 + 0.5 * Math.cos(time * 1.3));
+      parts.forEach((part, index) => {
+        part.position.y = (index - 2) * separation;
+        part.rotation.y = (index - 2) * (0.34 + separation * 0.72);
+      });
+      group.rotation.y = time * 0.34;
+    },
+    dispose() {
+      plate.dispose();
+      rings.dispose();
+      shaft.dispose();
+      casing.dispose();
+      core.dispose();
+    },
+  };
+}
+
 export function createThreeScene(
   canvas: HTMLCanvasElement,
   onContextChange: (lost: boolean) => void,
@@ -332,6 +485,8 @@ export function createThreeScene(
   const renderer = new WebGLRenderer({ canvas, context, alpha: true });
   const scene = new Scene();
   const camera = new PerspectiveCamera(38, 1, 0.1, 50);
+  const raycaster = new Raycaster();
+  const cursor = new Vector2();
   camera.position.set(4.5, 3.8, 6.75);
 
   const controls = new OrbitControls(camera, canvas);
@@ -439,6 +594,27 @@ export function createThreeScene(
       design.update(0);
       scene.add(design.group);
       schedule();
+      return design.choices ?? [];
+    },
+    select(index) {
+      if (!controls.enabled || lost || !design?.choices?.[index]) return;
+      design.select?.(index);
+      schedule();
+    },
+    pick(clientX, clientY) {
+      if (!controls.enabled || lost || !design?.choices) return undefined;
+      const { left, top, width, height } = canvas.getBoundingClientRect();
+      if (!width || !height) return undefined;
+      cursor.set(((clientX - left) / width) * 2 - 1, 1 - ((clientY - top) / height) * 2);
+      camera.updateMatrixWorld();
+      design.group.updateMatrixWorld(true);
+      raycaster.setFromCamera(cursor, camera);
+      for (const { object } of raycaster.intersectObject(design.group)) {
+        // Cada pieza puede tener varias mallas que comparten la misma opción.
+        const index = object.userData['choice'];
+        if (typeof index === 'number') return index;
+      }
+      return undefined;
     },
     setPlaying(next) {
       playing = next;

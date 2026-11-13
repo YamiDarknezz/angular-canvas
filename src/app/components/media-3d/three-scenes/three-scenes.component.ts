@@ -8,11 +8,13 @@ import {
   effect,
   inject,
   input,
+  output,
   signal,
   viewChild,
 } from '@angular/core';
 
 import type { SceneController, SceneVariant } from './three-scene';
+import type { SceneChoice } from './interactive-scenes';
 
 const SCENES = {
   sculpture: { title: 'Nudo escultórico', accent: '#dba46a' },
@@ -22,6 +24,12 @@ const SCENES = {
   nebula: { title: 'Nebulosa espiral', accent: '#a699ff' },
   helix: { title: 'Doble hélice', accent: '#6de4e0' },
   tiles: { title: 'Mosaico cinético', accent: '#7f9dff' },
+  pendulums: { title: 'Onda de péndulos', accent: '#ffb887' },
+  'light-trails': { title: 'Trayectorias de luz', accent: '#66f0d8' },
+  exploded: { title: 'Ensamble en despiece', accent: '#7aabff' },
+  warehouse: { title: 'Almacén interactivo', accent: '#66dabb' },
+  sales: { title: 'Embudo comercial', accent: '#efa967' },
+  teams: { title: 'Mapa de equipos', accent: '#acacff' },
 } satisfies Record<SceneVariant, { title: string; accent: string }>;
 
 /**
@@ -40,6 +48,7 @@ export class ThreeScenesComponent {
   readonly animate = input<boolean | null>(null);
   /** Presentación decorativa para fondos y paneles de otros componentes. */
   readonly decorative = input(false);
+  readonly choiceSelected = output<SceneChoice>();
 
   protected readonly scene = computed(() => SCENES[this.variant()] ?? SCENES.sculpture);
   protected readonly status = signal<'loading' | 'ready' | 'unavailable' | 'lost'>('loading');
@@ -54,11 +63,24 @@ export class ThreeScenesComponent {
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
   private readonly destroyRef = inject(DestroyRef);
   private readonly controller = signal<SceneController | null>(null);
+  protected readonly choices = signal<readonly SceneChoice[]>([]);
+  protected readonly selectedIndex = signal<number | undefined>(undefined);
+  protected readonly selectedChoice = computed(() => {
+    const index = this.selectedIndex();
+    return index === undefined ? undefined : this.choices()[index];
+  });
+  private tapStart?: { id: number; x: number; y: number };
 
   constructor() {
     afterNextRender(() => void this.mount());
     effect(() => {
-      this.controller()?.setScene(this.variant(), this.accent() ?? this.scene().accent);
+      const choices = this.controller()?.setScene(
+        this.variant(),
+        this.accent() ?? this.scene().accent,
+      );
+      this.choices.set(choices ?? []);
+      this.selectedIndex.set(undefined);
+      this.tapStart = undefined;
     });
     effect(() => this.controller()?.setPlaying(this.playing()));
     effect(() => this.controller()?.setInteractive(!this.decorative()));
@@ -74,6 +96,45 @@ export class ThreeScenesComponent {
 
   protected moveCamera(event: KeyboardEvent): void {
     if (this.controller()?.moveCamera(event.key)) event.preventDefault();
+  }
+
+  protected startTap(event: PointerEvent): void {
+    this.tapStart =
+      event.isPrimary && event.button === 0 && this.choices().length
+        ? { id: event.pointerId, x: event.clientX, y: event.clientY }
+        : undefined;
+  }
+
+  protected checkTapMovement(event: PointerEvent): void {
+    const start = this.tapStart;
+    if (
+      start &&
+      start.id === event.pointerId &&
+      Math.hypot(event.clientX - start.x, event.clientY - start.y) > 7
+    ) {
+      this.tapStart = undefined;
+    }
+  }
+
+  protected finishTap(event: PointerEvent): void {
+    this.checkTapMovement(event);
+    const start = this.tapStart;
+    this.tapStart = undefined;
+    if (!start || start.id !== event.pointerId) return;
+    const index = this.controller()?.pick(event.clientX, event.clientY);
+    if (index !== undefined) this.selectChoice(index);
+  }
+
+  protected tapCanceled(): void {
+    this.tapStart = undefined;
+  }
+
+  protected selectChoice(index: number): void {
+    const choice = this.choices()[index];
+    if (!choice || this.decorative() || this.status() !== 'ready') return;
+    this.controller()?.select(index);
+    this.selectedIndex.set(index);
+    this.choiceSelected.emit(choice);
   }
 
   private async mount(): Promise<void> {

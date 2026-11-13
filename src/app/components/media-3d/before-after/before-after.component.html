@@ -1,78 +1,63 @@
-<section class="ba-stage" [attr.data-variant]="variant()">
+<section class="comparison" [attr.data-variant]="mode()" [style.--compare-accent]="accent()">
+  <div class="labels">
+    <span><strong>Antes</strong> · Estructura</span>
+    <span><strong>Después</strong> · Acabado</span>
+  </div>
+
   <div
-    #boxEl
-    class="ba-container"
-    (mousedown)="onPointerDown($event)"
-    (mousemove)="onPointerMove($event)"
-    (mouseup)="onPointerUp()"
+    class="viewport"
+    [class.draggable]="mode() === 'split'"
+    [style.--position]="position() + '%'"
+    (pointerdown)="startDrag($event)"
+    (pointermove)="drag($event)"
+    (lostpointercapture)="stopDrag($event)"
+    aria-hidden="true"
   >
-    <!-- Capa Antes (Wireframe / Blueprint) -->
-    <div class="ba-layer layer-before">
-      <div class="blueprint-art">
-        <div class="wire-grid"></div>
-        <div class="blueprint-content">
-          <span class="layer-pill">Wireframe</span>
-          <h3>Arquitectura Base</h3>
-          <p>Estructura sin renderizar ni iluminación.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Capa Después (Renderizado Final Neón) con Clip-Path dinámico -->
-    <div
-      class="ba-layer layer-after"
-      [style.clip-path]="variant() === 'fade' ? 'none' : 'inset(0 0 0 ' + position() + '%)'"
-      [style.opacity]="variant() === 'fade' ? position() / 100 : 1"
-    >
-      <div class="render-art">
-        <div class="glow-orb"></div>
-        <div class="render-content">
-          <span class="layer-pill neon-pill">Render Final</span>
-          <h3>Acabado Iluminado</h3>
-          <p>Sombreado PBR con reflejos y partículas.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tirador Divisor de Cristal (Split mode y Scanner) -->
-    @if (variant() !== 'fade') {
-      <div class="ba-handle" [style.left.%]="position()">
-        <div class="handle-line"></div>
-        <div class="handle-thumb">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="m8 7-5 5 5 5M16 7l5 5-5 5" />
-          </svg>
+    @for (state of ['before', 'after']; track state) {
+      <div
+        class="layer"
+        [class.before]="state === 'before'"
+        [class.after]="state === 'after'"
+        [class.reveal]="state === 'after' && mode() !== 'fade'"
+        [style.opacity]="state === 'after' && mode() === 'fade' ? position() / 100 : null"
+      >
+        <div class="assembly">
+          @for (height of pieces; track $index) {
+            <div class="piece" [style.--height]="height + 'px'">
+              <span class="face top"></span>
+              <span class="face front"></span>
+              <span class="face right"></span>
+            </div>
+          }
         </div>
       </div>
     }
 
-    <!-- Control deslizante inferior si es modo Fade -->
-    @if (variant() === 'fade') {
-      <div class="fade-slider-box" (mousedown)="$event.stopPropagation()">
-        <span>Wireframe</span>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          [value]="position()"
-          (input)="position.set(+$any($event.target).value)"
-        />
-        <span>Render</span>
+    @if (mode() !== 'fade') {
+      <div class="divider" [class.beam]="mode() === 'scanner'">
+        @if (mode() === 'split') {
+          <span class="handle"></span>
+        }
       </div>
     }
   </div>
 
-  <p class="ba-hint">
-    @switch (variant()) {
-      @case ('fade') {
-        Desliza el control para fundir las dos capas [12.2.2.1]
-      }
-      @case ('scanner') {
-        Barrido continuo automático oscilante [12.2.3.1]
-      }
-      @default {
-        Arrastra el divisor central con el cursor [12.2.1.1]
-      }
+  <div class="controls">
+    <label>
+      <span>{{ mode() === 'fade' ? 'Acabado visible' : 'Posición del divisor' }}</span>
+      <input
+        #range
+        type="range"
+        min="0"
+        max="100"
+        [value]="position()"
+        (input)="scrub(range.valueAsNumber)"
+      />
+    </label>
+    @if (mode() === 'scanner' && animate() !== false) {
+      <button type="button" (click)="toggleScanner()">
+        {{ scanning() ? 'Pausar barrido' : 'Iniciar barrido' }}
+      </button>
     }
-  </p>
+  </div>
 </section>

@@ -15,6 +15,10 @@
       [attr.tabindex]="!decorative() && status() === 'ready' ? 0 : null"
       [attr.aria-hidden]="status() !== 'ready' ? 'true' : null"
       (keydown)="moveCamera($event)"
+      (pointerdown)="startTap($event)"
+      (pointermove)="checkTapMovement($event)"
+      (pointerup)="finishTap($event)"
+      (pointercancel)="tapCanceled()"
     ></canvas>
     @if (!decorative() && status() !== 'ready') {
       <p class="notice" role="status">
@@ -36,7 +40,13 @@
     <div class="controls">
       <div>
         <h2>{{ scene().title }}</h2>
-        <p>Arrastra para girar o usa las flechas.</p>
+        <p>
+          {{
+            choices().length
+              ? 'Toca una pieza o elige una opción. Arrastra para girar.'
+              : 'Arrastra para girar o usa las flechas.'
+          }}
+        </p>
       </div>
       <div class="actions">
         <button
@@ -51,5 +61,24 @@
         </button>
       </div>
     </div>
+    @if (choices().length) {
+      <div class="selection">
+        <div class="actions" role="group" aria-label="Piezas de la escena">
+          @for (choice of choices(); track choice.label; let index = $index) {
+            <button
+              type="button"
+              [attr.aria-pressed]="selectedIndex() === index"
+              [disabled]="status() !== 'ready'"
+              (click)="selectChoice(index)"
+            >
+              {{ choice.label }}
+            </button>
+          }
+        </div>
+        <p class="selection-detail" role="status">
+          {{ selectedChoice()?.detail ?? 'Selecciona una pieza para ver su detalle.' }}
+        </p>
+      </div>
+    }
   }
 </section>

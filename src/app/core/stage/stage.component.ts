@@ -105,7 +105,7 @@ export class StageComponent {
   readonly fileNames = computed(() => {
     const id = this.entry().id;
     const files = [`${id}.component.ts`, `${id}.component.html`, `${id}.component.scss`];
-    return this.isThreeScene() ? [...files, 'three-scene.ts'] : files;
+    return this.isThreeScene() ? [...files, 'three-scene.ts', 'interactive-scenes.ts'] : files;
   });
 
   /** Sub-estilos de la plantilla, para la ficha de código. */

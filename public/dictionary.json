@@ -2,8 +2,8 @@
   "version": "2.2.0",
   "totalGroups": 12,
   "totalComponents": 68,
-  "totalVariants": 194,
-  "updatedAt": "2026-11-13T14:16:09.257Z",
+  "totalVariants": 203,
+  "updatedAt": "2026-11-13T14:34:11.043Z",
   "groups": [
     {
       "id": "cards",
@@ -2338,7 +2338,7 @@
           "id": "before-after",
           "code": "12.2",
           "label": "Before & After",
-          "tagline": "Comparador visual interactivo con línea divisoria táctil de cristal y cross-fade",
+          "tagline": "Compara la estructura y el acabado de una misma pieza con divisor, fundido o barrido",
           "selector": "app-media-before-after",
           "className": "BeforeAfterComponent",
           "sourcePath": "src/app/components/media-3d/before-after",
@@ -2348,7 +2348,7 @@
               "id": "split",
               "code": "12.2.1.1",
               "label": "Split Slider",
-              "hint": "Divisor vertical interactivo arrastrable con clip-path dinámico",
+              "hint": "Arrastra el divisor o usa el control para revelar el acabado",
               "routePath": "/media-3d/before-after/split",
               "embedPath": "/embed/media-3d/before-after/split"
             },
@@ -2356,7 +2356,7 @@
               "id": "fade",
               "code": "12.2.2.1",
               "label": "Cross-Fade",
-              "hint": "Fundido suave y continuo entre estados con control de opacidad",
+              "hint": "Mezcla la estructura y el acabado de la misma pieza",
               "routePath": "/media-3d/before-after/fade",
               "embedPath": "/embed/media-3d/before-after/fade"
             },
@@ -2364,7 +2364,7 @@
               "id": "scanner",
               "code": "12.2.3.1",
               "label": "Escáner Automático",
-              "hint": "Barrido oscilante continuo de izquierda a derecha estilo escáner",
+              "hint": "Explora la pieza con un barrido automático que puedes pausar",
               "routePath": "/media-3d/before-after/scanner",
               "embedPath": "/embed/media-3d/before-after/scanner"
             }
@@ -2475,6 +2475,54 @@
               "hint": "81 baldosas se levantan y giran siguiendo una onda diagonal",
               "routePath": "/media-3d/three-scenes/tiles",
               "embedPath": "/embed/media-3d/three-scenes/tiles"
+            },
+            {
+              "id": "pendulums",
+              "code": "12.4.8.1",
+              "label": "Onda de péndulos",
+              "hint": "Trece péndulos de distintas longitudes forman patrones al oscilar",
+              "routePath": "/media-3d/three-scenes/pendulums",
+              "embedPath": "/embed/media-3d/three-scenes/pendulums"
+            },
+            {
+              "id": "light-trails",
+              "code": "12.4.9.1",
+              "label": "Trayectorias de luz",
+              "hint": "Tres puntos luminosos recorren curvas cerradas en el espacio",
+              "routePath": "/media-3d/three-scenes/light-trails",
+              "embedPath": "/embed/media-3d/three-scenes/light-trails"
+            },
+            {
+              "id": "exploded",
+              "code": "12.4.10.1",
+              "label": "Ensamble en despiece",
+              "hint": "Las piezas de un rotor se separan y vuelven a ensamblarse mientras giran",
+              "routePath": "/media-3d/three-scenes/exploded",
+              "embedPath": "/embed/media-3d/three-scenes/exploded"
+            },
+            {
+              "id": "warehouse",
+              "code": "12.4.11.1",
+              "label": "Almacén interactivo",
+              "hint": "Selecciona recepción, almacenaje o despacho para destacar su zona y ver su detalle",
+              "routePath": "/media-3d/three-scenes/warehouse",
+              "embedPath": "/embed/media-3d/three-scenes/warehouse"
+            },
+            {
+              "id": "sales",
+              "code": "12.4.12.1",
+              "label": "Embudo comercial",
+              "hint": "Separa una etapa del embudo para consultar sus cifras de ejemplo",
+              "routePath": "/media-3d/three-scenes/sales",
+              "embedPath": "/embed/media-3d/three-scenes/sales"
+            },
+            {
+              "id": "teams",
+              "code": "12.4.13.1",
+              "label": "Mapa de equipos",
+              "hint": "Eleva y resalta los equipos de talento, desarrollo o bienestar",
+              "routePath": "/media-3d/three-scenes/teams",
+              "embedPath": "/embed/media-3d/three-scenes/teams"
             }
           ]
         },
@@ -2518,6 +2566,30 @@
               "hint": "Baldosas animadas sobre un fondo azul",
               "routePath": "/media-3d/three-login/tiles",
               "embedPath": "/embed/media-3d/three-login/tiles"
+            },
+            {
+              "id": "operations",
+              "code": "12.5.4.1",
+              "label": "Acceso de Operaciones",
+              "hint": "Portal de inventario y despachos con un almacén isométrico",
+              "routePath": "/media-3d/three-login/operations",
+              "embedPath": "/embed/media-3d/three-login/operations"
+            },
+            {
+              "id": "commercial",
+              "code": "12.5.5.1",
+              "label": "Acceso Comercial",
+              "hint": "Portal de clientes y oportunidades con un embudo comercial 3D",
+              "routePath": "/media-3d/three-login/commercial",
+              "embedPath": "/embed/media-3d/three-login/commercial"
+            },
+            {
+              "id": "hr",
+              "code": "12.5.6.1",
+              "label": "Acceso de RR. HH.",
+              "hint": "Portal de personal con grupos de figuras y una paleta violeta",
+              "routePath": "/media-3d/three-login/hr",
+              "embedPath": "/embed/media-3d/three-login/hr"
             }
           ]
         }

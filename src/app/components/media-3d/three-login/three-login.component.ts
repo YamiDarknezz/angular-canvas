@@ -11,9 +11,48 @@ import {
 import { ThreeScenesComponent } from '../three-scenes/three-scenes.component';
 
 const THEMES = {
-  waves: { scene: 'waves', accent: '#5ce2bd', panel: '#102b28' },
-  nebula: { scene: 'nebula', accent: '#b4a5ff', panel: '#221c3d' },
-  tiles: { scene: 'tiles', accent: '#9abaff', panel: '#172541' },
+  waves: {
+    scene: 'waves',
+    accent: '#5ce2bd',
+    panel: '#102b28',
+    title: 'Inicia sesión',
+    description: 'Ingresa tu correo y contraseña.',
+  },
+  nebula: {
+    scene: 'nebula',
+    accent: '#b4a5ff',
+    panel: '#221c3d',
+    title: 'Inicia sesión',
+    description: 'Ingresa tu correo y contraseña.',
+  },
+  tiles: {
+    scene: 'tiles',
+    accent: '#9abaff',
+    panel: '#172541',
+    title: 'Inicia sesión',
+    description: 'Ingresa tu correo y contraseña.',
+  },
+  operations: {
+    scene: 'warehouse',
+    accent: '#71dbc4',
+    panel: '#173c38',
+    title: 'Portal de operaciones',
+    description: 'Ingresa con tu cuenta para consultar inventario y despachos.',
+  },
+  commercial: {
+    scene: 'sales',
+    accent: '#ffb982',
+    panel: '#482819',
+    title: 'Portal comercial',
+    description: 'Ingresa con tu cuenta para gestionar clientes y oportunidades.',
+  },
+  hr: {
+    scene: 'teams',
+    accent: '#bcb5ff',
+    panel: '#30265a',
+    title: 'Portal de RR. HH.',
+    description: 'Ingresa con tu cuenta para acceder a los servicios de personal.',
+  },
 } as const;
 
 type LoginVariant = keyof typeof THEMES;
@@ -44,6 +83,8 @@ export class ThreeLoginComponent {
   readonly animate = input<boolean | null>(null);
   readonly authenticate = input<((credentials: LoginCredentials) => Promise<void>) | null>(null);
   readonly recoveryUrl = input<string | null>(null);
+  readonly title = input<string | null>(null);
+  readonly description = input<string | null>(null);
 
   protected readonly theme = computed(() => THEMES[this.variant()] ?? THEMES.waves);
   protected readonly revealPassword = signal(false);

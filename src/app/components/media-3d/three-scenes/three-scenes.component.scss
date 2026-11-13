@@ -85,6 +85,14 @@ p {
   gap: 0.5rem;
 }
 
+.selection {
+  padding: 0 clamp(0.875rem, 3vw, 1.5rem) 1rem;
+}
+
+.selection-detail {
+  margin-block-start: 0.65rem;
+}
+
 button {
   min-block-size: 44px;
   padding: 0.45rem 0.8rem;
@@ -98,6 +106,11 @@ button {
 
   &:enabled:hover {
     border-color: var(--scene-accent);
+  }
+
+  &[aria-pressed='true'] {
+    border-color: var(--scene-accent);
+    background: color-mix(in srgb, var(--scene-accent) 24%, #20232d);
   }
 
   &:disabled {

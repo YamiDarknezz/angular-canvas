@@ -18,8 +18,8 @@
   </div>
 
   <div class="content">
-    <h2>Inicia sesión</h2>
-    <p class="description">Ingresa tu correo y contraseña.</p>
+    <h2>{{ title() ?? theme().title }}</h2>
+    <p class="description">{{ description() ?? theme().description }}</p>
 
     <form method="post" (submit)="submit($event, email, password)" [attr.aria-busy]="pending()">
       <label>

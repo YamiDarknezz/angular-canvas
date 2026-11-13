@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **68 Componentes** · **194 Efectos / Sub-estilos Únicos**
+> Total: **12 Categorías** · **68 Componentes** · **203 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -339,9 +339,9 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`12.1.1.1`** | Tilt Card 3D (`12.1`) | **Giroscopio 3D**<br><sub>Inclinación reactiva según el puntero con reflejo especular dinámico</sub> | `<app-media-tilt-card>` | `src/app/components/media-3d/tilt-card` | `<app-media-tilt-card [variant]="'gyro'" />` |
 | **`12.1.2.1`** | Tilt Card 3D (`12.1`) | **Capas Parallax Z**<br><sub>Capas desacopladas flotando en el eje Z con sensación de profundidad</sub> | `<app-media-tilt-card>` | `src/app/components/media-3d/tilt-card` | `<app-media-tilt-card [variant]="'layers'" />` |
 | **`12.1.3.1`** | Tilt Card 3D (`12.1`) | **Prisma Holográfico**<br><sub>Gradiente iridiscente que muta de tono según el ángulo de inclinación</sub> | `<app-media-tilt-card>` | `src/app/components/media-3d/tilt-card` | `<app-media-tilt-card [variant]="'hologram'" />` |
-| **`12.2.1.1`** | Before & After (`12.2`) | **Split Slider**<br><sub>Divisor vertical interactivo arrastrable con clip-path dinámico</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'split'" />` |
-| **`12.2.2.1`** | Before & After (`12.2`) | **Cross-Fade**<br><sub>Fundido suave y continuo entre estados con control de opacidad</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'fade'" />` |
-| **`12.2.3.1`** | Before & After (`12.2`) | **Escáner Automático**<br><sub>Barrido oscilante continuo de izquierda a derecha estilo escáner</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'scanner'" />` |
+| **`12.2.1.1`** | Before & After (`12.2`) | **Split Slider**<br><sub>Arrastra el divisor o usa el control para revelar el acabado</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'split'" />` |
+| **`12.2.2.1`** | Before & After (`12.2`) | **Cross-Fade**<br><sub>Mezcla la estructura y el acabado de la misma pieza</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'fade'" />` |
+| **`12.2.3.1`** | Before & After (`12.2`) | **Escáner Automático**<br><sub>Explora la pieza con un barrido automático que puedes pausar</sub> | `<app-media-before-after>` | `src/app/components/media-3d/before-after` | `<app-media-before-after [variant]="'scanner'" />` |
 | **`12.3.1.1`** | Audio Visualizer (`12.3`) | **Ecualizador Estéreo**<br><sub>32 bandas de frecuencia con oscilación reactiva y reflejo de piso</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'bars'" />` |
 | **`12.3.2.1`** | Audio Visualizer (`12.3`) | **Anillos de Pulso**<br><sub>Ondas circulares concéntricas de pulso radial acústico</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'radial'" />` |
 | **`12.3.3.1`** | Audio Visualizer (`12.3`) | **Onda Sinusoidal**<br><sub>Trazado continuo suave con oscilación espectral y resplandor neón</sub> | `<app-media-audio-visualizer>` | `src/app/components/media-3d/audio-visualizer` | `<app-media-audio-visualizer [variant]="'wave'" />` |
@@ -352,9 +352,18 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`12.4.5.1`** | Escenas Three.js (`12.4`) | **Nebulosa espiral**<br><sub>1 800 partículas forman cuatro brazos alrededor de un núcleo luminoso</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'nebula'" />` |
 | **`12.4.6.1`** | Escenas Three.js (`12.4`) | **Doble hélice**<br><sub>Dos hebras de esferas facetadas giran alrededor de un eje común</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'helix'" />` |
 | **`12.4.7.1`** | Escenas Three.js (`12.4`) | **Mosaico cinético**<br><sub>81 baldosas se levantan y giran siguiendo una onda diagonal</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'tiles'" />` |
+| **`12.4.8.1`** | Escenas Three.js (`12.4`) | **Onda de péndulos**<br><sub>Trece péndulos de distintas longitudes forman patrones al oscilar</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'pendulums'" />` |
+| **`12.4.9.1`** | Escenas Three.js (`12.4`) | **Trayectorias de luz**<br><sub>Tres puntos luminosos recorren curvas cerradas en el espacio</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'light-trails'" />` |
+| **`12.4.10.1`** | Escenas Three.js (`12.4`) | **Ensamble en despiece**<br><sub>Las piezas de un rotor se separan y vuelven a ensamblarse mientras giran</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'exploded'" />` |
+| **`12.4.11.1`** | Escenas Three.js (`12.4`) | **Almacén interactivo**<br><sub>Selecciona recepción, almacenaje o despacho para destacar su zona y ver su detalle</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'warehouse'" />` |
+| **`12.4.12.1`** | Escenas Three.js (`12.4`) | **Embudo comercial**<br><sub>Separa una etapa del embudo para consultar sus cifras de ejemplo</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'sales'" />` |
+| **`12.4.13.1`** | Escenas Three.js (`12.4`) | **Mapa de equipos**<br><sub>Eleva y resalta los equipos de talento, desarrollo o bienestar</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'teams'" />` |
 | **`12.5.1.1`** | Login 3D (`12.5`) | **Acceso con ondas**<br><sub>Formulario junto al campo de ondas 3D en color menta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'waves'" />` |
 | **`12.5.2.1`** | Login 3D (`12.5`) | **Acceso con nebulosa**<br><sub>Partículas en espiral con una paleta violeta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'nebula'" />` |
 | **`12.5.3.1`** | Login 3D (`12.5`) | **Acceso con mosaico**<br><sub>Baldosas animadas sobre un fondo azul</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'tiles'" />` |
+| **`12.5.4.1`** | Login 3D (`12.5`) | **Acceso de Operaciones**<br><sub>Portal de inventario y despachos con un almacén isométrico</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'operations'" />` |
+| **`12.5.5.1`** | Login 3D (`12.5`) | **Acceso Comercial**<br><sub>Portal de clientes y oportunidades con un embudo comercial 3D</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'commercial'" />` |
+| **`12.5.6.1`** | Login 3D (`12.5`) | **Acceso de RR. HH.**<br><sub>Portal de personal con grupos de figuras y una paleta violeta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'hr'" />` |
 
 **Escenas Three.js** · `npm install three@^0.184.0` · `npm install -D @types/three@^0.184.1`
 
