@@ -1,17 +1,25 @@
 // Dependencia de ejecución: three. OrbitControls viene incluido en el mismo paquete.
 import {
   AmbientLight,
+  AdditiveBlending,
   BoxGeometry,
+  BufferAttribute,
+  BufferGeometry,
   Color,
   DirectionalLight,
+  DoubleSide,
   DynamicDrawUsage,
   Group,
   IcosahedronGeometry,
   InstancedMesh,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Object3D,
   PerspectiveCamera,
+  PlaneGeometry,
+  Points,
+  PointsMaterial,
   Scene,
   TorusGeometry,
   TorusKnotGeometry,
@@ -19,7 +27,7 @@ import {
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-export type SceneVariant = 'sculpture' | 'orbit' | 'waves';
+export type SceneVariant = 'sculpture' | 'orbit' | 'waves' | 'dunes' | 'nebula' | 'helix' | 'tiles';
 
 interface Design {
   readonly group: Group;
@@ -30,6 +38,7 @@ interface Design {
 export interface SceneController {
   setScene(variant: SceneVariant, accent: string): void;
   setPlaying(playing: boolean): void;
+  setInteractive(interactive: boolean): void;
   moveCamera(key: string): boolean;
   resetView(): void;
   dispose(): void;
@@ -37,6 +46,17 @@ export interface SceneController {
 
 /** Añade nuevas escenas aquí. Cada diseño es dueño de sus propios recursos GPU. */
 function buildDesign(variant: SceneVariant, accent: string): Design {
+  switch (variant) {
+    case 'dunes':
+      return buildDunes(accent);
+    case 'nebula':
+      return buildNebula(accent);
+    case 'helix':
+      return buildHelix(accent);
+    case 'tiles':
+      return buildTiles(accent);
+  }
+
   const group = new Group();
   const color = new Color(accent);
   const material = new MeshStandardMaterial({ color, roughness: 0.32, metalness: 0.25 });
@@ -121,6 +141,179 @@ function buildDesign(variant: SceneVariant, accent: string): Design {
       group.rotation.set(0.4 + Math.sin(time * 0.4) * 0.24, time * 0.48, -0.22);
     },
     dispose() {
+      geometry.dispose();
+      material.dispose();
+    },
+  };
+}
+
+function buildDunes(accent: string): Design {
+  const group = new Group();
+  const geometry = new PlaneGeometry(4.5, 4.5, 40, 40).rotateX(-Math.PI / 2);
+  const positions = geometry.getAttribute('position');
+  if (positions instanceof BufferAttribute) positions.setUsage(DynamicDrawUsage);
+  const surface = new MeshStandardMaterial({
+    color: new Color(accent).multiplyScalar(0.48),
+    roughness: 0.64,
+    side: DoubleSide,
+  });
+  const lines = new MeshBasicMaterial({
+    color: accent,
+    wireframe: true,
+    opacity: 0.26,
+    transparent: true,
+  });
+  const wire = new Mesh(geometry, lines);
+  wire.position.y = 0.008;
+  group.add(new Mesh(geometry, surface), wire);
+
+  return {
+    group,
+    update(time) {
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i);
+        const z = positions.getZ(i);
+        positions.setY(
+          i,
+          0.36 * Math.sin(x * 2.1 + z - time * 1.1) + 0.22 * Math.cos(z * 2.6 + time * 0.8),
+        );
+      }
+      positions.needsUpdate = true;
+      geometry.computeVertexNormals();
+    },
+    dispose() {
+      geometry.dispose();
+      surface.dispose();
+      lines.dispose();
+    },
+  };
+}
+
+function buildNebula(accent: string): Design {
+  const group = new Group();
+  const count = 1800;
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  const tint = new Color(accent);
+  const core = new Color('#fff0db');
+  const color = new Color();
+  // Secuencia determinista para conservar el mismo encuadre cada vez que se abre la escena.
+  for (let i = 0; i < count; i++) {
+    const radius = 0.12 + 2.35 * Math.sqrt(i / count);
+    const noise = ((i * 0.61803398875) % 1) - 0.5;
+    const angle = (i % 4) * (Math.PI / 2) + radius * 1.9 + noise * (1.65 - radius * 0.36);
+    const index = i * 3;
+    positions[index] = Math.cos(angle) * radius;
+    positions[index + 1] = noise * (0.55 - radius * 0.13);
+    positions[index + 2] = Math.sin(angle) * radius;
+    color
+      .copy(tint)
+      .lerp(core, Math.max(0, 1 - radius * 0.47))
+      .multiplyScalar(0.48 + Math.abs(noise));
+    color.toArray(colors, index);
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new BufferAttribute(colors, 3));
+  const material = new PointsMaterial({
+    size: 0.034,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.84,
+    depthWrite: false,
+    blending: AdditiveBlending,
+  });
+  group.add(new Points(geometry, material));
+  return {
+    group,
+    update(time) {
+      group.rotation.set(-0.25, time * 0.16, 0.12);
+    },
+    dispose() {
+      geometry.dispose();
+      material.dispose();
+    },
+  };
+}
+
+function buildHelix(accent: string): Design {
+  const group = new Group();
+  const steps = 30;
+  const bead = new IcosahedronGeometry(0.105, 1);
+  const bar = new BoxGeometry(1.48, 0.025, 0.025);
+  const material = new MeshStandardMaterial({ roughness: 0.32, metalness: 0.2 });
+  const beads = new InstancedMesh(bead, material, steps * 2);
+  const bars = new InstancedMesh(bar, material, steps);
+  const tint = new Color(accent);
+  const complement = tint.clone().lerp(new Color('#e1eaff'), 0.58);
+  const transform = new Object3D();
+  for (let i = 0; i < steps; i++) {
+    const angle = i * 0.26;
+    const y = (i - (steps - 1) / 2) * 0.115;
+    const x = 0.75 * Math.cos(angle);
+    const z = 0.75 * Math.sin(angle);
+    transform.position.set(x, y, z);
+    transform.updateMatrix();
+    beads.setMatrixAt(i * 2, transform.matrix);
+    beads.setColorAt(i * 2, tint);
+    transform.position.set(-x, y, -z);
+    transform.updateMatrix();
+    beads.setMatrixAt(i * 2 + 1, transform.matrix);
+    beads.setColorAt(i * 2 + 1, complement);
+    transform.position.set(0, y, 0);
+    transform.rotation.y = -angle;
+    transform.updateMatrix();
+    bars.setMatrixAt(i, transform.matrix);
+    bars.setColorAt(i, tint);
+    transform.rotation.y = 0;
+  }
+  group.add(beads, bars);
+  return {
+    group,
+    update(time) {
+      group.rotation.set(0, time * 0.45, -0.32);
+    },
+    dispose() {
+      beads.dispose();
+      bars.dispose();
+      bead.dispose();
+      bar.dispose();
+      material.dispose();
+    },
+  };
+}
+
+function buildTiles(accent: string): Design {
+  const group = new Group();
+  const side = 9;
+  const geometry = new BoxGeometry(0.36, 0.09, 0.36);
+  const material = new MeshStandardMaterial({ roughness: 0.28, metalness: 0.32 });
+  const tiles = new InstancedMesh(geometry, material, side ** 2);
+  tiles.instanceMatrix.setUsage(DynamicDrawUsage);
+  const transform = new Object3D();
+  const tint = new Color(accent);
+  const color = new Color();
+  for (let i = 0; i < tiles.count; i++) {
+    color.copy(tint).multiplyScalar(0.48 + ((i * 7) % side) * 0.09);
+    tiles.setColorAt(i, color);
+  }
+  group.add(tiles);
+  return {
+    group,
+    update(time) {
+      for (let i = 0; i < tiles.count; i++) {
+        const x = (i % side) - (side - 1) / 2;
+        const z = Math.floor(i / side) - (side - 1) / 2;
+        const pulse = Math.max(0, Math.sin(time * 1.8 - (x + z) * 0.6));
+        transform.position.set(x * 0.46, pulse * 0.57, z * 0.46);
+        transform.rotation.x = pulse * Math.PI * 0.68;
+        transform.updateMatrix();
+        tiles.setMatrixAt(i, transform.matrix);
+      }
+      tiles.instanceMatrix.needsUpdate = true;
+    },
+    dispose() {
+      tiles.dispose();
       geometry.dispose();
       material.dispose();
     },
@@ -231,6 +424,10 @@ export function createThreeScene(
   canvas.addEventListener('webglcontextrestored', onRestored);
 
   return {
+    setInteractive(interactive) {
+      controls.enabled = interactive;
+      canvas.style.touchAction = interactive ? 'none' : 'auto';
+    },
     setScene(variant, accent) {
       if (design) {
         scene.remove(design.group);

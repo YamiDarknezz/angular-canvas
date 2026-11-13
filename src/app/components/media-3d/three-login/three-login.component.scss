@@ -1,0 +1,179 @@
+:host {
+  display: block;
+  color: #f5f7fc;
+  font-family: inherit;
+}
+
+.login {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(17rem, 0.9fr);
+  overflow: hidden;
+  max-inline-size: 64rem;
+  margin-inline: auto;
+  border: 1px solid #3d4557;
+  border-radius: 1rem;
+  background: #121722;
+  color-scheme: dark;
+}
+
+.artwork {
+  position: relative;
+  min-block-size: 25rem;
+  background: var(--login-panel);
+}
+
+app-media-three-scenes {
+  position: absolute;
+  inset: 0;
+  --three-scene-backdrop: radial-gradient(ellipse at 50% 44%, var(--login-panel), #10151f 78%);
+}
+
+button,
+input {
+  box-sizing: border-box;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.motion {
+  position: absolute;
+  inset-block-end: 0.9rem;
+  inset-inline-start: 0.9rem;
+  min-block-size: 44px;
+  padding-inline: 0.8rem;
+  border: 1px solid #69798d;
+  border-radius: 0.4rem;
+  background: #111722;
+  color: inherit;
+  font-size: 0.78rem;
+}
+
+.content {
+  align-self: center;
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.description,
+.demo {
+  margin: 0.65rem 0 0;
+  color: #bac7db;
+}
+
+.demo {
+  margin-block-start: 1rem;
+  font-size: 0.8rem;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 1.6rem;
+}
+
+label,
+.field {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+input {
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 46px;
+  padding-inline: 0.75rem;
+  border: 1px solid #4a5870;
+  border-radius: 0.45rem;
+  background: #171f2d;
+  color: inherit;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: #a0aec2;
+}
+
+.password {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.password input {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.password button {
+  min-inline-size: 4.5rem;
+  padding-inline: 0.55rem;
+  border: 1px solid #4a5870;
+  border-inline-start: 0;
+  border-start-end-radius: 0.45rem;
+  border-end-end-radius: 0.45rem;
+  background: #222d40;
+  color: inherit;
+  font-size: 0.8rem;
+}
+
+.recovery {
+  justify-self: end;
+  color: #c2d7ff;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.submit {
+  min-block-size: 46px;
+  border: 0;
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--login-accent) 60%, white);
+  color: #10151f;
+  font-weight: 750;
+}
+
+button:enabled:hover {
+  filter: brightness(1.16);
+}
+
+.submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+:where(input, a, button):focus-visible {
+  z-index: 1;
+  outline: 2px solid #eef8ff;
+  outline-offset: 2px;
+}
+
+.status {
+  margin: 0;
+  color: #a7f0d8;
+  font-size: 0.87rem;
+}
+
+.error {
+  color: #ffb9b9;
+}
+
+@media (max-width: 650px) {
+  .login {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .artwork {
+    min-block-size: clamp(10rem, 27dvh, 15rem);
+  }
+}

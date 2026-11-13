@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **67 Componentes** · **187 Efectos / Sub-estilos Únicos**
+> Total: **12 Categorías** · **68 Componentes** · **194 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -348,8 +348,19 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`12.4.1.1`** | Escenas Three.js (`12.4`) | **Nudo escultórico**<br><sub>Nudo toroidal giratorio con iluminación cálida y contraluz</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'sculpture'" />` |
 | **`12.4.2.1`** | Escenas Three.js (`12.4`) | **Anillos orbitales**<br><sub>Tres satélites recorren órbitas inclinadas alrededor de un núcleo facetado</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'orbit'" />` |
 | **`12.4.3.1`** | Escenas Three.js (`12.4`) | **Campo de ondas**<br><sub>Una onda radial recorre 289 columnas renderizadas con InstancedMesh</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'waves'" />` |
+| **`12.4.4.1`** | Escenas Three.js (`12.4`) | **Dunas de luz**<br><sub>Una superficie ondulante combina relieve iluminado y una malla de alambre</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'dunes'" />` |
+| **`12.4.5.1`** | Escenas Three.js (`12.4`) | **Nebulosa espiral**<br><sub>1 800 partículas forman cuatro brazos alrededor de un núcleo luminoso</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'nebula'" />` |
+| **`12.4.6.1`** | Escenas Three.js (`12.4`) | **Doble hélice**<br><sub>Dos hebras de esferas facetadas giran alrededor de un eje común</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'helix'" />` |
+| **`12.4.7.1`** | Escenas Three.js (`12.4`) | **Mosaico cinético**<br><sub>81 baldosas se levantan y giran siguiendo una onda diagonal</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'tiles'" />` |
+| **`12.5.1.1`** | Login 3D (`12.5`) | **Acceso con ondas**<br><sub>Formulario junto al campo de ondas 3D en color menta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'waves'" />` |
+| **`12.5.2.1`** | Login 3D (`12.5`) | **Acceso con nebulosa**<br><sub>Partículas en espiral con una paleta violeta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'nebula'" />` |
+| **`12.5.3.1`** | Login 3D (`12.5`) | **Acceso con mosaico**<br><sub>Baldosas animadas sobre un fondo azul</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'tiles'" />` |
 
 **Escenas Three.js** · `npm install three@^0.184.0` · `npm install -D @types/three@^0.184.1`
+
+**Login 3D** · `npm install three@^0.184.0` · `npm install -D @types/three@^0.184.1`
+
+Login 3D requiere estas carpetas hermanas: `src/app/components/media-3d/three-scenes`.
 
 ---
 

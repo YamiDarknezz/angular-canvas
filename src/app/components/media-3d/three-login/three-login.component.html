@@ -1,0 +1,75 @@
+<section
+  class="login"
+  [style.--login-accent]="accent() || theme().accent"
+  [style.--login-panel]="theme().panel"
+>
+  <div class="artwork">
+    <app-media-three-scenes
+      [variant]="theme().scene"
+      [accent]="accent() || theme().accent"
+      [animate]="paused() ? false : animate()"
+      [decorative]="true"
+    />
+    @if (animate() !== false) {
+      <button class="motion" type="button" (click)="paused.set(!paused())">
+        {{ paused() ? 'Reanudar fondo' : 'Pausar fondo' }}
+      </button>
+    }
+  </div>
+
+  <div class="content">
+    <h2>Inicia sesión</h2>
+    <p class="description">Ingresa tu correo y contraseña.</p>
+
+    <form method="post" (submit)="submit($event, email, password)" [attr.aria-busy]="pending()">
+      <label>
+        <span>Correo electrónico</span>
+        <input
+          #email
+          type="email"
+          autocomplete="username"
+          placeholder="nombre@ejemplo.com"
+          required
+          [readOnly]="pending()"
+        />
+      </label>
+
+      <div class="field">
+        <label [attr.for]="passwordId">Contraseña</label>
+        <div class="password">
+          <input
+            #password
+            [id]="passwordId"
+            [type]="revealPassword() ? 'text' : 'password'"
+            autocomplete="current-password"
+            required
+            [readOnly]="pending()"
+          />
+          <button
+            type="button"
+            (click)="revealPassword.set(!revealPassword())"
+            [attr.aria-label]="revealPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          >
+            {{ revealPassword() ? 'Ocultar' : 'Mostrar' }}
+          </button>
+        </div>
+      </div>
+
+      @if (recoveryUrl(); as url) {
+        <a class="recovery" [href]="url">Olvidé mi contraseña</a>
+      }
+
+      <button class="submit" type="submit" [disabled]="pending()">
+        {{ pending() ? 'Iniciando sesión…' : 'Entrar' }}
+      </button>
+
+      @if (message()) {
+        <p class="status" [class.error]="failed()" role="status">{{ message() }}</p>
+      }
+    </form>
+
+    @if (!authenticate()) {
+      <p class="demo">Modo demo. Usa datos de ejemplo.</p>
+    }
+  </div>
+</section>

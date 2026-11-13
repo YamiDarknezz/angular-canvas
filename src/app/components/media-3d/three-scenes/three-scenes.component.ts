@@ -18,6 +18,10 @@ const SCENES = {
   sculpture: { title: 'Nudo escultórico', accent: '#dba46a' },
   orbit: { title: 'Anillos orbitales', accent: '#7fb9ff' },
   waves: { title: 'Campo de ondas', accent: '#5ce2bd' },
+  dunes: { title: 'Dunas de luz', accent: '#e8a977' },
+  nebula: { title: 'Nebulosa espiral', accent: '#a699ff' },
+  helix: { title: 'Doble hélice', accent: '#6de4e0' },
+  tiles: { title: 'Mosaico cinético', accent: '#7f9dff' },
 } satisfies Record<SceneVariant, { title: string; accent: string }>;
 
 /**
@@ -34,6 +38,8 @@ export class ThreeScenesComponent {
   readonly variant = input<SceneVariant>('sculpture');
   readonly accent = input<string | null>(null);
   readonly animate = input<boolean | null>(null);
+  /** Presentación decorativa para fondos y paneles de otros componentes. */
+  readonly decorative = input(false);
 
   protected readonly scene = computed(() => SCENES[this.variant()] ?? SCENES.sculpture);
   protected readonly status = signal<'loading' | 'ready' | 'unavailable' | 'lost'>('loading');
@@ -55,6 +61,7 @@ export class ThreeScenesComponent {
       this.controller()?.setScene(this.variant(), this.accent() ?? this.scene().accent);
     });
     effect(() => this.controller()?.setPlaying(this.playing()));
+    effect(() => this.controller()?.setInteractive(!this.decorative()));
   }
 
   protected toggleAnimation(): void {

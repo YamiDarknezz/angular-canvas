@@ -80,6 +80,9 @@ if (isVariant) {
 }
 console.log(`   Selector  : <${parentComp.selector} ${isVariant ? `[variant]="'${match.id}'"` : ''} />`);
 console.log(`   Ubicación : ${parentComp.sourcePath}`);
+for (const folder of parentComp.supportingFolders ?? []) {
+  console.log(`   También copia: ${folder}`);
+}
 for (const command of parentComp.npmInstall ?? []) {
   console.log(`   Instalar  : ${command}`);
 }
@@ -89,27 +92,28 @@ if (parentComp.requiresForms) {
 console.log(`======================================================\n`);
 
 if (destDir) {
-  const srcFullPath = path.join(__dirname, '..', parentComp.sourcePath);
-  if (!fs.existsSync(srcFullPath)) {
-    console.error(`❌ Carpeta fuente no encontrada: ${srcFullPath}`);
+  const sources = [parentComp.sourcePath, ...(parentComp.supportingFolders ?? [])].map(
+    (folder) => path.join(__dirname, '..', folder),
+  );
+  const missing = sources.find((folder) => !fs.existsSync(folder));
+  if (missing) {
+    console.error(`❌ Carpeta fuente no encontrada: ${missing}`);
     process.exit(1);
   }
 
-  const targetFolder = path.join(path.resolve(destDir), path.basename(parentComp.sourcePath));
-  if (!fs.existsSync(targetFolder)) {
+  const destination = path.resolve(destDir);
+  for (const source of sources) {
+    const targetFolder = path.join(destination, path.basename(source));
     fs.mkdirSync(targetFolder, { recursive: true });
-  }
-
-  const files = fs.readdirSync(srcFullPath);
-  for (const f of files) {
-    const sFile = path.join(srcFullPath, f);
-    const dFile = path.join(targetFolder, f);
-    if (fs.statSync(sFile).isFile()) {
-      fs.copyFileSync(sFile, dFile);
-      console.log(`  ✓ Copiado: ${f} -> ${dFile}`);
+    for (const file of fs.readdirSync(source, { withFileTypes: true })) {
+      if (file.isFile()) {
+        const target = path.join(targetFolder, file.name);
+        fs.copyFileSync(path.join(source, file.name), target);
+        console.log(`  ✓ Copiado: ${file.name} -> ${target}`);
+      }
     }
   }
-  console.log(`\n🎉 Componente extraído con éxito en: ${targetFolder}`);
+  console.log(`\n🎉 Componente extraído con éxito en: ${destination}`);
 } else {
   console.log(`Para copiar directamente los archivos añade: --dest <carpeta_destino>`);
 }

@@ -132,6 +132,9 @@ export class StageComponent {
       '// Copia la carpeta completa y ajusta la ruta de importación:',
       `//    ${entry.sourcePath}/`,
       `//    ${this.fileNames().join(' · ')}`,
+      ...(entry.supportingFolders ?? []).map(
+        (folder) => `// Copia como carpeta hermana: ${folder}/`,
+      ),
       ...this.installCommands().map((command) => `// ${command}`),
       '',
       "import { Component } from '@angular/core';",
@@ -190,7 +193,7 @@ export class StageComponent {
 
   private tintAttribute(tint: string): string {
     if (!tint) return '';
-    return this.isThreeScene() ? ` accent="${tint}"` : ` [style.--ac-accent]="'${tint}'"`;
+    return this.entry().sceneControls ? ` accent="${tint}"` : ` [style.--ac-accent]="'${tint}'"`;
   }
 
   private installCommands(): readonly string[] {

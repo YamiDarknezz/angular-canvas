@@ -1,9 +1,9 @@
 {
   "version": "2.2.0",
   "totalGroups": 12,
-  "totalComponents": 67,
-  "totalVariants": 187,
-  "updatedAt": "2026-11-13T02:13:55.315Z",
+  "totalComponents": 68,
+  "totalVariants": 194,
+  "updatedAt": "2026-11-13T14:16:09.257Z",
   "groups": [
     {
       "id": "cards",
@@ -2410,7 +2410,7 @@
           "id": "three-scenes",
           "code": "12.4",
           "label": "Escenas Three.js",
-          "tagline": "Tres escenas WebGL 2 con iluminación, cámara orbital y control de animación",
+          "tagline": "Escenas WebGL 2 con iluminación, cámara orbital y control de animación",
           "selector": "app-media-three-scenes",
           "className": "ThreeScenesComponent",
           "sourcePath": "src/app/components/media-3d/three-scenes",
@@ -2443,6 +2443,81 @@
               "hint": "Una onda radial recorre 289 columnas renderizadas con InstancedMesh",
               "routePath": "/media-3d/three-scenes/waves",
               "embedPath": "/embed/media-3d/three-scenes/waves"
+            },
+            {
+              "id": "dunes",
+              "code": "12.4.4.1",
+              "label": "Dunas de luz",
+              "hint": "Una superficie ondulante combina relieve iluminado y una malla de alambre",
+              "routePath": "/media-3d/three-scenes/dunes",
+              "embedPath": "/embed/media-3d/three-scenes/dunes"
+            },
+            {
+              "id": "nebula",
+              "code": "12.4.5.1",
+              "label": "Nebulosa espiral",
+              "hint": "1 800 partículas forman cuatro brazos alrededor de un núcleo luminoso",
+              "routePath": "/media-3d/three-scenes/nebula",
+              "embedPath": "/embed/media-3d/three-scenes/nebula"
+            },
+            {
+              "id": "helix",
+              "code": "12.4.6.1",
+              "label": "Doble hélice",
+              "hint": "Dos hebras de esferas facetadas giran alrededor de un eje común",
+              "routePath": "/media-3d/three-scenes/helix",
+              "embedPath": "/embed/media-3d/three-scenes/helix"
+            },
+            {
+              "id": "tiles",
+              "code": "12.4.7.1",
+              "label": "Mosaico cinético",
+              "hint": "81 baldosas se levantan y giran siguiendo una onda diagonal",
+              "routePath": "/media-3d/three-scenes/tiles",
+              "embedPath": "/embed/media-3d/three-scenes/tiles"
+            }
+          ]
+        },
+        {
+          "id": "three-login",
+          "code": "12.5",
+          "label": "Login 3D",
+          "tagline": "Formulario de acceso con fondo animado, validación y conexión a tu servicio de sesión",
+          "selector": "app-media-three-login",
+          "className": "ThreeLoginComponent",
+          "sourcePath": "src/app/components/media-3d/three-login",
+          "npmInstall": [
+            "npm install three@^0.184.0",
+            "npm install -D @types/three@^0.184.1"
+          ],
+          "supportingFolders": [
+            "src/app/components/media-3d/three-scenes"
+          ],
+          "routePath": "/media-3d/three-login",
+          "variants": [
+            {
+              "id": "waves",
+              "code": "12.5.1.1",
+              "label": "Acceso con ondas",
+              "hint": "Formulario junto al campo de ondas 3D en color menta",
+              "routePath": "/media-3d/three-login/waves",
+              "embedPath": "/embed/media-3d/three-login/waves"
+            },
+            {
+              "id": "nebula",
+              "code": "12.5.2.1",
+              "label": "Acceso con nebulosa",
+              "hint": "Partículas en espiral con una paleta violeta",
+              "routePath": "/media-3d/three-login/nebula",
+              "embedPath": "/embed/media-3d/three-login/nebula"
+            },
+            {
+              "id": "tiles",
+              "code": "12.5.3.1",
+              "label": "Acceso con mosaico",
+              "hint": "Baldosas animadas sobre un fondo azul",
+              "routePath": "/media-3d/three-login/tiles",
+              "embedPath": "/embed/media-3d/three-login/tiles"
             }
           ]
         }

@@ -20,6 +20,22 @@
   background: radial-gradient(ellipse at 50% 55%, #262737, #0e1017 74%);
 }
 
+.scene.decorative {
+  block-size: 100%;
+  max-inline-size: none;
+  border: 0;
+  border-radius: 0;
+  pointer-events: none;
+
+  .viewport {
+    block-size: 100%;
+    background: var(
+      --three-scene-backdrop,
+      radial-gradient(ellipse at 50% 55%, #262737, #0e1017 74%)
+    );
+  }
+}
+
 canvas {
   display: block;
   inline-size: 100%;

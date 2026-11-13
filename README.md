@@ -5,7 +5,7 @@ Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `
 
 Construido con **Angular 22** (standalone components, signals, router, `@if` / `@for` y control flow reactivo).
 
-**12 categorías · 67 componentes · 187 sub-estilos indexados · 5 temas.**
+**12 categorías · 68 componentes · 194 sub-estilos indexados · 5 temas.**
 
 > 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de todos los códigos `1.1.1.1` al `10.2.3.1`.
 
@@ -248,6 +248,10 @@ El proyecto se verifica con Angular 22.
 | `12.4.1.1` | `sculpture` | Nudo toroidal iluminado |
 | `12.4.2.1` | `orbit` | Anillos y satélites alrededor de un núcleo facetado |
 | `12.4.3.1` | `waves` | Onda radial en una cuadrícula de 289 columnas |
+| `12.4.4.1` | `dunes` | Superficie ondulante con relieve y malla visible |
+| `12.4.5.1` | `nebula` | Nebulosa de 1 800 partículas en espiral |
+| `12.4.6.1` | `helix` | Doble hélice giratoria |
+| `12.4.7.1` | `tiles` | Mosaico de 81 baldosas que se levantan y giran |
 
 Desde AngularCanvas, copia la carpeta completa con el extractor.
 
@@ -272,6 +276,32 @@ reducido del sistema por defecto. Para añadir otra escena, amplía `SceneVarian
 y `buildDesign()` en `three-scene.ts`, añade su nombre y color en el componente,
 y registra su variante en el catálogo. Libera en `dispose()` las geometrías,
 materiales y texturas que cree la escena.
+
+### Login 3D
+
+Usa `12.5.1.1` para ondas, `12.5.2.1` para nebulosa o `12.5.3.1` para mosaico.
+El extractor copia `three-login` y `three-scenes` como carpetas hermanas.
+Instala los paquetes de Three.js de la sección anterior.
+
+```bash
+node scripts/extract.cjs 12.5.1.1 --dest ../mi-app/src/app/components
+```
+
+Importa `ThreeLoginComponent` en el array `imports` de tu página standalone.
+
+```html
+<app-media-three-login
+  variant="waves"
+  [authenticate]="iniciarSesion"
+  recoveryUrl="/recuperar-contrasena"
+/>
+```
+
+Pasa en `iniciarSesion` una función `(credentials: LoginCredentials) => Promise<void>`
+que llame a tu servicio de sesión. Resuelve la promesa cuando se confirme el acceso
+y recházala si falla. Tu aplicación decide cómo continuar después de iniciar sesión.
+Si omites el callback, el formulario funciona en modo demo y valida los campos
+localmente. `[animate]="false"` deja el fondo fijo.
 
 ---
 

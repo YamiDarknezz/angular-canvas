@@ -46,6 +46,7 @@ catalogNode.elements.forEach(gNode => {
       let cId = '', cCode = '', cLabel = '', cTagline = '', cSelector = '', cClassName = '', cSource = '';
       let varsNode = null;
       let npmInstall = [];
+      let supportingFolders = [];
       let requiresForms = false;
 
       cNode.properties.forEach(p => {
@@ -63,6 +64,9 @@ catalogNode.elements.forEach(gNode => {
           if (name === 'requiresForms') requiresForms = p.initializer.kind === ts.SyntaxKind.TrueKeyword;
           if (name === 'npmInstall' && ts.isArrayLiteralExpression(p.initializer)) {
             npmInstall = p.initializer.elements.map((element) => element.text);
+          }
+          if (name === 'supportingFolders' && ts.isArrayLiteralExpression(p.initializer)) {
+            supportingFolders = p.initializer.elements.map((element) => element.text);
           }
         }
       });
@@ -101,6 +105,7 @@ catalogNode.elements.forEach(gNode => {
         className: cClassName,
         sourcePath: cSource,
         ...(npmInstall.length && { npmInstall }),
+        ...(supportingFolders.length && { supportingFolders }),
         ...(requiresForms && { requiresForms }),
         routePath: `/${gId}/${cId}`,
         variants
@@ -187,6 +192,7 @@ groups.forEach(group => {
 
   for (const comp of group.components) {
     if (comp.npmInstall) md += `\n**${comp.label}** · ${comp.npmInstall.map(command => '`' + command + '`').join(' · ')}\n`;
+    if (comp.supportingFolders) md += `\n${comp.label} requiere estas carpetas hermanas: ${comp.supportingFolders.map(folder => '`' + folder + '`').join(' · ')}.\n`;
     if (comp.requiresForms) md += `\n**${comp.label}** requiere @angular/forms en la misma versión que @angular/core.\n`;
   }
   md += `\n---\n\n`;

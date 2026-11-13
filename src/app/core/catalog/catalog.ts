@@ -42,6 +42,10 @@ export interface CatalogEntry {
   /** `true` si la plantilla importa `FormsModule` (necesita `@angular/forms`). */
   readonly requiresForms?: boolean;
   readonly npmInstall?: readonly string[];
+  /** Carpetas hermanas que necesita el componente al extraerse. */
+  readonly supportingFolders?: readonly string[];
+  /** El entorno admite tinte y movimiento mediante inputs. */
+  readonly sceneControls?: boolean;
   readonly variants: readonly CatalogVariant[];
   readonly code: string;
 }
@@ -1692,10 +1696,11 @@ export const CATALOG: readonly CatalogGroup[] = [
         id: 'three-scenes',
         code: '12.4',
         label: 'Escenas Three.js',
-        tagline: 'Tres escenas WebGL 2 con iluminación, cámara orbital y control de animación',
+        tagline: 'Escenas WebGL 2 con iluminación, cámara orbital y control de animación',
         selector: 'app-media-three-scenes',
         className: 'ThreeScenesComponent',
         sourcePath: 'src/app/components/media-3d/three-scenes',
+        sceneControls: true,
         npmInstall: ['npm install three@^0.184.0', 'npm install -D @types/three@^0.184.1'],
         variants: [
           {
@@ -1715,6 +1720,63 @@ export const CATALOG: readonly CatalogGroup[] = [
             code: '12.4.3.1',
             label: 'Campo de ondas',
             hint: 'Una onda radial recorre 289 columnas renderizadas con InstancedMesh',
+          },
+          {
+            id: 'dunes',
+            code: '12.4.4.1',
+            label: 'Dunas de luz',
+            hint: 'Una superficie ondulante combina relieve iluminado y una malla de alambre',
+          },
+          {
+            id: 'nebula',
+            code: '12.4.5.1',
+            label: 'Nebulosa espiral',
+            hint: '1 800 partículas forman cuatro brazos alrededor de un núcleo luminoso',
+          },
+          {
+            id: 'helix',
+            code: '12.4.6.1',
+            label: 'Doble hélice',
+            hint: 'Dos hebras de esferas facetadas giran alrededor de un eje común',
+          },
+          {
+            id: 'tiles',
+            code: '12.4.7.1',
+            label: 'Mosaico cinético',
+            hint: '81 baldosas se levantan y giran siguiendo una onda diagonal',
+          },
+        ],
+      },
+      {
+        id: 'three-login',
+        code: '12.5',
+        label: 'Login 3D',
+        tagline:
+          'Formulario de acceso con fondo animado, validación y conexión a tu servicio de sesión',
+        selector: 'app-media-three-login',
+        className: 'ThreeLoginComponent',
+        sourcePath: 'src/app/components/media-3d/three-login',
+        supportingFolders: ['src/app/components/media-3d/three-scenes'],
+        sceneControls: true,
+        npmInstall: ['npm install three@^0.184.0', 'npm install -D @types/three@^0.184.1'],
+        variants: [
+          {
+            id: 'waves',
+            code: '12.5.1.1',
+            label: 'Acceso con ondas',
+            hint: 'Formulario junto al campo de ondas 3D en color menta',
+          },
+          {
+            id: 'nebula',
+            code: '12.5.2.1',
+            label: 'Acceso con nebulosa',
+            hint: 'Partículas en espiral con una paleta violeta',
+          },
+          {
+            id: 'tiles',
+            code: '12.5.3.1',
+            label: 'Acceso con mosaico',
+            hint: 'Baldosas animadas sobre un fondo azul',
           },
         ],
       },
