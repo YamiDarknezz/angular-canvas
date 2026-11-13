@@ -114,6 +114,7 @@ export class StageComponent {
           'department-scenes.ts',
           'diorama-details.ts',
           'retail-scenes.ts',
+          'bodega-scene.ts',
           'sales-scene.ts',
           'hr-scene.ts',
           'finance-scene.ts',

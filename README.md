@@ -268,6 +268,7 @@ El proyecto se verifica con Angular 22.
 | `12.4.21.1` | `financial-board` | Sala de tesorería con bóveda, mesa de operaciones y servidores de auditoría. |
 | `12.4.22.1` | `budget` | Distribución de presupuesto. Redistribuye el presupuesto entre áreas con distintos escenarios. |
 | `12.4.23.1` | `checkout` | Caja y punto de venta con lector, terminal de cobro y recibo. |
+| `12.4.24.1` | `bodega` | Bodega de barrio con exhibición de surtido, pedido de reposición y entrega animada. |
 
 Desde AngularCanvas, copia la carpeta completa con el extractor.
 

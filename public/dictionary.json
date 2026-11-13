@@ -2,8 +2,8 @@
   "version": "2.2.0",
   "totalGroups": 12,
   "totalComponents": 68,
-  "totalVariants": 214,
-  "updatedAt": "2026-11-13T22:17:41.328Z",
+  "totalVariants": 215,
+  "updatedAt": "2026-11-13T22:26:19.059Z",
   "groups": [
     {
       "id": "cards",
@@ -2603,6 +2603,14 @@
               "hint": "Mostrador con cinta y lector. Escanea un pedido, cobra y emite el recibo",
               "routePath": "/media-3d/three-scenes/checkout",
               "embedPath": "/embed/media-3d/three-scenes/checkout"
+            },
+            {
+              "id": "bodega",
+              "code": "12.4.24.1",
+              "label": "Bodega de barrio",
+              "hint": "Visita comercial a una bodega. Revisa el surtido, registra el pedido y entrega las cajas",
+              "routePath": "/media-3d/three-scenes/bodega",
+              "embedPath": "/embed/media-3d/three-scenes/bodega"
             }
           ]
         },

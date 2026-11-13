@@ -41,6 +41,7 @@ import { buildFinanceDesign } from './finance-scene';
 import { buildHrDesign } from './hr-scene';
 import { buildDepartmentDesign, type DepartmentVariant } from './department-scenes';
 import { buildRetailDesign, type RetailVariant } from './retail-scenes';
+import { buildBodegaDesign } from './bodega-scene';
 
 export type SceneVariant =
   | 'sculpture'
@@ -57,6 +58,7 @@ export type SceneVariant =
   | 'sales'
   | 'teams'
   | 'financial-board'
+  | 'bodega'
   | DepartmentVariant
   | RetailVariant;
 
@@ -98,6 +100,8 @@ function buildDesign(variant: SceneVariant, accent: string, document: Document):
       return buildExplodedAssembly(accent);
     case 'warehouse':
       return buildWarehouseDesign(accent);
+    case 'bodega':
+      return buildBodegaDesign(accent, document);
     case 'sales':
       return buildSalesDesign(accent, document);
     case 'teams':

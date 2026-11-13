@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **68 Componentes** · **214 Efectos / Sub-estilos Únicos**
+> Total: **12 Categorías** · **68 Componentes** · **215 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -368,6 +368,7 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`12.4.21.1`** | Escenas Three.js (`12.4`) | **Panel financiero**<br><sub>Bóveda, mesa de operaciones con gráficos de ejemplo y servidores de auditoría</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'financial-board'" />` |
 | **`12.4.22.1`** | Escenas Three.js (`12.4`) | **Distribución de presupuesto**<br><sub>Barras de presupuesto proporcionales que se redistribuyen según el escenario seleccionado</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'budget'" />` |
 | **`12.4.23.1`** | Escenas Three.js (`12.4`) | **Caja y punto de venta**<br><sub>Mostrador con cinta y lector. Escanea un pedido, cobra y emite el recibo</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'checkout'" />` |
+| **`12.4.24.1`** | Escenas Three.js (`12.4`) | **Bodega de barrio**<br><sub>Visita comercial a una bodega. Revisa el surtido, registra el pedido y entrega las cajas</sub> | `<app-media-three-scenes>` | `src/app/components/media-3d/three-scenes` | `<app-media-three-scenes [variant]="'bodega'" />` |
 | **`12.5.1.1`** | Login 3D (`12.5`) | **Acceso con ondas**<br><sub>Formulario junto al campo de ondas 3D en color menta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'waves'" />` |
 | **`12.5.2.1`** | Login 3D (`12.5`) | **Acceso con nebulosa**<br><sub>Partículas en espiral con una paleta violeta</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'nebula'" />` |
 | **`12.5.3.1`** | Login 3D (`12.5`) | **Acceso con mosaico**<br><sub>Baldosas animadas sobre un fondo azul</sub> | `<app-media-three-login>` | `src/app/components/media-3d/three-login` | `<app-media-three-login [variant]="'tiles'" />` |

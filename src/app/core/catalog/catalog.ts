@@ -1843,6 +1843,12 @@ export const CATALOG: readonly CatalogGroup[] = [
             label: 'Caja y punto de venta',
             hint: 'Mostrador con cinta y lector. Escanea un pedido, cobra y emite el recibo',
           },
+          {
+            id: 'bodega',
+            code: '12.4.24.1',
+            label: 'Bodega de barrio',
+            hint: 'Visita comercial a una bodega. Revisa el surtido, registra el pedido y entrega las cajas',
+          },
         ],
       },
       {
