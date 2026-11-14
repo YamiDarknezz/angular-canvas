@@ -1,0 +1,145 @@
+:host {
+  display: grid;
+  padding: 1rem;
+  place-items: center;
+  font:
+    500 1rem/1.5 Inter,
+    system-ui,
+    sans-serif;
+}
+
+.panel {
+  --surface: #18272d;
+  --muted: #b0c5c6;
+  --accent: #a4e0bc;
+  --button: #294742;
+
+  inline-size: min(100%, 26rem);
+  box-sizing: border-box;
+  padding: clamp(1.15rem, 4vw, 2rem);
+  border-radius: 14px;
+  color: #f7faf8;
+  background: var(--surface);
+  box-shadow: 0 12px 36px #0a182432;
+}
+
+[data-variant='publish'] {
+  --surface: #29233a;
+  --muted: #d2c5e6;
+  --accent: #ebd1ff;
+  --button: #503969;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.37rem;
+  letter-spacing: -0.022em;
+}
+
+p {
+  margin: 0.35rem 0 1.2rem;
+  color: var(--muted);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.hold {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  min-block-size: 3.2rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 10px;
+  background: var(--button);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hold:not(:disabled):hover {
+  border-color: var(--accent);
+}
+
+.fill {
+  position: absolute;
+  inset: auto 0 0;
+  block-size: 0.28rem;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+[data-phase='holding'] .fill {
+  animation: hold-progress var(--duration) linear forwards;
+}
+
+[data-phase='ready'] .fill {
+  transform: scaleX(1);
+}
+
+@keyframes hold-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.alternative {
+  display: block;
+  margin-block-start: 0.5rem;
+  padding: 0.6rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.fallback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-block-start: 0.7rem;
+}
+
+.fallback span {
+  flex: 0 0 100%;
+  color: var(--muted);
+}
+
+.fallback button {
+  min-block-size: 2.75rem;
+  padding-inline: 0.7rem;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  background: var(--button);
+  font-size: 0.9rem;
+}
+
+.status {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-phase='holding'] .fill {
+    animation: none;
+  }
+}

@@ -1,5 +1,10 @@
 import { Type } from '@angular/core';
 
+import { HoldConfirmButtonComponent } from '../../components/buttons/hold-confirm/hold-confirm.component';
+import { TopographicComponent } from '../../components/backgrounds/topographic/topographic.component';
+import { RevealHeadingComponent } from '../../components/typography/reveal-heading/reveal-heading.component';
+import { PasswordStrengthComponent } from '../../components/forms/password-strength/password-strength.component';
+
 // Cards
 import { GlassmorphismComponent } from '../../components/cards/glassmorphism/glassmorphism.component';
 import { NeonCardComponent } from '../../components/cards/neon/neon.component';
@@ -181,6 +186,10 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['media-3d/audio-visualizer', AudioVisualizerComponent],
   ['media-3d/three-scenes', ThreeScenesComponent],
   ['media-3d/three-login', ThreeLoginComponent],
+  ['buttons/hold-confirm', HoldConfirmButtonComponent],
+  ['backgrounds/topographic', TopographicComponent],
+  ['typography/reveal-heading', RevealHeadingComponent],
+  ['forms/password-strength', PasswordStrengthComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

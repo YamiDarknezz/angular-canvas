@@ -1,0 +1,20 @@
+<section class="map" [attr.aria-label]="settings().title">
+  <svg
+    class="contours"
+    viewBox="0 0 960 420"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <g>
+      @for (contour of contours(); track $index) {
+        <path [attr.d]="contour" [class.major]="$index % 5 === 0" />
+      }
+    </g>
+  </svg>
+  <div class="content">
+    <ng-content>
+      <h2>{{ settings().title }}</h2>
+      <p>{{ settings().detail }}</p>
+    </ng-content>
+  </div>
+</section>

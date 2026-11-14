@@ -1,0 +1,127 @@
+:host {
+  --ink: #232622;
+  --paper: #f4efe3;
+  --effect: var(--reveal-accent, #9d452c);
+  display: block;
+}
+
+:host([data-variant='shutter']) {
+  --paper: #192c30;
+  --ink: #eff0de;
+  --effect: var(--reveal-accent, #9dcec2);
+}
+
+:host([data-variant='underline']) {
+  --paper: #e8eaf5;
+  --ink: #252848;
+  --effect: var(--reveal-accent, #676fc4);
+}
+
+.sample {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  min-block-size: clamp(18rem, 52svh, 31rem);
+  padding: clamp(1.4rem, 6vw, 5rem);
+  border-radius: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+h2 {
+  max-inline-size: 12ch;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.24em;
+}
+
+.word {
+  display: inline-block;
+  max-inline-size: 100%;
+  overflow: clip;
+  padding-block: 0.1em 0.18em;
+  margin-block: -0.1em -0.1em;
+  overflow-wrap: anywhere;
+}
+
+.glyph {
+  display: block;
+  animation: rise 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(min(var(--order), 8) * 75ms);
+}
+
+:host([data-variant='shutter']) .glyph {
+  animation-name: shutter;
+}
+
+:host([data-variant='underline']) .glyph {
+  padding-block-end: 0.06em;
+  background: linear-gradient(var(--effect), var(--effect)) 0 100% / 100% 0.045em no-repeat;
+  animation-name: underline;
+}
+
+button {
+  min-block-size: 44px;
+  margin-block-start: 1.35rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid currentColor;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--effect);
+  outline-offset: 4px;
+}
+
+:host(.static) .glyph {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host(:not(.motion-forced)) .glyph {
+    animation: none;
+  }
+
+  :host(:not(.motion-forced)) button {
+    display: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes shutter {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes underline {
+  from {
+    background-size: 0 0.045em;
+  }
+}

@@ -1,0 +1,16 @@
+<section class="sample">
+  <h2 [attr.aria-label]="text()">
+    @for (animationKey of animationKeys(); track animationKey) {
+      <span class="title" aria-hidden="true">
+        @for (word of words(); track $index) {
+          <span class="word" [style.--order]="$index">
+            <span class="glyph">{{ word }}</span>
+          </span>
+        }
+      </span>
+    }
+  </h2>
+  @if (showReplay() && animate() !== false) {
+    <button type="button" (click)="replay()">Repetir animación</button>
+  }
+</section>

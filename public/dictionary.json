@@ -1,9 +1,9 @@
 {
   "version": "2.2.0",
   "totalGroups": 12,
-  "totalComponents": 68,
-  "totalVariants": 215,
-  "updatedAt": "2026-11-13T22:26:19.059Z",
+  "totalComponents": 72,
+  "totalVariants": 225,
+  "updatedAt": "2026-11-14T04:11:08.576Z",
   "groups": [
     {
       "id": "cards",
@@ -666,6 +666,34 @@
               "embedPath": "/embed/buttons/glass/gradient-border"
             }
           ]
+        },
+        {
+          "id": "hold-confirm",
+          "code": "2.8",
+          "label": "Mantener para confirmar",
+          "tagline": "Confirmación con barra de progreso, cancelación al soltar y alternativa de dos pasos",
+          "selector": "app-btn-hold-confirm",
+          "className": "HoldConfirmButtonComponent",
+          "sourcePath": "src/app/components/buttons/hold-confirm",
+          "routePath": "/buttons/hold-confirm",
+          "variants": [
+            {
+              "id": "dispatch",
+              "code": "2.8.1.1",
+              "label": "Liberar pedido",
+              "hint": "Mantén pulsado y suelta para confirmar la salida",
+              "routePath": "/buttons/hold-confirm/dispatch",
+              "embedPath": "/embed/buttons/hold-confirm/dispatch"
+            },
+            {
+              "id": "publish",
+              "code": "2.8.2.1",
+              "label": "Publicar cambios",
+              "hint": "Confirma la publicación con una alternativa de dos pasos",
+              "routePath": "/buttons/hold-confirm/publish",
+              "embedPath": "/embed/buttons/hold-confirm/publish"
+            }
+          ]
         }
       ]
     },
@@ -848,6 +876,42 @@
               "embedPath": "/embed/backgrounds/aurora/glass"
             }
           ]
+        },
+        {
+          "id": "topographic",
+          "code": "3.6",
+          "label": "Fondo topográfico",
+          "tagline": "Curvas vectoriales animadas para encabezados, portadas y paneles",
+          "selector": "app-bg-topographic",
+          "className": "TopographicComponent",
+          "sourcePath": "src/app/components/backgrounds/topographic",
+          "routePath": "/backgrounds/topographic",
+          "variants": [
+            {
+              "id": "terrain",
+              "code": "3.6.1.1",
+              "label": "Sierra central",
+              "hint": "Curvas de elevación sobre un fondo verde",
+              "routePath": "/backgrounds/topographic/terrain",
+              "embedPath": "/embed/backgrounds/topographic/terrain"
+            },
+            {
+              "id": "bathymetry",
+              "code": "3.6.2.1",
+              "label": "Cuenca oceánica",
+              "hint": "Anillos de profundidad en azul",
+              "routePath": "/backgrounds/topographic/bathymetry",
+              "embedPath": "/embed/backgrounds/topographic/bathymetry"
+            },
+            {
+              "id": "plateau",
+              "code": "3.6.3.1",
+              "label": "Meseta mineral",
+              "hint": "Relieve con tonos de arcilla",
+              "routePath": "/backgrounds/topographic/plateau",
+              "embedPath": "/embed/backgrounds/topographic/plateau"
+            }
+          ]
         }
       ]
     },
@@ -1000,6 +1064,42 @@
               "hint": "Flota con su sombra en movimiento",
               "routePath": "/typography/3d-text/floating",
               "embedPath": "/embed/typography/3d-text/floating"
+            }
+          ]
+        },
+        {
+          "id": "reveal-heading",
+          "code": "4.5",
+          "label": "Revelado tipográfico",
+          "tagline": "Entradas de texto por palabra con control para repetir la animación",
+          "selector": "app-type-reveal-heading",
+          "className": "RevealHeadingComponent",
+          "sourcePath": "src/app/components/typography/reveal-heading",
+          "routePath": "/typography/reveal-heading",
+          "variants": [
+            {
+              "id": "mask",
+              "code": "4.5.1.1",
+              "label": "Cortina ascendente",
+              "hint": "Las palabras suben desde una máscara",
+              "routePath": "/typography/reveal-heading/mask",
+              "embedPath": "/embed/typography/reveal-heading/mask"
+            },
+            {
+              "id": "shutter",
+              "code": "4.5.2.1",
+              "label": "Barrido lateral",
+              "hint": "El título aparece con un corte horizontal",
+              "routePath": "/typography/reveal-heading/shutter",
+              "embedPath": "/embed/typography/reveal-heading/shutter"
+            },
+            {
+              "id": "underline",
+              "code": "4.5.3.1",
+              "label": "Subrayado por palabras",
+              "hint": "Un trazo se dibuja debajo de cada palabra",
+              "routePath": "/typography/reveal-heading/underline",
+              "embedPath": "/embed/typography/reveal-heading/underline"
             }
           ]
         }
@@ -1405,6 +1505,34 @@
               "hint": "Pulgar translúcido con borde luminoso",
               "routePath": "/forms/range/glass",
               "embedPath": "/embed/forms/range/glass"
+            }
+          ]
+        },
+        {
+          "id": "password-strength",
+          "code": "6.8",
+          "label": "Requisitos de contraseña",
+          "tagline": "Campo con validación visual, contador de requisitos y control de visibilidad",
+          "selector": "app-form-password-strength",
+          "className": "PasswordStrengthComponent",
+          "sourcePath": "src/app/components/forms/password-strength",
+          "routePath": "/forms/password-strength",
+          "variants": [
+            {
+              "id": "security",
+              "code": "6.8.1.1",
+              "label": "Panel oscuro",
+              "hint": "Indicador por segmentos y requisitos en vivo",
+              "routePath": "/forms/password-strength/security",
+              "embedPath": "/embed/forms/password-strength/security"
+            },
+            {
+              "id": "compact",
+              "code": "6.8.2.1",
+              "label": "Compacto claro",
+              "hint": "Validación en una ficha clara de menor altura",
+              "routePath": "/forms/password-strength/compact",
+              "embedPath": "/embed/forms/password-strength/compact"
             }
           ]
         }

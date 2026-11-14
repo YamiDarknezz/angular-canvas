@@ -1,0 +1,39 @@
+<section class="panel" [attr.data-variant]="variant()">
+  <h2>{{ theme().heading }}</h2>
+  <p>Mantén pulsado hasta completar la barra y suelta para confirmar.</p>
+  @if (phase() !== 'done') {
+    <button
+      type="button"
+      class="hold"
+      [attr.data-phase]="phase()"
+      [style.--duration]="milliseconds() + 'ms'"
+      [disabled]="disabled()"
+      (pointerdown)="start($event)"
+      (pointermove)="move($event)"
+      (pointerup)="release($event)"
+      (pointercancel)="cancel($event)"
+      (lostpointercapture)="cancel($event)"
+      (blur)="abort()"
+      (window:blur)="abort()"
+      (contextmenu)="$event.preventDefault()"
+      (click)="activate($event)"
+    >
+      <span class="fill" aria-hidden="true"></span>
+      <span class="label">{{ phase() === 'ready' ? 'Suelta para confirmar' : action() }}</span>
+    </button>
+    @if (ask()) {
+      <div class="fallback">
+        <span>¿Confirmar esta acción?</span>
+        <button type="button" [disabled]="disabled()" (click)="complete()">Confirmar</button>
+        <button type="button" (click)="ask.set(false)">Cancelar</button>
+      </div>
+    } @else {
+      <button type="button" class="alternative" [disabled]="disabled()" (click)="ask.set(true)">
+        Usar confirmación en dos pasos
+      </button>
+    }
+  } @else {
+    <button type="button" class="alternative" (click)="phase.set('idle')">Volver a probar</button>
+  }
+  <span role="status" class="status">{{ phase() === 'done' ? theme().result : '' }}</span>
+</section>

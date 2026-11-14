@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **68 Componentes** · **215 Efectos / Sub-estilos Únicos**
+> Total: **12 Categorías** · **72 Componentes** · **225 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -115,6 +115,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`2.7.1.1`** | Glass (`2.7`) | **Glass**<br><sub>Vidrio suave con brillo interior</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass [variant]="'glass'" />` |
 | **`2.7.2.1`** | Glass (`2.7`) | **Frost**<br><sub>Escarchado con blur intenso</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass [variant]="'frost'" />` |
 | **`2.7.3.1`** | Glass (`2.7`) | **Borde degradado**<br><sub>Contorno tornasol sobre vidrio</sub> | `<app-btn-glass>` | `src/app/components/buttons/glass` | `<app-btn-glass [variant]="'gradient-border'" />` |
+| **`2.8.1.1`** | Mantener para confirmar (`2.8`) | **Liberar pedido**<br><sub>Mantén pulsado y suelta para confirmar la salida</sub> | `<app-btn-hold-confirm>` | `src/app/components/buttons/hold-confirm` | `<app-btn-hold-confirm [variant]="'dispatch'" />` |
+| **`2.8.2.1`** | Mantener para confirmar (`2.8`) | **Publicar cambios**<br><sub>Confirma la publicación con una alternativa de dos pasos</sub> | `<app-btn-hold-confirm>` | `src/app/components/buttons/hold-confirm` | `<app-btn-hold-confirm [variant]="'publish'" />` |
 
 ---
 
@@ -138,6 +140,9 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`3.5.1.1`** | Aurora (`3.5`) | **Aurora**<br><sub>Blobs difusos que derivan en diagonal</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora [variant]="'aurora'" />` |
 | **`3.5.2.1`** | Aurora (`3.5`) | **Haces**<br><sub>Columnas de luz que barren el fondo</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora [variant]="'beams'" />` |
 | **`3.5.3.1`** | Aurora (`3.5`) | **Con vidrio**<br><sub>Panel translúcido sobre la aurora</sub> | `<app-bg-aurora>` | `src/app/components/backgrounds/aurora` | `<app-bg-aurora [variant]="'glass'" />` |
+| **`3.6.1.1`** | Fondo topográfico (`3.6`) | **Sierra central**<br><sub>Curvas de elevación sobre un fondo verde</sub> | `<app-bg-topographic>` | `src/app/components/backgrounds/topographic` | `<app-bg-topographic [variant]="'terrain'" />` |
+| **`3.6.2.1`** | Fondo topográfico (`3.6`) | **Cuenca oceánica**<br><sub>Anillos de profundidad en azul</sub> | `<app-bg-topographic>` | `src/app/components/backgrounds/topographic` | `<app-bg-topographic [variant]="'bathymetry'" />` |
+| **`3.6.3.1`** | Fondo topográfico (`3.6`) | **Meseta mineral**<br><sub>Relieve con tonos de arcilla</sub> | `<app-bg-topographic>` | `src/app/components/backgrounds/topographic` | `<app-bg-topographic [variant]="'plateau'" />` |
 
 ---
 
@@ -159,6 +164,9 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`4.4.1.1`** | 3D Text (`4.4`) | **Extrude**<br><sub>Canto sólido por capas de sombra</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d [variant]="'extrude'" />` |
 | **`4.4.2.1`** | 3D Text (`4.4`) | **Isométrico**<br><sub>Texto recostado con perspectiva</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d [variant]="'isometric'" />` |
 | **`4.4.3.1`** | 3D Text (`4.4`) | **Floating**<br><sub>Flota con su sombra en movimiento</sub> | `<app-text-3d>` | `src/app/components/typography/3d-text` | `<app-text-3d [variant]="'floating'" />` |
+| **`4.5.1.1`** | Revelado tipográfico (`4.5`) | **Cortina ascendente**<br><sub>Las palabras suben desde una máscara</sub> | `<app-type-reveal-heading>` | `src/app/components/typography/reveal-heading` | `<app-type-reveal-heading [variant]="'mask'" />` |
+| **`4.5.2.1`** | Revelado tipográfico (`4.5`) | **Barrido lateral**<br><sub>El título aparece con un corte horizontal</sub> | `<app-type-reveal-heading>` | `src/app/components/typography/reveal-heading` | `<app-type-reveal-heading [variant]="'shutter'" />` |
+| **`4.5.3.1`** | Revelado tipográfico (`4.5`) | **Subrayado por palabras**<br><sub>Un trazo se dibuja debajo de cada palabra</sub> | `<app-type-reveal-heading>` | `src/app/components/typography/reveal-heading` | `<app-type-reveal-heading [variant]="'underline'" />` |
 
 ---
 
@@ -204,6 +212,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`6.6.2.1`** | Rating (`6.6`) | **Segmentos**<br><sub>Botones 1–5 con etiquetas</sub> | `<app-form-rating>` | `src/app/components/forms/rating` | `<app-form-rating [variant]="'segments'" />` |
 | **`6.7.1.1`** | Range Slider (`6.7`) | **Degradado**<br><sub>Pista indigo→rosa con pulgar blanco</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'gradient'" />` |
 | **`6.7.2.1`** | Range Slider (`6.7`) | **Vidrio**<br><sub>Pulgar translúcido con borde luminoso</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'glass'" />` |
+| **`6.8.1.1`** | Requisitos de contraseña (`6.8`) | **Panel oscuro**<br><sub>Indicador por segmentos y requisitos en vivo</sub> | `<app-form-password-strength>` | `src/app/components/forms/password-strength` | `<app-form-password-strength [variant]="'security'" />` |
+| **`6.8.2.1`** | Requisitos de contraseña (`6.8`) | **Compacto claro**<br><sub>Validación en una ficha clara de menor altura</sub> | `<app-form-password-strength>` | `src/app/components/forms/password-strength` | `<app-form-password-strength [variant]="'compact'" />` |
 
 **Glass Input** requiere @angular/forms en la misma versión que @angular/core.
 

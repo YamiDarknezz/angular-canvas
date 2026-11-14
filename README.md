@@ -5,9 +5,9 @@ Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `
 
 Construido con **Angular 22** (standalone components, signals, router, `@if` / `@for` y control flow reactivo).
 
-**12 categorías · 68 componentes · 203 sub-estilos indexados · 5 temas.**
+**12 categorías.** Consulta el diccionario para ver los componentes, variantes y temas disponibles.
 
-> 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de todos los códigos `1.1.1.1` al `10.2.3.1`.
+> 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de códigos.
 
 ---
 
