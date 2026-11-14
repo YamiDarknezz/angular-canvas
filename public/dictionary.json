@@ -3,7 +3,7 @@
   "totalGroups": 14,
   "totalComponents": 85,
   "totalVariants": 250,
-  "updatedAt": "2026-11-14T04:42:42.168Z",
+  "updatedAt": "2026-11-14T04:56:40.229Z",
   "groups": [
     {
       "id": "cards",
@@ -2218,7 +2218,7 @@
           "id": "corner-fold",
           "code": "9.5",
           "label": "Corner Fold",
-          "tagline": "Efecto de esquina doblada (dog-ear) y papel levantado",
+          "tagline": "Dobla la esquina del papel y revela la superficie inferior",
           "selector": "app-anim-corner-fold",
           "className": "CornerFoldComponent",
           "sourcePath": "src/app/components/animations/corner-fold",
@@ -2228,7 +2228,7 @@
               "id": "note",
               "code": "9.5.1.1",
               "label": "Nota",
-              "hint": "Esquina superior derecha doblada con elevación al hover",
+              "hint": "Arrastra el doblez diagonal y descubre el reverso de la nota",
               "routePath": "/animations/corner-fold/note",
               "embedPath": "/embed/animations/corner-fold/note"
             },
@@ -2236,7 +2236,7 @@
               "id": "document",
               "code": "9.5.2.1",
               "label": "Documento",
-              "hint": "Hoja técnica con pliegue pronunciado y sello de verificación",
+              "hint": "Levanta la esquina del acta para revelar el sello de muestra",
               "routePath": "/animations/corner-fold/document",
               "embedPath": "/embed/animations/corner-fold/document"
             },
@@ -2244,7 +2244,7 @@
               "id": "peel",
               "code": "9.5.3.1",
               "label": "Despegue",
-              "hint": "Efecto pegatina o sticker que se levanta interactivamente",
+              "hint": "Despega la etiqueta y observa el reverso curvado y su sombra",
               "routePath": "/animations/corner-fold/peel",
               "embedPath": "/embed/animations/corner-fold/peel"
             }

@@ -1,114 +1,143 @@
-<section class="design-section">
-  <h2 class="section-title">Corner Fold</h2>
-  <p class="section-desc">
-    Efecto de esquina doblada (dog-ear) y papel levantado con física de sombras realistas
-  </p>
-
-  @let v = variant() || 'note';
-  @switch (v) {
-    @case ('document') {
-      <ng-container *ngTemplateOutlet="docTpl" />
-    }
-    @case ('peel') {
-      <ng-container *ngTemplateOutlet="peelTpl" />
-    }
-    @default {
-      <ng-container *ngTemplateOutlet="noteTpl" />
-    }
-  }
+<section
+  class="stage"
+  [attr.aria-label]="model().kind"
+  [style.--lining]="model().surface"
+  [style.--control-accent]="accent()"
+>
+  <div class="work-surface">
+    <div class="sheet" #sheet>
+      <svg class="paper" viewBox="-18 -16 480 291" role="img" [attr.aria-label]="accessiblePaper()">
+        <path
+          [attr.d]="shape().front"
+          fill="#141b18"
+          opacity=".24"
+          transform="translate(2 8)"
+          stroke="#141b18"
+          stroke-width="5"
+          stroke-linejoin="round"
+        />
+        <path [attr.d]="shape().revealed" fill="#26332c" opacity=".52" />
+        <text class="underprint" x="431" y="24" text-anchor="end">{{ model().under }}</text>
+        <path
+          [attr.d]="shape().front"
+          [attr.fill]="model().paper"
+          stroke="rgb(35 37 28 / 16%)"
+          stroke-width="1"
+          stroke-linejoin="round"
+        />
+        @if (style() === 'peel') {
+          <path
+            d="M22 78V22h96 M22 173v56h96 M418 177v52h-95"
+            fill="none"
+            stroke="#ffffff"
+            stroke-opacity=".51"
+            stroke-width="2"
+          />
+          <path
+            d="M16 110h11 M16 140h11 M408 207h12 M408 215h12"
+            fill="none"
+            stroke="#ffffff"
+            stroke-opacity=".46"
+            stroke-width="2"
+          />
+        } @else if (style() === 'document') {
+          <path
+            d="M28 202h360 M28 216h360 M28 230h220"
+            fill="none"
+            stroke="#355867"
+            stroke-opacity=".21"
+            stroke-width="1"
+          />
+        } @else {
+          <path d="M29 199h360 M29 223h360" fill="none" stroke="#8f683a" stroke-opacity=".26" />
+        }
+        <g [attr.fill]="model().ink">
+          <text class="kind" x="30" y="48">{{ model().kind }}</text>
+          @for (line of heading(); track $index) {
+            <text class="paper-title" x="29" [attr.y]="105 + $index * 39">{{ line }}</text>
+          }
+          <text class="paper-body" x="30" y="176">
+            @for (line of model().body; track $index) {
+              <tspan x="30" [attr.dy]="$first ? 0 : 22">{{ line }}</tspan>
+            }
+          </text>
+          <text class="paper-footer" x="30" y="238">{{ model().footer }}</text>
+        </g>
+        @if (shape().depth > 0.2) {
+          <path
+            class="cast"
+            [attr.d]="shape().flap"
+            [attr.transform]="shape().shadow"
+            fill="#1e1a16"
+            [attr.opacity]="0.18 + amount() * 0.17"
+          />
+          <path [attr.d]="shape().shade" fill="#403529" [attr.opacity]="0.12 + amount() * 0.06" />
+          <path
+            [attr.d]="shape().flap"
+            [attr.fill]="shape().reverse ? model().back : model().paper"
+            [attr.stroke]="model().edge"
+            stroke-width="1.3"
+          />
+          @if (shape().reverse) {
+            <path
+              [attr.d]="shape().underside"
+              [attr.fill]="model().edge"
+              [attr.opacity]="amount() * 0.34"
+            />
+          }
+          <path [attr.d]="shape().crease" [attr.stroke]="model().edge" stroke-width="1.6" />
+          <path
+            [attr.d]="shape().light"
+            fill="none"
+            stroke="#fffaf0"
+            stroke-width="1.35"
+            opacity=".72"
+          />
+        }
+      </svg>
+      <button
+        type="button"
+        class="corner"
+        [style.left.%]="((shape().tipX + 18) / 480) * 100"
+        [style.top.%]="((shape().tipY + 16) / 291) * 100"
+        aria-label="Levantar o bajar la esquina"
+        (pointerdown)="pointerDown($event, sheet)"
+        (pointermove)="pointerMove($event)"
+        (pointerup)="pointerEnd($event)"
+        (pointercancel)="pointerEnd($event)"
+        (lostpointercapture)="pointerEnd($event)"
+        (click)="toggleCorner($event)"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"
+        >
+          <path d="M7 17 17 7M10 7h7v7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="slider">
+      <label>
+        <span>Apertura de la esquina</span>
+        <input
+          #range
+          type="range"
+          min="0"
+          max="100"
+          [value]="percentage()"
+          (input)="setAmount(range.value)"
+        />
+      </label>
+      <span class="value" aria-hidden="true">{{ percentage() }}%</span>
+    </div>
+    <button type="button" class="action" (click)="toggle($event)">
+      {{ lifted() ? 'Bajar esquina' : 'Levantar esquina' }}
+    </button>
+  </div>
+  <p class="hint">Arrastra la esquina en diagonal o ajusta la apertura.</p>
 </section>
-
-<!-- Variante 1: Nota Adhesiva -->
-<ng-template #noteTpl>
-  <div class="fold-stage" data-variant="note">
-    <p class="fold-hint">Pasa el cursor o haz click para doblar la esquina superior</p>
-    <div class="fold-scene">
-      <article
-        class="fold-card note-card"
-        [class.active]="noteActive()"
-        (click)="toggleNote()"
-        (mouseenter)="noteActive.set(true)"
-        (mouseleave)="noteActive.set(false)"
-      >
-        <div class="fold-cutout"></div>
-        <div class="fold-flap" [class.active]="noteActive()"></div>
-        <div class="fold-content">
-          <span class="fold-tag">Recordatorio</span>
-          <h3>Revisión de Arquitectura</h3>
-          <p>
-            La esquina superior se pliega sobre sí misma simulando un doblez físico en papel
-            auténtico.
-          </p>
-          <div class="fold-meta">
-            <span>Prioridad Alta</span>
-            <span>#NOTE-104</span>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</ng-template>
-
-<!-- Variante 2: Documento Técnico -->
-<ng-template #docTpl>
-  <div class="fold-stage" data-variant="document">
-    <p class="fold-hint">Pasa el cursor para revelar el código de verificación bajo el pliegue</p>
-    <div class="fold-scene">
-      <article
-        class="fold-card doc-card"
-        [class.active]="docActive()"
-        (click)="toggleDoc()"
-        (mouseenter)="docActive.set(true)"
-        (mouseleave)="docActive.set(false)"
-      >
-        <div class="fold-cutout doc-cutout">
-          <span class="hidden-seal">VERIFICADO</span>
-        </div>
-        <div class="fold-flap doc-flap" [class.active]="docActive()"></div>
-        <div class="fold-content">
-          <span class="fold-tag doc-tag">Certificado</span>
-          <h3>Licencia de Componentes</h3>
-          <p>
-            Diseñado para ser reutilizado en cualquier aplicación sin arrastrar estilos globales no
-            deseados.
-          </p>
-          <div class="fold-meta">
-            <span>SHA-256: 8F2A...</span>
-            <span>Válido</span>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</ng-template>
-
-<!-- Variante 3: Sticker / Despegue -->
-<ng-template #peelTpl>
-  <div class="fold-stage" data-variant="peel">
-    <p class="fold-hint">Pasa el cursor para levantar la etiqueta adhesiva</p>
-    <div class="fold-scene">
-      <article
-        class="fold-card peel-card"
-        [class.active]="peelActive()"
-        (click)="togglePeel()"
-        (mouseenter)="peelActive.set(true)"
-        (mouseleave)="peelActive.set(false)"
-      >
-        <div class="fold-cutout peel-cutout"></div>
-        <div class="fold-flap peel-flap" [class.active]="peelActive()"></div>
-        <div class="fold-content">
-          <span class="fold-tag peel-tag">Adhesivo</span>
-          <h3>Efecto Peel 3D</h3>
-          <p>
-            Un despegue gradual con reflejo metálico que reacciona a la posición del cursor o toque
-            táctil.
-          </p>
-          <div class="fold-meta">
-            <span>Angular 22+</span>
-            <span>Zero Dependencies</span>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</ng-template>
