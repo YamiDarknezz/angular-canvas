@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { TOTAL_COMPONENTS, TOTAL_VARIANTS } from '../core/catalog/catalog';
@@ -21,7 +21,7 @@ import { QuickSwitcherService } from './quick-switcher/quick-switcher.service';
  */
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, NavTreeComponent, IconComponent, QuickSwitcherComponent],
+  imports: [RouterOutlet, RouterLink, NavTreeComponent, IconComponent, QuickSwitcherComponent],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
   host: {
@@ -61,6 +61,13 @@ export class ShellComponent {
       this.document.body.classList.toggle('ac-drawer-open', this.drawerOpen());
     });
     this.destroyRef.onDestroy(() => this.document.body.classList.remove('ac-drawer-open'));
+
+    const handset = this.document.defaultView?.matchMedia('(max-width: 1000px)');
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (!event.matches) this.closeDrawer();
+    };
+    handset?.addEventListener('change', closeOnDesktop);
+    this.destroyRef.onDestroy(() => handset?.removeEventListener('change', closeOnDesktop));
   }
 
   setTheme(theme: (typeof this.themes)[number]['id']): void {

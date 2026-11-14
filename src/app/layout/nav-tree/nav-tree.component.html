@@ -2,8 +2,11 @@
   <button type="button" class="tree-search" (click)="openSearch()">
     <ac-icon name="search" />
     <span class="search-label">Buscar componentes…</span>
-    <kbd>⌘K</kbd>
+    <kbd>Ctrl/⌘ K</kbd>
   </button>
+  <a class="tree-home" routerLink="/" [attr.aria-current]="!activeGroupId() ? 'page' : null">
+    <ac-icon name="home" /> Inicio
+  </a>
 
   @for (shelf of shelves(); track shelf.id) {
     <section class="shelf" [attr.aria-label]="shelf.title">
@@ -49,6 +52,17 @@
 
         @if (isGroupOpen(group.id)) {
           <ul class="entries" [id]="'grp-' + group.id">
+            <li>
+              <a
+                class="entry-link group-link"
+                [routerLink]="['/', group.id]"
+                [attr.aria-current]="
+                  activeGroupId() === group.id && !activeEntryId() ? 'page' : null
+                "
+              >
+                Ver categoría <ac-icon name="arrow-right" />
+              </a>
+            </li>
             @for (entry of group.components; track entry.id) {
               <li class="entry-row">
                 <a

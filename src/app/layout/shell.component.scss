@@ -25,24 +25,24 @@ $breakpoint: 1000px;
     border-color 0.3s ease;
 }
 
+.brand-mark {
+  display: block;
+  flex: none;
+}
+
+.brand-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 8px;
+}
+
 .nav-brand {
   display: flex;
   align-items: center;
   gap: 0.7rem;
   padding: 1.1rem 1rem;
   border-bottom: 1px solid var(--ac-border);
-
-  .brand-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid color-mix(in srgb, var(--ac-primary) 45%, transparent);
-    border-radius: 10px;
-    background: color-mix(in srgb, var(--ac-primary) 16%, transparent);
-    color: var(--ac-primary-soft);
-    font-size: 1.05rem;
-  }
 
   .brand-text {
     font-family: var(--ac-font-display);
@@ -198,13 +198,9 @@ $breakpoint: 1000px;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  border-radius: 6px;
   font-size: 0.9rem;
-  color: var(--ac-text-muted);
-
-  ac-icon {
-    font-size: 1rem;
-    color: var(--ac-primary-soft);
-  }
+  color: var(--ac-text);
 }
 
 .topbar-search {
@@ -252,12 +248,17 @@ $breakpoint: 1000px;
 // ---- Móvil / tablet: la navegación es un panel deslizante ----
 @media (max-width: $breakpoint) {
   .shell-nav {
+    visibility: hidden;
     transform: translateX(-100%);
-    transition: transform 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
     box-shadow: 0 0 60px -20px rgb(0 0 0 / 70%);
 
     &.open {
+      visibility: visible;
       transform: translateX(0);
+      transition-delay: 0s;
     }
   }
 

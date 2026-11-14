@@ -5,7 +5,7 @@ Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `
 
 Construido con **Angular 22** (standalone components, signals, router, `@if` / `@for` y control flow reactivo).
 
-**12 categorías.** Consulta el diccionario para ver los componentes, variantes y temas disponibles.
+**13 categorías.** Consulta el diccionario para ver los componentes, variantes y temas disponibles.
 
 > 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de códigos.
 
@@ -26,6 +26,7 @@ Olvídate de descripciones subjetivas como "el libro del medio" o "el botón de 
   👉 Resuelve directamente a **Animations > Book Flip > Cuaderno** (`src/app/components/animations/book-flip`, `<app-anim-book-flip variant="notebook" />`).
 - **Navegación y búsqueda instantánea**:
   - Desde el navegador: `/code/9.4.2.1` o `/c/9.4.2.1` redirige directo al entorno.
+  - La portada filtra por nombre, código o categoría. Una ruta de categoría como `/forms` abre su colección.
   - En la galería: Presiona `⌘K` o `Ctrl+K` y escribe `9.4` o `9.4.2.1` para saltar inmediatamente.
 - **Efecto Único Limpio (Single-Effect Rendering)**:
   - Cada entorno renderiza **exclusivamente el efecto activo**.

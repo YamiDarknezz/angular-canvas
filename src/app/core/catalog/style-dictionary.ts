@@ -1,4 +1,4 @@
-import { CATALOG } from './catalog';
+import { CATALOG, FLAT_ENTRIES, type CatalogEntry, type CatalogGroup } from './catalog';
 
 export interface StyleDictionaryItem {
   /** Código único jerárquico: ej. '9.4.2.1' o '1.1.1.1' */
@@ -35,7 +35,7 @@ export interface StyleDictionaryItem {
 
 /**
  * Diccionario de Estilos completo del repositorio.
- * 151 estilos/efectos indexados unívocamente por su código numérico [Categoría.Componente.Variante.Subvariante].
+ * Estilos indexados por código numérico [Categoría.Componente.Variante.Subvariante].
  */
 export const STYLE_DICTIONARY: readonly StyleDictionaryItem[] = CATALOG.flatMap((group) =>
   group.components.flatMap((entry) =>
@@ -92,15 +92,101 @@ export function lookupByCode(code: string): StyleDictionaryItem | undefined {
  * Búsqueda difusa en el diccionario por código, nombre o selector.
  */
 export function searchDictionary(query: string): readonly StyleDictionaryItem[] {
-  if (!query) return [];
-  const q = query.toLowerCase().trim();
+  const q = normalizeSearch(query).trim();
+  if (!q) return [];
   return STYLE_DICTIONARY.filter(
     (item) =>
       item.code.startsWith(q) ||
       item.componentCode.startsWith(q) ||
-      item.componentLabel.toLowerCase().includes(q) ||
-      item.variantLabel.toLowerCase().includes(q) ||
-      item.selector.toLowerCase().includes(q) ||
-      item.hint.toLowerCase().includes(q),
+      normalizeSearch(
+        `${item.componentLabel} ${item.variantLabel} ${item.selector} ${item.hint}`,
+      ).includes(q),
   );
+}
+
+export function normalizeSearch(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '');
+}
+
+interface CatalogSearchResult {
+  readonly group: CatalogGroup;
+  readonly entry: CatalogEntry;
+  readonly code: string;
+  readonly label: string;
+  readonly hint: string;
+  readonly path: readonly string[];
+}
+
+const GROUP_ALIASES: Readonly<Record<string, string>> = {
+  cards: 'tarjetas',
+  buttons: 'botones',
+  backgrounds: 'fondos',
+  typography: 'tipografia texto',
+  navigation: 'navegacion menu',
+  forms: 'formularios campos',
+  modals: 'dialogos modales',
+  themes: 'temas',
+  animations: 'animaciones',
+  charts: 'graficos',
+  feedback: 'notificaciones avisos',
+  'media-3d': 'escenas modelos',
+};
+
+const COMPONENT_RESULTS = FLAT_ENTRIES.map(({ group, entry }) => ({
+  group,
+  entry,
+  code: entry.code,
+  label: entry.label,
+  hint: entry.tagline,
+  path: ['/', group.id, entry.id],
+}));
+
+const VARIANT_RESULTS = COMPONENT_RESULTS.flatMap((item) =>
+  item.entry.variants.map((variant) => ({
+    ...item,
+    code: variant.code,
+    label: `${item.label} · ${variant.label}`,
+    hint: variant.hint,
+    path: [...item.path, variant.id],
+  })),
+);
+
+const INDEXED_RESULTS = [...COMPONENT_RESULTS, ...VARIANT_RESULTS].map((item) => ({
+  item,
+  label: normalizeSearch(item.label),
+  text: normalizeSearch(
+    `${item.code} ${item.label} ${item.hint} ${item.path.join(' ')} ${item.group.label} ${GROUP_ALIASES[item.group.id] ?? ''}`,
+  ),
+}));
+
+/** Sin consulta se muestran componentes. Al buscar aparecen también las variantes. */
+export function catalogSearch(query: string, groupId?: string): readonly CatalogSearchResult[] {
+  const q = normalizeSearch(query).trim();
+  if (!q) return COMPONENT_RESULTS.filter((item) => !groupId || item.group.id === groupId);
+
+  const words = q.split(/\s+/);
+  return INDEXED_RESULTS.filter(
+    ({ item, text }) =>
+      (!groupId || item.group.id === groupId) && words.every((word) => text.includes(word)),
+  )
+    .map(({ item, label }) => ({
+      item,
+      rank:
+        item.code === q
+          ? 0
+          : item.code.startsWith(q + '.')
+            ? 1
+            : label === q
+              ? 2
+              : label.startsWith(q)
+                ? 3
+                : label.includes(q)
+                  ? 4
+                  : 5,
+    }))
+    .sort((a, b) => a.rank - b.rank)
+    .map(({ item }) => item);
 }

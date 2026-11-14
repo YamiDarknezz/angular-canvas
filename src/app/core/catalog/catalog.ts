@@ -2248,6 +2248,40 @@ export const CATALOG: readonly CatalogGroup[] = [
       },
     ],
   },
+  {
+    id: 'workflows',
+    code: '13',
+    label: 'Flujos de trabajo',
+    icon: 'workflows',
+    accent: '#6fbc9b',
+    tagline: 'Pantallas interactivas para practicar tareas de principio a fin',
+    components: [
+      {
+        id: 'order-workbench',
+        code: '13.1',
+        label: 'Mesa de pedidos',
+        tagline:
+          'Filtra pedidos, revisa sus productos y avanza cada uno por las etapas de despacho',
+        selector: 'app-workflow-order-workbench',
+        className: 'OrderWorkbenchComponent',
+        sourcePath: 'src/app/components/workflows/order-workbench',
+        variants: [
+          {
+            id: 'warehouse',
+            code: '13.1.1.1',
+            label: 'Despacho de almacén',
+            hint: 'Prepara pedidos y registra su salida',
+          },
+          {
+            id: 'retail',
+            code: '13.1.2.1',
+            label: 'Reposición de bodegas',
+            hint: 'Revisa los pedidos de una bodega y administra su despacho',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Categorías del catálogo. */

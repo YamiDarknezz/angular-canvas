@@ -6,8 +6,15 @@
     aria-label="Catálogo de componentes"
   >
     <div class="nav-brand">
-      <span class="brand-mark" aria-hidden="true"><ac-icon name="themes" /></span>
-      <span class="brand-text">Angular<strong>Canvas</strong></span>
+      <a
+        class="brand-home"
+        routerLink="/"
+        aria-label="AngularCanvas, inicio"
+        (click)="closeDrawer()"
+      >
+        <img class="brand-mark" src="brand-mark.svg" alt="" width="32" height="32" />
+        <span class="brand-text">Angular<strong>Canvas</strong></span>
+      </a>
       <span class="brand-badge">v{{ appVersion }}</span>
       <button
         type="button"
@@ -70,11 +77,14 @@
       >
         ☰
       </button>
-      <span class="topbar-brand"><ac-icon name="themes" /> AngularCanvas</span>
+      <a class="topbar-brand" routerLink="/" aria-label="AngularCanvas, inicio">
+        <img class="brand-mark" src="brand-mark.svg" alt="" width="24" height="24" />
+        AngularCanvas
+      </a>
       <button type="button" class="topbar-search" (click)="openSearch()">
         <ac-icon name="search" />
         <span>Buscar</span>
-        <kbd>⌘K</kbd>
+        <kbd>Ctrl/⌘ K</kbd>
       </button>
       <span class="topbar-version">v{{ appVersion }}</span>
     </header>

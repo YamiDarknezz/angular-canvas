@@ -1,0 +1,165 @@
+<section class="workbench" aria-label="Mesa de pedidos">
+  <header class="masthead">
+    <div>
+      <h2>{{ variant() === 'retail' ? 'Reposición de bodegas' : 'Despacho de almacén' }}</h2>
+      <p>Revisa el pedido, prepara el contenido y registra su salida.</p>
+    </div>
+    @if (!orders()) {
+      <span class="sample">Datos de ejemplo</span>
+    }
+  </header>
+
+  <div class="toolbar">
+    <label class="search">
+      <span class="sr-only">Buscar por pedido, destino o ruta</span>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        aria-hidden="true"
+      >
+        <circle cx="10.8" cy="10.8" r="5.6" />
+        <path d="m15 15 4 4" />
+      </svg>
+      <input
+        #term
+        type="search"
+        placeholder="Pedido, destino o ruta"
+        [value]="query()"
+        (input)="query.set(term.value)"
+      />
+    </label>
+    <div class="filters" role="group" aria-label="Filtrar por estado">
+      @for (option of filters(); track option.id) {
+        <button
+          type="button"
+          [attr.aria-pressed]="filter() === option.id"
+          (click)="filter.set(option.id)"
+        >
+          {{ option.label }} <span>{{ option.count }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="workspace">
+    <div class="queue">
+      <div class="queue-header">
+        <h3>Pedidos</h3>
+        <span>{{ visible().length }} visibles</span>
+      </div>
+      <ul>
+        @for (order of visible(); track order.id) {
+          <li>
+            <button
+              class="order"
+              type="button"
+              [attr.aria-pressed]="selected()?.id === order.id"
+              (click)="choose(order.id)"
+            >
+              <span class="order-top"
+                ><strong>{{ order.id }}</strong
+                ><span>{{ order.time }}</span></span
+              >
+              <span class="destination">{{ order.destination }}</span>
+              <span class="state" [attr.data-state]="order.stage">{{
+                stages[stageIndex(order.stage)].label
+              }}</span>
+            </button>
+          </li>
+        } @empty {
+          <li class="empty">
+            <p>No hay pedidos con esos filtros.</p>
+            <button type="button" (click)="query.set(''); filter.set('all')">
+              Limpiar filtros
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+
+    @if (selected(); as order) {
+      <article class="detail" [attr.aria-label]="'Detalle de ' + order.id">
+        <div class="detail-header">
+          <div>
+            <p class="reference">{{ order.id }}</p>
+            <h3>{{ order.destination }}</h3>
+            <p class="route">{{ order.route }}</p>
+          </div>
+          <div class="schedule">
+            <span>Salida prevista</span><strong>{{ order.time }}</strong>
+          </div>
+        </div>
+
+        <ol class="steps" aria-label="Etapas del pedido">
+          @for (stage of stages; track stage.id; let step = $index) {
+            <li
+              [class.passed]="step < stageIndex(order.stage)"
+              [attr.aria-current]="stage.id === order.stage ? 'step' : null"
+            >
+              <span class="step-mark" aria-hidden="true">
+                @if (step < stageIndex(order.stage)) {
+                  <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m4 9 3 3 7-7" />
+                  </svg>
+                } @else {
+                  {{ step + 1 }}
+                }
+              </span>
+              {{ stage.label }}
+            </li>
+          }
+        </ol>
+
+        <table>
+          <caption>
+            Contenido del pedido
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Unidades</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (line of order.lines; track line.sku) {
+              <tr>
+                <td>
+                  {{ line.label }} <small>{{ line.sku }}</small>
+                </td>
+                <td>{{ line.quantity }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="2">El pedido no contiene productos.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <div class="actions">
+          <button
+            #primaryAction
+            type="button"
+            class="advance"
+            [attr.aria-disabled]="order.stage === 'sent' || !order.lines.length"
+            (click)="advance(order)"
+          >
+            {{ stages[stageIndex(order.stage)].action }}
+          </button>
+          @if (canUndo()) {
+            <button type="button" class="undo" (click)="undo(order, primaryAction)">
+              Deshacer
+            </button>
+          }
+        </div>
+      </article>
+    } @else {
+      <div class="empty-detail">
+        <p>Cuando haya pedidos visibles, selecciona uno para ver su contenido.</p>
+      </div>
+    }
+  </div>
+  <p class="sr-only" role="status">{{ announcement() }}</p>
+</section>

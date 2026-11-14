@@ -1,17 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import {
-  CATALOG,
-  TOTAL_COMPONENTS,
-  TOTAL_GROUPS,
-  TOTAL_VARIANTS,
-} from '../../core/catalog/catalog';
-import { APP_VERSION } from '../../core/version';
-import { ThemeService } from '../../core/theme/theme.service';
+import { CATALOG, findGroup, TOTAL_COMPONENTS, TOTAL_VARIANTS } from '../../core/catalog/catalog';
+import { catalogSearch } from '../../core/catalog/style-dictionary';
+import { LibraryService } from '../../core/library/library.service';
 import { IconComponent } from '../../core/ui/icon.component';
+import { QuickSwitcherService } from '../../layout/quick-switcher/quick-switcher.service';
 
-/** Portada: la vitrina del catálogo, por capítulos de categoría. */
+const PAGE_SIZE = 12;
+const PREFERRED_GROUPS = ['workflows', 'media-3d', 'cards', 'forms', 'charts'];
+
 @Component({
   selector: 'ac-home',
   imports: [RouterLink, IconComponent],
@@ -19,12 +17,78 @@ import { IconComponent } from '../../core/ui/icon.component';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  private readonly themeService = inject(ThemeService);
+  private readonly library = inject(LibraryService);
+  private readonly quickSwitcher = inject(QuickSwitcherService);
+  readonly group = input<string>();
+  protected readonly selectedGroup = computed(() => findGroup(this.group()));
+  protected readonly catalog = [...CATALOG].sort(
+    (a, b) => this.categoryRank(a.id) - this.categoryRank(b.id),
+  );
+  protected readonly totalComponents = TOTAL_COMPONENTS;
+  protected readonly totalVariants = TOTAL_VARIANTS;
+  protected readonly query = signal('');
+  protected readonly limit = signal(PAGE_SIZE);
+  protected readonly results = computed(() =>
+    catalogSearch(this.query(), this.selectedGroup()?.id),
+  );
+  protected readonly visible = computed(() => this.results().slice(0, this.limit()));
+  protected readonly shelves = computed(() =>
+    [
+      { label: 'Favoritos', icon: 'star', items: this.library.favorites() },
+      { label: 'Recientes', icon: 'clock', items: this.library.recents() },
+    ].filter(({ items }) => items.length),
+  );
+  protected readonly startingPoints = [
+    {
+      label: 'Preparar y despachar pedidos',
+      category: 'Flujos de trabajo',
+      icon: 'workflows',
+      tone: 'mint',
+      path: '/workflows/order-workbench/warehouse',
+    },
+    {
+      label: 'Seguir reabastecimientos',
+      category: 'Cards',
+      icon: 'cards',
+      tone: 'lilac',
+      path: '/cards/stock-status/store',
+    },
+    {
+      label: 'Entender movimientos de caja',
+      category: 'Charts',
+      icon: 'charts',
+      tone: 'amber',
+      path: '/charts/waterfall-chart/finance',
+    },
+  ];
 
-  readonly catalog = CATALOG;
-  readonly totalGroups = TOTAL_GROUPS;
-  readonly totalComponents = TOTAL_COMPONENTS;
-  readonly totalVariants = TOTAL_VARIANTS;
-  readonly totalThemes = this.themeService.themes.length;
-  readonly appVersion = APP_VERSION;
+  protected openSearch(): void {
+    this.quickSwitcher.show();
+  }
+
+  protected updateQuery(value: string): void {
+    this.query.set(value);
+    this.resetLimit();
+  }
+
+  protected resetLimit(): void {
+    this.limit.set(PAGE_SIZE);
+  }
+
+  protected showMore(): void {
+    this.limit.update((limit) => limit + PAGE_SIZE);
+  }
+
+  protected toggleFavorite(group: string, entry: string): void {
+    this.library.toggleFavorite(group, entry);
+  }
+
+  protected isFavorite(group: string, entry: string): boolean {
+    return this.library.isFavorite(group, entry);
+  }
+
+  private categoryRank(id: string): number {
+    const rank = PREFERRED_GROUPS.indexOf(id);
+    return rank === -1 ? PREFERRED_GROUPS.length : rank;
+  }
 }

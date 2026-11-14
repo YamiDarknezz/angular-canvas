@@ -1,9 +1,9 @@
 {
   "version": "2.2.0",
-  "totalGroups": 12,
-  "totalComponents": 82,
-  "totalVariants": 245,
-  "updatedAt": "2026-11-14T04:19:13.649Z",
+  "totalGroups": 13,
+  "totalComponents": 83,
+  "totalVariants": 247,
+  "updatedAt": "2026-11-14T04:29:05.783Z",
   "groups": [
     {
       "id": "cards",
@@ -3094,6 +3094,44 @@
               "hint": "Portal de talento con estaciones ágiles ultrawide, muro Kanban y lounge biofílico",
               "routePath": "/media-3d/three-login/hr",
               "embedPath": "/embed/media-3d/three-login/hr"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "workflows",
+      "code": "13",
+      "label": "Flujos de trabajo",
+      "tagline": "Pantallas interactivas para practicar tareas de principio a fin",
+      "icon": "workflows",
+      "accent": "#6fbc9b",
+      "components": [
+        {
+          "id": "order-workbench",
+          "code": "13.1",
+          "label": "Mesa de pedidos",
+          "tagline": "Filtra pedidos, revisa sus productos y avanza cada uno por las etapas de despacho",
+          "selector": "app-workflow-order-workbench",
+          "className": "OrderWorkbenchComponent",
+          "sourcePath": "src/app/components/workflows/order-workbench",
+          "routePath": "/workflows/order-workbench",
+          "variants": [
+            {
+              "id": "warehouse",
+              "code": "13.1.1.1",
+              "label": "Despacho de almacén",
+              "hint": "Prepara pedidos y registra su salida",
+              "routePath": "/workflows/order-workbench/warehouse",
+              "embedPath": "/embed/workflows/order-workbench/warehouse"
+            },
+            {
+              "id": "retail",
+              "code": "13.1.2.1",
+              "label": "Reposición de bodegas",
+              "hint": "Revisa los pedidos de una bodega y administra su despacho",
+              "routePath": "/workflows/order-workbench/retail",
+              "embedPath": "/embed/workflows/order-workbench/retail"
             }
           ]
         }

@@ -116,7 +116,7 @@ export class EnvironmentComponent {
       return;
     }
     const target = event.target as HTMLElement | null;
-    if (target?.closest('input, textarea, select, [contenteditable]')) {
+    if (target?.closest('input, textarea, select, [contenteditable], [role="dialog"]')) {
       return;
     }
 

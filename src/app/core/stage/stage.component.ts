@@ -95,6 +95,10 @@ export class StageComponent {
 
   /** Ruta de la vista desnuda, para el iframe y para abrir en pestaña. */
   readonly embedPath = computed(() => `/embed/${this.group().id}/${this.entry().id}`);
+  readonly standalonePath = computed(() => {
+    const variant = this.activeVariant();
+    return variant ? `${this.embedPath()}/${variant.id}` : this.embedPath();
+  });
 
   /** URL del iframe (saneada por Angular). */
   readonly embedUrl = computed<SafeResourceUrl>(() =>

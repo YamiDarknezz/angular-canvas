@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **82 Componentes** · **245 Efectos / Sub-estilos Únicos**
+> Total: **13 Categorías** · **83 Componentes** · **247 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -412,6 +412,17 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 **Login 3D** · `npm install three@^0.184.0` · `npm install -D @types/three@^0.184.1`
 
 Login 3D requiere estas carpetas hermanas: `src/app/components/media-3d/three-scenes`.
+
+---
+
+## 13. Flujos de trabajo
+
+*Pantallas interactivas para practicar tareas de principio a fin*
+
+| Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **`13.1.1.1`** | Mesa de pedidos (`13.1`) | **Despacho de almacén**<br><sub>Prepara pedidos y registra su salida</sub> | `<app-workflow-order-workbench>` | `src/app/components/workflows/order-workbench` | `<app-workflow-order-workbench [variant]="'warehouse'" />` |
+| **`13.1.2.1`** | Mesa de pedidos (`13.1`) | **Reposición de bodegas**<br><sub>Revisa los pedidos de una bodega y administra su despacho</sub> | `<app-workflow-order-workbench>` | `src/app/components/workflows/order-workbench` | `<app-workflow-order-workbench [variant]="'retail'" />` |
 
 ---
 

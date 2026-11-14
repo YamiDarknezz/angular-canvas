@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { findGroup } from './core/catalog/catalog';
 import { lookupByCode } from './core/catalog/style-dictionary';
 import { ShellComponent } from './layout/shell.component';
 import { EmbedComponent } from './views/embed/embed.component';
@@ -9,7 +10,8 @@ import { HomeComponent } from './views/home/home.component';
 /**
  * Rutas del catálogo.
  *
- * - `/`                          → portada con todos los grupos.
+ * - `/`                          → portada y catálogo.
+ * - `/cards`                     → catálogo filtrado a una categoría.
  * - `/code/:code` o `/c/:code`   → redirección directa por código jerárquico (ej. `/code/9.4.2.1`).
  * - `/cards/neon`                → el entorno con todas sus variantes.
  * - `/cards/neon/blue`           → el entorno filtrado a una variante.
@@ -52,9 +54,13 @@ export const routes: Routes = [
         component: HomeComponent,
         title: 'AngularCanvas — Biblioteca de efectos y diseños para Angular',
       },
-      // Una categoría sin componente (`/cards`) no tiene página propia: vuelve
-      // al catálogo en vez de dejar una vista vacía.
-      { path: ':group', pathMatch: 'full', redirectTo: '/' },
+      {
+        path: ':group',
+        pathMatch: 'full',
+        canMatch: [(_route, segments) => Boolean(findGroup(segments[0]?.path))],
+        component: HomeComponent,
+        title: 'Catálogo — AngularCanvas',
+      },
       { path: ':group/:entry', component: EnvironmentComponent },
       { path: ':group/:entry/:variant', component: EnvironmentComponent },
       { path: '**', redirectTo: '/' },

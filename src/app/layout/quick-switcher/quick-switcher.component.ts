@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { CATALOG, CatalogEntry, CatalogGroup, CatalogVariant } from '../../core/catalog/catalog';
 import { LibraryService } from '../../core/library/library.service';
+import { catalogSearch } from '../../core/catalog/style-dictionary';
 import { IconComponent } from '../../core/ui/icon.component';
 import { QuickSwitcherService } from './quick-switcher.service';
 
@@ -38,6 +39,7 @@ export class QuickSwitcherComponent {
   private readonly library = inject(LibraryService);
   private readonly switcher = inject(QuickSwitcherService);
   private readonly search = viewChild<ElementRef<HTMLInputElement>>('search');
+  private focusBeforeSearch?: HTMLElement;
 
   readonly open = this.switcher.open;
   readonly query = signal('');
@@ -46,12 +48,6 @@ export class QuickSwitcherComponent {
 
   private readonly componentItems: readonly SwitcherItem[] = CATALOG.flatMap((group) =>
     group.components.map((entry) => this.toItem(group, entry)),
-  );
-
-  private readonly variantItems: readonly SwitcherItem[] = CATALOG.flatMap((group) =>
-    group.components.flatMap((entry) =>
-      entry.variants.map((variant) => this.toVariantItem(group, entry, variant)),
-    ),
   );
 
   readonly results = computed<readonly SwitcherItem[]>(() => {
@@ -69,17 +65,22 @@ export class QuickSwitcherComponent {
       return [...favorites, ...recents.filter((item) => !seen.has(item.key)), ...tail].slice(0, 12);
     }
 
-    return [...this.componentItems, ...this.variantItems]
-      .filter((item) => this.matches(item, query))
-      .slice(0, 14);
+    return catalogSearch(query)
+      .slice(0, 14)
+      .map(({ group, entry, code }) => {
+        const variant = entry.variants.find((item) => item.code === code);
+        return variant ? this.toVariantItem(group, entry, variant) : this.toItem(group, entry);
+      });
   });
 
   constructor() {
     // Al abrir, el foco va al buscador y la lista arranca limpia.
     effect(() => {
-      if (this.open()) {
-        this.search()?.nativeElement.focus();
-      }
+      const field = this.search()?.nativeElement;
+      if (!this.open() || !field || field.ownerDocument.activeElement === field) return;
+      const focused = field.ownerDocument.activeElement;
+      if (focused instanceof HTMLElement) this.focusBeforeSearch = focused;
+      field.focus();
     });
   }
 
@@ -90,13 +91,15 @@ export class QuickSwitcherComponent {
 
   go(item: SwitcherItem): void {
     void this.router.navigate(item.path);
-    this.close();
+    this.close(false);
   }
 
-  close(): void {
+  close(restoreFocus = true): void {
     this.query.set('');
     this.cursor.set(0);
     this.switcher.hide();
+    if (restoreFocus) this.focusBeforeSearch?.focus();
+    this.focusBeforeSearch = undefined;
   }
 
   onKeydown(event: KeyboardEvent): void {
@@ -112,6 +115,12 @@ export class QuickSwitcherComponent {
 
     if (event.key === 'Escape') {
       this.close();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      this.search()?.nativeElement.focus();
       return;
     }
 
@@ -134,12 +143,6 @@ export class QuickSwitcherComponent {
         this.go(item);
       }
     }
-  }
-
-  private matches(item: SwitcherItem, query: string): boolean {
-    return `${item.code} ${item.label} ${item.route} ${item.group.label} ${item.hint}`
-      .toLowerCase()
-      .includes(query);
   }
 
   private toItem(group: CatalogGroup, entry: CatalogEntry): SwitcherItem {

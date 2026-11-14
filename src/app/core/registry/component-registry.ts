@@ -1,4 +1,5 @@
 import { Type } from '@angular/core';
+import { OrderWorkbenchComponent } from '../../components/workflows/order-workbench/order-workbench.component';
 
 import { ShareAccessComponent } from '../../components/modals/share-access/share-access.component';
 import { EditorialThemeComponent } from '../../components/themes/editorial/editorial.component';
@@ -212,6 +213,7 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['themes/editorial', EditorialThemeComponent],
   ['animations/count-up', CountUpComponent],
   ['feedback/task-progress', TaskProgressComponent],
+  ['workflows/order-workbench', OrderWorkbenchComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

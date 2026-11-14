@@ -1,80 +1,158 @@
 <article class="home">
-  <header class="cover">
-    <div class="cover-aurora" aria-hidden="true">
-      <span class="orb orb-a"></span>
-      <span class="orb orb-b"></span>
-      <span class="orb orb-c"></span>
-    </div>
-
-    <h1 class="cover-title">
-      <span class="thin">Angular</span><strong>Canvas</strong>
-      <span class="cover-version-tag">v{{ appVersion }}</span>
-    </h1>
-    <p class="cover-lead">
-      Biblioteca viva de efectos y diseños para Angular. Cada componente vive en su entorno aislado:
-      míralo solo, cámbiale el ancho y cópialo cuando te sirva.
-    </p>
-    <p class="cover-stats">
-      <span>{{ totalComponents }} componentes</span>
-      <span>{{ totalVariants }} sub-estilos</span>
-      <span>{{ totalGroups }} categorías</span>
-      <span>{{ totalThemes }} temas</span>
-      <a
-        class="dict-pill"
-        href="/dictionary.json"
-        target="_blank"
-        rel="noopener"
-        title="Descargar o consultar el Diccionario de Estilos en formato JSON estructurado"
-      >
-        <span>JSON API</span>
-      </a>
-    </p>
-    <p class="cover-hint">
-      <kbd>⌘K</kbd> buscar <span aria-hidden="true">·</span> <kbd>←</kbd><kbd>→</kbd> recorrer
-      <span aria-hidden="true">·</span> <kbd>1</kbd>–<kbd>9</kbd> sub-estilos
-    </p>
-  </header>
-
-  @for (group of catalog; track group.id) {
-    <section class="chapter" [style.--accent]="group.accent" [attr.aria-label]="group.label">
-      <header class="chapter-head">
-        <span class="chapter-glyph" aria-hidden="true"><ac-icon [name]="group.icon" /></span>
-        <h2>
-          <span class="chapter-code">{{ group.code }}.</span> {{ group.label }}
-        </h2>
-        <p class="chapter-tagline">{{ group.tagline }}</p>
-        <p class="chapter-count">
-          {{ group.components.length }}
-          {{ group.components.length === 1 ? 'componente' : 'componentes' }}
+  @if (!selectedGroup()) {
+    <header class="cover">
+      <div class="cover-copy">
+        <h1>Diseños Angular en acción.</h1>
+        <p>
+          Prueba componentes, efectos y flujos completos. Abre una demo y toma el código que
+          necesites para tu proyecto.
         </p>
-      </header>
+        <div class="cover-actions">
+          <a class="primary" routerLink="/" fragment="catalogo"
+            >Explorar catálogo <ac-icon name="arrow-down"
+          /></a>
+          <button type="button" class="quiet" (click)="openSearch()">
+            <ac-icon name="search" /><span>Buscar por código o nombre</span>
+          </button>
+        </div>
+        <p class="cover-facts">
+          {{ totalComponents }} componentes <span aria-hidden="true">/</span>
+          {{ totalVariants }} variantes
+        </p>
+      </div>
+      <a class="feature" routerLink="/media-3d/three-scenes/bodega">
+        <img src="previews/bodega.webp" width="640" height="442" alt="" fetchpriority="high" />
+        <span class="feature-caption">
+          <span><strong>Bodega de barrio</strong><small>Escena 3D interactiva</small></span>
+          <ac-icon name="arrow-right" />
+        </span>
+      </a>
+    </header>
 
-      <ul class="specimens">
-        @for (entry of group.components; track entry.id) {
-          <li class="specimen">
-            <a class="specimen-main" [routerLink]="['/', group.id, entry.id]">
-              <span class="specimen-route">[{{ entry.code }}] /{{ group.id }}/{{ entry.id }}</span>
-              <span class="specimen-name">{{ entry.label }}</span>
-              <span class="specimen-desc">{{ entry.tagline }}</span>
-            </a>
+    <section class="routes" aria-label="Ejemplos para empezar">
+      @for (point of startingPoints; track point.path) {
+        <a [routerLink]="point.path" [attr.data-tone]="point.tone">
+          <ac-icon [name]="point.icon" />
+          <span
+            ><small>{{ point.category }}</small
+            ><strong>{{ point.label }}</strong></span
+          >
+          <ac-icon name="arrow-right" />
+        </a>
+      }
+    </section>
+  }
 
-            <ul class="specimen-variants">
-              @for (variant of entry.variants; track variant.id) {
-                <li>
-                  <a
-                    class="chip"
-                    [routerLink]="['/', group.id, entry.id, variant.id]"
-                    [title]="variant.hint"
-                  >
-                    <span class="chip-code">{{ variant.code }}</span>
-                    {{ variant.label }}
-                  </a>
-                </li>
-              }
-            </ul>
+  @for (shelf of shelves(); track shelf.label) {
+    <section class="shelf" [attr.aria-label]="shelf.label">
+      <h2><ac-icon [name]="shelf.icon" />{{ shelf.label }}</h2>
+      <ul>
+        @for (item of shelf.items.slice(0, 5); track item.entry.code) {
+          <li>
+            <a [routerLink]="['/', item.group.id, item.entry.id]">{{ item.entry.label }}</a>
           </li>
         }
       </ul>
     </section>
   }
+
+  <section id="catalogo" class="catalog" aria-label="Explorar componentes">
+    <header class="catalog-head">
+      <div>
+        @if (selectedGroup(); as category) {
+          <a class="back" routerLink="/" fragment="catalogo">← Catálogo</a>
+          <h1>{{ category.label }}</h1>
+          <p>{{ category.tagline }}</p>
+        } @else {
+          <h2>Explora el catálogo</h2>
+          <p>Filtra por categoría o busca una variante por su código.</p>
+        }
+      </div>
+      <label class="filter">
+        <ac-icon name="search" />
+        <input
+          #filterInput
+          type="search"
+          aria-label="Filtrar el catálogo"
+          placeholder="Ej. bodega o 12.4.24.1"
+          [value]="query()"
+          (input)="updateQuery(filterInput.value)"
+        />
+        @if (query()) {
+          <button
+            type="button"
+            (click)="updateQuery(''); filterInput.focus()"
+            aria-label="Limpiar búsqueda"
+          >
+            ×
+          </button>
+        }
+      </label>
+    </header>
+
+    <nav class="categories" aria-label="Categorías">
+      <a
+        routerLink="/"
+        fragment="catalogo"
+        [attr.aria-current]="!selectedGroup() ? 'page' : null"
+        (click)="resetLimit()"
+        >Todo</a
+      >
+      @for (category of catalog; track category.id) {
+        <a
+          [routerLink]="['/', category.id]"
+          fragment="catalogo"
+          [attr.aria-current]="selectedGroup()?.id === category.id ? 'page' : null"
+          (click)="resetLimit()"
+        >
+          <ac-icon [name]="category.icon" />{{ category.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="catalog-summary">
+      <p role="status">
+        {{ results().length }} {{ results().length === 1 ? 'resultado' : 'resultados' }}
+      </p>
+      <a href="dictionary.json" target="_blank" rel="noopener"
+        >Diccionario JSON <ac-icon name="external"
+      /></a>
+    </div>
+
+    <ul class="results">
+      @for (item of visible(); track item.code) {
+        <li class="result" [style.--category-color]="item.group.accent">
+          <a class="result-link" [routerLink]="item.path">
+            <span class="result-meta"
+              ><ac-icon [name]="item.group.icon" />{{ item.group.label
+              }}<code>{{ item.code }}</code></span
+            >
+            <strong>{{ item.label }}</strong>
+            <span class="description">{{ item.hint }}</span>
+            <span class="result-cta">Abrir demo <ac-icon name="arrow-right" /></span>
+          </a>
+          <button
+            class="save"
+            type="button"
+            [attr.aria-label]="'Favorito: ' + item.entry.label"
+            [attr.aria-pressed]="isFavorite(item.group.id, item.entry.id)"
+            (click)="toggleFavorite(item.group.id, item.entry.id)"
+          >
+            <ac-icon [name]="isFavorite(item.group.id, item.entry.id) ? 'star-filled' : 'star'" />
+          </button>
+        </li>
+      } @empty {
+        <li class="empty">
+          <strong>No encontramos coincidencias.</strong>
+          <p>Prueba con un código más corto o con el nombre de un componente.</p>
+          <button type="button" class="quiet" (click)="updateQuery(''); filterInput.focus()">
+            Limpiar búsqueda
+          </button>
+        </li>
+      }
+    </ul>
+    @if (visible().length < results().length) {
+      <button type="button" class="more quiet" (click)="showMore()">Mostrar más componentes</button>
+    }
+  </section>
 </article>
