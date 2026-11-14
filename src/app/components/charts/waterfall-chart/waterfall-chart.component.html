@@ -1,0 +1,53 @@
+<section
+  class="panel"
+  [class.inventory]="inventory()"
+  [attr.aria-label]="inventory() ? 'Cascada de inventario' : 'Cascada financiera'"
+>
+  <header>
+    <div>
+      <h2>{{ inventory() ? 'Inventario disponible' : 'Del saldo inicial al cierre' }}</h2>
+      <p>Valores en {{ unitLabel() }}</p>
+    </div>
+    <ul class="legend" aria-label="Leyenda">
+      <li><span class="key gain"></span> Aumentos</li>
+      <li><span class="key loss"></span> Reducciones</li>
+      <li><span class="key total"></span> Saldos</li>
+    </ul>
+  </header>
+
+  <div class="scroll">
+    <div
+      class="plot"
+      [style.--columns]="chart().columns.length"
+      [style.--zero.%]="chart().baseline"
+    >
+      @for (column of chart().columns; track $index; let index = $index; let last = $last) {
+        <button
+          type="button"
+          class="column"
+          [class]="column.kind"
+          [attr.aria-pressed]="selectedIndex() === index"
+          [attr.aria-label]="column.label + ' ' + column.shownValue + ' ' + unitLabel()"
+          [style.--bottom.%]="column.bottom"
+          [style.--height.%]="column.height"
+          [style.--junction.%]="column.junction"
+          (click)="choose(index)"
+        >
+          <span class="track" aria-hidden="true">
+            <span class="bar"></span>
+            <strong class="value">{{ column.shownValue }}</strong>
+            @if (!last) {
+              <span class="junction"></span>
+            }
+          </span>
+          <span class="name">{{ column.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <p class="detail" role="status">
+    <strong>{{ detail().label }} {{ detail().shownValue }}</strong>
+    <span>Saldo acumulado {{ display(detail().balance) }} {{ unitLabel() }}</span>
+  </p>
+</section>

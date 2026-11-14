@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **12 Categorías** · **72 Componentes** · **225 Efectos / Sub-estilos Únicos**
+> Total: **12 Categorías** · **82 Componentes** · **245 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -74,6 +74,10 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`1.7.3.1`** | Minimal (`1.7`) | **Con etiqueta**<br><sub>Tag sutil de categoría</sub> | `<app-card-minimal>` | `src/app/components/cards/minimal` | `<app-card-minimal [variant]="'with-tag'" />` |
 | **`1.8.1.1`** | Dark Corporate (`1.8`) | **Estándar**<br><sub>Cabecera, métricas y CTA</sub> | `<app-card-corporate>` | `src/app/components/cards/dark-corporate` | `<app-card-corporate [variant]="'default'" />` |
 | **`1.8.2.1`** | Dark Corporate (`1.8`) | **Con badge accent**<br><sub>Badge de acento y otra densidad</sub> | `<app-card-corporate>` | `src/app/components/cards/dark-corporate` | `<app-card-corporate [variant]="'variant'" />` |
+| **`1.9.1.1`** | Seguimiento de entrega (`1.9`) | **En ruta**<br><sub>Consulta las etapas y la ventana estimada de entrega</sub> | `<app-card-delivery-timeline>` | `src/app/components/cards/delivery-timeline` | `<app-card-delivery-timeline [variant]="'in-transit'" />` |
+| **`1.9.2.1`** | Seguimiento de entrega (`1.9`) | **Entregado**<br><sub>Revisa la recepción confirmada y las horas de cada hito</sub> | `<app-card-delivery-timeline>` | `src/app/components/cards/delivery-timeline` | `<app-card-delivery-timeline [variant]="'delivered'" />` |
+| **`1.10.1.1`** | Estado del inventario (`1.10`) | **Almacén**<br><sub>Compara existencias con el mínimo de reposición</sub> | `<app-card-stock-status>` | `src/app/components/cards/stock-status` | `<app-card-stock-status [variant]="'warehouse'" />` |
+| **`1.10.2.1`** | Estado del inventario (`1.10`) | **Bodega**<br><sub>Filtra los productos bajo mínimo y los agotados</sub> | `<app-card-stock-status>` | `src/app/components/cards/stock-status` | `<app-card-stock-status [variant]="'store'" />` |
 
 ---
 
@@ -192,6 +196,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`5.7.1.1`** | Stepper (`5.7`) | **Horizontal**<br><sub>Pasos en fila con conectores</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper [variant]="'horizontal'" />` |
 | **`5.7.2.1`** | Stepper (`5.7`) | **Vertical**<br><sub>Pasos apilados con línea izquierda</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper [variant]="'vertical'" />` |
 | **`5.7.3.1`** | Stepper (`5.7`) | **Progreso**<br><sub>Barra de progreso con puntos</sub> | `<app-nav-stepper>` | `src/app/components/navigation/stepper` | `<app-nav-stepper [variant]="'progress'" />` |
+| **`5.8.1.1`** | Explorador de archivos (`5.8`) | **Terminal oscura**<br><sub>Abre carpetas con las flechas y selecciona archivos</sub> | `<app-nav-tree-explorer>` | `src/app/components/navigation/tree-explorer` | `<app-nav-tree-explorer [variant]="'midnight'" />` |
+| **`5.8.2.1`** | Explorador de archivos (`5.8`) | **Papel claro**<br><sub>Explorador claro con navegación jerárquica y vista previa</sub> | `<app-nav-tree-explorer>` | `src/app/components/navigation/tree-explorer` | `<app-nav-tree-explorer [variant]="'paper'" />` |
 
 ---
 
@@ -214,6 +220,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`6.7.2.1`** | Range Slider (`6.7`) | **Vidrio**<br><sub>Pulgar translúcido con borde luminoso</sub> | `<app-form-range>` | `src/app/components/forms/range` | `<app-form-range [variant]="'glass'" />` |
 | **`6.8.1.1`** | Requisitos de contraseña (`6.8`) | **Panel oscuro**<br><sub>Indicador por segmentos y requisitos en vivo</sub> | `<app-form-password-strength>` | `src/app/components/forms/password-strength` | `<app-form-password-strength [variant]="'security'" />` |
 | **`6.8.2.1`** | Requisitos de contraseña (`6.8`) | **Compacto claro**<br><sub>Validación en una ficha clara de menor altura</sub> | `<app-form-password-strength>` | `src/app/components/forms/password-strength` | `<app-form-password-strength [variant]="'compact'" />` |
+| **`6.9.1.1`** | Zona para adjuntar archivos (`6.9`) | **Documentos**<br><sub>Adjunta PDF, CSV y XLSX y revisa el tamaño</sub> | `<app-form-file-drop>` | `src/app/components/forms/file-drop` | `<app-form-file-drop [variant]="'documents'" />` |
+| **`6.9.2.1`** | Zona para adjuntar archivos (`6.9`) | **Imágenes**<br><sub>Selecciona imágenes en una zona de arrastre oscura</sub> | `<app-form-file-drop>` | `src/app/components/forms/file-drop` | `<app-form-file-drop [variant]="'images'" />` |
 
 **Glass Input** requiere @angular/forms en la misma versión que @angular/core.
 
@@ -234,6 +242,10 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`7.5.2.1`** | Bottom Sheet (`7.5`) | **Vidrio**<br><sub>Panel translúcido con blur</sub> | `<app-modal-sheet>` | `src/app/components/modals/bottom-sheet` | `<app-modal-sheet [variant]="'glass'" />` |
 | **`7.6.1.1`** | Lightbox (`7.6`) | **Foto**<br><sub>Visor oscuro con flechas</sub> | `<app-modal-lightbox>` | `src/app/components/modals/lightbox` | `<app-modal-lightbox [variant]="'photo'" />` |
 | **`7.6.2.1`** | Lightbox (`7.6`) | **Vidrio**<br><sub>Miniaturas con efecto de vidrio</sub> | `<app-modal-lightbox>` | `src/app/components/modals/lightbox` | `<app-modal-lightbox [variant]="'glass'" />` |
+| **`7.7.1.1`** | Asistente de informes (`7.7`) | **Papel claro**<br><sub>Configura área y periodo y revisa los datos antes de solicitar</sub> | `<app-modal-report-wizard>` | `src/app/components/modals/report-wizard` | `<app-modal-report-wizard [variant]="'paper'" />` |
+| **`7.7.2.1`** | Asistente de informes (`7.7`) | **Verde nocturno**<br><sub>Asistente oscuro con diálogo nativo y confirmación</sub> | `<app-modal-report-wizard>` | `src/app/components/modals/report-wizard` | `<app-modal-report-wizard [variant]="'night'" />` |
+| **`7.8.1.1`** | Compartir acceso (`7.8`) | **Estudio violeta**<br><sub>Agrega colaboradores, cambia sus permisos y copia el enlace</sub> | `<app-modal-share-access>` | `src/app/components/modals/share-access` | `<app-modal-share-access [variant]="'studio'" />` |
+| **`7.8.2.1`** | Compartir acceso (`7.8`) | **Papel claro**<br><sub>Gestiona el acceso desde un diálogo en tonos claros</sub> | `<app-modal-share-access>` | `src/app/components/modals/share-access` | `<app-modal-share-access [variant]="'paper'" />` |
 
 ---
 
@@ -256,6 +268,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`8.4.3.1`** | Cyberpunk (`8.4`) | **Paleta**<br><sub>Neones saturados</sub> | `<app-theme-cyberpunk>` | `src/app/components/themes/cyberpunk` | `<app-theme-cyberpunk [variant]="'palette'" />` |
 | **`8.5.1.1`** | Corporate (`8.5`) | **Cabecera**<br><sub>Logo y jerarquía</sub> | `<app-theme-corporate>` | `src/app/components/themes/corporate` | `<app-theme-corporate [variant]="'header'" />` |
 | **`8.5.2.1`** | Corporate (`8.5`) | **Paleta**<br><sub>Azules corporativos y grises</sub> | `<app-theme-corporate>` | `src/app/components/themes/corporate` | `<app-theme-corporate [variant]="'palette'" />` |
+| **`8.6.1.1`** | Tema editorial (`8.6`) | **Papel cálido**<br><sub>Consulta la bitácora y guarda artículos sobre una superficie clara</sub> | `<app-theme-editorial>` | `src/app/components/themes/editorial` | `<app-theme-editorial [variant]="'paper'" />` |
+| **`8.6.2.1`** | Tema editorial (`8.6`) | **Lectura nocturna**<br><sub>Explora la misma bitácora en verde oscuro</sub> | `<app-theme-editorial>` | `src/app/components/themes/editorial` | `<app-theme-editorial [variant]="'night'" />` |
 
 ---
 
@@ -283,6 +297,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`9.6.1.1`** | Marquee (`9.6`) | **Texto**<br><sub>Palabras en loop con separadores y estilos alternados</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee [variant]="'text'" />` |
 | **`9.6.2.1`** | Marquee (`9.6`) | **Bidireccional**<br><sub>Dos filas en direcciones opuestas a distinta velocidad</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee [variant]="'dual'" />` |
 | **`9.6.3.1`** | Marquee (`9.6`) | **Logos**<br><sub>Fila de marcas que se pausa al pasar el cursor</sub> | `<app-anim-marquee>` | `src/app/components/animations/marquee` | `<app-anim-marquee [variant]="'logos'" />` |
+| **`9.7.1.1`** | Contador animado (`9.7`) | **Pedidos despachados**<br><sub>Reproduce un conteo entero con barra de progreso</sub> | `<app-anim-count-up>` | `src/app/components/animations/count-up` | `<app-anim-count-up [variant]="'fulfillment'" />` |
+| **`9.7.2.1`** | Contador animado (`9.7`) | **Tasa de conversión**<br><sub>Anima el valor de un porcentaje con decimales</sub> | `<app-anim-count-up>` | `src/app/components/animations/count-up` | `<app-anim-count-up [variant]="'conversion'" />` |
 
 ---
 
@@ -307,6 +323,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`10.5.1.1`** | Radar & Spider (`10.5`) | **Polígono Cyber**<br><sub>Polígono radial hexagonal con rebote elástico en vértices vía GSAP</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'polygon'" />` |
 | **`10.5.2.1`** | Radar & Spider (`10.5`) | **Comparativa Dual**<br><sub>Dos perfiles superpuestos A vs B con áreas semitransparentes</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'dual'" />` |
 | **`10.5.3.1`** | Radar & Spider (`10.5`) | **Escáner Sonar**<br><sub>Barrido rotatorio continuo 360° con nodos de datos iluminados</sub> | `<app-chart-radar>` | `src/app/components/charts/radar-chart` | `<app-chart-radar [variant]="'scanner'" />` |
+| **`10.6.1.1`** | Gráfico de cascada (`10.6`) | **Flujo financiero**<br><sub>Rastrea el impacto de ventas y gastos en el saldo</sub> | `<app-chart-waterfall>` | `src/app/components/charts/waterfall-chart` | `<app-chart-waterfall [variant]="'finance'" />` |
+| **`10.6.2.1`** | Gráfico de cascada (`10.6`) | **Movimientos de inventario**<br><sub>Compara compras, salidas, retornos y mermas</sub> | `<app-chart-waterfall>` | `src/app/components/charts/waterfall-chart` | `<app-chart-waterfall [variant]="'inventory'" />` |
 
 **Line Chart** · `npm install gsap@^3.15.1`
 
@@ -335,6 +353,8 @@ Cada efecto visual o componente en este repositorio posee un **código numérico
 | **`11.3.1.1`** | Confetti & Bursts (`11.3`) | **Explosión Radial**<br><sub>Estallido radial de 110 partículas multicolor con física de gravedad</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'explosion'" />` |
 | **`11.3.2.1`** | Confetti & Bursts (`11.3`) | **Doble Cañón**<br><sub>Disparo cruzado en arco desde las esquinas inferiores</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'cannons'" />` |
 | **`11.3.3.1`** | Confetti & Bursts (`11.3`) | **Fuegos Artificiales**<br><sub>Estallidos múltiples en cascada superior con estelas luminosas</sub> | `<app-confetti-burst>` | `src/app/components/feedback/confetti` | `<app-confetti-burst [variant]="'fireworks'" />` |
+| **`11.4.1.1`** | Progreso por etapas (`11.4`) | **Generar informe**<br><sub>Sigue la generación simulada de un informe</sub> | `<app-feedback-task-progress>` | `src/app/components/feedback/task-progress` | `<app-feedback-task-progress [variant]="'report'" />` |
+| **`11.4.2.1`** | Progreso por etapas (`11.4`) | **Sincronizar inventario**<br><sub>Sigue las etapas de una sincronización de existencias</sub> | `<app-feedback-task-progress>` | `src/app/components/feedback/task-progress` | `<app-feedback-task-progress [variant]="'sync'" />` |
 
 **Dynamic Island** · `npm install gsap@^3.15.1`
 

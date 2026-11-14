@@ -1,0 +1,53 @@
+<article class="ticket" [class.delivered]="variant() === 'delivered'">
+  <header>
+    <div>
+      <p class="reference">{{ data().order }} <span>·</span> {{ data().reference }}</p>
+      <h2>Seguimiento de entrega</h2>
+    </div>
+    @if (current(); as milestone) {
+      <span class="state"><span aria-hidden="true"></span>{{ milestone.label }}</span>
+    }
+  </header>
+  <div class="route">
+    <div>
+      <span>Origen</span>
+      <strong>{{ data().origin }}</strong>
+    </div>
+    <div class="direction" aria-hidden="true"></div>
+    <div>
+      <span>Destino</span>
+      <strong>{{ data().destination }}</strong>
+    </div>
+  </div>
+  <ol class="stages" [style.--count]="data().milestones.length" [style.--progress]="progress()">
+    @for (stage of data().milestones; track stage.id; let index = $index) {
+      <li>
+        <button
+          type="button"
+          [class.is-complete]="index <= data().current"
+          [attr.aria-pressed]="stage === selected()"
+          [attr.aria-current]="stage === current() ? 'step' : null"
+          (click)="select(stage)"
+        >
+          <span class="node" aria-hidden="true"></span>
+          <span>{{ stage.label }}</span>
+        </button>
+      </li>
+    }
+  </ol>
+  <div class="detail" aria-live="polite">
+    @if (selected(); as stage) {
+      @for (shown of [stage]; track shown.id) {
+        <div class="detail-body">
+          <div>
+            <strong>{{ shown.label }}</strong
+            ><span>{{ shown.time }}</span>
+          </div>
+          <p>{{ shown.detail }}</p>
+        </div>
+      }
+    } @else {
+      <p>Aún no hay etapas registradas.</p>
+    }
+  </div>
+</article>

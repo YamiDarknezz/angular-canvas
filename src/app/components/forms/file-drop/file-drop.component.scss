@@ -1,0 +1,175 @@
+:host {
+  display: block;
+  inline-size: min(100%, 34rem);
+  max-inline-size: 100%;
+}
+
+.panel {
+  --surface: #f3eee4;
+  --drop: #fcf9f2;
+  --ink: #292e30;
+  --muted: #555c58;
+  --edge: #9eaaa5;
+  --accent: #146655;
+  --hover: #def1e9;
+  --button-ink: #fff;
+  box-sizing: border-box;
+  padding: clamp(1rem, 5vw, 1.8rem);
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 1rem;
+  color: var(--ink);
+}
+
+.images {
+  --surface: #1d2736;
+  --drop: #142033;
+  --ink: #f2f4ff;
+  --muted: #bac5d7;
+  --edge: #71819e;
+  --accent: #c1c9ff;
+  --hover: #303b59;
+  --button-ink: #1b2346;
+}
+
+h2 {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.2rem, 4vw, 1.65rem);
+  letter-spacing: -0.025em;
+}
+
+.drop-zone {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.55rem;
+  min-block-size: 10rem;
+  padding: 1rem;
+  border: 1px dashed var(--edge);
+  border-radius: 0.7rem;
+  background: var(--drop);
+  text-align: center;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.drop-zone.dragging {
+  border-color: var(--accent);
+  background: var(--hover);
+}
+
+.document {
+  display: grid;
+  align-content: center;
+  justify-items: stretch;
+  gap: 0.18rem;
+  inline-size: 1rem;
+  block-size: 1.45rem;
+  padding-inline: 0.24rem;
+  border: 2px solid var(--accent);
+  border-radius: 0.24rem;
+  transform: rotate(-10deg);
+  transition: transform 160ms ease;
+}
+
+.dragging .document {
+  transform: rotate(0) translateY(-0.12rem);
+}
+
+.document span {
+  block-size: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.document span:last-child {
+  inline-size: 65%;
+}
+
+.drop-zone p {
+  margin: 0;
+  font-size: 0.89rem;
+}
+
+.drop-zone .rules {
+  color: var(--muted);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.choose {
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  padding: 0.52rem 0.8rem;
+  color: var(--button-ink);
+  background: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.files {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0.8rem 0 0;
+  list-style: none;
+}
+
+.files li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--edge);
+  border-radius: 0.45rem;
+  font-size: 0.8rem;
+}
+
+.filename {
+  overflow-wrap: anywhere;
+}
+
+.size {
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.files button {
+  border: 0;
+  border-radius: 0.3rem;
+  padding: 0.25rem;
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.status {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.status:empty {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.drop-zone, .document) {
+    transition: none;
+  }
+}

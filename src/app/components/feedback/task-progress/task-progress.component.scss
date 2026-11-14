@@ -1,0 +1,98 @@
+:host {
+  --surface: #f2eee2;
+  --ink: #2b3028;
+  --border: #c9c5b7;
+  --accent: #396013;
+  display: block;
+}
+:host([data-variant='sync']) {
+  --surface: #1b3038;
+  --ink: #e5f4f7;
+  --border: #506e76;
+  --accent: #99e4e3;
+}
+.panel {
+  max-inline-size: 36rem;
+  margin-inline: auto;
+  padding: clamp(1.2rem, 5vw, 2.65rem);
+  border: 1px solid var(--border);
+  border-radius: 0.95rem;
+  background: var(--surface);
+  color: var(--ink);
+}
+h2 {
+  margin: 0;
+  font-size: clamp(1.55rem, 5vw, 2.45rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.status {
+  min-block-size: 1.5rem;
+  margin: 0.6rem 0 1.4rem;
+}
+ol {
+  display: grid;
+  gap: 0.18rem;
+  margin: 0 0 1.35rem;
+  padding: 0;
+  list-style: none;
+}
+li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-block-size: 2.9rem;
+  padding: 0.35rem 0.6rem;
+  border-block-start: 1px solid var(--border);
+}
+.dot {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.done .dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+li[aria-current] {
+  color: var(--accent);
+  font-weight: 650;
+}
+li[aria-current] .dot {
+  animation: pulse 0.85s ease-in-out infinite alternate;
+}
+button {
+  min-block-size: 44px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.4rem;
+  background: var(--accent);
+  color: var(--surface);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+@keyframes pulse {
+  to {
+    transform: scale(1.24);
+    background: var(--accent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  li[aria-current] .dot {
+    animation: none;
+    background: var(--accent);
+  }
+}

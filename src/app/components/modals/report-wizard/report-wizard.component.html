@@ -1,0 +1,133 @@
+<section class="stage" [class.night]="variant() === 'night'">
+  <div class="stage-copy">
+    <h2>Informes</h2>
+    <p>Elige los datos que quieres incluir y revisa la solicitud antes de enviarla.</p>
+    <button class="primary" type="button" (click)="open(dialog, reportName)">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        aria-hidden="true"
+      >
+        <path d="M12 5v14M5 12h14" />
+      </svg>
+      Nuevo informe
+    </button>
+    <p class="confirmation" role="status">
+      @if (confirmation(); as report) {
+        Solicitud registrada en la demo: <strong>{{ report.name }}</strong>
+      }
+    </p>
+  </div>
+
+  <div class="paper-stack" aria-hidden="true">
+    <div class="paper">
+      <div class="paper-title"></div>
+      <div class="paper-grid"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="paper-rule"></div>
+      <div class="paper-rule narrow"></div>
+    </div>
+  </div>
+
+  <dialog #dialog aria-label="Nuevo informe">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <div>
+          <ol class="steps" aria-label="Progreso">
+            <li [attr.aria-current]="review() ? null : 'step'">Datos</li>
+            <li [attr.aria-current]="review() ? 'step' : null">Revisión</li>
+          </ol>
+          <h3>Nuevo informe</h3>
+        </div>
+        <button class="icon-button" type="button" aria-label="Cerrar" (click)="dialog.close()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            aria-hidden="true"
+          >
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </header>
+
+      <form [hidden]="review()" (submit)="next($event, reportName, summary)">
+        <label class="field">
+          <span>Nombre</span>
+          <input
+            #reportName
+            autofocus
+            type="text"
+            required
+            maxlength="80"
+            placeholder="Ej. Resultados del mes"
+            [value]="name()"
+            (input)="name.set(reportName.value); reportName.setCustomValidity('')"
+          />
+        </label>
+        <div class="field-grid">
+          <label class="field">
+            <span>Área</span>
+            <select #area required [value]="areaId()" (change)="areaId.set(area.value)">
+              @if (!areas().length) {
+                <option value="">Sin áreas disponibles</option>
+              }
+              @for (option of areas(); track option.id) {
+                <option [value]="option.id" [selected]="option.id === areaId()">
+                  {{ option.label }}
+                </option>
+              }
+            </select>
+          </label>
+          <label class="field">
+            <span>Periodo</span>
+            <select #period required [value]="periodId()" (change)="periodId.set(period.value)">
+              @if (!periods().length) {
+                <option value="">Sin periodos disponibles</option>
+              }
+              @for (option of periods(); track option.id) {
+                <option [value]="option.id" [selected]="option.id === periodId()">
+                  {{ option.label }}
+                </option>
+              }
+            </select>
+          </label>
+        </div>
+        <footer>
+          <button class="secondary" type="button" (click)="dialog.close()">Cancelar</button>
+          <button class="primary" type="submit">Revisar</button>
+        </footer>
+      </form>
+
+      <section [hidden]="!review()">
+        <h4 #summary tabindex="-1">Revisa los datos del informe</h4>
+        @if (draft(); as report) {
+          <dl>
+            <div>
+              <dt>Nombre</dt>
+              <dd>{{ report.name }}</dd>
+            </div>
+            <div>
+              <dt>Área</dt>
+              <dd>{{ report.area.label }}</dd>
+            </div>
+            <div>
+              <dt>Periodo</dt>
+              <dd>{{ report.period.label }}</dd>
+            </div>
+          </dl>
+        } @else {
+          <p>Los datos disponibles cambiaron. Vuelve para revisar tu selección.</p>
+        }
+        <footer>
+          <button class="secondary" type="button" (click)="back(reportName)">Atrás</button>
+          <button class="primary" type="button" [disabled]="!draft()" (click)="finish(dialog)">
+            Solicitar informe
+          </button>
+        </footer>
+      </section>
+    </div>
+  </dialog>
+</section>

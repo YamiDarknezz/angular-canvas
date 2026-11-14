@@ -1,0 +1,88 @@
+<section class="explorer" [class.paper]="variant() === 'paper'" aria-label="Explorador de proyecto">
+  <nav class="rail" aria-label="Archivos">
+    <header class="project">
+      <span class="project-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z M4 7.5l8 4.5 8-4.5 M12 12v9" />
+        </svg>
+      </span>
+      <h2>{{ project() }}</h2>
+    </header>
+
+    <div class="tree" #tree role="tree" aria-label="Estructura de archivos">
+      @for (row of rows(); track row.node.id) {
+        <button
+          class="tree-row"
+          type="button"
+          role="treeitem"
+          [style.--depth]="row.level - 1"
+          [attr.aria-level]="row.level"
+          [attr.aria-posinset]="row.position"
+          [attr.aria-setsize]="row.siblings"
+          [attr.aria-expanded]="row.node.children ? isExpanded(row.node) : null"
+          [attr.aria-selected]="row.node.children ? null : file()?.node.id === row.node.id"
+          [attr.tabindex]="row.node.id === tabStop() ? 0 : -1"
+          (focus)="focus(row.node)"
+          (click)="activate(row)"
+          (keydown)="navigate($event, row, tree)"
+        >
+          @if (row.node.children) {
+            <svg
+              class="caret"
+              aria-hidden="true"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            >
+              <path d="m6 4 4 4-4 4" />
+            </svg>
+            <svg
+              class="folder"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.55"
+            >
+              <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+            </svg>
+          } @else {
+            <span class="caret" aria-hidden="true"></span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.55"
+            >
+              <path d="M6 3h8l4 4v14H6z M14 3v5h4 M9 12h6 M9 16h6" />
+            </svg>
+          }
+          <span>{{ row.node.label }}</span>
+        </button>
+      } @empty {
+        <p class="empty">No hay archivos.</p>
+      }
+    </div>
+  </nav>
+
+  <div class="preview">
+    @if (file(); as current) {
+      <header class="preview-header">
+        <span class="path">{{ current.path }}</span>
+        <h3>{{ current.node.label }}</h3>
+      </header>
+      @if (current.node.content !== undefined) {
+        <pre
+          tabindex="0"
+          aria-label="Contenido del archivo"
+        ><code>{{ current.node.content }}</code></pre>
+      } @else {
+        <p class="empty">Este archivo no tiene vista previa.</p>
+      }
+    } @else {
+      <p class="empty">Selecciona un archivo para abrir la vista previa.</p>
+    }
+  </div>
+</section>

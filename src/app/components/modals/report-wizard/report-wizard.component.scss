@@ -1,0 +1,350 @@
+:host {
+  display: block;
+}
+
+.stage {
+  --report-bg: #f4eee2;
+  --report-panel: #fcf8f0;
+  --report-detail: #e8e1d2;
+  --report-line: #c5baaa;
+  --report-ink: #292e26;
+  --report-muted: #5d6356;
+  --report-action: #365944;
+  --report-action-hover: #264532;
+  --report-action-text: #f5f8f0;
+  --report-focus: #365944;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 1.25rem;
+  max-inline-size: 42rem;
+  min-block-size: 17rem;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 5vw, 2.4rem);
+  overflow: hidden;
+  border: 1px solid var(--report-line);
+  border-radius: 14px;
+  background: var(--report-bg);
+  color: var(--report-ink);
+  color-scheme: light;
+
+  &.night {
+    --report-bg: #16221f;
+    --report-panel: #202c29;
+    --report-detail: #293a33;
+    --report-line: #54665e;
+    --report-ink: #ecf0e6;
+    --report-muted: #b5c2b7;
+    --report-action: #9bceac;
+    --report-action-hover: #bbdec2;
+    --report-action-text: #183025;
+    --report-focus: #9bceac;
+    color-scheme: dark;
+  }
+}
+
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 4.8vw, 2.65rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.stage-copy > p:first-of-type {
+  margin-block: 0.8rem 1.1rem;
+  color: var(--report-muted);
+  line-height: 1.5;
+}
+
+.confirmation:not(:empty) {
+  margin-block-start: 0.8rem;
+  overflow-wrap: anywhere;
+  color: var(--report-muted);
+  font-size: 0.83rem;
+}
+
+button {
+  display: inline-flex;
+  min-block-size: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 650;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+
+  svg {
+    inline-size: 1.1rem;
+    flex-shrink: 0;
+  }
+}
+
+.primary {
+  background: var(--report-action);
+  color: var(--report-action-text);
+
+  &:hover:not(:disabled) {
+    background: var(--report-action-hover);
+  }
+}
+
+.secondary,
+.icon-button {
+  border-color: var(--report-line);
+  background: transparent;
+  color: var(--report-ink);
+
+  &:hover {
+    background: var(--report-detail);
+  }
+}
+
+.paper-stack {
+  position: relative;
+  inline-size: min(100%, 9rem);
+  aspect-ratio: 0.84;
+  margin-inline: auto;
+
+  &::before {
+    position: absolute;
+    inset: 0 0.16rem 0.12rem;
+    transform: rotate(12deg);
+    border-radius: 8px;
+    background: var(--report-action);
+    content: '';
+  }
+}
+
+.paper {
+  position: relative;
+  display: grid;
+  block-size: 100%;
+  grid-template-rows: 0.7rem minmax(0, 1fr) 0.38rem 0.38rem;
+  gap: 0.42rem;
+  padding: 0.75rem;
+  transform: rotate(-8deg);
+  border: 1px solid var(--report-line);
+  border-radius: 8px;
+  background: var(--report-panel);
+}
+
+.paper-title,
+.paper-rule {
+  border-radius: 2px;
+  background: var(--report-line);
+}
+
+.paper-rule.narrow {
+  inline-size: 65%;
+}
+
+.paper-grid {
+  display: flex;
+  align-items: end;
+  gap: 0.3rem;
+  padding: 0.25rem 0.16rem 0;
+  border-block-end: 1px solid var(--report-line);
+
+  i {
+    inline-size: 20%;
+    block-size: 42%;
+    border-radius: 2px 2px 0 0;
+    background: var(--report-action);
+
+    &:nth-child(2) {
+      block-size: 55%;
+    }
+    &:nth-child(3) {
+      block-size: 38%;
+    }
+    &:nth-child(4) {
+      block-size: 73%;
+    }
+    &:nth-child(5) {
+      block-size: 86%;
+    }
+  }
+}
+
+dialog {
+  box-sizing: border-box;
+  inline-size: min(calc(100% - 1.5rem), 30rem);
+  max-block-size: calc(100% - 1.5rem);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--report-line);
+  border-radius: 14px;
+  background: var(--report-panel);
+  color: var(--report-ink);
+
+  &[open] {
+    animation: report-open 180ms ease-out both;
+  }
+
+  &::backdrop {
+    background: rgb(11 19 17 / 69%);
+  }
+}
+
+.dialog-shell {
+  padding: clamp(0.95rem, 4vw, 1.5rem);
+}
+
+.dialog-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-block-end: 1.1rem;
+}
+
+.dialog-header h3 {
+  margin-block-start: 0.6rem;
+  font-size: 1.55rem;
+  letter-spacing: -0.02em;
+}
+
+.icon-button {
+  min-inline-size: 2.75rem;
+  padding: 0.5rem;
+}
+
+.steps {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--report-muted);
+  font-size: 0.8rem;
+
+  li {
+    padding-block-end: 0.19rem;
+    border-block-end: 2px solid transparent;
+
+    &[aria-current='step'] {
+      border-color: var(--report-focus);
+      color: var(--report-ink);
+      font-weight: 700;
+    }
+  }
+}
+
+.field,
+.field-grid {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.field {
+  min-inline-size: 0;
+  gap: 0.38rem;
+
+  > span {
+    font-size: 0.86rem;
+    font-weight: 650;
+  }
+}
+
+.field-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-block-start: 0.85rem;
+}
+
+:where(input, select) {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 2.75rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--report-line);
+  border-radius: 7px;
+  background: var(--report-bg);
+  color: var(--report-ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: var(--report-muted);
+}
+
+dl {
+  margin-block: 0.7rem 0;
+}
+
+dl > div {
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 0.55rem;
+  border-block-end: 1px solid var(--report-line);
+  overflow-wrap: anywhere;
+}
+
+dt {
+  color: var(--report-muted);
+}
+
+dd {
+  margin: 0;
+  font-weight: 650;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  margin-block-start: 1.25rem;
+}
+
+:where(button, input, select, h4):focus-visible {
+  outline: 2px solid var(--report-focus);
+  outline-offset: 2px;
+}
+
+@keyframes report-open {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 475px) {
+  .stage,
+  .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .paper-stack {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog[open],
+  button {
+    animation: none;
+    transition: none;
+  }
+}

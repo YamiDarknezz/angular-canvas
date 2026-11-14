@@ -1,0 +1,35 @@
+<section class="panel" [class.images]="photos()" aria-label="Selector de archivos locales">
+  <h2>{{ photos() ? 'Adjuntar imágenes' : 'Adjuntar documentos' }}</h2>
+  <div
+    class="drop-zone"
+    [class.dragging]="dragging()"
+    (dragenter)="dragEnter($event)"
+    (dragover)="dragOver($event)"
+    (dragleave)="dragLeave()"
+    (drop)="drop($event)"
+  >
+    <span class="document" aria-hidden="true"><span></span><span></span><span></span></span>
+    <p>Arrastra archivos a esta zona</p>
+    <input #picker type="file" [accept]="allowed()" multiple hidden (change)="choose(picker)" />
+    <button type="button" class="choose" (click)="picker.click()">Seleccionar archivos</button>
+    <p class="rules">
+      {{ photos() && accept() === null ? 'Imágenes' : allowed() || 'Cualquier formato' }}
+      · Hasta {{ formatSize(limit()) }} por archivo
+    </p>
+  </div>
+
+  @if (files().length) {
+    <ul class="files" aria-label="Archivos seleccionados">
+      @for (file of files(); track file; let index = $index) {
+        <li>
+          <span class="filename">{{ file.name }}</span>
+          <span class="size">{{ formatSize(file.size) }}</span>
+          <button type="button" (click)="remove(index)" [attr.aria-label]="'Quitar ' + file.name">
+            Quitar
+          </button>
+        </li>
+      }
+    </ul>
+  }
+  <p class="status" role="status">{{ message() }}</p>
+</section>

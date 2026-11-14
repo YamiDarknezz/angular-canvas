@@ -1,0 +1,31 @@
+<div class="theme">
+  <ng-content>
+    <header>
+      <h2>Bitácora del equipo</h2>
+      <button type="button" [attr.aria-pressed]="filtered()" (click)="toggleFilter()">
+        Mostrar guardados · {{ bookmarks().length }}
+      </button>
+    </header>
+    <ul>
+      @for (article of visible(); track article.id) {
+        <li>
+          <div>
+            <p class="category">{{ article.section }}</p>
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.detail }}</p>
+          </div>
+          <button
+            type="button"
+            [attr.aria-label]="'Guardar ' + article.title"
+            [attr.aria-pressed]="bookmarks().includes(article.id)"
+            (click)="toggle(article.id)"
+          >
+            {{ bookmarks().includes(article.id) ? 'Guardado' : 'Guardar' }}
+          </button>
+        </li>
+      } @empty {
+        <li>Aún no hay artículos guardados.</li>
+      }
+    </ul>
+  </ng-content>
+</div>

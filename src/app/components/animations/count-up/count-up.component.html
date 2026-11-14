@@ -1,0 +1,9 @@
+<section class="metric">
+  <h2>{{ model().title }}</h2>
+  <div class="value" aria-hidden="true">{{ displayed() }}</div>
+  <span class="sr-only">{{ finalValue() }}</span>
+  <div class="track" aria-hidden="true"><span [style.--progress]="shownProgress()"></span></div>
+  <button type="button" [disabled]="!canReplay() || isRunning()" (click)="replay()">
+    {{ isRunning() && canReplay() ? 'Animando…' : 'Animar contador' }}
+  </button>
+</section>

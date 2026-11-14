@@ -1,0 +1,31 @@
+<section class="panel">
+  <h2>{{ config().title }}</h2>
+  <p class="status" role="status">{{ status() }}</p>
+  <ol>
+    @for (stage of config().stages; track stage; let index = $index) {
+      <li
+        [class.done]="step() > index"
+        [attr.aria-current]="phase() === 'running' && step() === index ? 'step' : null"
+      >
+        <span class="dot" aria-hidden="true"></span>
+        <span>{{ stage }}</span>
+        @if (step() > index) {
+          <span class="sr-only">Completado</span>
+        }
+      </li>
+    }
+  </ol>
+  <button type="button" (click)="runAction()">
+    @switch (phase()) {
+      @case ('running') {
+        Cancelar
+      }
+      @case ('idle') {
+        Iniciar demo
+      }
+      @default {
+        Reiniciar demo
+      }
+    }
+  </button>
+</section>

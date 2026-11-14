@@ -1,9 +1,9 @@
 {
   "version": "2.2.0",
   "totalGroups": 12,
-  "totalComponents": 72,
-  "totalVariants": 225,
-  "updatedAt": "2026-11-14T04:11:08.576Z",
+  "totalComponents": 82,
+  "totalVariants": 245,
+  "updatedAt": "2026-11-14T04:19:13.649Z",
   "groups": [
     {
       "id": "cards",
@@ -314,6 +314,62 @@
               "hint": "Badge de acento y otra densidad",
               "routePath": "/cards/dark-corporate/variant",
               "embedPath": "/embed/cards/dark-corporate/variant"
+            }
+          ]
+        },
+        {
+          "id": "delivery-timeline",
+          "code": "1.9",
+          "label": "Seguimiento de entrega",
+          "tagline": "Tarjeta de pedido con ruta, etapas consultables y detalle animado",
+          "selector": "app-card-delivery-timeline",
+          "className": "DeliveryTimelineCardComponent",
+          "sourcePath": "src/app/components/cards/delivery-timeline",
+          "routePath": "/cards/delivery-timeline",
+          "variants": [
+            {
+              "id": "in-transit",
+              "code": "1.9.1.1",
+              "label": "En ruta",
+              "hint": "Consulta las etapas y la ventana estimada de entrega",
+              "routePath": "/cards/delivery-timeline/in-transit",
+              "embedPath": "/embed/cards/delivery-timeline/in-transit"
+            },
+            {
+              "id": "delivered",
+              "code": "1.9.2.1",
+              "label": "Entregado",
+              "hint": "Revisa la recepción confirmada y las horas de cada hito",
+              "routePath": "/cards/delivery-timeline/delivered",
+              "embedPath": "/embed/cards/delivery-timeline/delivered"
+            }
+          ]
+        },
+        {
+          "id": "stock-status",
+          "code": "1.10",
+          "label": "Estado del inventario",
+          "tagline": "Tarjeta con existencias, umbral de reposición y filtro de artículos",
+          "selector": "app-card-stock-status",
+          "className": "StockStatusCardComponent",
+          "sourcePath": "src/app/components/cards/stock-status",
+          "routePath": "/cards/stock-status",
+          "variants": [
+            {
+              "id": "warehouse",
+              "code": "1.10.1.1",
+              "label": "Almacén",
+              "hint": "Compara existencias con el mínimo de reposición",
+              "routePath": "/cards/stock-status/warehouse",
+              "embedPath": "/embed/cards/stock-status/warehouse"
+            },
+            {
+              "id": "store",
+              "code": "1.10.2.1",
+              "label": "Bodega",
+              "hint": "Filtra los productos bajo mínimo y los agotados",
+              "routePath": "/cards/stock-status/store",
+              "embedPath": "/embed/cards/stock-status/store"
             }
           ]
         }
@@ -1324,6 +1380,34 @@
               "embedPath": "/embed/navigation/stepper/progress"
             }
           ]
+        },
+        {
+          "id": "tree-explorer",
+          "code": "5.8",
+          "label": "Explorador de archivos",
+          "tagline": "Árbol de proyecto con carpetas, teclado y vista previa",
+          "selector": "app-nav-tree-explorer",
+          "className": "TreeExplorerComponent",
+          "sourcePath": "src/app/components/navigation/tree-explorer",
+          "routePath": "/navigation/tree-explorer",
+          "variants": [
+            {
+              "id": "midnight",
+              "code": "5.8.1.1",
+              "label": "Terminal oscura",
+              "hint": "Abre carpetas con las flechas y selecciona archivos",
+              "routePath": "/navigation/tree-explorer/midnight",
+              "embedPath": "/embed/navigation/tree-explorer/midnight"
+            },
+            {
+              "id": "paper",
+              "code": "5.8.2.1",
+              "label": "Papel claro",
+              "hint": "Explorador claro con navegación jerárquica y vista previa",
+              "routePath": "/navigation/tree-explorer/paper",
+              "embedPath": "/embed/navigation/tree-explorer/paper"
+            }
+          ]
         }
       ]
     },
@@ -1535,6 +1619,34 @@
               "embedPath": "/embed/forms/password-strength/compact"
             }
           ]
+        },
+        {
+          "id": "file-drop",
+          "code": "6.9",
+          "label": "Zona para adjuntar archivos",
+          "tagline": "Selector local con arrastre, lista y validación de tamaño y formato",
+          "selector": "app-form-file-drop",
+          "className": "FileDropComponent",
+          "sourcePath": "src/app/components/forms/file-drop",
+          "routePath": "/forms/file-drop",
+          "variants": [
+            {
+              "id": "documents",
+              "code": "6.9.1.1",
+              "label": "Documentos",
+              "hint": "Adjunta PDF, CSV y XLSX y revisa el tamaño",
+              "routePath": "/forms/file-drop/documents",
+              "embedPath": "/embed/forms/file-drop/documents"
+            },
+            {
+              "id": "images",
+              "code": "6.9.2.1",
+              "label": "Imágenes",
+              "hint": "Selecciona imágenes en una zona de arrastre oscura",
+              "routePath": "/forms/file-drop/images",
+              "embedPath": "/embed/forms/file-drop/images"
+            }
+          ]
         }
       ]
     },
@@ -1687,6 +1799,62 @@
               "hint": "Miniaturas con efecto de vidrio",
               "routePath": "/modals/lightbox/glass",
               "embedPath": "/embed/modals/lightbox/glass"
+            }
+          ]
+        },
+        {
+          "id": "report-wizard",
+          "code": "7.7",
+          "label": "Asistente de informes",
+          "tagline": "Diálogo con formulario, validación y revisión de la solicitud",
+          "selector": "app-modal-report-wizard",
+          "className": "ReportWizardComponent",
+          "sourcePath": "src/app/components/modals/report-wizard",
+          "routePath": "/modals/report-wizard",
+          "variants": [
+            {
+              "id": "paper",
+              "code": "7.7.1.1",
+              "label": "Papel claro",
+              "hint": "Configura área y periodo y revisa los datos antes de solicitar",
+              "routePath": "/modals/report-wizard/paper",
+              "embedPath": "/embed/modals/report-wizard/paper"
+            },
+            {
+              "id": "night",
+              "code": "7.7.2.1",
+              "label": "Verde nocturno",
+              "hint": "Asistente oscuro con diálogo nativo y confirmación",
+              "routePath": "/modals/report-wizard/night",
+              "embedPath": "/embed/modals/report-wizard/night"
+            }
+          ]
+        },
+        {
+          "id": "share-access",
+          "code": "7.8",
+          "label": "Compartir acceso",
+          "tagline": "Gestiona colaboradores, permisos y el enlace de un documento",
+          "selector": "app-modal-share-access",
+          "className": "ShareAccessComponent",
+          "sourcePath": "src/app/components/modals/share-access",
+          "routePath": "/modals/share-access",
+          "variants": [
+            {
+              "id": "studio",
+              "code": "7.8.1.1",
+              "label": "Estudio violeta",
+              "hint": "Agrega colaboradores, cambia sus permisos y copia el enlace",
+              "routePath": "/modals/share-access/studio",
+              "embedPath": "/embed/modals/share-access/studio"
+            },
+            {
+              "id": "paper",
+              "code": "7.8.2.1",
+              "label": "Papel claro",
+              "hint": "Gestiona el acceso desde un diálogo en tonos claros",
+              "routePath": "/modals/share-access/paper",
+              "embedPath": "/embed/modals/share-access/paper"
             }
           ]
         }
@@ -1861,6 +2029,34 @@
               "hint": "Azules corporativos y grises",
               "routePath": "/themes/corporate/palette",
               "embedPath": "/embed/themes/corporate/palette"
+            }
+          ]
+        },
+        {
+          "id": "editorial",
+          "code": "8.6",
+          "label": "Tema editorial",
+          "tagline": "Bitácora con tipografía editorial, lectura y marcadores locales",
+          "selector": "app-theme-editorial",
+          "className": "EditorialThemeComponent",
+          "sourcePath": "src/app/components/themes/editorial",
+          "routePath": "/themes/editorial",
+          "variants": [
+            {
+              "id": "paper",
+              "code": "8.6.1.1",
+              "label": "Papel cálido",
+              "hint": "Consulta la bitácora y guarda artículos sobre una superficie clara",
+              "routePath": "/themes/editorial/paper",
+              "embedPath": "/embed/themes/editorial/paper"
+            },
+            {
+              "id": "night",
+              "code": "8.6.2.1",
+              "label": "Lectura nocturna",
+              "hint": "Explora la misma bitácora en verde oscuro",
+              "routePath": "/themes/editorial/night",
+              "embedPath": "/embed/themes/editorial/night"
             }
           ]
         }
@@ -2089,6 +2285,34 @@
               "embedPath": "/embed/animations/marquee/logos"
             }
           ]
+        },
+        {
+          "id": "count-up",
+          "code": "9.7",
+          "label": "Contador animado",
+          "tagline": "Anima cantidades y porcentajes con opción de repetir",
+          "selector": "app-anim-count-up",
+          "className": "CountUpComponent",
+          "sourcePath": "src/app/components/animations/count-up",
+          "routePath": "/animations/count-up",
+          "variants": [
+            {
+              "id": "fulfillment",
+              "code": "9.7.1.1",
+              "label": "Pedidos despachados",
+              "hint": "Reproduce un conteo entero con barra de progreso",
+              "routePath": "/animations/count-up/fulfillment",
+              "embedPath": "/embed/animations/count-up/fulfillment"
+            },
+            {
+              "id": "conversion",
+              "code": "9.7.2.1",
+              "label": "Tasa de conversión",
+              "hint": "Anima el valor de un porcentaje con decimales",
+              "routePath": "/animations/count-up/conversion",
+              "embedPath": "/embed/animations/count-up/conversion"
+            }
+          ]
         }
       ]
     },
@@ -2294,6 +2518,34 @@
               "embedPath": "/embed/charts/radar-chart/scanner"
             }
           ]
+        },
+        {
+          "id": "waterfall-chart",
+          "code": "10.6",
+          "label": "Gráfico de cascada",
+          "tagline": "Desglosa el cambio del saldo entre aumentos y reducciones seleccionables",
+          "selector": "app-chart-waterfall",
+          "className": "WaterfallChartComponent",
+          "sourcePath": "src/app/components/charts/waterfall-chart",
+          "routePath": "/charts/waterfall-chart",
+          "variants": [
+            {
+              "id": "finance",
+              "code": "10.6.1.1",
+              "label": "Flujo financiero",
+              "hint": "Rastrea el impacto de ventas y gastos en el saldo",
+              "routePath": "/charts/waterfall-chart/finance",
+              "embedPath": "/embed/charts/waterfall-chart/finance"
+            },
+            {
+              "id": "inventory",
+              "code": "10.6.2.1",
+              "label": "Movimientos de inventario",
+              "hint": "Compara compras, salidas, retornos y mermas",
+              "routePath": "/charts/waterfall-chart/inventory",
+              "embedPath": "/embed/charts/waterfall-chart/inventory"
+            }
+          ]
         }
       ]
     },
@@ -2413,6 +2665,34 @@
               "hint": "Estallidos múltiples en cascada superior con estelas luminosas",
               "routePath": "/feedback/confetti/fireworks",
               "embedPath": "/embed/feedback/confetti/fireworks"
+            }
+          ]
+        },
+        {
+          "id": "task-progress",
+          "code": "11.4",
+          "label": "Progreso por etapas",
+          "tagline": "Muestra el avance de una tarea con cancelación y reinicio",
+          "selector": "app-feedback-task-progress",
+          "className": "TaskProgressComponent",
+          "sourcePath": "src/app/components/feedback/task-progress",
+          "routePath": "/feedback/task-progress",
+          "variants": [
+            {
+              "id": "report",
+              "code": "11.4.1.1",
+              "label": "Generar informe",
+              "hint": "Sigue la generación simulada de un informe",
+              "routePath": "/feedback/task-progress/report",
+              "embedPath": "/embed/feedback/task-progress/report"
+            },
+            {
+              "id": "sync",
+              "code": "11.4.2.1",
+              "label": "Sincronizar inventario",
+              "hint": "Sigue las etapas de una sincronización de existencias",
+              "routePath": "/feedback/task-progress/sync",
+              "embedPath": "/embed/feedback/task-progress/sync"
             }
           ]
         }

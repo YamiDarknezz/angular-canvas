@@ -1,5 +1,17 @@
 import { Type } from '@angular/core';
 
+import { ShareAccessComponent } from '../../components/modals/share-access/share-access.component';
+import { EditorialThemeComponent } from '../../components/themes/editorial/editorial.component';
+import { CountUpComponent } from '../../components/animations/count-up/count-up.component';
+import { TaskProgressComponent } from '../../components/feedback/task-progress/task-progress.component';
+
+import { DeliveryTimelineCardComponent } from '../../components/cards/delivery-timeline/delivery-timeline.component';
+import { StockStatusCardComponent } from '../../components/cards/stock-status/stock-status.component';
+import { TreeExplorerComponent } from '../../components/navigation/tree-explorer/tree-explorer.component';
+import { FileDropComponent } from '../../components/forms/file-drop/file-drop.component';
+import { ReportWizardComponent } from '../../components/modals/report-wizard/report-wizard.component';
+import { WaterfallChartComponent } from '../../components/charts/waterfall-chart/waterfall-chart.component';
+
 import { HoldConfirmButtonComponent } from '../../components/buttons/hold-confirm/hold-confirm.component';
 import { TopographicComponent } from '../../components/backgrounds/topographic/topographic.component';
 import { RevealHeadingComponent } from '../../components/typography/reveal-heading/reveal-heading.component';
@@ -190,6 +202,16 @@ const ENTRY_COMPONENTS: ReadonlyMap<string, Type<unknown>> = new Map<string, Typ
   ['backgrounds/topographic', TopographicComponent],
   ['typography/reveal-heading', RevealHeadingComponent],
   ['forms/password-strength', PasswordStrengthComponent],
+  ['cards/delivery-timeline', DeliveryTimelineCardComponent],
+  ['cards/stock-status', StockStatusCardComponent],
+  ['navigation/tree-explorer', TreeExplorerComponent],
+  ['forms/file-drop', FileDropComponent],
+  ['modals/report-wizard', ReportWizardComponent],
+  ['charts/waterfall-chart', WaterfallChartComponent],
+  ['modals/share-access', ShareAccessComponent],
+  ['themes/editorial', EditorialThemeComponent],
+  ['animations/count-up', CountUpComponent],
+  ['feedback/task-progress', TaskProgressComponent],
 ]);
 
 /** Componente que corresponde a un entorno del catálogo. */

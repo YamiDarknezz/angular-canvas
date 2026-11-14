@@ -1,0 +1,58 @@
+<article class="sheet" [class.store]="variant() === 'store'">
+  <header>
+    <h2>{{ title() }}</h2>
+    <span class="summary">
+      @if (low().length === 1) {
+        1 requiere reposición
+      } @else {
+        {{ low().length }} requieren reposición
+      }
+    </span>
+  </header>
+  <label class="filter">
+    <input
+      type="checkbox"
+      [checked]="onlyLow()"
+      (change)="onlyLow.set($any($event.target).checked)"
+    />
+    Solo artículos para reponer
+  </label>
+  <ul>
+    @for (item of visible(); track item.id) {
+      <li>
+        <button
+          type="button"
+          [class.low]="lowStock(item)"
+          [attr.aria-expanded]="selected() === item"
+          (click)="select(item)"
+        >
+          <span class="item">{{ item.name }}</span>
+          <span class="quantity">{{ item.available }} / {{ item.capacity }}</span>
+          <span class="meter" aria-hidden="true">
+            <span class="fill" [style.--fill]="ratio(item.available, item.capacity)"></span>
+            <span
+              class="minimum"
+              [style.--minimum]="ratio(item.minimum, item.capacity) * 100 + '%'"
+            ></span>
+          </span>
+          <span class="status">{{
+            item.available === 0 ? 'Agotado' : lowStock(item) ? 'Bajo mínimo' : 'Disponible'
+          }}</span>
+        </button>
+        @if (selected() === item) {
+          <div class="detail">
+            <strong>{{ item.id }}</strong>
+            <span>Mínimo de reposición: {{ item.minimum }} unidades.</span>
+          </div>
+        }
+      </li>
+    } @empty {
+      <li class="empty">
+        {{ onlyLow() ? 'No hay artículos para reponer.' : 'No hay artículos registrados.' }}
+      </li>
+    }
+  </ul>
+  <p class="legend">
+    <span aria-hidden="true"></span> La marca vertical indica el mínimo de reposición.
+  </p>
+</article>

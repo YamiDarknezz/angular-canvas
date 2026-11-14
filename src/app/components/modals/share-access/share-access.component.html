@@ -1,0 +1,116 @@
+<section class="stage" [class.paper]="variant() === 'paper'">
+  <div class="document">
+    <span class="document-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M6 3h8l4 4v14H6z M14 3v5h4 M9 12h6 M9 16h6" />
+      </svg>
+    </span>
+    <div class="document-copy">
+      <h2>{{ documentName() }}</h2>
+      <p>
+        {{ collaborators().length }}
+        {{ collaborators().length === 1 ? 'persona con acceso' : 'personas con acceso' }}
+      </p>
+    </div>
+    <button class="primary" type="button" (click)="feedback.set(''); dialog.showModal()">
+      Compartir
+    </button>
+  </div>
+
+  <dialog #dialog aria-label="Compartir documento">
+    <div class="dialog-shell">
+      <header>
+        <div>
+          <h3>Compartir documento</h3>
+          <p>{{ documentName() }}</p>
+        </div>
+        <button class="icon" type="button" aria-label="Cerrar" (click)="dialog.close()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            aria-hidden="true"
+          >
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </header>
+
+      <form (submit)="add($event, email, access)">
+        <label>
+          <span>Correo</span>
+          <input
+            #email
+            autofocus
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="nombre@empresa.com"
+            (input)="email.setCustomValidity('')"
+          />
+        </label>
+        <label>
+          <span>Permiso</span>
+          <select #access>
+            <option value="viewer">Ver</option>
+            <option value="editor">Editar</option>
+          </select>
+        </label>
+        <button class="primary" type="submit">Agregar</button>
+      </form>
+
+      <h4>Personas con acceso</h4>
+      <ul>
+        @for (person of collaborators(); track person.email) {
+          <li>
+            <span class="avatar" aria-hidden="true">{{
+              (person.name || person.email).slice(0, 1).toUpperCase()
+            }}</span>
+            <div class="person">
+              @if (person.name) {
+                <strong>{{ person.name }}</strong>
+              }
+              <span>{{ person.email }}</span>
+            </div>
+            <select
+              #role
+              [attr.aria-label]="'Permiso de ' + person.email"
+              (change)="changeRole(person.email, role)"
+            >
+              <option value="viewer" [selected]="person.role === 'viewer'">Ver</option>
+              <option value="editor" [selected]="person.role === 'editor'">Editar</option>
+            </select>
+            <button
+              class="icon"
+              type="button"
+              [attr.aria-label]="'Quitar acceso a ' + person.email"
+              (click)="remove(person.email, email)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+              </svg>
+            </button>
+          </li>
+        } @empty {
+          <li class="empty">Todavía no hay personas con acceso.</li>
+        }
+      </ul>
+
+      <div class="link">
+        <label>
+          <span>Enlace del documento</span>
+          <input #link readonly [value]="shareLink()" />
+        </label>
+        <button class="secondary" type="button" (click)="copy(link)">Copiar</button>
+      </div>
+      <p class="feedback" role="status">{{ feedback() }}</p>
+    </div>
+  </dialog>
+</section>
