@@ -1,7 +1,7 @@
 # Diccionario de Estilos y Efectos — AngularCanvas
 
 > **Catálogo de Referencia Jerárquico para Desarrolladores y Agentes de IA**  
-> Total: **13 Categorías** · **83 Componentes** · **247 Efectos / Sub-estilos Únicos**
+> Total: **14 Categorías** · **85 Componentes** · **250 Efectos / Sub-estilos Únicos**
 > Formato JSON disponible en [`public/dictionary.json`](public/dictionary.json) o en la web vía `https://canvas.darknezz.dev/dictionary.json`
 
 ---
@@ -423,6 +423,20 @@ Login 3D requiere estas carpetas hermanas: `src/app/components/media-3d/three-sc
 | :---: | :--- | :--- | :--- | :--- | :--- |
 | **`13.1.1.1`** | Mesa de pedidos (`13.1`) | **Despacho de almacén**<br><sub>Prepara pedidos y registra su salida</sub> | `<app-workflow-order-workbench>` | `src/app/components/workflows/order-workbench` | `<app-workflow-order-workbench [variant]="'warehouse'" />` |
 | **`13.1.2.1`** | Mesa de pedidos (`13.1`) | **Reposición de bodegas**<br><sub>Revisa los pedidos de una bodega y administra su despacho</sub> | `<app-workflow-order-workbench>` | `src/app/components/workflows/order-workbench` | `<app-workflow-order-workbench [variant]="'retail'" />` |
+| **`13.2.1.1`** | Reposición conectada (`13.2`) | **Inventario, pedido y recepción**<br><sub>Solicita reposición, despacha el pedido, recibe las unidades y actualiza el stock</sub> | `<app-workflow-replenishment-flow>` | `src/app/components/workflows/replenishment-flow` | `<app-workflow-replenishment-flow [variant]="'retail'" />` |
+
+Reposición conectada requiere estas carpetas con su ruta relativa bajo components: `src/app/components/data/inventory-table` · `src/app/components/cards/stock-status` · `src/app/components/workflows/order-workbench`.
+
+---
+
+## 14. Tablas y datos
+
+*Herramientas para consultar, filtrar y editar datos de trabajo*
+
+| Código | Componente | Sub-estilo / Efecto | Selector | Carpeta a copiar | Uso Standalone |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **`14.1.1.1`** | Inventario por sede (`14.1`) | **Inventario por bodega**<br><sub>Compara el stock de tres bodegas y solicita reposición de productos bajo mínimo</sub> | `<app-data-inventory-table>` | `src/app/components/data/inventory-table` | `<app-data-inventory-table [variant]="'store'" />` |
+| **`14.1.2.1`** | Inventario por sede (`14.1`) | **Inventario por almacén**<br><sub>Filtra existencias por almacén y ajusta cantidades en la tabla</sub> | `<app-data-inventory-table>` | `src/app/components/data/inventory-table` | `<app-data-inventory-table [variant]="'warehouse'" />` |
 
 ---
 

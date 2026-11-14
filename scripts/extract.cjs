@@ -92,7 +92,8 @@ if (parentComp.requiresForms) {
 console.log(`======================================================\n`);
 
 if (destDir) {
-  const sources = [parentComp.sourcePath, ...(parentComp.supportingFolders ?? [])].map(
+  const folders = [parentComp.sourcePath, ...(parentComp.supportingFolders ?? [])];
+  const sources = folders.map(
     (folder) => path.join(__dirname, '..', folder),
   );
   const missing = sources.find((folder) => !fs.existsSync(folder));
@@ -102,8 +103,17 @@ if (destDir) {
   }
 
   const destination = path.resolve(destDir);
-  for (const source of sources) {
-    const targetFolder = path.join(destination, path.basename(source));
+  const componentsRoot = path.resolve(__dirname, '../src/app/components');
+  const destinations = sources.map((source) => {
+    if (!parentComp.preserveSourceLayout) return path.basename(source);
+    const relative = path.relative(componentsRoot, source);
+    if (!relative || relative === '..' || relative.startsWith('..' + path.sep) || path.isAbsolute(relative)) {
+      throw new Error(`La carpeta fuente no está bajo src/app/components: ${source}`);
+    }
+    return relative;
+  });
+  for (const [index, source] of sources.entries()) {
+    const targetFolder = path.join(destination, destinations[index]);
     fs.mkdirSync(targetFolder, { recursive: true });
     for (const file of fs.readdirSync(source, { withFileTypes: true })) {
       if (file.isFile()) {

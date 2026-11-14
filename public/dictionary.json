@@ -1,9 +1,9 @@
 {
   "version": "2.2.0",
-  "totalGroups": 13,
-  "totalComponents": 83,
-  "totalVariants": 247,
-  "updatedAt": "2026-11-14T04:29:05.783Z",
+  "totalGroups": 14,
+  "totalComponents": 85,
+  "totalVariants": 250,
+  "updatedAt": "2026-11-14T04:42:42.168Z",
   "groups": [
     {
       "id": "cards",
@@ -3132,6 +3132,70 @@
               "hint": "Revisa los pedidos de una bodega y administra su despacho",
               "routePath": "/workflows/order-workbench/retail",
               "embedPath": "/embed/workflows/order-workbench/retail"
+            }
+          ]
+        },
+        {
+          "id": "replenishment-flow",
+          "code": "13.2",
+          "label": "Reposición conectada",
+          "tagline": "Pasa de un faltante en inventario a un pedido y registra su recepción",
+          "selector": "app-workflow-replenishment-flow",
+          "className": "ReplenishmentFlowComponent",
+          "sourcePath": "src/app/components/workflows/replenishment-flow",
+          "supportingFolders": [
+            "src/app/components/data/inventory-table",
+            "src/app/components/cards/stock-status",
+            "src/app/components/workflows/order-workbench"
+          ],
+          "preserveSourceLayout": true,
+          "routePath": "/workflows/replenishment-flow",
+          "variants": [
+            {
+              "id": "retail",
+              "code": "13.2.1.1",
+              "label": "Inventario, pedido y recepción",
+              "hint": "Solicita reposición, despacha el pedido, recibe las unidades y actualiza el stock",
+              "routePath": "/workflows/replenishment-flow/retail",
+              "embedPath": "/embed/workflows/replenishment-flow/retail"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "code": "14",
+      "label": "Tablas y datos",
+      "tagline": "Herramientas para consultar, filtrar y editar datos de trabajo",
+      "icon": "data",
+      "accent": "#74bdb6",
+      "components": [
+        {
+          "id": "inventory-table",
+          "code": "14.1",
+          "label": "Inventario por sede",
+          "tagline": "Consulta stock por producto y sede, ordénalo y edita las existencias en línea",
+          "selector": "app-data-inventory-table",
+          "className": "InventoryTableComponent",
+          "sourcePath": "src/app/components/data/inventory-table",
+          "routePath": "/data/inventory-table",
+          "variants": [
+            {
+              "id": "store",
+              "code": "14.1.1.1",
+              "label": "Inventario por bodega",
+              "hint": "Compara el stock de tres bodegas y solicita reposición de productos bajo mínimo",
+              "routePath": "/data/inventory-table/store",
+              "embedPath": "/embed/data/inventory-table/store"
+            },
+            {
+              "id": "warehouse",
+              "code": "14.1.2.1",
+              "label": "Inventario por almacén",
+              "hint": "Filtra existencias por almacén y ajusta cantidades en la tabla",
+              "routePath": "/data/inventory-table/warehouse",
+              "embedPath": "/embed/data/inventory-table/warehouse"
             }
           ]
         }

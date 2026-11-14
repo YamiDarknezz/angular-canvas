@@ -1,0 +1,86 @@
+<section class="flow" aria-label="Reposición conectada">
+  <header class="intro">
+    <div>
+      <h2>Reposición conectada</h2>
+      <p>
+        Detecta faltantes, prepara un pedido y registra su llegada para actualizar las existencias
+        de la bodega.
+      </p>
+    </div>
+    <span class="sample">Datos de ejemplo</span>
+  </header>
+
+  <div class="inventory">
+    <app-data-inventory-table
+      variant="store"
+      title="Inventario de bodegas"
+      [rows]="rows()"
+      [queuedIds]="pendingRowIds()"
+      (siteChange)="selectedSite.set($event)"
+      (quantityChange)="updateQuantity($event)"
+      (restockRequested)="createOrder($event)"
+    />
+    <app-card-stock-status variant="store" [title]="siteTitle()" [items]="stock()" />
+  </div>
+
+  <div class="handoff" [class.quiet]="!message() && !awaitingReceipt()">
+    <p class="announcement" role="status">{{ message() }}</p>
+    @if (awaitingReceipt()) {
+      <button type="button" (click)="receiptHeading.focus()">Ir a recepciones</button>
+    } @else if (activeOrders().length && message()) {
+      <button type="button" (click)="workbenchPanel.focus()">Ir a pedidos</button>
+    }
+  </div>
+
+  <div class="dispatch">
+    <div
+      #workbenchPanel
+      tabindex="-1"
+      class="step-target"
+      role="group"
+      aria-label="Mesa de pedidos de reposición"
+    >
+      <app-workflow-order-workbench
+        variant="retail"
+        [orders]="activeOrders()"
+        (orderChange)="updateOrder($event)"
+      />
+    </div>
+
+    <section class="receipt" aria-label="Recepciones en bodega">
+      <header>
+        <h3 #receiptHeading tabindex="-1" class="step-target">Recepciones en bodega</h3>
+        <p>Las unidades se suman al inventario cuando confirmas la recepción.</p>
+      </header>
+      <ul>
+        @for (shipment of receipts(); track shipment.order.id) {
+          <li>
+            <div>
+              <span class="reference">{{ shipment.order.id }}</span>
+              <strong>{{ shipment.order.destination }}</strong>
+              <span
+                >{{ shipment.order.lines[0].quantity }} u. ·
+                {{ shipment.order.lines[0].label }}</span
+              >
+            </div>
+            <button
+              type="button"
+              [attr.aria-disabled]="shipment.received ? 'true' : null"
+              [attr.aria-label]="
+                (shipment.received ? 'Recepción registrada ' : 'Registrar recepción ') +
+                shipment.order.id
+              "
+              (click)="receive(shipment.order.id)"
+            >
+              {{ shipment.received ? 'Recibido' : 'Registrar recepción' }}
+            </button>
+          </li>
+        } @empty {
+          <li class="empty">
+            Cuando registres un despacho en la mesa de pedidos, podrás confirmar su llegada aquí.
+          </li>
+        }
+      </ul>
+    </section>
+  </div>
+</section>

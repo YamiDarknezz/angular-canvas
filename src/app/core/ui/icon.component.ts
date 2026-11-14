@@ -70,6 +70,14 @@ const ICONS: Readonly<Record<string, IconDefinition>> = {
 
   // Acciones
   workflows: { paths: ['M4 7h9', 'M4 12h6', 'M4 17h9', 'm15 11 2.5 2.5L21 10', 'M17.5 13.5V18'] },
+  data: {
+    paths: [
+      'M5 5h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z',
+      'M4 10h16',
+      'M4 14.5h16',
+      'M10 10v9',
+    ],
+  },
   home: { paths: ['m3.5 10 8.5-7 8.5 7v9a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1z', 'M9.5 20v-6h5v6'] },
   'arrow-down': { paths: ['M12 4v15', 'm6 13 6 6 6-6'] },
   search: { paths: ['M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z', 'm20 20-3.8-3.8'] },

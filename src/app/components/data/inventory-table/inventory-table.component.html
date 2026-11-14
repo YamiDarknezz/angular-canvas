@@ -1,0 +1,262 @@
+<section class="inventory" [attr.aria-label]="heading()">
+  <header class="overview">
+    <div>
+      <h2>{{ heading() }}</h2>
+      <p>Consulta las existencias y detecta qué productos necesitan reposición.</p>
+    </div>
+    @if (showingDemo()) {
+      <span class="demo">Datos de ejemplo</span>
+    }
+  </header>
+
+  <dl class="summary">
+    <div>
+      <dt>Registros</dt>
+      <dd>{{ counts().total }}</dd>
+    </div>
+    <div>
+      <dt><span class="indicator" data-state="low" aria-hidden="true"></span>Bajo mínimo</dt>
+      <dd>{{ counts().low }}</dd>
+    </div>
+    <div>
+      <dt><span class="indicator" data-state="out" aria-hidden="true"></span>Agotados</dt>
+      <dd>{{ counts().out }}</dd>
+    </div>
+  </dl>
+
+  <div class="filters">
+    <label class="field search">
+      <span>Buscar producto</span>
+      <span class="search-box">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <circle cx="10" cy="10" r="5.5" />
+          <path d="m14 14 5 5" />
+        </svg>
+        <input
+          #filterInput
+          type="search"
+          placeholder="Nombre o SKU"
+          [value]="query()"
+          (input)="setQuery(filterInput.value)"
+        />
+      </span>
+    </label>
+    <label class="field">
+      <span>{{ locationLabel() }}</span>
+      <select #siteField [value]="activeSite()" (change)="setSite(siteField.value)">
+        <option value="all">{{ locationPlural() }}</option>
+        @for (location of sites(); track location.id) {
+          <option [value]="location.id">{{ location.label }}</option>
+        }
+      </select>
+    </label>
+    <label class="field">
+      <span>Estado</span>
+      <select #statusField [value]="status()" (change)="setStatus(statusField.value)">
+        <option value="all">Todos los estados</option>
+        <option value="low">Bajo mínimo</option>
+        <option value="out">Agotado</option>
+        <option value="ok">Disponible</option>
+      </select>
+    </label>
+    @if (query() || activeSite() !== 'all' || status() !== 'all') {
+      <button class="reset" type="button" (click)="clearFilters(); filterInput.focus()">
+        Limpiar filtros
+      </button>
+    }
+  </div>
+
+  <p class="announcement" role="status">{{ message() }}</p>
+  <div class="table-scroll" role="region" [attr.aria-label]="caption()" tabindex="0">
+    <table>
+      <caption class="sr-only">
+        {{
+          caption()
+        }}
+      </caption>
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            [attr.aria-sort]="
+              sort().key === 'name'
+                ? sort().direction === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : null
+            "
+          >
+            <button type="button" (click)="sortBy('name')">
+              Producto
+              <span aria-hidden="true">{{
+                sort().key === 'name' ? (sort().direction === 'asc' ? '↑' : '↓') : '↕'
+              }}</span>
+            </button>
+          </th>
+          <th
+            class="site-column"
+            scope="col"
+            [attr.aria-sort]="
+              sort().key === 'siteLabel'
+                ? sort().direction === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : null
+            "
+          >
+            <button type="button" (click)="sortBy('siteLabel')">
+              {{ locationLabel() }}
+              <span aria-hidden="true">{{
+                sort().key === 'siteLabel' ? (sort().direction === 'asc' ? '↑' : '↓') : '↕'
+              }}</span>
+            </button>
+          </th>
+          <th
+            class="quantity"
+            scope="col"
+            [attr.aria-sort]="
+              sort().key === 'available'
+                ? sort().direction === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : null
+            "
+          >
+            <button type="button" (click)="sortBy('available')">
+              Stock
+              <span aria-hidden="true">{{
+                sort().key === 'available' ? (sort().direction === 'asc' ? '↑' : '↓') : '↕'
+              }}</span>
+            </button>
+          </th>
+          <th
+            class="quantity minimum-column"
+            scope="col"
+            [attr.aria-sort]="
+              sort().key === 'minimum'
+                ? sort().direction === 'asc'
+                  ? 'ascending'
+                  : 'descending'
+                : null
+            "
+          >
+            <button type="button" (click)="sortBy('minimum')">
+              Mínimo
+              <span aria-hidden="true">{{
+                sort().key === 'minimum' ? (sort().direction === 'asc' ? '↑' : '↓') : '↕'
+              }}</span>
+            </button>
+          </th>
+          <th class="state-column" scope="col">Estado</th>
+          <th class="actions-heading" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of visible(); track row.id) {
+          <tr [class.editing]="draft()?.id === row.id">
+            <th scope="row">
+              <strong>{{ row.name }}</strong>
+              <span class="sku">{{ row.sku }}</span>
+              <span class="compact-site">{{ row.siteLabel }}</span>
+              <span class="compact-state">
+                <span class="state" [attr.data-state]="stockStatus(row)">
+                  <span class="indicator" aria-hidden="true"></span>{{ statusLabel(row) }}
+                </span>
+              </span>
+            </th>
+            <td class="site-column">{{ row.siteLabel }}</td>
+            <td class="quantity">
+              <strong>{{ row.available }}</strong>
+              <span class="compact-minimum">Mín. {{ row.minimum }}</span>
+            </td>
+            <td class="quantity minimum-column">{{ row.minimum }}</td>
+            <td class="state-column">
+              <span class="state" [attr.data-state]="stockStatus(row)">
+                <span class="indicator" aria-hidden="true"></span>{{ statusLabel(row) }}
+              </span>
+            </td>
+            <td class="actions">
+              <button
+                #editButton
+                class="edit"
+                type="button"
+                [attr.aria-label]="'Editar stock de ' + row.name + ' en ' + row.siteLabel"
+                [attr.aria-expanded]="draft()?.id === row.id"
+                (click)="startEdit(row, editButton)"
+              >
+                Editar
+              </button>
+              @if (stockStatus(row) !== 'ok' || isQueued(row.id)) {
+                <button
+                  class="restock"
+                  type="button"
+                  [attr.aria-label]="
+                    (isQueued(row.id) ? 'Reposición solicitada de ' : 'Reponer ') +
+                    row.name +
+                    ' en ' +
+                    row.siteLabel
+                  "
+                  [attr.aria-disabled]="isQueued(row.id)"
+                  (click)="requestRestock(row)"
+                >
+                  {{ isQueued(row.id) ? 'Solicitado' : 'Reponer' }}
+                </button>
+              }
+            </td>
+          </tr>
+          @if (draft(); as activeDraft) {
+            @if (activeDraft.id === row.id) {
+              <tr class="editor-row">
+                <td colspan="6">
+                  <form
+                    class="editor"
+                    novalidate
+                    (submit)="saveEdit($event)"
+                    (keydown.escape)="$event.stopPropagation(); cancelEdit()"
+                  >
+                    <label class="field">
+                      <span>Stock de {{ row.name }}</span>
+                      <input
+                        #quantityField
+                        type="number"
+                        min="0"
+                        step="1"
+                        inputmode="numeric"
+                        [value]="activeDraft.value"
+                        [attr.aria-invalid]="activeDraft.error ? 'true' : null"
+                        (input)="updateDraft(quantityField.value)"
+                      />
+                    </label>
+                    <div class="editor-actions">
+                      <button class="save" type="submit">Guardar</button>
+                      <button class="cancel" type="button" (click)="cancelEdit()">Cancelar</button>
+                    </div>
+                    @if (activeDraft.error) {
+                      <p class="error" role="alert">{{ activeDraft.error }}</p>
+                    }
+                  </form>
+                </td>
+              </tr>
+            }
+          }
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty">
+              <strong>No se encontraron productos.</strong>
+              <p>Prueba con otro nombre o cambia los filtros para ver más existencias.</p>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <footer class="table-footer">
+    {{ visible().length }} {{ visible().length === 1 ? 'registro visible' : 'registros visibles' }}
+  </footer>
+</section>

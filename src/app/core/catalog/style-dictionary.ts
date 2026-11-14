@@ -133,6 +133,7 @@ const GROUP_ALIASES: Readonly<Record<string, string>> = {
   charts: 'graficos',
   feedback: 'notificaciones avisos',
   'media-3d': 'escenas modelos',
+  data: 'tablas datos registros',
 };
 
 const COMPONENT_RESULTS = FLAT_ENTRIES.map(({ group, entry }) => ({

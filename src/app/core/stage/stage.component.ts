@@ -150,8 +150,10 @@ export class StageComponent {
       '// Copia la carpeta completa y ajusta la ruta de importación:',
       `//    ${entry.sourcePath}/`,
       `//    ${this.fileNames().join(' · ')}`,
-      ...(entry.supportingFolders ?? []).map(
-        (folder) => `// Copia como carpeta hermana: ${folder}/`,
+      ...(entry.supportingFolders ?? []).map((folder) =>
+        entry.preserveSourceLayout
+          ? `// Conserva esta ruta relativa a components: ${folder.replace('src/app/components/', '')}/`
+          : `// Copia como carpeta hermana: ${folder}/`,
       ),
       ...this.installCommands().map((command) => `// ${command}`),
       '',

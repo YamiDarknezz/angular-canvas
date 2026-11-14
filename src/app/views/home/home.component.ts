@@ -8,7 +8,7 @@ import { IconComponent } from '../../core/ui/icon.component';
 import { QuickSwitcherService } from '../../layout/quick-switcher/quick-switcher.service';
 
 const PAGE_SIZE = 12;
-const PREFERRED_GROUPS = ['workflows', 'media-3d', 'cards', 'forms', 'charts'];
+const PREFERRED_GROUPS = ['workflows', 'data', 'media-3d', 'cards', 'forms', 'charts'];
 
 @Component({
   selector: 'ac-home',
@@ -40,18 +40,18 @@ export class HomeComponent {
   );
   protected readonly startingPoints = [
     {
-      label: 'Preparar y despachar pedidos',
+      label: 'Simular una reposición',
       category: 'Flujos de trabajo',
       icon: 'workflows',
       tone: 'mint',
-      path: '/workflows/order-workbench/warehouse',
+      path: '/workflows/replenishment-flow/retail',
     },
     {
-      label: 'Seguir reabastecimientos',
-      category: 'Cards',
-      icon: 'cards',
+      label: 'Consultar inventario por bodega',
+      category: 'Tablas y datos',
+      icon: 'data',
       tone: 'lilac',
-      path: '/cards/stock-status/store',
+      path: '/data/inventory-table/store',
     },
     {
       label: 'Entender movimientos de caja',

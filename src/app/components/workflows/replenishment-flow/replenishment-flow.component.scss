@@ -1,0 +1,179 @@
+:host {
+  display: block;
+  color: #1c342c;
+  font-family: inherit;
+}
+
+.flow {
+  display: grid;
+  gap: 1rem;
+  max-inline-size: 86rem;
+  margin-inline: auto;
+  padding: clamp(0.75rem, 2.6vw, 2rem);
+  border: 1px solid #ccd8d1;
+  border-radius: 1rem;
+  background: #edf3ee;
+}
+
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.7rem 1rem;
+  padding: 0.1rem 0 0.95rem;
+  border-block-end: 1px solid #c5d3c9;
+}
+
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+.intro h2 {
+  font-size: clamp(1.55rem, 5vw, 2.35rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.intro p,
+.receipt p {
+  margin-block-start: 0.4rem;
+  color: #3f574c;
+  line-height: 1.5;
+}
+
+.sample {
+  padding: 0.28rem 0.52rem;
+  border: 1px solid #c8d8cc;
+  border-radius: 0.4rem;
+  background: #e3ece5;
+  color: #315044;
+  font-size: 0.78rem;
+}
+
+.inventory,
+.dispatch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 0.8rem;
+}
+
+.announcement {
+  min-width: 0;
+  color: #205540;
+  font-weight: 650;
+  font-size: 0.87rem;
+  overflow-wrap: anywhere;
+}
+
+.handoff {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+}
+
+.handoff.quiet {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.receipt {
+  overflow: hidden;
+  border: 1px solid #c7d5cb;
+  border-radius: 0.8rem;
+  background: #f9fcfa;
+}
+
+.receipt header {
+  padding: 0.9rem;
+}
+
+.receipt h3 {
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.receipt p {
+  font-size: 0.86rem;
+}
+
+.receipt ul {
+  padding: 0;
+  list-style: none;
+}
+
+.receipt li {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+  padding: 0.85rem 0.9rem;
+  border-block-start: 1px solid #dae4de;
+  overflow-wrap: anywhere;
+}
+
+.receipt li div {
+  display: grid;
+  gap: 0.19rem;
+}
+
+.receipt li span,
+.receipt .empty {
+  color: #3e584d;
+  font-size: 0.86rem;
+}
+
+.receipt li .reference {
+  color: #2e6250;
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.receipt button,
+.handoff button {
+  min-block-size: 44px;
+  padding: 0.38rem 0.66rem;
+  border: 1px solid #265846;
+  border-radius: 0.46rem;
+  background: #265846;
+  color: #fff;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 650;
+  cursor: pointer;
+
+  &:hover {
+    background: #194532;
+  }
+
+  &[aria-disabled='true'] {
+    border-color: #c4d5c9;
+    background: #e5efe8;
+    color: #294d3c;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #245a4b;
+    outline-offset: 3px;
+  }
+}
+
+.step-target:focus {
+  outline: 2px solid #245a4b;
+  outline-offset: 3px;
+}
+
+@media (min-width: 1100px) {
+  .inventory,
+  .dispatch {
+    grid-template-columns: minmax(0, 1fr) minmax(15.5rem, 21%);
+  }
+}

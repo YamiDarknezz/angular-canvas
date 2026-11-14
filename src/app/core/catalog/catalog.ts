@@ -42,8 +42,10 @@ export interface CatalogEntry {
   /** `true` si la plantilla importa `FormsModule` (necesita `@angular/forms`). */
   readonly requiresForms?: boolean;
   readonly npmInstall?: readonly string[];
-  /** Carpetas hermanas que necesita el componente al extraerse. */
+  /** Carpetas de apoyo que necesita el componente al extraerse. */
   readonly supportingFolders?: readonly string[];
+  /** Respeta la ruta bajo components cuando los imports cruzan categorías. */
+  readonly preserveSourceLayout?: boolean;
   /** El entorno admite tinte y movimiento mediante inputs. */
   readonly sceneControls?: boolean;
   readonly variants: readonly CatalogVariant[];
@@ -2277,6 +2279,62 @@ export const CATALOG: readonly CatalogGroup[] = [
             code: '13.1.2.1',
             label: 'Reposición de bodegas',
             hint: 'Revisa los pedidos de una bodega y administra su despacho',
+          },
+        ],
+      },
+      {
+        id: 'replenishment-flow',
+        code: '13.2',
+        label: 'Reposición conectada',
+        tagline: 'Pasa de un faltante en inventario a un pedido y registra su recepción',
+        selector: 'app-workflow-replenishment-flow',
+        className: 'ReplenishmentFlowComponent',
+        sourcePath: 'src/app/components/workflows/replenishment-flow',
+        supportingFolders: [
+          'src/app/components/data/inventory-table',
+          'src/app/components/cards/stock-status',
+          'src/app/components/workflows/order-workbench',
+        ],
+        preserveSourceLayout: true,
+        variants: [
+          {
+            id: 'retail',
+            code: '13.2.1.1',
+            label: 'Inventario, pedido y recepción',
+            hint: 'Solicita reposición, despacha el pedido, recibe las unidades y actualiza el stock',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'data',
+    code: '14',
+    label: 'Tablas y datos',
+    icon: 'data',
+    accent: '#74bdb6',
+    tagline: 'Herramientas para consultar, filtrar y editar datos de trabajo',
+    components: [
+      {
+        id: 'inventory-table',
+        code: '14.1',
+        label: 'Inventario por sede',
+        tagline: 'Consulta stock por producto y sede, ordénalo y edita las existencias en línea',
+        selector: 'app-data-inventory-table',
+        className: 'InventoryTableComponent',
+        sourcePath: 'src/app/components/data/inventory-table',
+        variants: [
+          {
+            id: 'store',
+            code: '14.1.1.1',
+            label: 'Inventario por bodega',
+            hint: 'Compara el stock de tres bodegas y solicita reposición de productos bajo mínimo',
+          },
+          {
+            id: 'warehouse',
+            code: '14.1.2.1',
+            label: 'Inventario por almacén',
+            hint: 'Filtra existencias por almacén y ajusta cantidades en la tabla',
           },
         ],
       },

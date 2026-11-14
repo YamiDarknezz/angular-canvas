@@ -5,7 +5,20 @@ Cada componente y sub-estilo cuenta con un **código numérico unívoco** (ej. `
 
 Construido con **Angular 22** (standalone components, signals, router, `@if` / `@for` y control flow reactivo).
 
-**13 categorías.** Consulta el diccionario para ver los componentes, variantes y temas disponibles.
+**14 categorías.** Consulta el diccionario para ver los componentes, variantes y temas disponibles.
+
+## Inventario y reposición
+
+- **Inventario por sede** (`14.1.1.1` y `14.1.2.1`) incluye búsqueda, filtros, ordenamiento y edición de cantidades.
+  Pasa tus registros con `[rows]`. Los eventos `(quantityChange)` y `(restockRequested)` permiten aplicar los cambios en tu app.
+- **Reposición conectada** (`13.2.1.1`) coordina la tabla de inventario, la tarjeta de stock y la mesa de pedidos.
+  Solicita reposición, prepara y despacha el pedido. Al recibirlo se actualiza la existencia de la sede.
+
+El extractor conserva las rutas de las cuatro carpetas que usa la demo conectada. Usa como destino la carpeta `components` de tu proyecto:
+
+```bash
+node scripts/extract.cjs 13.2.1.1 --dest ../mi-app/src/app/components
+```
 
 > 📖 **Consulta el Diccionario Completo en [DICTIONARY.md](DICTIONARY.md)** con la tabla maestra de códigos.
 
@@ -18,7 +31,7 @@ Olvídate de descripciones subjetivas como "el libro del medio" o "el botón de 
 ```
   [Categoría] . [Componente] . [Variante] . [Subvariante]
        │              │             │             │
-      (1-9)         (1-N)         (1-N)          (1)
+      (1-N)         (1-N)         (1-N)          (1)
 ```
 
 - **Uso con Agentes de IA / Copilot**:  
